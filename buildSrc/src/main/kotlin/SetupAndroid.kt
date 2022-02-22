@@ -20,8 +20,6 @@ fun Project.setupAndroid() {
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
 
-        setupAndroidApp()
-
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_11
             targetCompatibility = JavaVersion.VERSION_11
@@ -54,7 +52,11 @@ fun Project.setupAndroid() {
                 )
             )
         }
+
+        setupFlavorDimensions()
     }
+
+    setupAndroidApp()
 }
 
 private fun Project.setupAndroidApp() {
