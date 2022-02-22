@@ -1,3 +1,7 @@
+plugins {
+    id(Dependencies.Plugin.ktlint) version Versions.ktLint
+}
+
 buildscript {
     repositories {
         google()
@@ -10,6 +14,23 @@ buildscript {
         classpath(Dependencies.Gradle.safeArgs)
     }
 }
+
+ktlint {
+    verbose.set(true)
+    ignoreFailures.set(true)
+    coloredOutput.set(true)
+    outputColorName.set("RED")
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
+    }
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
+        include("**/*.kts")
+    }
+}
+
 
 tasks.register("clean", Delete::class) {
     group = "cleanup"
