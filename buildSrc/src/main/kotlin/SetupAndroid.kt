@@ -26,6 +26,27 @@ fun Project.setupAndroid() {
             sourceCompatibility = JavaVersion.VERSION_11
             targetCompatibility = JavaVersion.VERSION_11
         }
+
+        lintOptions {
+            isCheckDependencies = true
+            xmlReport = true
+            htmlReport = true
+            isAbortOnError = false
+            disable.plusAssign(
+                setOf(
+                    "UnsafeExperimentalUsageError",
+                    "UnsafeExperimentalUsageWarning",
+                    "FragmentBackPressedCallback",
+                    "FragmentLiveDataObserve",
+                    "WebViewApiAvailability",
+                    "InlinedApi",
+                    "ObsoleteSdkInt",
+                    "Override",
+                    "NewApi",
+                    "UnusedAttribute"
+                )
+            )
+        }
     }
 }
 
