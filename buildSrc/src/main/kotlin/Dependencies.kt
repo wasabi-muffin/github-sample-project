@@ -38,6 +38,9 @@ object Versions {
 
     // Lint
     const val ktLint = "10.2.1"
+
+    // Test Coverage
+    const val kover = "0.5.0"
 }
 
 object Dependencies {
@@ -54,6 +57,7 @@ object Dependencies {
         const val parcelize = "kotlin-parcelize"
         const val safeArgs = "androidx.navigation.safeargs.kotlin"
         const val ktlint = "org.jlleitschuh.gradle.ktlint"
+        const val kover = "org.jetbrains.kotlinx.kover"
     }
 
     object Kotlinx {
