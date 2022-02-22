@@ -8,6 +8,8 @@ references:
     /home/circleci
   gem_cache_key: &gem_cache_key
     key: bundle-{{ checksum "Gemfile.lock" }}
+  ssh_cache_key: &ssh_cache_key
+    key: ssh-{{ .Environment.CIRCLE_SHA1 }}
 
 commands:
   gradle:
@@ -37,9 +39,8 @@ commands:
           <<: *gem_cache_key
           paths:
             - vendor/bundle
-      - run:
-          name: Add github.com to known hosts
-          command: ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - restore_cache:
+          <<: *ssh_cache_key
       - run: bundle exec danger --dangerfile=<< parameters.path >> --danger_id=<< parameters.path >>
 
 jobs:
@@ -56,6 +57,13 @@ jobs:
           task: compileDebugSources --stacktrace
       - android/save-gradle-cache
       - android/save-build-cache
+      - run:
+          name: Add github.com to known hosts
+          command: ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - save_cache:
+          <<: *ssh_cache_key
+          paths:
+            - ~/.ssh
       - persist_to_workspace:
           root: *home
           paths:
