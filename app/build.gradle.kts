@@ -37,4 +37,7 @@ dependencies {
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.junitExt)
     androidTestImplementation(Dependencies.Test.espresso)
+
+    // Leak
+    debugImplementation(Dependencies.Leak.leakCanary)
 }

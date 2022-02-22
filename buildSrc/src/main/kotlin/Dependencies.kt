@@ -41,6 +41,9 @@ object Versions {
 
     // Test Coverage
     const val kover = "0.5.0"
+
+    // Leaks
+    const val leakCanary = "2.8.1"
 }
 
 object Dependencies {
@@ -91,5 +94,9 @@ object Dependencies {
 
     object Coil {
         const val core = "io.coil-kt:coil:${Versions.coil}"
+    }
+
+    object Leak {
+        const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
     }
 }
