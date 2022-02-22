@@ -17,9 +17,13 @@ object Versions {
     const val kotlinCoroutines = "1.5.2"
 
     // Tests
+    const val testCore = "1.4.0"
     const val junit = "4.13.2"
     const val junitExt = "1.1.3"
     const val espresso = "3.4.0"
+    const val roboelectric = "4.6.1"
+    const val turbine = "0.7.0"
+    const val mockk = "1.12.2"
 
     // Android
     const val material = "1.4.0"
@@ -58,6 +62,7 @@ object Dependencies {
 
     object Plugin {
         const val androidApplication = "com.android.application"
+        const val androidLibrary = "com.android.library"
         const val kotlinAndroid = "kotlin-android"
         const val kotlinKapt = "kotlin-kapt"
         const val parcelize = "kotlin-parcelize"
@@ -88,8 +93,13 @@ object Dependencies {
 
     object Test {
         const val junit = "junit:junit:${Versions.junit}"
+        const val core = "androidx.test.core-ktx:${Versions.testCore}"
         const val junitExt = "androidx.test.ext:junit:${Versions.junitExt}"
         const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinCoroutines}"
+        const val roboelectric = "org.robolectric:robolectric:${Versions.roboelectric}"
+        const val turbine = "app.cash.turbine:turbine:${Versions.turbine}"
+        const val mockk = "io.mockk:mockk:${Versions.mockk}"
     }
 
     object Ktor {
