@@ -6,7 +6,9 @@ orbs:
 references:
   home: &home
     /home/circleci
-    
+  gem_cache_key: &gem_cache_key
+    key: bundle-{{ checksum "Gemfile.lock" }}
+
 commands:
   gradle:
     parameters:
@@ -19,6 +21,23 @@ commands:
           name: <<parameters.title>>
           # https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties
           command: ./gradlew <<parameters.task>> --no-daemon --no-parallel -Dkotlin.compiler.execution.strategy=in-process -Dorg.gradle.workers.max=2 -Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"
+  danger:
+    description: Run Danger
+    parameters:
+      path:
+        type: string
+        description: Dangerfile
+    steps:
+      - restore_cache:
+          <<: *gem_cache_key
+      - run:
+          name: bundle install
+          command: bundle install --path vendor/bundle --clean
+      - save_cache:
+          <<: *gem_cache_key
+          paths:
+            - vendor/bundle
+      - run: bundle exec danger --dangerfile=<< parameters.path >> --danger_id=<< parameters.path >>
 
 jobs:
   build_workspace:
@@ -54,6 +73,8 @@ jobs:
       - gradle:
           title: ktLint
           task: ktlintCheck
+      - danger:
+          path: ./Dangerfile-Lint
 
   unit_test:
     executor:
