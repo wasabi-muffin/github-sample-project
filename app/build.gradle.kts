@@ -34,7 +34,7 @@ dependencies {
     implementation(Dependencies.Coil.core)
 
     // Test
-    testImplementation(Dependencies.Test.junit)
+    projectTest(Modules.Test)
     androidTestImplementation(Dependencies.Test.junitExt)
     androidTestImplementation(Dependencies.Test.espresso)
 
