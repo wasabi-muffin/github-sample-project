@@ -37,6 +37,9 @@ commands:
           <<: *gem_cache_key
           paths:
             - vendor/bundle
+      - run:
+          name: Add github.com to known hosts
+          command: ssh-keyscan github.com >> ~/.ssh/known_hosts
       - run: bundle exec danger --dangerfile=<< parameters.path >> --danger_id=<< parameters.path >>
 
 jobs:
