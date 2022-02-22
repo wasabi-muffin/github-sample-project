@@ -1,5 +1,6 @@
 plugins {
     id(Dependencies.Plugin.ktlint) version Versions.ktLint
+    id(Dependencies.Plugin.kover) version Versions.kover
 }
 
 buildscript {
