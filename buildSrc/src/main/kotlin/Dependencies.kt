@@ -35,6 +35,9 @@ object Versions {
 
     // Coil
     const val coil = "1.3.2"
+
+    // Lint
+    const val ktLint = "10.2.1"
 }
 
 object Dependencies {
@@ -50,6 +53,7 @@ object Dependencies {
         const val kotlinKapt = "kotlin-kapt"
         const val parcelize = "kotlin-parcelize"
         const val safeArgs = "androidx.navigation.safeargs.kotlin"
+        const val ktlint = "org.jlleitschuh.gradle.ktlint"
     }
 
     object Kotlinx {
