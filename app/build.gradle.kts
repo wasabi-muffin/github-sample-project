@@ -9,6 +9,9 @@ plugins {
 setupAndroid()
 
 dependencies {
+    // Projects
+    project(Modules.Domain)
+
     // AndroidX
     implementation(Dependencies.AndroidX.core)
     implementation(Dependencies.AndroidX.appCompat)

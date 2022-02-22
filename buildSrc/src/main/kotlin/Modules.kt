@@ -1,10 +1,10 @@
 import org.gradle.api.artifacts.Dependency
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.project
-import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 enum class Modules(val path: String) {
-    Test(":test-internal")
+    Test(":test-internal"),
+    Domain(":domain"),
 }
 
 fun DependencyHandlerScope.project(module: Modules): Dependency? = "implementation"(project(module.path))
