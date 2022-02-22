@@ -24,7 +24,7 @@ jobs:
   build_workspace:
     executor:
       name: android/android
-      sdk-version: '31'
+      sdk-version: '30'
     steps:
       - checkout
       - android/restore-gradle-cache
@@ -44,7 +44,7 @@ jobs:
   check_lint:
     executor:
       name: android/android
-      sdk-version: '31'
+      sdk-version: '30'
     steps:
       - attach_workspace:
           at: *home
@@ -55,7 +55,7 @@ jobs:
   unit_test:
     executor:
       name: android/android
-      sdk-version: '31'
+      sdk-version: '30'
     steps:
       - attach_workspace:
           at: *home
@@ -66,7 +66,7 @@ jobs:
   deploy:
     executor:
       name: android/android
-      sdk-version: '31'
+      sdk-version: '30'
     steps:
       - attach_workspace:
           at: *home
