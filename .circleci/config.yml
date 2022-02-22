@@ -90,7 +90,7 @@ jobs:
           title: code coverage
           task: koverMergedXmlReport
       - danger:
-          - path: ./Dangerfile-Test
+          path: ./Dangerfile-Test
       - store_test_results:
           path: build/reports/kover/
 
