@@ -13,4 +13,5 @@ dependencies {
     api(Dependencies.Test.coroutines)
     api(Dependencies.Test.turbine)
     api(Dependencies.Test.mockk)
+    api(Dependencies.Test.kotest)
 }

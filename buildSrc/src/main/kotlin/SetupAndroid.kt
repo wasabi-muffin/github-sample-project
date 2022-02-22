@@ -12,7 +12,6 @@ fun Project.setupAndroid() {
         compileSdkVersion(Versions.Config.androidCompileSdk)
         buildToolsVersion(Versions.Config.buildToolsVersion)
         defaultConfig {
-            applicationId = "jp.co.yumemi.android.codecheck"
             minSdk = Versions.Config.androidMinSdk
             targetSdk = Versions.Config.androidTargetSdk
             versionCode = Versions.Config.androidVersionCode
@@ -61,6 +60,10 @@ fun Project.setupAndroid() {
 
 private fun Project.setupAndroidApp() {
     extensions.findByType(BaseAppModuleExtension::class.java)?.apply {
+        defaultConfig {
+            applicationId = "jp.co.yumemi.android.codecheck"
+        }
+
         buildFeatures {
             viewBinding = true
         }
