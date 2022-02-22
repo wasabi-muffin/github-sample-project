@@ -27,6 +27,13 @@ fun Project.setupAndroid() {
             targetCompatibility = JavaVersion.VERSION_11
         }
 
+        buildTypes {
+            getByName("release") {
+                isMinifyEnabled = true
+                proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            }
+        }
+
         lintOptions {
             isCheckDependencies = true
             xmlReport = true
