@@ -1,0 +1,128 @@
+version: 2.1
+
+orbs:
+  android: circleci/android@1.0.3
+  
+references:
+  home: &home
+    /home/circleci
+  gem_cache_key: &gem_cache_key
+    key: bundle-{{ checksum "Gemfile.lock" }}
+
+commands:
+  gradle:
+    parameters:
+      title:
+        type: string
+      task:
+        type: string
+    steps:
+      - run:
+          name: <<parameters.title>>
+          # https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties
+          command: ./gradlew <<parameters.task>> --no-daemon --no-parallel -Dkotlin.compiler.execution.strategy=in-process -Dorg.gradle.workers.max=2 -Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"
+  danger:
+    description: Run Danger
+    parameters:
+      path:
+        type: string
+        description: Dangerfile
+    steps:
+      - restore_cache:
+          <<: *gem_cache_key
+      - run:
+          name: bundle install
+          command: bundle install --path vendor/bundle --clean
+      - save_cache:
+          <<: *gem_cache_key
+          paths:
+            - vendor/bundle
+      - run: bundle exec danger --dangerfile=<< parameters.path >> --danger_id=<< parameters.path >>
+
+jobs:
+  build_workspace:
+    executor:
+      name: android/android
+      sdk-version: '30'
+    steps:
+      - checkout
+      - android/restore-gradle-cache
+      - android/restore-build-cache
+      - gradle:
+          title: compile sources
+          task: compileDebugSources --stacktrace
+      - android/save-gradle-cache
+      - android/save-build-cache
+      - persist_to_workspace:
+          root: *home
+          paths:
+            - ./project
+            - ./.gradle/cache
+            - ./.gradle/wrapper
+
+  check_lint:
+    executor:
+      name: android/android
+      sdk-version: '30'
+    steps:
+      - attach_workspace:
+          at: *home
+      - gradle:
+          title: lint
+          task: lintDebug
+      - gradle:
+          title: ktLint
+          task: ktlintCheck
+      - danger:
+          path: ./Dangerfile-Lint
+
+  unit_test:
+    executor:
+      name: android/android
+      sdk-version: '30'
+    steps:
+      - attach_workspace:
+          at: *home
+      - gradle:
+          title: unit test
+          task: testDebugUnitTest
+      - gradle:
+          title: code coverage
+          task: koverMergedXmlReport
+      - danger:
+          path: ./Dangerfile-Test
+      - store_test_results:
+          path: build/reports/kover/
+
+  deploy:
+    executor:
+      name: android/android
+      sdk-version: '30'
+    steps:
+      - attach_workspace:
+          at: *home
+      - gradle:
+          title: Build Debug Apk
+          task: assembleDebug
+      - store_artifacts:
+          path: app/build/outputs/apk
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build_workspace
+      - check_lint:
+          requires:
+            - build_workspace
+      - unit_test:
+          requires:
+            - build_workspace
+      - deploy:
+          requires:
+            - unit_test
+          filters:
+            branches:
+              only:
+                - develop
+                - main
