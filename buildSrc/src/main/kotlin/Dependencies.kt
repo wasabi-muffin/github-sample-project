@@ -44,6 +44,9 @@ object Versions {
 
     // Leaks
     const val leakCanary = "2.8.1"
+
+    // Documentation
+    const val dokka = "1.6.10"
 }
 
 object Dependencies {
@@ -61,6 +64,7 @@ object Dependencies {
         const val safeArgs = "androidx.navigation.safeargs.kotlin"
         const val ktlint = "org.jlleitschuh.gradle.ktlint"
         const val kover = "org.jetbrains.kotlinx.kover"
+        const val dokka = "org.jetbrains.dokka"
     }
 
     object Kotlinx {

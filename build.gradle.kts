@@ -1,6 +1,7 @@
 plugins {
     id(Dependencies.Plugin.ktlint) version Versions.ktLint
     id(Dependencies.Plugin.kover) version Versions.kover
+    id(Dependencies.Plugin.dokka) version Versions.dokka
 }
 
 buildscript {
@@ -14,6 +15,10 @@ buildscript {
         classpath(Dependencies.Gradle.kotlin)
         classpath(Dependencies.Gradle.safeArgs)
     }
+}
+
+subprojects {
+    plugins.apply(Dependencies.Plugin.dokka)
 }
 
 ktlint {
