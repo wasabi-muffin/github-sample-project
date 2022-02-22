@@ -50,7 +50,10 @@ jobs:
           at: *home
       - gradle:
           title: lint
-          task: lintDevDebug
+          task: lintDebug
+      - gradle:
+          title: ktLint
+          task: ktlintCheck
 
   unit_test:
     executor:
