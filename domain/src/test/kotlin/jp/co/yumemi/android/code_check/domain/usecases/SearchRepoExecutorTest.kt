@@ -18,7 +18,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class SearchRepoUseCaseTest {
+class SearchRepoExecutorTest {
     @get:Rule
     val coroutineTestRule = CoroutineTestRule()
     private val searchRepository = mockk<SearchRepository>()

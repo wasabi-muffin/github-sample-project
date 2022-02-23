@@ -22,7 +22,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class SearchRepositoryTest {
+class SearchDataRepositoryTest {
     @get:Rule
     val coroutineTestRule = CoroutineTestRule()
     private val searchRemoteDataSource = mockk<SearchRemoteDataSource>()
