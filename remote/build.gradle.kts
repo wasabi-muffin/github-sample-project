@@ -1,5 +1,6 @@
 plugins {
     id(Dependencies.Plugin.androidLibrary)
+    id(Dependencies.Plugin.kotlinAndroid)
 }
 
 setupAndroid()

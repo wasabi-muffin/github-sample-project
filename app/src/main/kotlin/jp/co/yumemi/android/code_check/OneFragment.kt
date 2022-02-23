@@ -23,7 +23,7 @@ class OneFragment: Fragment(R.layout.fragment_one){
 
         val _binding= FragmentOneBinding.bind(view)
 
-        val _viewModel= OneViewModel(context!!)
+        val _viewModel= OneViewModel()
 
         val _layoutManager= LinearLayoutManager(context!!)
         val _dividerItemDecoration=

@@ -3,73 +3,45 @@
  */
 package jp.co.yumemi.android.code_check
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.android.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import java.util.*
+import java.util.Date
 import jp.co.yumemi.android.code_check.TopActivity.Companion.lastSearchDate
+import jp.co.yumemi.android.code_check.data.repositories.SearchDataRepository
+import jp.co.yumemi.android.code_check.domain.core.DomainError
+import jp.co.yumemi.android.code_check.domain.core.DomainResult
+import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.entities.GithubRepo
+import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoExecutor
+import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
+import jp.co.yumemi.android.code_check.remote.apis.HttpClientSearchApi
+import jp.co.yumemi.android.code_check.remote.core.DefaultHttpClientProvider
+import jp.co.yumemi.android.code_check.remote.providers.SearchRemoteDataProvider
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import org.json.JSONObject
 
 /**
  * TwoFragment で使う
  */
-class OneViewModel(
-    val context: Context
-) : ViewModel() {
+class OneViewModel : ViewModel() {
+    // TODO: DI
+    private val httpClientProvider = DefaultHttpClientProvider()
+    private val searchApi = HttpClientSearchApi(httpClientProvider)
+    private val searchRemoteDataSource = SearchRemoteDataProvider(searchApi)
+    private val searchRepository = SearchDataRepository(searchRemoteDataSource)
+    private val errorHandler = ErrorHandler { throwable -> DomainError.Unknown(throwable) }
+    private val searchRepoUseCase = SearchRepoExecutor(searchRepository, errorHandler)
 
     // 検索結果
+    // TODO: Remove runBlocking and GlobalScope
     fun searchResults(inputText: String): List<GithubRepo> = runBlocking {
-        val client = HttpClient(Android)
-
         return@runBlocking GlobalScope.async {
-            val response: HttpResponse = client?.get("https://api.github.com/search/repositories") {
-                header("Accept", "application/vnd.github.v3+json")
-                parameter("q", inputText)
-            }
-
-            val jsonBody = JSONObject(response.receive<String>())
-
-            val jsonItems = jsonBody.optJSONArray("items")!!
-
-            val items = mutableListOf<GithubRepo>()
-
-            /**
-             * アイテムの個数分ループする
-             */
-            for (i in 0 until jsonItems.length()) {
-                val jsonItem = jsonItems.optJSONObject(i)!!
-                val name = jsonItem.optString("full_name")
-                val ownerIconUrl = jsonItem.optJSONObject("owner")!!.optString("avatar_url")
-                val language = jsonItem.optString("language")
-                val stargazersCount = jsonItem.optLong("stargazers_count")
-                val watchersCount = jsonItem.optLong("watchers_count")
-                val forksCount = jsonItem.optLong("forks_conut")
-                val openIssuesCount = jsonItem.optLong("open_issues_count")
-
-                items.add(
-                    GithubRepo(
-                        name = name,
-                        ownerIconUrl = ownerIconUrl,
-                        language = context.getString(R.string.written_language, language),
-                        stargazersCount = stargazersCount.toInt(),
-                        watchersCount = watchersCount.toInt(),
-                        forksCount = forksCount.toInt(),
-                        openIssuesCount = openIssuesCount.toInt()
-                    )
-                )
-            }
-
+            // TODO: Remove Last Search Date
             lastSearchDate = Date()
-
-            return@async items.toList()
+            return@async when (val items = searchRepoUseCase.execute(SearchRepoUseCase.Args(inputText))) {
+                is DomainResult.Success -> items.data
+                is DomainResult.Failure -> emptyList()
+            }
         }.await()
     }
 }
