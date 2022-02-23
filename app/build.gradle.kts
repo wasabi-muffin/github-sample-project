@@ -13,6 +13,7 @@ dependencies {
     project(Modules.Domain)
     project(Modules.Data)
     project(Modules.Remote)
+    project(Modules.Local)
 
     // AndroidX
     implementation(Dependencies.AndroidX.core)
