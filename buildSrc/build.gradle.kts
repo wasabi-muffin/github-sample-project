@@ -1,4 +1,6 @@
 buildscript {
+    val kotlinVersion = "1.5.31"
+
     repositories {
         google()
         mavenCentral()
@@ -6,11 +8,18 @@ buildscript {
     }
 
     dependencies {
-        classpath(kotlin("gradle-plugin", "1.5.31"))
+        classpath(kotlin("gradle-plugin", kotlinVersion))
+    }
+
+    configurations.classpath.get().resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlin") {
+            useVersion(kotlinVersion)
+        }
     }
 }
 
 plugins {
+    `java-gradle-plugin`
     `kotlin-dsl`
 }
 
@@ -21,6 +30,8 @@ repositories {
 }
 
 dependencies {
+    compileOnly(gradleApi())
+    implementation(kotlin("gradle-plugin"))
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
     implementation("com.android.tools.build:gradle:7.0.3")
     implementation(kotlin("script-runtime"))

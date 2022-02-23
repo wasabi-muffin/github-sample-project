@@ -67,6 +67,7 @@ object Dependencies {
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
         const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
+        const val ktlint = "org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktLint}"
     }
 
     object Plugin {
