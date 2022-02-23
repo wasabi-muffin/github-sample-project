@@ -1,44 +1,18 @@
-package jp.co.yumemi.android.code_check.data.repositories
+package jp.co.yumemi.android.code_check.data.mappers
 
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldBeTypeOf
-import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.every
-import io.mockk.mockk
 import jp.co.yumemi.android.code_check.data.models.RepoMinusSearchMinusResultMinusItemModel
-import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
-import jp.co.yumemi.android.code_check.domain.core.DomainError
-import jp.co.yumemi.android.code_check.domain.core.DomainResult
-import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
-import jp.co.yumemi.android.code_check.domain.entities.GithubRepo
-import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
-import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoExecutor
-import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
-import jp.co.yumemi.android.code_check.test.CoroutineTestRule
-import jp.co.yumemi.android.code_check.test.runBlockingTest
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.junit.Rule
 import org.junit.Test
 
-@ExperimentalCoroutinesApi
-class SearchRepositoryTest {
-    @get:Rule
-    val coroutineTestRule = CoroutineTestRule()
-    private val searchRemoteDataSource = mockk<SearchRemoteDataSource>()
-    private val searchRepository = SearchDataRepository(searchRemoteDataSource)
-    private val testException = Exception("test")
-
+class SearchMapperTest {
     @Test
-    fun `test when search is successful`() {
-        coEvery {
-            searchRemoteDataSource.searchRepos(any(), any())
-        } returns List(5) { index ->
+    fun `test for mapping github repo model to entity`() {
+        val entity = SearchMapper.repoModelToEntity(
             RepoMinusSearchMinusResultMinusItemModel(
-                id = index,
+                id = 0,
                 nodeId = "",
                 name = "",
-                fullName = "name$index",
+                fullName = "",
                 owner = null,
                 private = false,
                 htmlUrl = "",
@@ -122,32 +96,13 @@ class SearchRepositoryTest {
                 allowForking = null,
                 isTemplate = null
             )
-        }
-
-        coroutineTestRule.runBlockingTest {
-            val result = searchRepository.searchRepos("")
-            result.shouldBeTypeOf<List<GithubRepo>>()
-            result.size shouldBe 5
-            result.forEachIndexed { index, repo ->
-                repo.name shouldBe "name$index"
-            }
-            coVerify { searchRemoteDataSource.searchRepos(any(), any()) }
-        }
-    }
-
-    @Test
-    fun `test when remote data provider throws an error`() {
-        coEvery {
-            searchRemoteDataSource.searchRepos(any(), any())
-        } throws testException
-
-        coroutineTestRule.runBlockingTest {
-            val result = runCatching {
-                searchRepository.searchRepos("")
-            }.exceptionOrNull()
-            result.shouldBeTypeOf<Exception>()
-            result shouldBe testException
-            coVerify { searchRemoteDataSource.searchRepos(any(), any()) }
-        }
+        )
+        entity.name shouldBe ""
+        entity.ownerIconUrl shouldBe null
+        entity.language shouldBe null
+        entity.stargazersCount shouldBe 0
+        entity.watchersCount shouldBe 0
+        entity.forksCount shouldBe 0
+        entity.openIssuesCount shouldBe 0
     }
 }
