@@ -5,6 +5,7 @@ import org.gradle.kotlin.dsl.project
 enum class Modules(val path: String) {
     Test(":test-internal"),
     Domain(":domain"),
+    Data(":data"),
 }
 
 fun DependencyHandlerScope.project(module: Modules): Dependency? = "implementation"(project(module.path))
