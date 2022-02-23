@@ -1,5 +1,8 @@
 package jp.co.yumemi.android.code_check.domain.core
 
+/**
+ * Wrapper for throwables
+ */
 sealed class DomainError(
     open val throwable: Throwable,
 ) : Throwable(throwable) {
