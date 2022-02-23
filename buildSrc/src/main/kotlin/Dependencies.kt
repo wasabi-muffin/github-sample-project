@@ -15,6 +15,7 @@ object Versions {
     const val kotlin = "1.5.31"
     const val gradle = "7.0.3"
     const val kotlinCoroutines = "1.5.2"
+    const val datetime = "0.3.2"
 
     // Tests
     const val testCore = "1.4.0"
@@ -84,6 +85,7 @@ object Dependencies {
     object Kotlinx {
         const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}"
         const val serializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
+        const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.datetime}"
     }
 
     object Android {
@@ -104,6 +106,7 @@ object Dependencies {
     object Room {
         const val runtime = "androidx.room:room-runtime:${Versions.room}"
         const val compiler = "androidx.room:room-compiler:${Versions.room}"
+        const val coroutines = "androidx.room:room-ktx:${Versions.room}"
     }
 
     object Test {

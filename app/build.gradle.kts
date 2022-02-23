@@ -36,6 +36,10 @@ dependencies {
     // Ktor
     implementation(Dependencies.Ktor.clientAndroid)
 
+    // Room
+    implementation(Dependencies.Room.runtime)
+    kapt(Dependencies.Room.compiler)
+
     // Coil
     implementation(Dependencies.Coil.core)
 
