@@ -73,6 +73,10 @@ object Dependencies {
         const val dokka = "org.jetbrains.dokka"
     }
 
+    object Kotlin {
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    }
+
     object Kotlinx {
         const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}"
     }

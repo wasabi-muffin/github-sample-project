@@ -12,6 +12,7 @@ buildscript {
 
 plugins {
     `kotlin-dsl`
+    id("org.jetbrains.kotlinx.kover") version "0.5.0"
 }
 
 repositories {

@@ -1,11 +1,7 @@
-
 import com.android.build.gradle.BaseExtension
-import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.dependencies
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun Project.setupAndroid() {
     extensions.findByType(BaseExtension::class.java)?.apply {
