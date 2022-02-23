@@ -97,9 +97,9 @@ jobs:
       - gradle:
           title: unit test
           task: testDevDebugUnitTest
-      - gradle:
-          title: code coverage
-          task: koverMergedXmlReport
+#      - gradle:
+#          title: code coverage
+#          task: koverMergedXmlReport
 #      - danger:
 #          path: ./Dangerfile-Test
       - store_test_results:
