@@ -7,12 +7,6 @@ plugins {
 
 setupAndroid()
 
-android {
-    testOptions {
-        unitTests.all {
-            it.extensions.configure(kotlinx.kover.api.KoverTaskExtension::class) {
-                isDisabled = it.name.contains("Release")
-            }
-        }
-    }
+dependencies {
+    projectTest(Modules.Test)
 }
