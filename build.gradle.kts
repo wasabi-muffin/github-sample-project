@@ -50,6 +50,9 @@ tasks.withType(kotlinx.kover.tasks.KoverMergedTask::class) {
         "*.remote.core.*",
         "*.remote.models.*",
         "*.remote.apis.*",
+        "*.local.core.*",
+        "*.local.models.*",
+        "*.local.dao.*"
     )
 }
 
