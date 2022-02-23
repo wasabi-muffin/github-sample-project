@@ -2,6 +2,8 @@ package jp.co.yumemi.android.code_check.domain.core
 
 /**
  * Wrapper for throwables
+ *
+ * [Exception]s should be caught in the domain layer and passed as [DomainError]s to the presentation layer
  */
 sealed class DomainError(
     open val throwable: Throwable,

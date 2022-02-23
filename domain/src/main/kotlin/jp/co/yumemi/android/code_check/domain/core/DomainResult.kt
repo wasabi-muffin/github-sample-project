@@ -2,6 +2,8 @@ package jp.co.yumemi.android.code_check.domain.core
 
 /**
  * Wrapper for either Success with data or Failure with error
+ *
+ * Use where [Exception]s could be thrown
  */
 sealed class DomainResult<out R> {
     data class Success<out T>(val data: T) : DomainResult<T>()
