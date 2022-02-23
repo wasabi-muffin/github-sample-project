@@ -126,7 +126,6 @@ class SearchRepositoryTest {
 
         coroutineTestRule.runBlockingTest {
             val result = searchRepository.searchRepos("")
-            result.shouldBeTypeOf<List<GithubRepo>>()
             result.size shouldBe 5
             result.forEachIndexed { index, repo ->
                 repo.name shouldBe "name$index"
