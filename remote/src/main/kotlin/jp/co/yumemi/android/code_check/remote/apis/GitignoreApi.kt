@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -41,9 +41,9 @@ interface GitignoreApi {
     *
     * The API also allows fetching the source of a single template. Use the raw [media type](https://docs.github.com/rest/overview/media-types/) to get the raw contents.
     *
-    * @return GitignoreMinusTemplateModel
+    * @return GitignoreMinusTemplateApiModel
     */
-    suspend fun gitignoreGetTemplate(accessToken: String? = null, name: kotlin.String): GitignoreMinusTemplateModel
+    suspend fun gitignoreGetTemplate(accessToken: String? = null, name: kotlin.String): GitignoreMinusTemplateApiModel
 
 }
 
@@ -59,7 +59,7 @@ class HttpClientGitignoreApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun gitignoreGetTemplate(accessToken: String?, name: kotlin.String): GitignoreMinusTemplateModel {
+    override suspend fun gitignoreGetTemplate(accessToken: String?, name: kotlin.String): GitignoreMinusTemplateApiModel {
         val path = "/gitignore/templates/{name}".replace("{"+"name"+"}", "$name")
 
         return httpClient.request {

@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -32,34 +32,34 @@ interface LicensesApi {
     *
     * 
     *
-    * @return LicenseModel
+    * @return LicenseApiModel
     */
-    suspend fun licensesGet(accessToken: String? = null, license: kotlin.String): LicenseModel
+    suspend fun licensesGet(accessToken: String? = null, license: kotlin.String): LicenseApiModel
 
     /**
     * Get all commonly used licenses
     *
     * 
     *
-    * @return kotlin.collections.List<LicenseMinusSimpleModel>
+    * @return kotlin.collections.List<LicenseMinusSimpleApiModel>
     */
-    suspend fun licensesGetAllCommonlyUsed(accessToken: String? = null, featured: kotlin.Boolean? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LicenseMinusSimpleModel>
+    suspend fun licensesGetAllCommonlyUsed(accessToken: String? = null, featured: kotlin.Boolean? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LicenseMinusSimpleApiModel>
 
     /**
     * Get the license for a repository
     *
     * This method returns the contents of the repository&#39;s license file, if one is detected.  Similar to [Get repository content](https://docs.github.com/rest/reference/repos#get-repository-content), this method also supports [custom media types](https://docs.github.com/rest/overview/media-types) for retrieving the raw license content or rendered license HTML.
     *
-    * @return LicenseMinusContentModel
+    * @return LicenseMinusContentApiModel
     */
-    suspend fun licensesGetForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): LicenseMinusContentModel
+    suspend fun licensesGetForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): LicenseMinusContentApiModel
 
 }
 
 class HttpClientLicensesApi(private val httpClientProvider: HttpClientProvider) : LicensesApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun licensesGet(accessToken: String?, license: kotlin.String): LicenseModel {
+    override suspend fun licensesGet(accessToken: String?, license: kotlin.String): LicenseApiModel {
         val path = "/licenses/{license}".replace("{"+"license"+"}", "$license")
 
         return httpClient.request {
@@ -68,7 +68,7 @@ class HttpClientLicensesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun licensesGetAllCommonlyUsed(accessToken: String?, featured: kotlin.Boolean?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LicenseMinusSimpleModel> {
+    override suspend fun licensesGetAllCommonlyUsed(accessToken: String?, featured: kotlin.Boolean?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LicenseMinusSimpleApiModel> {
         val path = "/licenses"
 
         return httpClient.request {
@@ -80,7 +80,7 @@ class HttpClientLicensesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun licensesGetForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): LicenseMinusContentModel {
+    override suspend fun licensesGetForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): LicenseMinusContentApiModel {
         val path = "/repos/{owner}/{repo}/license".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {

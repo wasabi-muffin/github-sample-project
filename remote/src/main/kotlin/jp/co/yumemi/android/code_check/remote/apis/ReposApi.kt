@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -42,9 +42,9 @@ interface ReposApi {
     * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See \&quot;[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)\&quot; and \&quot;[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)\&quot; for details.  For more information on permission levels, see \&quot;[Repository permission levels for an organization](https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)\&quot;. There are restrictions on which permissions can be granted to organization members when an organization base role is in place. In this case, the permission being given must be equal to or higher than the org base permission. Otherwise, the request will fail with:  &#x60;&#x60;&#x60; Cannot assign {member} permission of {role name} &#x60;&#x60;&#x60;  Note that, if you choose not to pass any parameters, you&#39;ll need to set &#x60;Content-Length&#x60; to zero when calling out to this endpoint. For more information, see \&quot;[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs).\&quot;  The invitee will receive a notification that they have been invited to the repository, which they must accept or decline. They may do this via the notifications page, the email they receive, or by using the [repository invitations API endpoints](https://docs.github.com/rest/reference/repos#invitations).  **Rate limits**  You are limited to sending 50 invitations to a repository per 24 hour period. Note there is no limit if you are inviting organization members to an organization repository.
     *
     * @param request  (optional)
-    * @return RepositoryMinusInvitationModel
+    * @return RepositoryMinusInvitationApiModel
     */
-    suspend fun reposAddCollaborator(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, username: kotlin.String, request: InlineObject74Model): RepositoryMinusInvitationModel
+    suspend fun reposAddCollaborator(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, username: kotlin.String, request: InlineObject74ApiModel): RepositoryMinusInvitationApiModel
 
     /**
     * Check if a user is a repository collaborator
@@ -69,18 +69,18 @@ interface ReposApi {
     *
     * List any syntax errors that are detected in the CODEOWNERS file.  For more information about the correct CODEOWNERS syntax, see \&quot;[About code owners](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).\&quot;
     *
-    * @return CodeownersMinusErrorsModel
+    * @return CodeownersMinusErrorsApiModel
     */
-    suspend fun reposCodeownersErrors(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String? = null): CodeownersMinusErrorsModel
+    suspend fun reposCodeownersErrors(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String? = null): CodeownersMinusErrorsApiModel
 
     /**
     * Compare two commits
     *
     * The &#x60;basehead&#x60; param is comprised of two parts: &#x60;base&#x60; and &#x60;head&#x60;. Both must be branch names in &#x60;repo&#x60;. To compare branches across other repositories in the same network as &#x60;repo&#x60;, use the format &#x60;&lt;USERNAME&gt;:branch&#x60;.  The response from the API is equivalent to running the &#x60;git log base..head&#x60; command; however, commits are returned in chronological order. Pass the appropriate [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.  The response also includes details on the files that were changed between the two commits. This includes the status of the change (for example, if a file was added, removed, modified, or renamed), and details of the change itself. For example, files with a &#x60;renamed&#x60; status have a &#x60;previous_filename&#x60; field showing the previous filename of the file, and files with a &#x60;modified&#x60; status have a &#x60;patch&#x60; field showing the changes made to the file.  **Working with large comparisons**  To process a response with a large number of commits, you can use (&#x60;per_page&#x60; or &#x60;page&#x60;) to paginate the results. When using paging, the list of changed files is only returned with page 1, but includes all changed files for the entire comparison. For more information on working with pagination, see \&quot;[Traversing with pagination](/rest/guides/traversing-with-pagination).\&quot;  When calling this API without any paging parameters (&#x60;per_page&#x60; or &#x60;page&#x60;), the returned list is limited to 250 commits and the last commit in the list is the most recent of the entire comparison. When a paging parameter is specified, the first commit in the returned list of each page is the earliest.  **Signature verification object**  The response will include a &#x60;verification&#x60; object that describes the result of verifying the commit&#39;s signature. The following fields are included in the &#x60;verification&#x60; object:  | Name | Type | Description | | ---- | ---- | ----------- | | &#x60;verified&#x60; | &#x60;boolean&#x60; | Indicates whether GitHub considers the signature in this commit to be verified. | | &#x60;reason&#x60; | &#x60;string&#x60; | The reason for verified value. Possible values and their meanings are enumerated in table below. | | &#x60;signature&#x60; | &#x60;string&#x60; | The signature that was extracted from the commit. | | &#x60;payload&#x60; | &#x60;string&#x60; | The value that was signed. |  These are the possible values for &#x60;reason&#x60; in the &#x60;verification&#x60; object:  | Value | Description | | ----- | ----------- | | &#x60;expired_key&#x60; | The key that made the signature is expired. | | &#x60;not_signing_key&#x60; | The \&quot;signing\&quot; flag is not among the usage flags in the GPG key that made the signature. | | &#x60;gpgverify_error&#x60; | There was an error communicating with the signature verification service. | | &#x60;gpgverify_unavailable&#x60; | The signature verification service is currently unavailable. | | &#x60;unsigned&#x60; | The object does not include a signature. | | &#x60;unknown_signature_type&#x60; | A non-PGP signature was found in the commit. | | &#x60;no_user&#x60; | No user was associated with the &#x60;committer&#x60; email address in the commit. | | &#x60;unverified_email&#x60; | The &#x60;committer&#x60; email address in the commit was associated with a user, but the email address is not verified on her/his account. | | &#x60;bad_email&#x60; | The &#x60;committer&#x60; email address in the commit is not included in the identities of the PGP key that made the signature. | | &#x60;unknown_key&#x60; | The key that made the signature has not been registered with any user&#39;s account. | | &#x60;malformed_signature&#x60; | There was an error parsing the signature. | | &#x60;invalid&#x60; | The signature could not be cryptographically verified using the key whose key-id was found in the signature. | | &#x60;valid&#x60; | None of the above errors applied, so the signature is considered to be verified. |
     *
-    * @return CommitMinusComparisonModel
+    * @return CommitMinusComparisonApiModel
     */
-    suspend fun reposCompareCommits(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, basehead: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): CommitMinusComparisonModel
+    suspend fun reposCompareCommits(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, basehead: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): CommitMinusComparisonApiModel
 
     /**
     * Create an autolink reference for a repository
@@ -88,9 +88,9 @@ interface ReposApi {
     * Users with admin access to the repository can create an autolink.
     *
     * @param request 
-    * @return AutolinkModel
+    * @return AutolinkApiModel
     */
-    suspend fun reposCreateAutolink(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject64Model): AutolinkModel
+    suspend fun reposCreateAutolink(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject64ApiModel): AutolinkApiModel
 
     /**
     * Create a commit comment
@@ -98,18 +98,18 @@ interface ReposApi {
     * Create a comment for a commit using its &#x60;:commit_sha&#x60;.  This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See \&quot;[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)\&quot; and \&quot;[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)\&quot; for details.
     *
     * @param request 
-    * @return CommitMinusCommentModel
+    * @return CommitMinusCommentApiModel
     */
-    suspend fun reposCreateCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, request: InlineObject77Model): CommitMinusCommentModel
+    suspend fun reposCreateCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, request: InlineObject77ApiModel): CommitMinusCommentApiModel
 
     /**
     * Create commit signature protection
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  When authenticated with admin or owner permissions to the repository, you can use this endpoint to require signed commits on a branch. You must enable branch protection to require signed commits.
     *
-    * @return ProtectedMinusBranchMinusAdminMinusEnforcedModel
+    * @return ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
     */
-    suspend fun reposCreateCommitSignatureProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedModel
+    suspend fun reposCreateCommitSignatureProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
 
     /**
     * Create a commit status
@@ -117,9 +117,9 @@ interface ReposApi {
     * Users with push access in a repository can create commit statuses for a given SHA.  Note: there is a limit of 1000 statuses per &#x60;sha&#x60; and &#x60;context&#x60; within a repository. Attempts to create more than 1000 statuses will result in a validation error.
     *
     * @param request 
-    * @return StatusModel
+    * @return StatusApiModel
     */
-    suspend fun reposCreateCommitStatus(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String, request: InlineObject136Model): StatusModel
+    suspend fun reposCreateCommitStatus(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String, request: InlineObject136ApiModel): StatusApiModel
 
     /**
     * Create a deploy key
@@ -127,9 +127,9 @@ interface ReposApi {
     * You can create a read-only deploy key.
     *
     * @param request 
-    * @return DeployMinusKeyModel
+    * @return DeployMinusKeyApiModel
     */
-    suspend fun reposCreateDeployKey(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject108Model): DeployMinusKeyModel
+    suspend fun reposCreateDeployKey(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject108ApiModel): DeployMinusKeyApiModel
 
     /**
     * Create a deployment
@@ -137,9 +137,9 @@ interface ReposApi {
     * Deployments offer a few configurable parameters with certain defaults.  The &#x60;ref&#x60; parameter can be any named branch, tag, or SHA. At GitHub we often deploy branches and verify them before we merge a pull request.  The &#x60;environment&#x60; parameter allows deployments to be issued to different runtime environments. Teams often have multiple environments for verifying their applications, such as &#x60;production&#x60;, &#x60;staging&#x60;, and &#x60;qa&#x60;. This parameter makes it easier to track which environments have requested deployments. The default environment is &#x60;production&#x60;.  The &#x60;auto_merge&#x60; parameter is used to ensure that the requested ref is not behind the repository&#39;s default branch. If the ref _is_ behind the default branch for the repository, we will attempt to merge it for you. If the merge succeeds, the API will return a successful merge commit. If merge conflicts prevent the merge from succeeding, the API will return a failure response.  By default, [commit statuses](https://docs.github.com/rest/reference/commits#commit-statuses) for every submitted context must be in a &#x60;success&#x60; state. The &#x60;required_contexts&#x60; parameter allows you to specify a subset of contexts that must be &#x60;success&#x60;, or to specify contexts that have not yet been submitted. You are not required to use commit statuses to deploy. If you do not require any contexts or create any commit statuses, the deployment will always succeed.  The &#x60;payload&#x60; parameter is available for any extra information that a deployment system might need. It is a JSON text field that will be passed on when a deployment event is dispatched.  The &#x60;task&#x60; parameter is used by the deployment system to allow different execution paths. In the web world this might be &#x60;deploy:migrations&#x60; to run schema changes on the system. In the compiled world this could be a flag to compile an application with debugging enabled.  Users with &#x60;repo&#x60; or &#x60;repo_deployment&#x60; scopes can create a deployment for a given ref.  #### Merged branch response You will see this response when GitHub automatically merges the base branch into the topic branch instead of creating a deployment. This auto-merge happens when: *   Auto-merge option is enabled in the repository *   Topic branch does not include the latest changes on the base branch, which is &#x60;master&#x60; in the response example *   There are no merge conflicts  If there are no new commits in the base branch, a new request to create a deployment should give a successful response.  #### Merge conflict response This error happens when the &#x60;auto_merge&#x60; option is enabled and when the default branch (in this case &#x60;master&#x60;), can&#39;t be merged into the branch that&#39;s being deployed (in this case &#x60;topic-branch&#x60;), due to merge conflicts.  #### Failed commit status checks This error happens when the &#x60;required_contexts&#x60; parameter indicates that one or more contexts need to have a &#x60;success&#x60; status for the commit to be deployed, but one or more of the required contexts do not have a state of &#x60;success&#x60;.
     *
     * @param request 
-    * @return DeploymentModel
+    * @return DeploymentApiModel
     */
-    suspend fun reposCreateDeployment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject81Model): DeploymentModel
+    suspend fun reposCreateDeployment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject81ApiModel): DeploymentApiModel
 
     /**
     * Create a deployment status
@@ -147,9 +147,9 @@ interface ReposApi {
     * Users with &#x60;push&#x60; access can create deployment statuses for a given deployment.  GitHub Apps require &#x60;read &amp; write&#x60; access to \&quot;Deployments\&quot; and &#x60;read-only&#x60; access to \&quot;Repo contents\&quot; (for private repos). OAuth Apps require the &#x60;repo_deployment&#x60; scope.
     *
     * @param request 
-    * @return DeploymentMinusStatusModel
+    * @return DeploymentMinusStatusApiModel
     */
-    suspend fun reposCreateDeploymentStatus(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, request: InlineObject82Model): DeploymentMinusStatusModel
+    suspend fun reposCreateDeploymentStatus(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, request: InlineObject82ApiModel): DeploymentMinusStatusApiModel
 
     /**
     * Create a repository for the authenticated user
@@ -157,9 +157,9 @@ interface ReposApi {
     * Creates a new repository for the authenticated user.  **OAuth scope requirements**  When using [OAuth](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/), authorizations must include:  *   &#x60;public_repo&#x60; scope or &#x60;repo&#x60; scope to create a public repository. Note: For GitHub AE, use &#x60;repo&#x60; scope to create an internal repository. *   &#x60;repo&#x60; scope to create a private repository.
     *
     * @param request 
-    * @return RepositoryModel
+    * @return RepositoryApiModel
     */
-    suspend fun reposCreateForAuthenticatedUser(accessToken: String? = null, request: InlineObject171Model): RepositoryModel
+    suspend fun reposCreateForAuthenticatedUser(accessToken: String? = null, request: InlineObject171ApiModel): RepositoryApiModel
 
     /**
     * Create a fork
@@ -167,9 +167,9 @@ interface ReposApi {
     * Create a fork for the authenticated user.  **Note**: Forking a Repository happens asynchronously. You may have to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be sure to contact [GitHub Support](https://support.github.com/contact?tags&#x3D;dotcom-rest-api).
     *
     * @param request  (optional)
-    * @return FullMinusRepositoryModel
+    * @return FullMinusRepositoryApiModel
     */
-    suspend fun reposCreateFork(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject84Model): FullMinusRepositoryModel
+    suspend fun reposCreateFork(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject84ApiModel): FullMinusRepositoryApiModel
 
     /**
     * Create an organization repository
@@ -177,9 +177,9 @@ interface ReposApi {
     * Creates a new repository in the specified organization. The authenticated user must be a member of the organization.  **OAuth scope requirements**  When using [OAuth](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/), authorizations must include:  *   &#x60;public_repo&#x60; scope or &#x60;repo&#x60; scope to create a public repository. Note: For GitHub AE, use &#x60;repo&#x60; scope to create an internal repository. *   &#x60;repo&#x60; scope to create a private repository
     *
     * @param request 
-    * @return RepositoryModel
+    * @return RepositoryApiModel
     */
-    suspend fun reposCreateInOrg(accessToken: String? = null, org: kotlin.String, request: InlineObject36Model): RepositoryModel
+    suspend fun reposCreateInOrg(accessToken: String? = null, org: kotlin.String, request: InlineObject36ApiModel): RepositoryApiModel
 
     /**
     * Create or update an environment
@@ -187,9 +187,9 @@ interface ReposApi {
     * Create or update an environment with protection rules, such as required reviewers. For more information about environment protection rules, see \&quot;[Environments](/actions/reference/environments#environment-protection-rules).\&quot;  **Note:** Although you can use this operation to specify that only branches that match specified name patterns can deploy to this environment, you must use the UI to set the name patterns. For more information, see \&quot;[Environments](/actions/reference/environments#deployment-branches).\&quot;  **Note:** To create or update secrets for an environment, see \&quot;[Secrets](/rest/reference/actions#secrets).\&quot;  You must authenticate using an access token with the repo scope to use this endpoint.
     *
     * @param request  (optional)
-    * @return EnvironmentModel
+    * @return EnvironmentApiModel
     */
-    suspend fun reposCreateOrUpdateEnvironment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String, request: InlineObject83Model): EnvironmentModel
+    suspend fun reposCreateOrUpdateEnvironment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String, request: InlineObject83ApiModel): EnvironmentApiModel
 
     /**
     * Create or update file contents
@@ -197,9 +197,9 @@ interface ReposApi {
     * Creates a new file or replaces an existing file in a repository.
     *
     * @param request 
-    * @return FileMinusCommitModel
+    * @return FileMinusCommitApiModel
     */
-    suspend fun reposCreateOrUpdateFileContents(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject78Model): FileMinusCommitModel
+    suspend fun reposCreateOrUpdateFileContents(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject78ApiModel): FileMinusCommitApiModel
 
     /**
     * Create a release
@@ -207,9 +207,9 @@ interface ReposApi {
     * Users with push access to the repository can create a release.  This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See \&quot;[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)\&quot; and \&quot;[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)\&quot; for details.
     *
     * @param request 
-    * @return ReleaseModel
+    * @return ReleaseApiModel
     */
-    suspend fun reposCreateRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject130Model): ReleaseModel
+    suspend fun reposCreateRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject130ApiModel): ReleaseApiModel
 
     /**
     * Create a repository using a template
@@ -217,9 +217,9 @@ interface ReposApi {
     * Creates a new repository using a repository template. Use the &#x60;template_owner&#x60; and &#x60;template_repo&#x60; route parameters to specify the repository to use as the template. The authenticated user must own or be a member of an organization that owns the repository. To check if a repository is available to use as a template, get the repository&#39;s information using the [Get a repository](https://docs.github.com/rest/reference/repos#get-a-repository) endpoint and check that the &#x60;is_template&#x60; key is &#x60;true&#x60;.  **OAuth scope requirements**  When using [OAuth](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/), authorizations must include:  *   &#x60;public_repo&#x60; scope or &#x60;repo&#x60; scope to create a public repository. Note: For GitHub AE, use &#x60;repo&#x60; scope to create an internal repository. *   &#x60;repo&#x60; scope to create a private repository
     *
     * @param request 
-    * @return RepositoryModel
+    * @return RepositoryApiModel
     */
-    suspend fun reposCreateUsingTemplate(accessToken: String? = null, templateOwner: kotlin.String, templateRepo: kotlin.String, request: InlineObject140Model): RepositoryModel
+    suspend fun reposCreateUsingTemplate(accessToken: String? = null, templateOwner: kotlin.String, templateRepo: kotlin.String, request: InlineObject140ApiModel): RepositoryApiModel
 
     /**
     * Create a repository webhook
@@ -227,9 +227,9 @@ interface ReposApi {
     * Repositories can have multiple webhooks installed. Each webhook should have a unique &#x60;config&#x60;. Multiple webhooks can share the same &#x60;config&#x60; as long as those webhooks do not have any &#x60;events&#x60; that overlap.
     *
     * @param request  (optional)
-    * @return HookModel
+    * @return HookApiModel
     */
-    suspend fun reposCreateWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject91Model): HookModel
+    suspend fun reposCreateWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject91ApiModel): HookApiModel
 
     /**
     * Decline a repository invitation
@@ -336,9 +336,9 @@ interface ReposApi {
     * Deletes a file in a repository.  You can provide an additional &#x60;committer&#x60; parameter, which is an object containing information about the committer. Or, you can provide an &#x60;author&#x60; parameter, which is an object containing information about the author.  The &#x60;author&#x60; section is optional and is filled in with the &#x60;committer&#x60; information if omitted. If the &#x60;committer&#x60; information is omitted, the authenticated user&#39;s information is used.  You must provide values for both &#x60;name&#x60; and &#x60;email&#x60;, whether you choose to use &#x60;author&#x60; or &#x60;committer&#x60;. Otherwise, you&#39;ll receive a &#x60;422&#x60; status code.
     *
     * @param request 
-    * @return FileMinusCommitModel
+    * @return FileMinusCommitApiModel
     */
-    suspend fun reposDeleteFile(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject79Model): FileMinusCommitModel
+    suspend fun reposDeleteFile(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject79ApiModel): FileMinusCommitApiModel
 
     /**
     * Delete a repository invitation
@@ -463,261 +463,261 @@ interface ReposApi {
     * Generate a name and body describing a [release](https://docs.github.com/rest/reference/repos#releases). The body content will be markdown formatted and contain information like the changes since last release and users who contributed. The generated release notes are not saved anywhere. They are intended to be generated and used when creating a new release.
     *
     * @param request 
-    * @return ReleaseMinusNotesMinusContentModel
+    * @return ReleaseMinusNotesMinusContentApiModel
     */
-    suspend fun reposGenerateReleaseNotes(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject132Model): ReleaseMinusNotesMinusContentModel
+    suspend fun reposGenerateReleaseNotes(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject132ApiModel): ReleaseMinusNotesMinusContentApiModel
 
     /**
     * Get a repository
     *
     * The &#x60;parent&#x60; and &#x60;source&#x60; objects are present when the repository is a fork. &#x60;parent&#x60; is the repository this repository was forked from, &#x60;source&#x60; is the ultimate source for the network.
     *
-    * @return FullMinusRepositoryModel
+    * @return FullMinusRepositoryApiModel
     */
-    suspend fun reposGet(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): FullMinusRepositoryModel
+    suspend fun reposGet(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): FullMinusRepositoryApiModel
 
     /**
     * Get access restrictions
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  Lists who has access to this protected branch.  **Note**: Users, apps, and teams &#x60;restrictions&#x60; are only available for organization-owned repositories.
     *
-    * @return BranchMinusRestrictionMinusPolicyModel
+    * @return BranchMinusRestrictionMinusPolicyApiModel
     */
-    suspend fun reposGetAccessRestrictions(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusRestrictionMinusPolicyModel
+    suspend fun reposGetAccessRestrictions(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusRestrictionMinusPolicyApiModel
 
     /**
     * Get admin branch protection
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
-    * @return ProtectedMinusBranchMinusAdminMinusEnforcedModel
+    * @return ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
     */
-    suspend fun reposGetAdminBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedModel
+    suspend fun reposGetAdminBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
 
     /**
     * Get all environments
     *
     * Get all environments for a repository.  Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return InlineResponse20023Model
+    * @return InlineResponse20023ApiModel
     */
-    suspend fun reposGetAllEnvironments(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): InlineResponse20023Model
+    suspend fun reposGetAllEnvironments(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): InlineResponse20023ApiModel
 
     /**
     * Get all repository topics
     *
     * 
     *
-    * @return TopicModel
+    * @return TopicApiModel
     */
-    suspend fun reposGetAllTopics(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): TopicModel
+    suspend fun reposGetAllTopics(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): TopicApiModel
 
     /**
     * Get an autolink reference of a repository
     *
     * This returns a single autolink reference by ID that was configured for the given repository.  Information about autolinks are only available to repository administrators.
     *
-    * @return AutolinkModel
+    * @return AutolinkApiModel
     */
-    suspend fun reposGetAutolink(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, autolinkId: kotlin.Int): AutolinkModel
+    suspend fun reposGetAutolink(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, autolinkId: kotlin.Int): AutolinkApiModel
 
     /**
     * Get a branch
     *
     * 
     *
-    * @return BranchMinusWithMinusProtectionModel
+    * @return BranchMinusWithMinusProtectionApiModel
     */
-    suspend fun reposGetBranch(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusWithMinusProtectionModel
+    suspend fun reposGetBranch(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusWithMinusProtectionApiModel
 
     /**
     * Get branch protection
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
-    * @return BranchMinusProtectionModel
+    * @return BranchMinusProtectionApiModel
     */
-    suspend fun reposGetBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusProtectionModel
+    suspend fun reposGetBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusProtectionApiModel
 
     /**
     * Get repository clones
     *
     * Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
     *
-    * @return CloneMinusTrafficModel
+    * @return CloneMinusTrafficApiModel
     */
-    suspend fun reposGetClones(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, per: kotlin.String? = null): CloneMinusTrafficModel
+    suspend fun reposGetClones(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, per: kotlin.String? = null): CloneMinusTrafficApiModel
 
     /**
     * Get repository permissions for a user
     *
     * Checks the repository permission of a collaborator. The possible repository permissions are &#x60;admin&#x60;, &#x60;write&#x60;, &#x60;read&#x60;, and &#x60;none&#x60;.
     *
-    * @return RepositoryMinusCollaboratorMinusPermissionModel
+    * @return RepositoryMinusCollaboratorMinusPermissionApiModel
     */
-    suspend fun reposGetCollaboratorPermissionLevel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, username: kotlin.String): RepositoryMinusCollaboratorMinusPermissionModel
+    suspend fun reposGetCollaboratorPermissionLevel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, username: kotlin.String): RepositoryMinusCollaboratorMinusPermissionApiModel
 
     /**
     * Get the combined status for a specific reference
     *
     * Users with pull access in a repository can access a combined view of commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name.   Additionally, a combined &#x60;state&#x60; is returned. The &#x60;state&#x60; is one of:  *   **failure** if any of the contexts report as &#x60;error&#x60; or &#x60;failure&#x60; *   **pending** if there are no statuses or a context is &#x60;pending&#x60; *   **success** if the latest status for all contexts is &#x60;success&#x60;
     *
-    * @return CombinedMinusCommitMinusStatusModel
+    * @return CombinedMinusCommitMinusStatusApiModel
     */
-    suspend fun reposGetCombinedStatusForRef(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): CombinedMinusCommitMinusStatusModel
+    suspend fun reposGetCombinedStatusForRef(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): CombinedMinusCommitMinusStatusApiModel
 
     /**
     * Get a commit
     *
     * Returns the contents of a single commit reference. You must have &#x60;read&#x60; access for the repository to use this endpoint.  **Note:** If there are more than 300 files in the commit diff, the response will include pagination link headers for the remaining files, up to a limit of 3000 files. Each page contains the static commit information, and the only changes are to the file listing.  You can pass the appropriate [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) to  fetch &#x60;diff&#x60; and &#x60;patch&#x60; formats. Diffs with binary data will have no &#x60;patch&#x60; property.  To return only the SHA-1 hash of the commit reference, you can provide the &#x60;sha&#x60; custom [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) in the &#x60;Accept&#x60; header. You can use this endpoint to check if a remote reference&#39;s SHA-1 hash is the same as your local reference&#39;s SHA-1 hash by providing the local SHA-1 reference as the ETag.  **Signature verification object**  The response will include a &#x60;verification&#x60; object that describes the result of verifying the commit&#39;s signature. The following fields are included in the &#x60;verification&#x60; object:  | Name | Type | Description | | ---- | ---- | ----------- | | &#x60;verified&#x60; | &#x60;boolean&#x60; | Indicates whether GitHub considers the signature in this commit to be verified. | | &#x60;reason&#x60; | &#x60;string&#x60; | The reason for verified value. Possible values and their meanings are enumerated in table below. | | &#x60;signature&#x60; | &#x60;string&#x60; | The signature that was extracted from the commit. | | &#x60;payload&#x60; | &#x60;string&#x60; | The value that was signed. |  These are the possible values for &#x60;reason&#x60; in the &#x60;verification&#x60; object:  | Value | Description | | ----- | ----------- | | &#x60;expired_key&#x60; | The key that made the signature is expired. | | &#x60;not_signing_key&#x60; | The \&quot;signing\&quot; flag is not among the usage flags in the GPG key that made the signature. | | &#x60;gpgverify_error&#x60; | There was an error communicating with the signature verification service. | | &#x60;gpgverify_unavailable&#x60; | The signature verification service is currently unavailable. | | &#x60;unsigned&#x60; | The object does not include a signature. | | &#x60;unknown_signature_type&#x60; | A non-PGP signature was found in the commit. | | &#x60;no_user&#x60; | No user was associated with the &#x60;committer&#x60; email address in the commit. | | &#x60;unverified_email&#x60; | The &#x60;committer&#x60; email address in the commit was associated with a user, but the email address is not verified on her/his account. | | &#x60;bad_email&#x60; | The &#x60;committer&#x60; email address in the commit is not included in the identities of the PGP key that made the signature. | | &#x60;unknown_key&#x60; | The key that made the signature has not been registered with any user&#39;s account. | | &#x60;malformed_signature&#x60; | There was an error parsing the signature. | | &#x60;invalid&#x60; | The signature could not be cryptographically verified using the key whose key-id was found in the signature. | | &#x60;valid&#x60; | None of the above errors applied, so the signature is considered to be verified. |
     *
-    * @return CommitModel
+    * @return CommitApiModel
     */
-    suspend fun reposGetCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): CommitModel
+    suspend fun reposGetCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): CommitApiModel
 
     /**
     * Get the last year of commit activity
     *
     * Returns the last year of commit activity grouped by week. The &#x60;days&#x60; array is a group of commits per day, starting on &#x60;Sunday&#x60;.
     *
-    * @return kotlin.collections.List<CommitMinusActivityModel>
+    * @return kotlin.collections.List<CommitMinusActivityApiModel>
     */
-    suspend fun reposGetCommitActivityStats(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<CommitMinusActivityModel>
+    suspend fun reposGetCommitActivityStats(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<CommitMinusActivityApiModel>
 
     /**
     * Get a commit comment
     *
     * 
     *
-    * @return CommitMinusCommentModel
+    * @return CommitMinusCommentApiModel
     */
-    suspend fun reposGetCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): CommitMinusCommentModel
+    suspend fun reposGetCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): CommitMinusCommentApiModel
 
     /**
     * Get commit signature protection
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  When authenticated with admin or owner permissions to the repository, you can use this endpoint to check whether a branch requires signed commits. An enabled status of &#x60;true&#x60; indicates you must sign commits on this branch. For more information, see [Signing commits with GPG](https://docs.github.com/articles/signing-commits-with-gpg) in GitHub Help.  **Note**: You must enable branch protection to require signed commits.
     *
-    * @return ProtectedMinusBranchMinusAdminMinusEnforcedModel
+    * @return ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
     */
-    suspend fun reposGetCommitSignatureProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedModel
+    suspend fun reposGetCommitSignatureProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
 
     /**
     * Get community profile metrics
     *
     * This endpoint will return all community profile metrics, including an overall health score, repository description, the presence of documentation, detected code of conduct, detected license, and the presence of ISSUE\\_TEMPLATE, PULL\\_REQUEST\\_TEMPLATE, README, and CONTRIBUTING files.  The &#x60;health_percentage&#x60; score is defined as a percentage of how many of these four documents are present: README, CONTRIBUTING, LICENSE, and CODE_OF_CONDUCT. For example, if all four documents are present, then the &#x60;health_percentage&#x60; is &#x60;100&#x60;. If only one is present, then the &#x60;health_percentage&#x60; is &#x60;25&#x60;.  &#x60;content_reports_enabled&#x60; is only returned for organization-owned repositories.
     *
-    * @return CommunityMinusProfileModel
+    * @return CommunityMinusProfileApiModel
     */
-    suspend fun reposGetCommunityProfileMetrics(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): CommunityMinusProfileModel
+    suspend fun reposGetCommunityProfileMetrics(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): CommunityMinusProfileApiModel
 
     /**
     * Get repository content
     *
     * Gets the contents of a file or directory in a repository. Specify the file path or directory in &#x60;:path&#x60;. If you omit &#x60;:path&#x60;, you will receive the contents of the repository&#39;s root directory. See the description below regarding what the API response includes for directories.   Files and symlinks support [a custom media type](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML (when supported). All content types support [a custom media type](https://docs.github.com/rest/reference/repos#custom-media-types) to ensure the content is returned in a consistent object format.  **Note**: *   To get a repository&#39;s contents recursively, you can [recursively get the tree](https://docs.github.com/rest/reference/git#trees). *   This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees API](https://docs.github.com/rest/reference/git#get-a-tree). *   This API supports files up to 1 megabyte in size.  #### If the content is a directory The response will be an array of objects, one object for each item in the directory. When listing the contents of a directory, submodules have their \&quot;type\&quot; specified as \&quot;file\&quot;. Logically, the value _should_ be \&quot;submodule\&quot;. This behavior exists in API v3 [for backwards compatibility purposes](https://git.io/v1YCW). In the next major version of the API, the type will be returned as \&quot;submodule\&quot;.  #### If the content is a symlink  If the requested &#x60;:path&#x60; points to a symlink, and the symlink&#39;s target is a normal file in the repository, then the API responds with the content of the file (in the format shown in the example. Otherwise, the API responds with an object  describing the symlink itself.  #### If the content is a submodule The &#x60;submodule_git_url&#x60; identifies the location of the submodule repository, and the &#x60;sha&#x60; identifies a specific commit within the submodule repository. Git uses the given URL when cloning the submodule repository, and checks out the submodule at that specific commit.  If the submodule repository is not hosted on github.com, the Git URLs (&#x60;git_url&#x60; and &#x60;_links[\&quot;git\&quot;]&#x60;) and the github.com URLs (&#x60;html_url&#x60; and &#x60;_links[\&quot;html\&quot;]&#x60;) will have null values.
     *
-    * @return ContentMinusTreeModel
+    * @return ContentMinusTreeApiModel
     */
-    suspend fun reposGetContent(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, ref: kotlin.String? = null): ContentMinusTreeModel
+    suspend fun reposGetContent(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, ref: kotlin.String? = null): ContentMinusTreeApiModel
 
     /**
     * Get all contributor commit activity
     *
     *  Returns the &#x60;total&#x60; number of commits authored by the contributor. In addition, the response includes a Weekly Hash (&#x60;weeks&#x60; array) with the following information:  *   &#x60;w&#x60; - Start of the week, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time). *   &#x60;a&#x60; - Number of additions *   &#x60;d&#x60; - Number of deletions *   &#x60;c&#x60; - Number of commits
     *
-    * @return kotlin.collections.List<ContributorMinusActivityModel>
+    * @return kotlin.collections.List<ContributorMinusActivityApiModel>
     */
-    suspend fun reposGetContributorsStats(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContributorMinusActivityModel>
+    suspend fun reposGetContributorsStats(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContributorMinusActivityApiModel>
 
     /**
     * Get a deploy key
     *
     * 
     *
-    * @return DeployMinusKeyModel
+    * @return DeployMinusKeyApiModel
     */
-    suspend fun reposGetDeployKey(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, keyId: kotlin.Int): DeployMinusKeyModel
+    suspend fun reposGetDeployKey(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, keyId: kotlin.Int): DeployMinusKeyApiModel
 
     /**
     * Get a deployment
     *
     * 
     *
-    * @return DeploymentModel
+    * @return DeploymentApiModel
     */
-    suspend fun reposGetDeployment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int): DeploymentModel
+    suspend fun reposGetDeployment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int): DeploymentApiModel
 
     /**
     * Get a deployment status
     *
     * Users with pull access can view a deployment status for a deployment:
     *
-    * @return DeploymentMinusStatusModel
+    * @return DeploymentMinusStatusApiModel
     */
-    suspend fun reposGetDeploymentStatus(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, statusId: kotlin.Int): DeploymentMinusStatusModel
+    suspend fun reposGetDeploymentStatus(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, statusId: kotlin.Int): DeploymentMinusStatusApiModel
 
     /**
     * Get an environment
     *
     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return EnvironmentModel
+    * @return EnvironmentApiModel
     */
-    suspend fun reposGetEnvironment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String): EnvironmentModel
+    suspend fun reposGetEnvironment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String): EnvironmentApiModel
 
     /**
     * Get latest Pages build
     *
     * 
     *
-    * @return PageMinusBuildModel
+    * @return PageMinusBuildApiModel
     */
-    suspend fun reposGetLatestPagesBuild(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): PageMinusBuildModel
+    suspend fun reposGetLatestPagesBuild(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): PageMinusBuildApiModel
 
     /**
     * Get the latest release
     *
     * View the latest published full release for the repository.  The latest release is the most recent non-prerelease, non-draft release, sorted by the &#x60;created_at&#x60; attribute. The &#x60;created_at&#x60; attribute is the date of the commit used for the release, and not the date when the release was drafted or published.
     *
-    * @return ReleaseModel
+    * @return ReleaseApiModel
     */
-    suspend fun reposGetLatestRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ReleaseModel
+    suspend fun reposGetLatestRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ReleaseApiModel
 
     /**
     * Get GitHub Pages build
     *
     * 
     *
-    * @return PageMinusBuildModel
+    * @return PageMinusBuildApiModel
     */
-    suspend fun reposGetPagesBuild(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, buildId: kotlin.Int): PageMinusBuildModel
+    suspend fun reposGetPagesBuild(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, buildId: kotlin.Int): PageMinusBuildApiModel
 
     /**
     * Get a DNS health check for GitHub Pages
     *
     * Gets a health check of the DNS settings for the &#x60;CNAME&#x60; record configured for a repository&#39;s GitHub Pages.  The first request to this endpoint returns a &#x60;202 Accepted&#x60; status and starts an asynchronous background task to get the results for the domain. After the background task completes, subsequent requests to this endpoint return a &#x60;200 OK&#x60; status with the health check results in the response.  Users must have admin or owner permissions. GitHub Apps must have the &#x60;pages:write&#x60; and &#x60;administration:write&#x60; permission to use this endpoint.
     *
-    * @return PagesMinusHealthMinusCheckModel
+    * @return PagesMinusHealthMinusCheckApiModel
     */
-    suspend fun reposGetPagesHealthCheck(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): PagesMinusHealthMinusCheckModel
+    suspend fun reposGetPagesHealthCheck(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): PagesMinusHealthMinusCheckApiModel
 
     /**
     * Get the weekly commit count
     *
     * Returns the total commit counts for the &#x60;owner&#x60; and total commit counts in &#x60;all&#x60;. &#x60;all&#x60; is everyone combined, including the &#x60;owner&#x60; in the last 52 weeks. If you&#39;d like to get the commit counts for non-owners, you can subtract &#x60;owner&#x60; from &#x60;all&#x60;.  The array order is oldest week (index 0) to most recent week.
     *
-    * @return ParticipationMinusStatsModel
+    * @return ParticipationMinusStatsApiModel
     */
-    suspend fun reposGetParticipationStats(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ParticipationMinusStatsModel
+    suspend fun reposGetParticipationStats(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ParticipationMinusStatsApiModel
 
     /**
     * Get pull request review protection
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
-    * @return ProtectedMinusBranchMinusPullMinusRequestMinusReviewModel
+    * @return ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel
     */
-    suspend fun reposGetPullRequestReviewProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusPullMinusRequestMinusReviewModel
+    suspend fun reposGetPullRequestReviewProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel
 
     /**
     * Get the hourly commit count for each day
@@ -733,261 +733,261 @@ interface ReposApi {
     *
     * Gets the preferred README for a repository.  READMEs support [custom media types](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML.
     *
-    * @return ContentMinusFileModel
+    * @return ContentMinusFileApiModel
     */
-    suspend fun reposGetReadme(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String? = null): ContentMinusFileModel
+    suspend fun reposGetReadme(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String? = null): ContentMinusFileApiModel
 
     /**
     * Get a repository README for a directory
     *
     * Gets the README from a repository directory.  READMEs support [custom media types](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML.
     *
-    * @return ContentMinusFileModel
+    * @return ContentMinusFileApiModel
     */
-    suspend fun reposGetReadmeInDirectory(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, dir: kotlin.String, ref: kotlin.String? = null): ContentMinusFileModel
+    suspend fun reposGetReadmeInDirectory(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, dir: kotlin.String, ref: kotlin.String? = null): ContentMinusFileApiModel
 
     /**
     * Get a release
     *
     * **Note:** This returns an &#x60;upload_url&#x60; key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia).
     *
-    * @return ReleaseModel
+    * @return ReleaseApiModel
     */
-    suspend fun reposGetRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int): ReleaseModel
+    suspend fun reposGetRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int): ReleaseApiModel
 
     /**
     * Get a release asset
     *
     * To download the asset&#39;s binary content, set the &#x60;Accept&#x60; header of the request to [&#x60;application/octet-stream&#x60;](https://docs.github.com/rest/overview/media-types). The API will either redirect the client to the location, or stream it directly if possible. API clients should handle both a &#x60;200&#x60; or &#x60;302&#x60; response.
     *
-    * @return ReleaseMinusAssetModel
+    * @return ReleaseMinusAssetApiModel
     */
-    suspend fun reposGetReleaseAsset(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int): ReleaseMinusAssetModel
+    suspend fun reposGetReleaseAsset(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int): ReleaseMinusAssetApiModel
 
     /**
     * Get a release by tag name
     *
     * Get a published release with the specified tag.
     *
-    * @return ReleaseModel
+    * @return ReleaseApiModel
     */
-    suspend fun reposGetReleaseByTag(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, tag: kotlin.String): ReleaseModel
+    suspend fun reposGetReleaseByTag(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, tag: kotlin.String): ReleaseApiModel
 
     /**
     * Get status checks protection
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
     *
-    * @return StatusMinusCheckMinusPolicyModel
+    * @return StatusMinusCheckMinusPolicyApiModel
     */
-    suspend fun reposGetStatusChecksProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): StatusMinusCheckMinusPolicyModel
+    suspend fun reposGetStatusChecksProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): StatusMinusCheckMinusPolicyApiModel
 
     /**
     * Get top referral paths
     *
     * Get the top 10 popular contents over the last 14 days.
     *
-    * @return kotlin.collections.List<ContentMinusTrafficModel>
+    * @return kotlin.collections.List<ContentMinusTrafficApiModel>
     */
-    suspend fun reposGetTopPaths(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContentMinusTrafficModel>
+    suspend fun reposGetTopPaths(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContentMinusTrafficApiModel>
 
     /**
     * Get top referral sources
     *
     * Get the top 10 referrers over the last 14 days.
     *
-    * @return kotlin.collections.List<ReferrerMinusTrafficModel>
+    * @return kotlin.collections.List<ReferrerMinusTrafficApiModel>
     */
-    suspend fun reposGetTopReferrers(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ReferrerMinusTrafficModel>
+    suspend fun reposGetTopReferrers(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ReferrerMinusTrafficApiModel>
 
     /**
     * Get page views
     *
     * Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
     *
-    * @return ViewMinusTrafficModel
+    * @return ViewMinusTrafficApiModel
     */
-    suspend fun reposGetViews(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, per: kotlin.String? = null): ViewMinusTrafficModel
+    suspend fun reposGetViews(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, per: kotlin.String? = null): ViewMinusTrafficApiModel
 
     /**
     * Get a repository webhook
     *
     * Returns a webhook configured in a repository. To get only the webhook &#x60;config&#x60; properties, see \&quot;[Get a webhook configuration for a repository](/rest/reference/repos#get-a-webhook-configuration-for-a-repository).\&quot;
     *
-    * @return HookModel
+    * @return HookApiModel
     */
-    suspend fun reposGetWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): HookModel
+    suspend fun reposGetWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): HookApiModel
 
     /**
     * Get a webhook configuration for a repository
     *
     * Returns the webhook configuration for a repository. To get more information about the webhook, including the &#x60;active&#x60; state and &#x60;events&#x60;, use \&quot;[Get a repository webhook](/rest/reference/orgs#get-a-repository-webhook).\&quot;  Access tokens must have the &#x60;read:repo_hook&#x60; or &#x60;repo&#x60; scope, and GitHub Apps must have the &#x60;repository_hooks:read&#x60; permission.
     *
-    * @return WebhookMinusConfigModel
+    * @return WebhookMinusConfigApiModel
     */
-    suspend fun reposGetWebhookConfigForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigModel
+    suspend fun reposGetWebhookConfigForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigApiModel
 
     /**
     * List all autolinks of a repository
     *
     * This returns a list of autolinks configured for the given repository.  Information about autolinks are only available to repository administrators.
     *
-    * @return kotlin.collections.List<AutolinkModel>
+    * @return kotlin.collections.List<AutolinkApiModel>
     */
-    suspend fun reposListAutolinks(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int? = null): kotlin.collections.List<AutolinkModel>
+    suspend fun reposListAutolinks(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int? = null): kotlin.collections.List<AutolinkApiModel>
 
     /**
     * List branches
     *
     * 
     *
-    * @return kotlin.collections.List<ShortMinusBranchModel>
+    * @return kotlin.collections.List<ShortMinusBranchApiModel>
     */
-    suspend fun reposListBranches(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, isProtected: kotlin.Boolean? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ShortMinusBranchModel>
+    suspend fun reposListBranches(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, isProtected: kotlin.Boolean? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ShortMinusBranchApiModel>
 
     /**
     * List branches for HEAD commit
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  Returns all branches where the given commit SHA is the HEAD, or latest commit for the branch.
     *
-    * @return kotlin.collections.List<BranchMinusShortModel>
+    * @return kotlin.collections.List<BranchMinusShortApiModel>
     */
-    suspend fun reposListBranchesForHeadCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String): kotlin.collections.List<BranchMinusShortModel>
+    suspend fun reposListBranchesForHeadCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String): kotlin.collections.List<BranchMinusShortApiModel>
 
     /**
     * List repository collaborators
     *
     * For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.  Team members will include the members of child teams.  You must authenticate using an access token with the &#x60;read:org&#x60; and &#x60;repo&#x60; scopes with push access to use this endpoint. GitHub Apps must have the &#x60;members&#x60; organization permission and &#x60;metadata&#x60; repository permission to use this endpoint.
     *
-    * @return kotlin.collections.List<CollaboratorModel>
+    * @return kotlin.collections.List<CollaboratorApiModel>
     */
-    suspend fun reposListCollaborators(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, affiliation: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CollaboratorModel>
+    suspend fun reposListCollaborators(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, affiliation: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CollaboratorApiModel>
 
     /**
     * List commit comments
     *
     * Use the &#x60;:commit_sha&#x60; to specify the commit that will have its comments listed.
     *
-    * @return kotlin.collections.List<CommitMinusCommentModel>
+    * @return kotlin.collections.List<CommitMinusCommentApiModel>
     */
-    suspend fun reposListCommentsForCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitMinusCommentModel>
+    suspend fun reposListCommentsForCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitMinusCommentApiModel>
 
     /**
     * List commit comments for a repository
     *
     * Commit Comments use [these custom media types](https://docs.github.com/rest/reference/repos#custom-media-types). You can read more about the use of media types in the API [here](https://docs.github.com/rest/overview/media-types/).  Comments are ordered by ascending ID.
     *
-    * @return kotlin.collections.List<CommitMinusCommentModel>
+    * @return kotlin.collections.List<CommitMinusCommentApiModel>
     */
-    suspend fun reposListCommitCommentsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitMinusCommentModel>
+    suspend fun reposListCommitCommentsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitMinusCommentApiModel>
 
     /**
     * List commit statuses for a reference
     *
     * Users with pull access in a repository can view commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name. Statuses are returned in reverse chronological order. The first status in the list will be the latest one.  This resource is also available via a legacy route: &#x60;GET /repos/:owner/:repo/statuses/:ref&#x60;.
     *
-    * @return kotlin.collections.List<StatusModel>
+    * @return kotlin.collections.List<StatusApiModel>
     */
-    suspend fun reposListCommitStatusesForRef(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<StatusModel>
+    suspend fun reposListCommitStatusesForRef(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<StatusApiModel>
 
     /**
     * List commits
     *
     * **Signature verification object**  The response will include a &#x60;verification&#x60; object that describes the result of verifying the commit&#39;s signature. The following fields are included in the &#x60;verification&#x60; object:  | Name | Type | Description | | ---- | ---- | ----------- | | &#x60;verified&#x60; | &#x60;boolean&#x60; | Indicates whether GitHub considers the signature in this commit to be verified. | | &#x60;reason&#x60; | &#x60;string&#x60; | The reason for verified value. Possible values and their meanings are enumerated in table below. | | &#x60;signature&#x60; | &#x60;string&#x60; | The signature that was extracted from the commit. | | &#x60;payload&#x60; | &#x60;string&#x60; | The value that was signed. |  These are the possible values for &#x60;reason&#x60; in the &#x60;verification&#x60; object:  | Value | Description | | ----- | ----------- | | &#x60;expired_key&#x60; | The key that made the signature is expired. | | &#x60;not_signing_key&#x60; | The \&quot;signing\&quot; flag is not among the usage flags in the GPG key that made the signature. | | &#x60;gpgverify_error&#x60; | There was an error communicating with the signature verification service. | | &#x60;gpgverify_unavailable&#x60; | The signature verification service is currently unavailable. | | &#x60;unsigned&#x60; | The object does not include a signature. | | &#x60;unknown_signature_type&#x60; | A non-PGP signature was found in the commit. | | &#x60;no_user&#x60; | No user was associated with the &#x60;committer&#x60; email address in the commit. | | &#x60;unverified_email&#x60; | The &#x60;committer&#x60; email address in the commit was associated with a user, but the email address is not verified on her/his account. | | &#x60;bad_email&#x60; | The &#x60;committer&#x60; email address in the commit is not included in the identities of the PGP key that made the signature. | | &#x60;unknown_key&#x60; | The key that made the signature has not been registered with any user&#39;s account. | | &#x60;malformed_signature&#x60; | There was an error parsing the signature. | | &#x60;invalid&#x60; | The signature could not be cryptographically verified using the key whose key-id was found in the signature. | | &#x60;valid&#x60; | None of the above errors applied, so the signature is considered to be verified. |
     *
-    * @return kotlin.collections.List<CommitModel>
+    * @return kotlin.collections.List<CommitApiModel>
     */
-    suspend fun reposListCommits(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String? = null, path: kotlin.String? = null, author: kotlin.String? = null, since: kotlin.String? = null, until: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitModel>
+    suspend fun reposListCommits(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String? = null, path: kotlin.String? = null, author: kotlin.String? = null, since: kotlin.String? = null, until: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitApiModel>
 
     /**
     * List repository contributors
     *
     * Lists contributors to the specified repository and sorts them by the number of commits per contributor in descending order. This endpoint may return information that is a few hours old because the GitHub REST API v3 caches contributor data to improve performance.  GitHub identifies contributors by author email address. This endpoint groups contribution counts by GitHub user, which includes all associated email addresses. To improve performance, only the first 500 author email addresses in the repository link to GitHub users. The rest will appear as anonymous contributors without associated GitHub user information.
     *
-    * @return kotlin.collections.List<ContributorModel>
+    * @return kotlin.collections.List<ContributorApiModel>
     */
-    suspend fun reposListContributors(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, anon: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ContributorModel>
+    suspend fun reposListContributors(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, anon: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ContributorApiModel>
 
     /**
     * List deploy keys
     *
     * 
     *
-    * @return kotlin.collections.List<DeployMinusKeyModel>
+    * @return kotlin.collections.List<DeployMinusKeyApiModel>
     */
-    suspend fun reposListDeployKeys(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeployMinusKeyModel>
+    suspend fun reposListDeployKeys(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeployMinusKeyApiModel>
 
     /**
     * List deployment statuses
     *
     * Users with pull access can view deployment statuses for a deployment:
     *
-    * @return kotlin.collections.List<DeploymentMinusStatusModel>
+    * @return kotlin.collections.List<DeploymentMinusStatusApiModel>
     */
-    suspend fun reposListDeploymentStatuses(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeploymentMinusStatusModel>
+    suspend fun reposListDeploymentStatuses(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeploymentMinusStatusApiModel>
 
     /**
     * List deployments
     *
     * Simple filtering of deployments is available via query parameters:
     *
-    * @return kotlin.collections.List<DeploymentModel>
+    * @return kotlin.collections.List<DeploymentApiModel>
     */
-    suspend fun reposListDeployments(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String? = null, ref: kotlin.String? = null, task: kotlin.String? = null, environment: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeploymentModel>
+    suspend fun reposListDeployments(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String? = null, ref: kotlin.String? = null, task: kotlin.String? = null, environment: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeploymentApiModel>
 
     /**
     * List repositories for the authenticated user
     *
     * Lists repositories that the authenticated user has explicit permission (&#x60;:read&#x60;, &#x60;:write&#x60;, or &#x60;:admin&#x60;) to access.  The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
     *
-    * @return kotlin.collections.List<RepositoryModel>
+    * @return kotlin.collections.List<RepositoryApiModel>
     */
-    suspend fun reposListForAuthenticatedUser(accessToken: String? = null, visibility: kotlin.String? = null, affiliation: kotlin.String? = null, type: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, since: kotlin.String? = null, before: kotlin.String? = null): kotlin.collections.List<RepositoryModel>
+    suspend fun reposListForAuthenticatedUser(accessToken: String? = null, visibility: kotlin.String? = null, affiliation: kotlin.String? = null, type: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, since: kotlin.String? = null, before: kotlin.String? = null): kotlin.collections.List<RepositoryApiModel>
 
     /**
     * List organization repositories
     *
     * Lists repositories for the specified organization.
     *
-    * @return kotlin.collections.List<MinimalMinusRepositoryModel>
+    * @return kotlin.collections.List<MinimalMinusRepositoryApiModel>
     */
-    suspend fun reposListForOrg(accessToken: String? = null, org: kotlin.String, type: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryModel>
+    suspend fun reposListForOrg(accessToken: String? = null, org: kotlin.String, type: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryApiModel>
 
     /**
     * List repositories for a user
     *
     * Lists public repositories for the specified user. Note: For GitHub AE, this endpoint will list internal repositories for the specified user.
     *
-    * @return kotlin.collections.List<MinimalMinusRepositoryModel>
+    * @return kotlin.collections.List<MinimalMinusRepositoryApiModel>
     */
-    suspend fun reposListForUser(accessToken: String? = null, username: kotlin.String, type: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryModel>
+    suspend fun reposListForUser(accessToken: String? = null, username: kotlin.String, type: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryApiModel>
 
     /**
     * List forks
     *
     * 
     *
-    * @return kotlin.collections.List<MinimalMinusRepositoryModel>
+    * @return kotlin.collections.List<MinimalMinusRepositoryApiModel>
     */
-    suspend fun reposListForks(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryModel>
+    suspend fun reposListForks(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryApiModel>
 
     /**
     * List repository invitations
     *
     * When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.
     *
-    * @return kotlin.collections.List<RepositoryMinusInvitationModel>
+    * @return kotlin.collections.List<RepositoryMinusInvitationApiModel>
     */
-    suspend fun reposListInvitations(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<RepositoryMinusInvitationModel>
+    suspend fun reposListInvitations(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<RepositoryMinusInvitationApiModel>
 
     /**
     * List repository invitations for the authenticated user
     *
     * When authenticating as a user, this endpoint will list all currently open repository invitations for that user.
     *
-    * @return kotlin.collections.List<RepositoryMinusInvitationModel>
+    * @return kotlin.collections.List<RepositoryMinusInvitationApiModel>
     */
-    suspend fun reposListInvitationsForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<RepositoryMinusInvitationModel>
+    suspend fun reposListInvitationsForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<RepositoryMinusInvitationApiModel>
 
     /**
     * List repository languages
@@ -1003,72 +1003,72 @@ interface ReposApi {
     *
     * 
     *
-    * @return kotlin.collections.List<PageMinusBuildModel>
+    * @return kotlin.collections.List<PageMinusBuildApiModel>
     */
-    suspend fun reposListPagesBuilds(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PageMinusBuildModel>
+    suspend fun reposListPagesBuilds(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PageMinusBuildApiModel>
 
     /**
     * List public repositories
     *
     * Lists all public repositories in the order that they were created.  Note: - For GitHub Enterprise Server, this endpoint will only list repositories available to all users on the enterprise. - Pagination is powered exclusively by the &#x60;since&#x60; parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of repositories.
     *
-    * @return kotlin.collections.List<MinimalMinusRepositoryModel>
+    * @return kotlin.collections.List<MinimalMinusRepositoryApiModel>
     */
-    suspend fun reposListPublic(accessToken: String? = null, since: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryModel>
+    suspend fun reposListPublic(accessToken: String? = null, since: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryApiModel>
 
     /**
     * List pull requests associated with a commit
     *
     * Lists the merged pull request that introduced the commit to the repository. If the commit is not present in the default branch, additionally returns open pull requests associated with the commit. The results may include open and closed pull requests. Additional preview headers may be required to see certain details for associated pull requests, such as whether a pull request is in a draft state. For more information about previews that might affect this endpoint, see the [List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests) endpoint.
     *
-    * @return kotlin.collections.List<PullMinusRequestMinusSimpleModel>
+    * @return kotlin.collections.List<PullMinusRequestMinusSimpleApiModel>
     */
-    suspend fun reposListPullRequestsAssociatedWithCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusSimpleModel>
+    suspend fun reposListPullRequestsAssociatedWithCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusSimpleApiModel>
 
     /**
     * List release assets
     *
     * 
     *
-    * @return kotlin.collections.List<ReleaseMinusAssetModel>
+    * @return kotlin.collections.List<ReleaseMinusAssetApiModel>
     */
-    suspend fun reposListReleaseAssets(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReleaseMinusAssetModel>
+    suspend fun reposListReleaseAssets(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReleaseMinusAssetApiModel>
 
     /**
     * List releases
     *
     * This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the [Repository Tags API](https://docs.github.com/rest/reference/repos#list-repository-tags).  Information about published releases are available to everyone. Only users with push access will receive listings for draft releases.
     *
-    * @return kotlin.collections.List<ReleaseModel>
+    * @return kotlin.collections.List<ReleaseApiModel>
     */
-    suspend fun reposListReleases(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReleaseModel>
+    suspend fun reposListReleases(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReleaseApiModel>
 
     /**
     * List repository tags
     *
     * 
     *
-    * @return kotlin.collections.List<TagModel>
+    * @return kotlin.collections.List<TagApiModel>
     */
-    suspend fun reposListTags(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TagModel>
+    suspend fun reposListTags(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TagApiModel>
 
     /**
     * List repository teams
     *
     * 
     *
-    * @return kotlin.collections.List<TeamModel>
+    * @return kotlin.collections.List<TeamApiModel>
     */
-    suspend fun reposListTeams(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamModel>
+    suspend fun reposListTeams(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamApiModel>
 
     /**
     * List repository webhooks
     *
     * 
     *
-    * @return kotlin.collections.List<HookModel>
+    * @return kotlin.collections.List<HookApiModel>
     */
-    suspend fun reposListWebhooks(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<HookModel>
+    suspend fun reposListWebhooks(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<HookApiModel>
 
     /**
     * Merge a branch
@@ -1076,9 +1076,9 @@ interface ReposApi {
     * 
     *
     * @param request 
-    * @return CommitModel
+    * @return CommitApiModel
     */
-    suspend fun reposMerge(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject112Model): CommitModel
+    suspend fun reposMerge(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject112ApiModel): CommitApiModel
 
     /**
     * Sync a fork branch with the upstream repository
@@ -1086,9 +1086,9 @@ interface ReposApi {
     * Sync a branch of a forked repository to keep it up-to-date with the upstream repository.
     *
     * @param request 
-    * @return MergedMinusUpstreamModel
+    * @return MergedMinusUpstreamApiModel
     */
-    suspend fun reposMergeUpstream(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject111Model): MergedMinusUpstreamModel
+    suspend fun reposMergeUpstream(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject111ApiModel): MergedMinusUpstreamApiModel
 
     /**
     * Ping a repository webhook
@@ -1132,9 +1132,9 @@ interface ReposApi {
     * Renames a branch in a repository.  **Note:** Although the API responds immediately, the branch rename process might take some extra time to complete in the background. You won&#39;t be able to push to the old branch name while the rename process is in progress. For more information, see \&quot;[Renaming a branch](https://docs.github.com/github/administering-a-repository/renaming-a-branch)\&quot;.  The permissions required to use this endpoint depends on whether you are renaming the default branch.  To rename a non-default branch:  * Users must have push access. * GitHub Apps must have the &#x60;contents:write&#x60; repository permission.  To rename the default branch:  * Users must have admin or owner permissions. * GitHub Apps must have the &#x60;administration:write&#x60; repository permission.
     *
     * @param request 
-    * @return BranchMinusWithMinusProtectionModel
+    * @return BranchMinusWithMinusProtectionApiModel
     */
-    suspend fun reposRenameBranch(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject68Model): BranchMinusWithMinusProtectionModel
+    suspend fun reposRenameBranch(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject68ApiModel): BranchMinusWithMinusProtectionApiModel
 
     /**
     * Replace all repository topics
@@ -1142,27 +1142,27 @@ interface ReposApi {
     * 
     *
     * @param request 
-    * @return TopicModel
+    * @return TopicApiModel
     */
-    suspend fun reposReplaceAllTopics(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject138Model): TopicModel
+    suspend fun reposReplaceAllTopics(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject138ApiModel): TopicApiModel
 
     /**
     * Request a GitHub Pages build
     *
     * You can request that your site be built from the latest revision on the default branch. This has the same effect as pushing a commit to your default branch, but does not require an additional commit. Manually triggering page builds can be helpful when diagnosing build warnings and failures.  Build requests are limited to one concurrent build per repository and one concurrent build per requester. If you request a build while another is still in progress, the second request will be queued until the first completes.
     *
-    * @return PageMinusBuildMinusStatusModel
+    * @return PageMinusBuildMinusStatusApiModel
     */
-    suspend fun reposRequestPagesBuild(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): PageMinusBuildMinusStatusModel
+    suspend fun reposRequestPagesBuild(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): PageMinusBuildMinusStatusApiModel
 
     /**
     * Set admin branch protection
     *
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  Adding admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
     *
-    * @return ProtectedMinusBranchMinusAdminMinusEnforcedModel
+    * @return ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
     */
-    suspend fun reposSetAdminBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedModel
+    suspend fun reposSetAdminBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
 
     /**
     * Test the push repository webhook
@@ -1179,9 +1179,9 @@ interface ReposApi {
     * A transfer request will need to be accepted by the new owner when transferring a personal repository to another user. The response will contain the original &#x60;owner&#x60;, and the transfer will continue asynchronously. For more details on the requirements to transfer personal and organization-owned repositories, see [about repository transfers](https://docs.github.com/articles/about-repository-transfers/).
     *
     * @param request 
-    * @return MinimalMinusRepositoryModel
+    * @return MinimalMinusRepositoryApiModel
     */
-    suspend fun reposTransfer(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject139Model): MinimalMinusRepositoryModel
+    suspend fun reposTransfer(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject139ApiModel): MinimalMinusRepositoryApiModel
 
     /**
     * Update a repository
@@ -1189,9 +1189,9 @@ interface ReposApi {
     * **Note**: To edit a repository&#39;s topics, use the [Replace all repository topics](https://docs.github.com/rest/reference/repos#replace-all-repository-topics) endpoint.
     *
     * @param request  (optional)
-    * @return FullMinusRepositoryModel
+    * @return FullMinusRepositoryApiModel
     */
-    suspend fun reposUpdate(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject57Model): FullMinusRepositoryModel
+    suspend fun reposUpdate(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject57ApiModel): FullMinusRepositoryApiModel
 
     /**
     * Update branch protection
@@ -1199,9 +1199,9 @@ interface ReposApi {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  Protecting a branch requires admin or owner permissions to the repository.  **Note**: Passing new arrays of &#x60;users&#x60; and &#x60;teams&#x60; replaces their previous values.  **Note**: The list of users, apps, and teams in total is limited to 100 items.
     *
     * @param request 
-    * @return ProtectedMinusBranchModel
+    * @return ProtectedMinusBranchApiModel
     */
-    suspend fun reposUpdateBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject65Model): ProtectedMinusBranchModel
+    suspend fun reposUpdateBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject65ApiModel): ProtectedMinusBranchApiModel
 
     /**
     * Update a commit comment
@@ -1209,9 +1209,9 @@ interface ReposApi {
     * 
     *
     * @param request 
-    * @return CommitMinusCommentModel
+    * @return CommitMinusCommentApiModel
     */
-    suspend fun reposUpdateCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject75Model): CommitMinusCommentModel
+    suspend fun reposUpdateCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject75ApiModel): CommitMinusCommentApiModel
 
     /**
     * Update a repository invitation
@@ -1219,9 +1219,9 @@ interface ReposApi {
     * 
     *
     * @param request  (optional)
-    * @return RepositoryMinusInvitationModel
+    * @return RepositoryMinusInvitationApiModel
     */
-    suspend fun reposUpdateInvitation(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, invitationId: kotlin.Int, request: InlineObject98Model): RepositoryMinusInvitationModel
+    suspend fun reposUpdateInvitation(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, invitationId: kotlin.Int, request: InlineObject98ApiModel): RepositoryMinusInvitationApiModel
 
     /**
     * Update pull request review protection
@@ -1229,9 +1229,9 @@ interface ReposApi {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  Updating pull request review enforcement requires admin or owner permissions to the repository and branch protection to be enabled.  **Note**: Passing new arrays of &#x60;users&#x60; and &#x60;teams&#x60; replaces their previous values.
     *
     * @param request  (optional)
-    * @return ProtectedMinusBranchMinusPullMinusRequestMinusReviewModel
+    * @return ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel
     */
-    suspend fun reposUpdatePullRequestReviewProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject66Model): ProtectedMinusBranchMinusPullMinusRequestMinusReviewModel
+    suspend fun reposUpdatePullRequestReviewProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject66ApiModel): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel
 
     /**
     * Update a release
@@ -1239,9 +1239,9 @@ interface ReposApi {
     * Users with push access to the repository can edit a release.
     *
     * @param request  (optional)
-    * @return ReleaseModel
+    * @return ReleaseApiModel
     */
-    suspend fun reposUpdateRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, request: InlineObject133Model): ReleaseModel
+    suspend fun reposUpdateRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, request: InlineObject133ApiModel): ReleaseApiModel
 
     /**
     * Update a release asset
@@ -1249,9 +1249,9 @@ interface ReposApi {
     * Users with push access to the repository can edit a release asset.
     *
     * @param request  (optional)
-    * @return ReleaseMinusAssetModel
+    * @return ReleaseMinusAssetApiModel
     */
-    suspend fun reposUpdateReleaseAsset(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int, request: InlineObject131Model): ReleaseMinusAssetModel
+    suspend fun reposUpdateReleaseAsset(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int, request: InlineObject131ApiModel): ReleaseMinusAssetApiModel
 
     /**
     * Update status check protection
@@ -1259,9 +1259,9 @@ interface ReposApi {
     * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  Updating required status checks requires admin or owner permissions to the repository and branch protection to be enabled.
     *
     * @param request  (optional)
-    * @return StatusMinusCheckMinusPolicyModel
+    * @return StatusMinusCheckMinusPolicyApiModel
     */
-    suspend fun reposUpdateStatusCheckProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject67Model): StatusMinusCheckMinusPolicyModel
+    suspend fun reposUpdateStatusCheckProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject67ApiModel): StatusMinusCheckMinusPolicyApiModel
 
     /**
     * Update a repository webhook
@@ -1269,9 +1269,9 @@ interface ReposApi {
     * Updates a webhook configured in a repository. If you previously had a &#x60;secret&#x60; set, you must provide the same &#x60;secret&#x60; or set a new &#x60;secret&#x60; or the secret will be removed. If you are only updating individual webhook &#x60;config&#x60; properties, use \&quot;[Update a webhook configuration for a repository](/rest/reference/repos#update-a-webhook-configuration-for-a-repository).\&quot;
     *
     * @param request 
-    * @return HookModel
+    * @return HookApiModel
     */
-    suspend fun reposUpdateWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject92Model): HookModel
+    suspend fun reposUpdateWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject92ApiModel): HookApiModel
 
     /**
     * Update a webhook configuration for a repository
@@ -1279,9 +1279,9 @@ interface ReposApi {
     * Updates the webhook configuration for a repository. To update more information about the webhook, including the &#x60;active&#x60; state and &#x60;events&#x60;, use \&quot;[Update a repository webhook](/rest/reference/orgs#update-a-repository-webhook).\&quot;  Access tokens must have the &#x60;write:repo_hook&#x60; or &#x60;repo&#x60; scope, and GitHub Apps must have the &#x60;repository_hooks:write&#x60; permission.
     *
     * @param request  (optional)
-    * @return WebhookMinusConfigModel
+    * @return WebhookMinusConfigApiModel
     */
-    suspend fun reposUpdateWebhookConfigForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject93Model): WebhookMinusConfigModel
+    suspend fun reposUpdateWebhookConfigForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject93ApiModel): WebhookMinusConfigApiModel
 
     /**
     * Upload a release asset
@@ -1289,9 +1289,9 @@ interface ReposApi {
     * This endpoint makes use of [a Hypermedia relation](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia) to determine which URL to access. The endpoint you call to upload release assets is specific to your release. Use the &#x60;upload_url&#x60; returned in the response of the [Create a release endpoint](https://docs.github.com/rest/reference/repos#create-a-release) to upload a release asset.  You need to use an HTTP client which supports [SNI](http://en.wikipedia.org/wiki/Server_Name_Indication) to make calls to this endpoint.  Most libraries will set the required &#x60;Content-Length&#x60; header automatically. Use the required &#x60;Content-Type&#x60; header to provide the media type of the asset. For a list of media types, see [Media Types](https://www.iana.org/assignments/media-types/media-types.xhtml). For example:   &#x60;application/zip&#x60;  GitHub expects the asset data in its raw binary form, rather than JSON. You will send the raw binary content of the asset as the request body. Everything else about the endpoint is the same as the rest of the API. For example, you&#39;ll still need to pass your authentication to be able to upload an asset.  When an upstream failure occurs, you will receive a &#x60;502 Bad Gateway&#x60; status. This may leave an empty asset with a state of &#x60;starter&#x60;. It can be safely deleted.  **Notes:** *   GitHub renames asset filenames that have special characters, non-alphanumeric characters, and leading or trailing periods. The \&quot;[List assets for a release](https://docs.github.com/rest/reference/repos#list-assets-for-a-release)\&quot; endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://support.github.com/contact?tags&#x3D;dotcom-rest-api). *   If you upload an asset with the same filename as another uploaded asset, you&#39;ll receive an error and must delete the old file before you can re-upload the new asset.
     *
     * @param request  (optional)
-    * @return ReleaseMinusAssetModel
+    * @return ReleaseMinusAssetApiModel
     */
-    suspend fun reposUploadReleaseAsset(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, name: kotlin.String? = null, label: kotlin.String? = null, request: kotlin.String): ReleaseMinusAssetModel
+    suspend fun reposUploadReleaseAsset(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, name: kotlin.String? = null, label: kotlin.String? = null, request: kotlin.String): ReleaseMinusAssetApiModel
 
 }
 
@@ -1307,7 +1307,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposAddCollaborator(accessToken: String?, owner: kotlin.String, repo: kotlin.String, username: kotlin.String, request: InlineObject74Model): RepositoryMinusInvitationModel {
+    override suspend fun reposAddCollaborator(accessToken: String?, owner: kotlin.String, repo: kotlin.String, username: kotlin.String, request: InlineObject74ApiModel): RepositoryMinusInvitationApiModel {
         val path = "/repos/{owner}/{repo}/collaborators/{username}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -1335,7 +1335,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCodeownersErrors(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String?): CodeownersMinusErrorsModel {
+    override suspend fun reposCodeownersErrors(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String?): CodeownersMinusErrorsApiModel {
         val path = "/repos/{owner}/{repo}/codeowners/errors".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1345,7 +1345,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCompareCommits(accessToken: String?, owner: kotlin.String, repo: kotlin.String, basehead: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): CommitMinusComparisonModel {
+    override suspend fun reposCompareCommits(accessToken: String?, owner: kotlin.String, repo: kotlin.String, basehead: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): CommitMinusComparisonApiModel {
         val path = "/repos/{owner}/{repo}/compare/{basehead}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"basehead"+"}", "$basehead")
 
         return httpClient.request {
@@ -1356,7 +1356,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateAutolink(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject64Model): AutolinkModel {
+    override suspend fun reposCreateAutolink(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject64ApiModel): AutolinkApiModel {
         val path = "/repos/{owner}/{repo}/autolinks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1366,7 +1366,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, request: InlineObject77Model): CommitMinusCommentModel {
+    override suspend fun reposCreateCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, request: InlineObject77ApiModel): CommitMinusCommentApiModel {
         val path = "/repos/{owner}/{repo}/commits/{commit_sha}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"commit_sha"+"}", "$commitSha")
 
         return httpClient.request {
@@ -1376,7 +1376,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateCommitSignatureProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedModel {
+    override suspend fun reposCreateCommitSignatureProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -1385,7 +1385,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateCommitStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String, request: InlineObject136Model): StatusModel {
+    override suspend fun reposCreateCommitStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String, request: InlineObject136ApiModel): StatusApiModel {
         val path = "/repos/{owner}/{repo}/statuses/{sha}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"sha"+"}", "$sha")
 
         return httpClient.request {
@@ -1395,7 +1395,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateDeployKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject108Model): DeployMinusKeyModel {
+    override suspend fun reposCreateDeployKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject108ApiModel): DeployMinusKeyApiModel {
         val path = "/repos/{owner}/{repo}/keys".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1405,7 +1405,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateDeployment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject81Model): DeploymentModel {
+    override suspend fun reposCreateDeployment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject81ApiModel): DeploymentApiModel {
         val path = "/repos/{owner}/{repo}/deployments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1415,7 +1415,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateDeploymentStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, request: InlineObject82Model): DeploymentMinusStatusModel {
+    override suspend fun reposCreateDeploymentStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, request: InlineObject82ApiModel): DeploymentMinusStatusApiModel {
         val path = "/repos/{owner}/{repo}/deployments/{deployment_id}/statuses".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"deployment_id"+"}", "$deploymentId")
 
         return httpClient.request {
@@ -1425,7 +1425,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateForAuthenticatedUser(accessToken: String?, request: InlineObject171Model): RepositoryModel {
+    override suspend fun reposCreateForAuthenticatedUser(accessToken: String?, request: InlineObject171ApiModel): RepositoryApiModel {
         val path = "/user/repos"
 
         return httpClient.request {
@@ -1435,7 +1435,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateFork(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject84Model): FullMinusRepositoryModel {
+    override suspend fun reposCreateFork(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject84ApiModel): FullMinusRepositoryApiModel {
         val path = "/repos/{owner}/{repo}/forks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1445,7 +1445,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateInOrg(accessToken: String?, org: kotlin.String, request: InlineObject36Model): RepositoryModel {
+    override suspend fun reposCreateInOrg(accessToken: String?, org: kotlin.String, request: InlineObject36ApiModel): RepositoryApiModel {
         val path = "/orgs/{org}/repos".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1455,7 +1455,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateOrUpdateEnvironment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String, request: InlineObject83Model): EnvironmentModel {
+    override suspend fun reposCreateOrUpdateEnvironment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String, request: InlineObject83ApiModel): EnvironmentApiModel {
         val path = "/repos/{owner}/{repo}/environments/{environment_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"environment_name"+"}", "$environmentName")
 
         return httpClient.request {
@@ -1465,7 +1465,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateOrUpdateFileContents(accessToken: String?, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject78Model): FileMinusCommitModel {
+    override suspend fun reposCreateOrUpdateFileContents(accessToken: String?, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject78ApiModel): FileMinusCommitApiModel {
         val path = "/repos/{owner}/{repo}/contents/{path}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"path"+"}", "$path")
 
         return httpClient.request {
@@ -1475,7 +1475,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject130Model): ReleaseModel {
+    override suspend fun reposCreateRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject130ApiModel): ReleaseApiModel {
         val path = "/repos/{owner}/{repo}/releases".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1485,7 +1485,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateUsingTemplate(accessToken: String?, templateOwner: kotlin.String, templateRepo: kotlin.String, request: InlineObject140Model): RepositoryModel {
+    override suspend fun reposCreateUsingTemplate(accessToken: String?, templateOwner: kotlin.String, templateRepo: kotlin.String, request: InlineObject140ApiModel): RepositoryApiModel {
         val path = "/repos/{template_owner}/{template_repo}/generate".replace("{"+"template_owner"+"}", "$templateOwner").replace("{"+"template_repo"+"}", "$templateRepo")
 
         return httpClient.request {
@@ -1495,7 +1495,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject91Model): HookModel {
+    override suspend fun reposCreateWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject91ApiModel): HookApiModel {
         val path = "/repos/{owner}/{repo}/hooks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1604,7 +1604,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteFile(accessToken: String?, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject79Model): FileMinusCommitModel {
+    override suspend fun reposDeleteFile(accessToken: String?, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject79ApiModel): FileMinusCommitApiModel {
         val path = "/repos/{owner}/{repo}/contents/{path}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"path"+"}", "$path")
 
         return httpClient.request {
@@ -1731,7 +1731,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGenerateReleaseNotes(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject132Model): ReleaseMinusNotesMinusContentModel {
+    override suspend fun reposGenerateReleaseNotes(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject132ApiModel): ReleaseMinusNotesMinusContentApiModel {
         val path = "/repos/{owner}/{repo}/releases/generate-notes".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1741,7 +1741,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGet(accessToken: String?, owner: kotlin.String, repo: kotlin.String): FullMinusRepositoryModel {
+    override suspend fun reposGet(accessToken: String?, owner: kotlin.String, repo: kotlin.String): FullMinusRepositoryApiModel {
         val path = "/repos/{owner}/{repo}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1750,7 +1750,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetAccessRestrictions(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusRestrictionMinusPolicyModel {
+    override suspend fun reposGetAccessRestrictions(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusRestrictionMinusPolicyApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -1759,7 +1759,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetAdminBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedModel {
+    override suspend fun reposGetAdminBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -1768,7 +1768,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetAllEnvironments(accessToken: String?, owner: kotlin.String, repo: kotlin.String): InlineResponse20023Model {
+    override suspend fun reposGetAllEnvironments(accessToken: String?, owner: kotlin.String, repo: kotlin.String): InlineResponse20023ApiModel {
         val path = "/repos/{owner}/{repo}/environments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1777,7 +1777,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetAllTopics(accessToken: String?, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): TopicModel {
+    override suspend fun reposGetAllTopics(accessToken: String?, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): TopicApiModel {
         val path = "/repos/{owner}/{repo}/topics".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1788,7 +1788,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetAutolink(accessToken: String?, owner: kotlin.String, repo: kotlin.String, autolinkId: kotlin.Int): AutolinkModel {
+    override suspend fun reposGetAutolink(accessToken: String?, owner: kotlin.String, repo: kotlin.String, autolinkId: kotlin.Int): AutolinkApiModel {
         val path = "/repos/{owner}/{repo}/autolinks/{autolink_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"autolink_id"+"}", "$autolinkId")
 
         return httpClient.request {
@@ -1797,7 +1797,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetBranch(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusWithMinusProtectionModel {
+    override suspend fun reposGetBranch(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusWithMinusProtectionApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -1806,7 +1806,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusProtectionModel {
+    override suspend fun reposGetBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusProtectionApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/protection".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -1815,7 +1815,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetClones(accessToken: String?, owner: kotlin.String, repo: kotlin.String, per: kotlin.String?): CloneMinusTrafficModel {
+    override suspend fun reposGetClones(accessToken: String?, owner: kotlin.String, repo: kotlin.String, per: kotlin.String?): CloneMinusTrafficApiModel {
         val path = "/repos/{owner}/{repo}/traffic/clones".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1825,7 +1825,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCollaboratorPermissionLevel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, username: kotlin.String): RepositoryMinusCollaboratorMinusPermissionModel {
+    override suspend fun reposGetCollaboratorPermissionLevel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, username: kotlin.String): RepositoryMinusCollaboratorMinusPermissionApiModel {
         val path = "/repos/{owner}/{repo}/collaborators/{username}/permission".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -1834,7 +1834,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCombinedStatusForRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): CombinedMinusCommitMinusStatusModel {
+    override suspend fun reposGetCombinedStatusForRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): CombinedMinusCommitMinusStatusApiModel {
         val path = "/repos/{owner}/{repo}/commits/{ref}/status".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
@@ -1845,7 +1845,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): CommitModel {
+    override suspend fun reposGetCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): CommitApiModel {
         val path = "/repos/{owner}/{repo}/commits/{ref}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
@@ -1856,7 +1856,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCommitActivityStats(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<CommitMinusActivityModel> {
+    override suspend fun reposGetCommitActivityStats(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<CommitMinusActivityApiModel> {
         val path = "/repos/{owner}/{repo}/stats/commit_activity".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1865,7 +1865,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): CommitMinusCommentModel {
+    override suspend fun reposGetCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): CommitMinusCommentApiModel {
         val path = "/repos/{owner}/{repo}/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
@@ -1874,7 +1874,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCommitSignatureProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedModel {
+    override suspend fun reposGetCommitSignatureProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -1883,7 +1883,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCommunityProfileMetrics(accessToken: String?, owner: kotlin.String, repo: kotlin.String): CommunityMinusProfileModel {
+    override suspend fun reposGetCommunityProfileMetrics(accessToken: String?, owner: kotlin.String, repo: kotlin.String): CommunityMinusProfileApiModel {
         val path = "/repos/{owner}/{repo}/community/profile".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1892,7 +1892,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetContent(accessToken: String?, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, ref: kotlin.String?): ContentMinusTreeModel {
+    override suspend fun reposGetContent(accessToken: String?, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, ref: kotlin.String?): ContentMinusTreeApiModel {
         val path = "/repos/{owner}/{repo}/contents/{path}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"path"+"}", "$path")
 
         return httpClient.request {
@@ -1902,7 +1902,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetContributorsStats(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContributorMinusActivityModel> {
+    override suspend fun reposGetContributorsStats(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContributorMinusActivityApiModel> {
         val path = "/repos/{owner}/{repo}/stats/contributors".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1911,7 +1911,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetDeployKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String, keyId: kotlin.Int): DeployMinusKeyModel {
+    override suspend fun reposGetDeployKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String, keyId: kotlin.Int): DeployMinusKeyApiModel {
         val path = "/repos/{owner}/{repo}/keys/{key_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"key_id"+"}", "$keyId")
 
         return httpClient.request {
@@ -1920,7 +1920,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetDeployment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int): DeploymentModel {
+    override suspend fun reposGetDeployment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int): DeploymentApiModel {
         val path = "/repos/{owner}/{repo}/deployments/{deployment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"deployment_id"+"}", "$deploymentId")
 
         return httpClient.request {
@@ -1929,7 +1929,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetDeploymentStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, statusId: kotlin.Int): DeploymentMinusStatusModel {
+    override suspend fun reposGetDeploymentStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, statusId: kotlin.Int): DeploymentMinusStatusApiModel {
         val path = "/repos/{owner}/{repo}/deployments/{deployment_id}/statuses/{status_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"deployment_id"+"}", "$deploymentId").replace("{"+"status_id"+"}", "$statusId")
 
         return httpClient.request {
@@ -1938,7 +1938,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetEnvironment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String): EnvironmentModel {
+    override suspend fun reposGetEnvironment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String): EnvironmentApiModel {
         val path = "/repos/{owner}/{repo}/environments/{environment_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"environment_name"+"}", "$environmentName")
 
         return httpClient.request {
@@ -1947,7 +1947,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetLatestPagesBuild(accessToken: String?, owner: kotlin.String, repo: kotlin.String): PageMinusBuildModel {
+    override suspend fun reposGetLatestPagesBuild(accessToken: String?, owner: kotlin.String, repo: kotlin.String): PageMinusBuildApiModel {
         val path = "/repos/{owner}/{repo}/pages/builds/latest".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1956,7 +1956,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetLatestRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ReleaseModel {
+    override suspend fun reposGetLatestRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ReleaseApiModel {
         val path = "/repos/{owner}/{repo}/releases/latest".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1965,7 +1965,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetPagesBuild(accessToken: String?, owner: kotlin.String, repo: kotlin.String, buildId: kotlin.Int): PageMinusBuildModel {
+    override suspend fun reposGetPagesBuild(accessToken: String?, owner: kotlin.String, repo: kotlin.String, buildId: kotlin.Int): PageMinusBuildApiModel {
         val path = "/repos/{owner}/{repo}/pages/builds/{build_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"build_id"+"}", "$buildId")
 
         return httpClient.request {
@@ -1974,7 +1974,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetPagesHealthCheck(accessToken: String?, owner: kotlin.String, repo: kotlin.String): PagesMinusHealthMinusCheckModel {
+    override suspend fun reposGetPagesHealthCheck(accessToken: String?, owner: kotlin.String, repo: kotlin.String): PagesMinusHealthMinusCheckApiModel {
         val path = "/repos/{owner}/{repo}/pages/health".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1983,7 +1983,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetParticipationStats(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ParticipationMinusStatsModel {
+    override suspend fun reposGetParticipationStats(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ParticipationMinusStatsApiModel {
         val path = "/repos/{owner}/{repo}/stats/participation".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1992,7 +1992,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetPullRequestReviewProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusPullMinusRequestMinusReviewModel {
+    override suspend fun reposGetPullRequestReviewProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -2010,7 +2010,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetReadme(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String?): ContentMinusFileModel {
+    override suspend fun reposGetReadme(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String?): ContentMinusFileApiModel {
         val path = "/repos/{owner}/{repo}/readme".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2020,7 +2020,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetReadmeInDirectory(accessToken: String?, owner: kotlin.String, repo: kotlin.String, dir: kotlin.String, ref: kotlin.String?): ContentMinusFileModel {
+    override suspend fun reposGetReadmeInDirectory(accessToken: String?, owner: kotlin.String, repo: kotlin.String, dir: kotlin.String, ref: kotlin.String?): ContentMinusFileApiModel {
         val path = "/repos/{owner}/{repo}/readme/{dir}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"dir"+"}", "$dir")
 
         return httpClient.request {
@@ -2030,7 +2030,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int): ReleaseModel {
+    override suspend fun reposGetRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int): ReleaseApiModel {
         val path = "/repos/{owner}/{repo}/releases/{release_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
 
         return httpClient.request {
@@ -2039,7 +2039,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetReleaseAsset(accessToken: String?, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int): ReleaseMinusAssetModel {
+    override suspend fun reposGetReleaseAsset(accessToken: String?, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int): ReleaseMinusAssetApiModel {
         val path = "/repos/{owner}/{repo}/releases/assets/{asset_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"asset_id"+"}", "$assetId")
 
         return httpClient.request {
@@ -2048,7 +2048,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetReleaseByTag(accessToken: String?, owner: kotlin.String, repo: kotlin.String, tag: kotlin.String): ReleaseModel {
+    override suspend fun reposGetReleaseByTag(accessToken: String?, owner: kotlin.String, repo: kotlin.String, tag: kotlin.String): ReleaseApiModel {
         val path = "/repos/{owner}/{repo}/releases/tags/{tag}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"tag"+"}", "$tag")
 
         return httpClient.request {
@@ -2057,7 +2057,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetStatusChecksProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): StatusMinusCheckMinusPolicyModel {
+    override suspend fun reposGetStatusChecksProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): StatusMinusCheckMinusPolicyApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -2066,7 +2066,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetTopPaths(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContentMinusTrafficModel> {
+    override suspend fun reposGetTopPaths(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContentMinusTrafficApiModel> {
         val path = "/repos/{owner}/{repo}/traffic/popular/paths".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2075,7 +2075,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetTopReferrers(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ReferrerMinusTrafficModel> {
+    override suspend fun reposGetTopReferrers(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ReferrerMinusTrafficApiModel> {
         val path = "/repos/{owner}/{repo}/traffic/popular/referrers".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2084,7 +2084,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetViews(accessToken: String?, owner: kotlin.String, repo: kotlin.String, per: kotlin.String?): ViewMinusTrafficModel {
+    override suspend fun reposGetViews(accessToken: String?, owner: kotlin.String, repo: kotlin.String, per: kotlin.String?): ViewMinusTrafficApiModel {
         val path = "/repos/{owner}/{repo}/traffic/views".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2094,7 +2094,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): HookModel {
+    override suspend fun reposGetWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): HookApiModel {
         val path = "/repos/{owner}/{repo}/hooks/{hook_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
@@ -2103,7 +2103,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetWebhookConfigForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigModel {
+    override suspend fun reposGetWebhookConfigForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigApiModel {
         val path = "/repos/{owner}/{repo}/hooks/{hook_id}/config".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
@@ -2112,7 +2112,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListAutolinks(accessToken: String?, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int?): kotlin.collections.List<AutolinkModel> {
+    override suspend fun reposListAutolinks(accessToken: String?, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int?): kotlin.collections.List<AutolinkApiModel> {
         val path = "/repos/{owner}/{repo}/autolinks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2122,7 +2122,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListBranches(accessToken: String?, owner: kotlin.String, repo: kotlin.String, isProtected: kotlin.Boolean?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ShortMinusBranchModel> {
+    override suspend fun reposListBranches(accessToken: String?, owner: kotlin.String, repo: kotlin.String, isProtected: kotlin.Boolean?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ShortMinusBranchApiModel> {
         val path = "/repos/{owner}/{repo}/branches".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2134,7 +2134,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListBranchesForHeadCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String): kotlin.collections.List<BranchMinusShortModel> {
+    override suspend fun reposListBranchesForHeadCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String): kotlin.collections.List<BranchMinusShortApiModel> {
         val path = "/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"commit_sha"+"}", "$commitSha")
 
         return httpClient.request {
@@ -2143,7 +2143,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListCollaborators(accessToken: String?, owner: kotlin.String, repo: kotlin.String, affiliation: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CollaboratorModel> {
+    override suspend fun reposListCollaborators(accessToken: String?, owner: kotlin.String, repo: kotlin.String, affiliation: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CollaboratorApiModel> {
         val path = "/repos/{owner}/{repo}/collaborators".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2155,7 +2155,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListCommentsForCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitMinusCommentModel> {
+    override suspend fun reposListCommentsForCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitMinusCommentApiModel> {
         val path = "/repos/{owner}/{repo}/commits/{commit_sha}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"commit_sha"+"}", "$commitSha")
 
         return httpClient.request {
@@ -2166,7 +2166,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListCommitCommentsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitMinusCommentModel> {
+    override suspend fun reposListCommitCommentsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitMinusCommentApiModel> {
         val path = "/repos/{owner}/{repo}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2177,7 +2177,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListCommitStatusesForRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<StatusModel> {
+    override suspend fun reposListCommitStatusesForRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<StatusApiModel> {
         val path = "/repos/{owner}/{repo}/commits/{ref}/statuses".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
@@ -2188,7 +2188,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListCommits(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String?, path: kotlin.String?, author: kotlin.String?, since: kotlin.String?, until: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitModel> {
+    override suspend fun reposListCommits(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String?, path: kotlin.String?, author: kotlin.String?, since: kotlin.String?, until: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitApiModel> {
         val path = "/repos/{owner}/{repo}/commits".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2204,7 +2204,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListContributors(accessToken: String?, owner: kotlin.String, repo: kotlin.String, anon: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ContributorModel> {
+    override suspend fun reposListContributors(accessToken: String?, owner: kotlin.String, repo: kotlin.String, anon: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ContributorApiModel> {
         val path = "/repos/{owner}/{repo}/contributors".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2216,7 +2216,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListDeployKeys(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeployMinusKeyModel> {
+    override suspend fun reposListDeployKeys(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeployMinusKeyApiModel> {
         val path = "/repos/{owner}/{repo}/keys".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2227,7 +2227,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListDeploymentStatuses(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeploymentMinusStatusModel> {
+    override suspend fun reposListDeploymentStatuses(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeploymentMinusStatusApiModel> {
         val path = "/repos/{owner}/{repo}/deployments/{deployment_id}/statuses".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"deployment_id"+"}", "$deploymentId")
 
         return httpClient.request {
@@ -2238,7 +2238,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListDeployments(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String?, ref: kotlin.String?, task: kotlin.String?, environment: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeploymentModel> {
+    override suspend fun reposListDeployments(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String?, ref: kotlin.String?, task: kotlin.String?, environment: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeploymentApiModel> {
         val path = "/repos/{owner}/{repo}/deployments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2253,7 +2253,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListForAuthenticatedUser(accessToken: String?, visibility: kotlin.String?, affiliation: kotlin.String?, type: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?, since: kotlin.String?, before: kotlin.String?): kotlin.collections.List<RepositoryModel> {
+    override suspend fun reposListForAuthenticatedUser(accessToken: String?, visibility: kotlin.String?, affiliation: kotlin.String?, type: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?, since: kotlin.String?, before: kotlin.String?): kotlin.collections.List<RepositoryApiModel> {
         val path = "/user/repos"
 
         return httpClient.request {
@@ -2271,7 +2271,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListForOrg(accessToken: String?, org: kotlin.String, type: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryModel> {
+    override suspend fun reposListForOrg(accessToken: String?, org: kotlin.String, type: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryApiModel> {
         val path = "/orgs/{org}/repos".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -2285,7 +2285,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListForUser(accessToken: String?, username: kotlin.String, type: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryModel> {
+    override suspend fun reposListForUser(accessToken: String?, username: kotlin.String, type: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryApiModel> {
         val path = "/users/{username}/repos".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -2299,7 +2299,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListForks(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryModel> {
+    override suspend fun reposListForks(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryApiModel> {
         val path = "/repos/{owner}/{repo}/forks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2311,7 +2311,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListInvitations(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<RepositoryMinusInvitationModel> {
+    override suspend fun reposListInvitations(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<RepositoryMinusInvitationApiModel> {
         val path = "/repos/{owner}/{repo}/invitations".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2322,7 +2322,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListInvitationsForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<RepositoryMinusInvitationModel> {
+    override suspend fun reposListInvitationsForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<RepositoryMinusInvitationApiModel> {
         val path = "/user/repository_invitations"
 
         return httpClient.request {
@@ -2342,7 +2342,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListPagesBuilds(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PageMinusBuildModel> {
+    override suspend fun reposListPagesBuilds(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PageMinusBuildApiModel> {
         val path = "/repos/{owner}/{repo}/pages/builds".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2353,7 +2353,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListPublic(accessToken: String?, since: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryModel> {
+    override suspend fun reposListPublic(accessToken: String?, since: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryApiModel> {
         val path = "/repositories"
 
         return httpClient.request {
@@ -2363,7 +2363,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListPullRequestsAssociatedWithCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusSimpleModel> {
+    override suspend fun reposListPullRequestsAssociatedWithCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusSimpleApiModel> {
         val path = "/repos/{owner}/{repo}/commits/{commit_sha}/pulls".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"commit_sha"+"}", "$commitSha")
 
         return httpClient.request {
@@ -2374,7 +2374,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListReleaseAssets(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReleaseMinusAssetModel> {
+    override suspend fun reposListReleaseAssets(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReleaseMinusAssetApiModel> {
         val path = "/repos/{owner}/{repo}/releases/{release_id}/assets".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
 
         return httpClient.request {
@@ -2385,7 +2385,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListReleases(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReleaseModel> {
+    override suspend fun reposListReleases(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReleaseApiModel> {
         val path = "/repos/{owner}/{repo}/releases".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2396,7 +2396,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListTags(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TagModel> {
+    override suspend fun reposListTags(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TagApiModel> {
         val path = "/repos/{owner}/{repo}/tags".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2407,7 +2407,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListTeams(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamModel> {
+    override suspend fun reposListTeams(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamApiModel> {
         val path = "/repos/{owner}/{repo}/teams".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2418,7 +2418,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListWebhooks(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<HookModel> {
+    override suspend fun reposListWebhooks(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<HookApiModel> {
         val path = "/repos/{owner}/{repo}/hooks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2429,7 +2429,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposMerge(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject112Model): CommitModel {
+    override suspend fun reposMerge(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject112ApiModel): CommitApiModel {
         val path = "/repos/{owner}/{repo}/merges".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2439,7 +2439,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposMergeUpstream(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject111Model): MergedMinusUpstreamModel {
+    override suspend fun reposMergeUpstream(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject111ApiModel): MergedMinusUpstreamApiModel {
         val path = "/repos/{owner}/{repo}/merge-upstream".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2485,7 +2485,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposRenameBranch(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject68Model): BranchMinusWithMinusProtectionModel {
+    override suspend fun reposRenameBranch(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject68ApiModel): BranchMinusWithMinusProtectionApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/rename".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -2495,7 +2495,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposReplaceAllTopics(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject138Model): TopicModel {
+    override suspend fun reposReplaceAllTopics(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject138ApiModel): TopicApiModel {
         val path = "/repos/{owner}/{repo}/topics".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2505,7 +2505,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposRequestPagesBuild(accessToken: String?, owner: kotlin.String, repo: kotlin.String): PageMinusBuildMinusStatusModel {
+    override suspend fun reposRequestPagesBuild(accessToken: String?, owner: kotlin.String, repo: kotlin.String): PageMinusBuildMinusStatusApiModel {
         val path = "/repos/{owner}/{repo}/pages/builds".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2514,7 +2514,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposSetAdminBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedModel {
+    override suspend fun reposSetAdminBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -2532,7 +2532,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposTransfer(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject139Model): MinimalMinusRepositoryModel {
+    override suspend fun reposTransfer(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject139ApiModel): MinimalMinusRepositoryApiModel {
         val path = "/repos/{owner}/{repo}/transfer".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2542,7 +2542,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject57Model): FullMinusRepositoryModel {
+    override suspend fun reposUpdate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject57ApiModel): FullMinusRepositoryApiModel {
         val path = "/repos/{owner}/{repo}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -2552,7 +2552,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject65Model): ProtectedMinusBranchModel {
+    override suspend fun reposUpdateBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject65ApiModel): ProtectedMinusBranchApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/protection".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -2562,7 +2562,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject75Model): CommitMinusCommentModel {
+    override suspend fun reposUpdateCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject75ApiModel): CommitMinusCommentApiModel {
         val path = "/repos/{owner}/{repo}/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
@@ -2572,7 +2572,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateInvitation(accessToken: String?, owner: kotlin.String, repo: kotlin.String, invitationId: kotlin.Int, request: InlineObject98Model): RepositoryMinusInvitationModel {
+    override suspend fun reposUpdateInvitation(accessToken: String?, owner: kotlin.String, repo: kotlin.String, invitationId: kotlin.Int, request: InlineObject98ApiModel): RepositoryMinusInvitationApiModel {
         val path = "/repos/{owner}/{repo}/invitations/{invitation_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"invitation_id"+"}", "$invitationId")
 
         return httpClient.request {
@@ -2582,7 +2582,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdatePullRequestReviewProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject66Model): ProtectedMinusBranchMinusPullMinusRequestMinusReviewModel {
+    override suspend fun reposUpdatePullRequestReviewProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject66ApiModel): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -2592,7 +2592,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, request: InlineObject133Model): ReleaseModel {
+    override suspend fun reposUpdateRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, request: InlineObject133ApiModel): ReleaseApiModel {
         val path = "/repos/{owner}/{repo}/releases/{release_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
 
         return httpClient.request {
@@ -2602,7 +2602,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateReleaseAsset(accessToken: String?, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int, request: InlineObject131Model): ReleaseMinusAssetModel {
+    override suspend fun reposUpdateReleaseAsset(accessToken: String?, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int, request: InlineObject131ApiModel): ReleaseMinusAssetApiModel {
         val path = "/repos/{owner}/{repo}/releases/assets/{asset_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"asset_id"+"}", "$assetId")
 
         return httpClient.request {
@@ -2612,7 +2612,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateStatusCheckProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject67Model): StatusMinusCheckMinusPolicyModel {
+    override suspend fun reposUpdateStatusCheckProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject67ApiModel): StatusMinusCheckMinusPolicyApiModel {
         val path = "/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
@@ -2622,7 +2622,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject92Model): HookModel {
+    override suspend fun reposUpdateWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject92ApiModel): HookApiModel {
         val path = "/repos/{owner}/{repo}/hooks/{hook_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
@@ -2632,7 +2632,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateWebhookConfigForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject93Model): WebhookMinusConfigModel {
+    override suspend fun reposUpdateWebhookConfigForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject93ApiModel): WebhookMinusConfigApiModel {
         val path = "/repos/{owner}/{repo}/hooks/{hook_id}/config".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
@@ -2642,7 +2642,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUploadReleaseAsset(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, name: kotlin.String?, label: kotlin.String?, request: kotlin.String): ReleaseMinusAssetModel {
+    override suspend fun reposUploadReleaseAsset(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, name: kotlin.String?, label: kotlin.String?, request: kotlin.String): ReleaseMinusAssetApiModel {
         val path = "/repos/{owner}/{repo}/releases/{release_id}/assets".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
 
         return httpClient.request {

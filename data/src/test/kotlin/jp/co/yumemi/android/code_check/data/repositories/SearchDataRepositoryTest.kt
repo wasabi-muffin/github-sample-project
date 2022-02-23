@@ -6,7 +6,6 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
-import jp.co.yumemi.android.code_check.data.models.RepoMinusSearchMinusResultMinusItemModel
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
 import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.core.DomainResult
@@ -34,7 +33,7 @@ class SearchDataRepositoryTest {
         coEvery {
             searchRemoteDataSource.searchRepos(any(), any())
         } returns List(5) { index ->
-            RepoMinusSearchMinusResultMinusItemModel(
+            RepoMinusSearchMinusResultMinusItemApiModel(
                 id = index,
                 nodeId = "",
                 name = "",

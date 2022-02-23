@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -42,9 +42,9 @@ interface GistsApi {
     * Allows you to add a new gist with one or more files.  **Note:** Don&#39;t name your files \&quot;gistfile\&quot; with a numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.
     *
     * @param request 
-    * @return GistMinusSimpleModel
+    * @return GistMinusSimpleApiModel
     */
-    suspend fun gistsCreate(accessToken: String? = null, request: InlineObject11Model): GistMinusSimpleModel
+    suspend fun gistsCreate(accessToken: String? = null, request: InlineObject11ApiModel): GistMinusSimpleApiModel
 
     /**
     * Create a gist comment
@@ -52,9 +52,9 @@ interface GistsApi {
     * 
     *
     * @param request 
-    * @return GistMinusCommentModel
+    * @return GistMinusCommentApiModel
     */
-    suspend fun gistsCreateComment(accessToken: String? = null, gistId: kotlin.String, request: InlineObject12Model): GistMinusCommentModel
+    suspend fun gistsCreateComment(accessToken: String? = null, gistId: kotlin.String, request: InlineObject12ApiModel): GistMinusCommentApiModel
 
     /**
     * Delete a gist comment
@@ -70,90 +70,90 @@ interface GistsApi {
     *
     * **Note**: This was previously &#x60;/gists/:gist_id/fork&#x60;.
     *
-    * @return BaseMinusGistModel
+    * @return BaseMinusGistApiModel
     */
-    suspend fun gistsFork(accessToken: String? = null, gistId: kotlin.String): BaseMinusGistModel
+    suspend fun gistsFork(accessToken: String? = null, gistId: kotlin.String): BaseMinusGistApiModel
 
     /**
     * Get a gist comment
     *
     * 
     *
-    * @return GistMinusCommentModel
+    * @return GistMinusCommentApiModel
     */
-    suspend fun gistsGetComment(accessToken: String? = null, gistId: kotlin.String, commentId: kotlin.Int): GistMinusCommentModel
+    suspend fun gistsGetComment(accessToken: String? = null, gistId: kotlin.String, commentId: kotlin.Int): GistMinusCommentApiModel
 
     /**
     * Get a gist revision
     *
     * 
     *
-    * @return GistMinusSimpleModel
+    * @return GistMinusSimpleApiModel
     */
-    suspend fun gistsGetRevision(accessToken: String? = null, gistId: kotlin.String, sha: kotlin.String): GistMinusSimpleModel
+    suspend fun gistsGetRevision(accessToken: String? = null, gistId: kotlin.String, sha: kotlin.String): GistMinusSimpleApiModel
 
     /**
     * List gists for the authenticated user
     *
     * Lists the authenticated user&#39;s gists or if called anonymously, this endpoint returns all public gists:
     *
-    * @return kotlin.collections.List<BaseMinusGistModel>
+    * @return kotlin.collections.List<BaseMinusGistApiModel>
     */
-    suspend fun gistsList(accessToken: String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<BaseMinusGistModel>
+    suspend fun gistsList(accessToken: String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<BaseMinusGistApiModel>
 
     /**
     * List gist comments
     *
     * 
     *
-    * @return kotlin.collections.List<GistMinusCommentModel>
+    * @return kotlin.collections.List<GistMinusCommentApiModel>
     */
-    suspend fun gistsListComments(accessToken: String? = null, gistId: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GistMinusCommentModel>
+    suspend fun gistsListComments(accessToken: String? = null, gistId: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GistMinusCommentApiModel>
 
     /**
     * List gist commits
     *
     * 
     *
-    * @return kotlin.collections.List<GistMinusCommitModel>
+    * @return kotlin.collections.List<GistMinusCommitApiModel>
     */
-    suspend fun gistsListCommits(accessToken: String? = null, gistId: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GistMinusCommitModel>
+    suspend fun gistsListCommits(accessToken: String? = null, gistId: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GistMinusCommitApiModel>
 
     /**
     * List gists for a user
     *
     * Lists public gists for the specified user:
     *
-    * @return kotlin.collections.List<BaseMinusGistModel>
+    * @return kotlin.collections.List<BaseMinusGistApiModel>
     */
-    suspend fun gistsListForUser(accessToken: String? = null, username: kotlin.String, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<BaseMinusGistModel>
+    suspend fun gistsListForUser(accessToken: String? = null, username: kotlin.String, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<BaseMinusGistApiModel>
 
     /**
     * List gist forks
     *
     * 
     *
-    * @return kotlin.collections.List<GistMinusSimpleModel>
+    * @return kotlin.collections.List<GistMinusSimpleApiModel>
     */
-    suspend fun gistsListForks(accessToken: String? = null, gistId: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GistMinusSimpleModel>
+    suspend fun gistsListForks(accessToken: String? = null, gistId: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GistMinusSimpleApiModel>
 
     /**
     * List public gists
     *
     * List public gists sorted by most recently updated to least recently updated.  Note: With [pagination](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
     *
-    * @return kotlin.collections.List<BaseMinusGistModel>
+    * @return kotlin.collections.List<BaseMinusGistApiModel>
     */
-    suspend fun gistsListPublic(accessToken: String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<BaseMinusGistModel>
+    suspend fun gistsListPublic(accessToken: String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<BaseMinusGistApiModel>
 
     /**
     * List starred gists
     *
     * List the authenticated user&#39;s starred gists:
     *
-    * @return kotlin.collections.List<BaseMinusGistModel>
+    * @return kotlin.collections.List<BaseMinusGistApiModel>
     */
-    suspend fun gistsListStarred(accessToken: String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<BaseMinusGistModel>
+    suspend fun gistsListStarred(accessToken: String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<BaseMinusGistApiModel>
 
     /**
     * Star a gist
@@ -179,9 +179,9 @@ interface GistsApi {
     * 
     *
     * @param request 
-    * @return GistMinusCommentModel
+    * @return GistMinusCommentApiModel
     */
-    suspend fun gistsUpdateComment(accessToken: String? = null, gistId: kotlin.String, commentId: kotlin.Int, request: InlineObject13Model): GistMinusCommentModel
+    suspend fun gistsUpdateComment(accessToken: String? = null, gistId: kotlin.String, commentId: kotlin.Int, request: InlineObject13ApiModel): GistMinusCommentApiModel
 
 }
 
@@ -197,7 +197,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsCreate(accessToken: String?, request: InlineObject11Model): GistMinusSimpleModel {
+    override suspend fun gistsCreate(accessToken: String?, request: InlineObject11ApiModel): GistMinusSimpleApiModel {
         val path = "/gists"
 
         return httpClient.request {
@@ -207,7 +207,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsCreateComment(accessToken: String?, gistId: kotlin.String, request: InlineObject12Model): GistMinusCommentModel {
+    override suspend fun gistsCreateComment(accessToken: String?, gistId: kotlin.String, request: InlineObject12ApiModel): GistMinusCommentApiModel {
         val path = "/gists/{gist_id}/comments".replace("{"+"gist_id"+"}", "$gistId")
 
         return httpClient.request {
@@ -226,7 +226,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsFork(accessToken: String?, gistId: kotlin.String): BaseMinusGistModel {
+    override suspend fun gistsFork(accessToken: String?, gistId: kotlin.String): BaseMinusGistApiModel {
         val path = "/gists/{gist_id}/forks".replace("{"+"gist_id"+"}", "$gistId")
 
         return httpClient.request {
@@ -235,7 +235,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsGetComment(accessToken: String?, gistId: kotlin.String, commentId: kotlin.Int): GistMinusCommentModel {
+    override suspend fun gistsGetComment(accessToken: String?, gistId: kotlin.String, commentId: kotlin.Int): GistMinusCommentApiModel {
         val path = "/gists/{gist_id}/comments/{comment_id}".replace("{"+"gist_id"+"}", "$gistId").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
@@ -244,7 +244,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsGetRevision(accessToken: String?, gistId: kotlin.String, sha: kotlin.String): GistMinusSimpleModel {
+    override suspend fun gistsGetRevision(accessToken: String?, gistId: kotlin.String, sha: kotlin.String): GistMinusSimpleApiModel {
         val path = "/gists/{gist_id}/{sha}".replace("{"+"gist_id"+"}", "$gistId").replace("{"+"sha"+"}", "$sha")
 
         return httpClient.request {
@@ -253,7 +253,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsList(accessToken: String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<BaseMinusGistModel> {
+    override suspend fun gistsList(accessToken: String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<BaseMinusGistApiModel> {
         val path = "/gists"
 
         return httpClient.request {
@@ -265,7 +265,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsListComments(accessToken: String?, gistId: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GistMinusCommentModel> {
+    override suspend fun gistsListComments(accessToken: String?, gistId: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GistMinusCommentApiModel> {
         val path = "/gists/{gist_id}/comments".replace("{"+"gist_id"+"}", "$gistId")
 
         return httpClient.request {
@@ -276,7 +276,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsListCommits(accessToken: String?, gistId: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GistMinusCommitModel> {
+    override suspend fun gistsListCommits(accessToken: String?, gistId: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GistMinusCommitApiModel> {
         val path = "/gists/{gist_id}/commits".replace("{"+"gist_id"+"}", "$gistId")
 
         return httpClient.request {
@@ -287,7 +287,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsListForUser(accessToken: String?, username: kotlin.String, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<BaseMinusGistModel> {
+    override suspend fun gistsListForUser(accessToken: String?, username: kotlin.String, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<BaseMinusGistApiModel> {
         val path = "/users/{username}/gists".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -299,7 +299,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsListForks(accessToken: String?, gistId: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GistMinusSimpleModel> {
+    override suspend fun gistsListForks(accessToken: String?, gistId: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GistMinusSimpleApiModel> {
         val path = "/gists/{gist_id}/forks".replace("{"+"gist_id"+"}", "$gistId")
 
         return httpClient.request {
@@ -310,7 +310,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsListPublic(accessToken: String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<BaseMinusGistModel> {
+    override suspend fun gistsListPublic(accessToken: String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<BaseMinusGistApiModel> {
         val path = "/gists/public"
 
         return httpClient.request {
@@ -322,7 +322,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsListStarred(accessToken: String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<BaseMinusGistModel> {
+    override suspend fun gistsListStarred(accessToken: String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<BaseMinusGistApiModel> {
         val path = "/gists/starred"
 
         return httpClient.request {
@@ -352,7 +352,7 @@ class HttpClientGistsApi(private val httpClientProvider: HttpClientProvider) : G
         }
     }
 
-    override suspend fun gistsUpdateComment(accessToken: String?, gistId: kotlin.String, commentId: kotlin.Int, request: InlineObject13Model): GistMinusCommentModel {
+    override suspend fun gistsUpdateComment(accessToken: String?, gistId: kotlin.String, commentId: kotlin.Int, request: InlineObject13ApiModel): GistMinusCommentApiModel {
         val path = "/gists/{gist_id}/comments/{comment_id}".replace("{"+"gist_id"+"}", "$gistId").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {

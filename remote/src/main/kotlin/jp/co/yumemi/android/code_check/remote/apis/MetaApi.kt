@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -32,9 +32,9 @@ interface MetaApi {
     *
     * Returns meta information about GitHub, including a list of GitHub&#39;s IP addresses. For more information, see \&quot;[About GitHub&#39;s IP addresses](https://docs.github.com/articles/about-github-s-ip-addresses/).\&quot;  **Note:** The IP addresses shown in the documentation&#39;s response are only example values. You must always query the API directly to get the latest list of IP addresses.
     *
-    * @return ApiMinusOverviewModel
+    * @return ApiMinusOverviewApiModel
     */
-    suspend fun metaGet(accessToken: String? = null): ApiMinusOverviewModel
+    suspend fun metaGet(accessToken: String? = null): ApiMinusOverviewApiModel
 
     /**
     * Get Octocat
@@ -59,16 +59,16 @@ interface MetaApi {
     *
     * Get Hypermedia links to resources accessible in GitHub&#39;s REST API
     *
-    * @return InlineResponse200Model
+    * @return InlineResponse200ApiModel
     */
-    suspend fun metaRoot(accessToken: String? = null): InlineResponse200Model
+    suspend fun metaRoot(accessToken: String? = null): InlineResponse200ApiModel
 
 }
 
 class HttpClientMetaApi(private val httpClientProvider: HttpClientProvider) : MetaApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun metaGet(accessToken: String?): ApiMinusOverviewModel {
+    override suspend fun metaGet(accessToken: String?): ApiMinusOverviewApiModel {
         val path = "/meta"
 
         return httpClient.request {
@@ -96,7 +96,7 @@ class HttpClientMetaApi(private val httpClientProvider: HttpClientProvider) : Me
         }
     }
 
-    override suspend fun metaRoot(accessToken: String?): InlineResponse200Model {
+    override suspend fun metaRoot(accessToken: String?): InlineResponse200ApiModel {
         val path = "/"
 
         return httpClient.request {

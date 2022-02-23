@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -35,7 +35,7 @@ interface ProjectsApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun projectsAddCollaborator(accessToken: String? = null, projectId: kotlin.Int, username: kotlin.String, request: InlineObject55Model)
+    suspend fun projectsAddCollaborator(accessToken: String? = null, projectId: kotlin.Int, username: kotlin.String, request: InlineObject55ApiModel)
 
     /**
     * Create a project column
@@ -43,9 +43,9 @@ interface ProjectsApi {
     * 
     *
     * @param request 
-    * @return ProjectMinusColumnModel
+    * @return ProjectMinusColumnApiModel
     */
-    suspend fun projectsCreateColumn(accessToken: String? = null, projectId: kotlin.Int, request: InlineObject56Model): ProjectMinusColumnModel
+    suspend fun projectsCreateColumn(accessToken: String? = null, projectId: kotlin.Int, request: InlineObject56ApiModel): ProjectMinusColumnApiModel
 
     /**
     * Create a user project
@@ -53,9 +53,9 @@ interface ProjectsApi {
     * 
     *
     * @param request 
-    * @return ProjectModel
+    * @return ProjectApiModel
     */
-    suspend fun projectsCreateForAuthenticatedUser(accessToken: String? = null, request: InlineObject170Model): ProjectModel
+    suspend fun projectsCreateForAuthenticatedUser(accessToken: String? = null, request: InlineObject170ApiModel): ProjectApiModel
 
     /**
     * Create an organization project
@@ -63,9 +63,9 @@ interface ProjectsApi {
     * Creates an organization project board. Returns a &#x60;404 Not Found&#x60; status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a &#x60;401 Unauthorized&#x60; or &#x60;410 Gone&#x60; status is returned.
     *
     * @param request 
-    * @return ProjectModel
+    * @return ProjectApiModel
     */
-    suspend fun projectsCreateForOrg(accessToken: String? = null, org: kotlin.String, request: InlineObject35Model): ProjectModel
+    suspend fun projectsCreateForOrg(accessToken: String? = null, org: kotlin.String, request: InlineObject35ApiModel): ProjectApiModel
 
     /**
     * Create a repository project
@@ -73,9 +73,9 @@ interface ProjectsApi {
     * Creates a repository project board. Returns a &#x60;404 Not Found&#x60; status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a &#x60;401 Unauthorized&#x60; or &#x60;410 Gone&#x60; status is returned.
     *
     * @param request 
-    * @return ProjectModel
+    * @return ProjectApiModel
     */
-    suspend fun projectsCreateForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject116Model): ProjectModel
+    suspend fun projectsCreateForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject116ApiModel): ProjectApiModel
 
     /**
     * Delete a project
@@ -109,81 +109,81 @@ interface ProjectsApi {
     *
     * Gets a project by its &#x60;id&#x60;. Returns a &#x60;404 Not Found&#x60; status if projects are disabled. If you do not have sufficient privileges to perform this action, a &#x60;401 Unauthorized&#x60; or &#x60;410 Gone&#x60; status is returned.
     *
-    * @return ProjectModel
+    * @return ProjectApiModel
     */
-    suspend fun projectsGet(accessToken: String? = null, projectId: kotlin.Int): ProjectModel
+    suspend fun projectsGet(accessToken: String? = null, projectId: kotlin.Int): ProjectApiModel
 
     /**
     * Get a project card
     *
     * 
     *
-    * @return ProjectMinusCardModel
+    * @return ProjectMinusCardApiModel
     */
-    suspend fun projectsGetCard(accessToken: String? = null, cardId: kotlin.Int): ProjectMinusCardModel
+    suspend fun projectsGetCard(accessToken: String? = null, cardId: kotlin.Int): ProjectMinusCardApiModel
 
     /**
     * Get a project column
     *
     * 
     *
-    * @return ProjectMinusColumnModel
+    * @return ProjectMinusColumnApiModel
     */
-    suspend fun projectsGetColumn(accessToken: String? = null, columnId: kotlin.Int): ProjectMinusColumnModel
+    suspend fun projectsGetColumn(accessToken: String? = null, columnId: kotlin.Int): ProjectMinusColumnApiModel
 
     /**
     * Get project permission for a user
     *
     * Returns the collaborator&#39;s permission level for an organization project. Possible values for the &#x60;permission&#x60; key: &#x60;admin&#x60;, &#x60;write&#x60;, &#x60;read&#x60;, &#x60;none&#x60;. You must be an organization owner or a project &#x60;admin&#x60; to review a user&#39;s permission level.
     *
-    * @return ProjectMinusCollaboratorMinusPermissionModel
+    * @return ProjectMinusCollaboratorMinusPermissionApiModel
     */
-    suspend fun projectsGetPermissionForUser(accessToken: String? = null, projectId: kotlin.Int, username: kotlin.String): ProjectMinusCollaboratorMinusPermissionModel
+    suspend fun projectsGetPermissionForUser(accessToken: String? = null, projectId: kotlin.Int, username: kotlin.String): ProjectMinusCollaboratorMinusPermissionApiModel
 
     /**
     * List project collaborators
     *
     * Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project &#x60;admin&#x60; to list collaborators.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun projectsListCollaborators(accessToken: String? = null, projectId: kotlin.Int, affiliation: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun projectsListCollaborators(accessToken: String? = null, projectId: kotlin.Int, affiliation: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List project columns
     *
     * 
     *
-    * @return kotlin.collections.List<ProjectMinusColumnModel>
+    * @return kotlin.collections.List<ProjectMinusColumnApiModel>
     */
-    suspend fun projectsListColumns(accessToken: String? = null, projectId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ProjectMinusColumnModel>
+    suspend fun projectsListColumns(accessToken: String? = null, projectId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ProjectMinusColumnApiModel>
 
     /**
     * List organization projects
     *
     * Lists the projects in an organization. Returns a &#x60;404 Not Found&#x60; status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a &#x60;401 Unauthorized&#x60; or &#x60;410 Gone&#x60; status is returned.
     *
-    * @return kotlin.collections.List<ProjectModel>
+    * @return kotlin.collections.List<ProjectApiModel>
     */
-    suspend fun projectsListForOrg(accessToken: String? = null, org: kotlin.String, state: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ProjectModel>
+    suspend fun projectsListForOrg(accessToken: String? = null, org: kotlin.String, state: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ProjectApiModel>
 
     /**
     * List repository projects
     *
     * Lists the projects in a repository. Returns a &#x60;404 Not Found&#x60; status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a &#x60;401 Unauthorized&#x60; or &#x60;410 Gone&#x60; status is returned.
     *
-    * @return kotlin.collections.List<ProjectModel>
+    * @return kotlin.collections.List<ProjectApiModel>
     */
-    suspend fun projectsListForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, state: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ProjectModel>
+    suspend fun projectsListForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, state: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ProjectApiModel>
 
     /**
     * List user projects
     *
     * 
     *
-    * @return kotlin.collections.List<ProjectModel>
+    * @return kotlin.collections.List<ProjectApiModel>
     */
-    suspend fun projectsListForUser(accessToken: String? = null, username: kotlin.String, state: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ProjectModel>
+    suspend fun projectsListForUser(accessToken: String? = null, username: kotlin.String, state: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ProjectApiModel>
 
     /**
     * Move a project card
@@ -193,7 +193,7 @@ interface ProjectsApi {
     * @param request 
     * @return kotlin.Any
     */
-    suspend fun projectsMoveCard(accessToken: String? = null, cardId: kotlin.Int, request: InlineObject51Model): kotlin.Any
+    suspend fun projectsMoveCard(accessToken: String? = null, cardId: kotlin.Int, request: InlineObject51ApiModel): kotlin.Any
 
     /**
     * Move a project column
@@ -203,7 +203,7 @@ interface ProjectsApi {
     * @param request 
     * @return kotlin.Any
     */
-    suspend fun projectsMoveColumn(accessToken: String? = null, columnId: kotlin.Int, request: InlineObject53Model): kotlin.Any
+    suspend fun projectsMoveColumn(accessToken: String? = null, columnId: kotlin.Int, request: InlineObject53ApiModel): kotlin.Any
 
     /**
     * Remove user as a collaborator
@@ -220,9 +220,9 @@ interface ProjectsApi {
     * Updates a project board&#39;s information. Returns a &#x60;404 Not Found&#x60; status if projects are disabled. If you do not have sufficient privileges to perform this action, a &#x60;401 Unauthorized&#x60; or &#x60;410 Gone&#x60; status is returned.
     *
     * @param request  (optional)
-    * @return ProjectModel
+    * @return ProjectApiModel
     */
-    suspend fun projectsUpdate(accessToken: String? = null, projectId: kotlin.Int, request: InlineObject54Model): ProjectModel
+    suspend fun projectsUpdate(accessToken: String? = null, projectId: kotlin.Int, request: InlineObject54ApiModel): ProjectApiModel
 
     /**
     * Update an existing project card
@@ -230,9 +230,9 @@ interface ProjectsApi {
     * 
     *
     * @param request  (optional)
-    * @return ProjectMinusCardModel
+    * @return ProjectMinusCardApiModel
     */
-    suspend fun projectsUpdateCard(accessToken: String? = null, cardId: kotlin.Int, request: InlineObject50Model): ProjectMinusCardModel
+    suspend fun projectsUpdateCard(accessToken: String? = null, cardId: kotlin.Int, request: InlineObject50ApiModel): ProjectMinusCardApiModel
 
     /**
     * Update an existing project column
@@ -240,16 +240,16 @@ interface ProjectsApi {
     * 
     *
     * @param request 
-    * @return ProjectMinusColumnModel
+    * @return ProjectMinusColumnApiModel
     */
-    suspend fun projectsUpdateColumn(accessToken: String? = null, columnId: kotlin.Int, request: InlineObject52Model): ProjectMinusColumnModel
+    suspend fun projectsUpdateColumn(accessToken: String? = null, columnId: kotlin.Int, request: InlineObject52ApiModel): ProjectMinusColumnApiModel
 
 }
 
 class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) : ProjectsApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun projectsAddCollaborator(accessToken: String?, projectId: kotlin.Int, username: kotlin.String, request: InlineObject55Model) {
+    override suspend fun projectsAddCollaborator(accessToken: String?, projectId: kotlin.Int, username: kotlin.String, request: InlineObject55ApiModel) {
         val path = "/projects/{project_id}/collaborators/{username}".replace("{"+"project_id"+"}", "$projectId").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -259,7 +259,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsCreateColumn(accessToken: String?, projectId: kotlin.Int, request: InlineObject56Model): ProjectMinusColumnModel {
+    override suspend fun projectsCreateColumn(accessToken: String?, projectId: kotlin.Int, request: InlineObject56ApiModel): ProjectMinusColumnApiModel {
         val path = "/projects/{project_id}/columns".replace("{"+"project_id"+"}", "$projectId")
 
         return httpClient.request {
@@ -269,7 +269,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsCreateForAuthenticatedUser(accessToken: String?, request: InlineObject170Model): ProjectModel {
+    override suspend fun projectsCreateForAuthenticatedUser(accessToken: String?, request: InlineObject170ApiModel): ProjectApiModel {
         val path = "/user/projects"
 
         return httpClient.request {
@@ -279,7 +279,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsCreateForOrg(accessToken: String?, org: kotlin.String, request: InlineObject35Model): ProjectModel {
+    override suspend fun projectsCreateForOrg(accessToken: String?, org: kotlin.String, request: InlineObject35ApiModel): ProjectApiModel {
         val path = "/orgs/{org}/projects".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -289,7 +289,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsCreateForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject116Model): ProjectModel {
+    override suspend fun projectsCreateForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject116ApiModel): ProjectApiModel {
         val path = "/repos/{owner}/{repo}/projects".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -326,7 +326,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsGet(accessToken: String?, projectId: kotlin.Int): ProjectModel {
+    override suspend fun projectsGet(accessToken: String?, projectId: kotlin.Int): ProjectApiModel {
         val path = "/projects/{project_id}".replace("{"+"project_id"+"}", "$projectId")
 
         return httpClient.request {
@@ -335,7 +335,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsGetCard(accessToken: String?, cardId: kotlin.Int): ProjectMinusCardModel {
+    override suspend fun projectsGetCard(accessToken: String?, cardId: kotlin.Int): ProjectMinusCardApiModel {
         val path = "/projects/columns/cards/{card_id}".replace("{"+"card_id"+"}", "$cardId")
 
         return httpClient.request {
@@ -344,7 +344,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsGetColumn(accessToken: String?, columnId: kotlin.Int): ProjectMinusColumnModel {
+    override suspend fun projectsGetColumn(accessToken: String?, columnId: kotlin.Int): ProjectMinusColumnApiModel {
         val path = "/projects/columns/{column_id}".replace("{"+"column_id"+"}", "$columnId")
 
         return httpClient.request {
@@ -353,7 +353,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsGetPermissionForUser(accessToken: String?, projectId: kotlin.Int, username: kotlin.String): ProjectMinusCollaboratorMinusPermissionModel {
+    override suspend fun projectsGetPermissionForUser(accessToken: String?, projectId: kotlin.Int, username: kotlin.String): ProjectMinusCollaboratorMinusPermissionApiModel {
         val path = "/projects/{project_id}/collaborators/{username}/permission".replace("{"+"project_id"+"}", "$projectId").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -362,7 +362,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsListCollaborators(accessToken: String?, projectId: kotlin.Int, affiliation: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun projectsListCollaborators(accessToken: String?, projectId: kotlin.Int, affiliation: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/projects/{project_id}/collaborators".replace("{"+"project_id"+"}", "$projectId")
 
         return httpClient.request {
@@ -374,7 +374,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsListColumns(accessToken: String?, projectId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ProjectMinusColumnModel> {
+    override suspend fun projectsListColumns(accessToken: String?, projectId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ProjectMinusColumnApiModel> {
         val path = "/projects/{project_id}/columns".replace("{"+"project_id"+"}", "$projectId")
 
         return httpClient.request {
@@ -385,7 +385,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsListForOrg(accessToken: String?, org: kotlin.String, state: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ProjectModel> {
+    override suspend fun projectsListForOrg(accessToken: String?, org: kotlin.String, state: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ProjectApiModel> {
         val path = "/orgs/{org}/projects".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -397,7 +397,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsListForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ProjectModel> {
+    override suspend fun projectsListForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ProjectApiModel> {
         val path = "/repos/{owner}/{repo}/projects".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -409,7 +409,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsListForUser(accessToken: String?, username: kotlin.String, state: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ProjectModel> {
+    override suspend fun projectsListForUser(accessToken: String?, username: kotlin.String, state: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ProjectApiModel> {
         val path = "/users/{username}/projects".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -421,7 +421,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsMoveCard(accessToken: String?, cardId: kotlin.Int, request: InlineObject51Model): kotlin.Any {
+    override suspend fun projectsMoveCard(accessToken: String?, cardId: kotlin.Int, request: InlineObject51ApiModel): kotlin.Any {
         val path = "/projects/columns/cards/{card_id}/moves".replace("{"+"card_id"+"}", "$cardId")
 
         return httpClient.request {
@@ -431,7 +431,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsMoveColumn(accessToken: String?, columnId: kotlin.Int, request: InlineObject53Model): kotlin.Any {
+    override suspend fun projectsMoveColumn(accessToken: String?, columnId: kotlin.Int, request: InlineObject53ApiModel): kotlin.Any {
         val path = "/projects/columns/{column_id}/moves".replace("{"+"column_id"+"}", "$columnId")
 
         return httpClient.request {
@@ -450,7 +450,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsUpdate(accessToken: String?, projectId: kotlin.Int, request: InlineObject54Model): ProjectModel {
+    override suspend fun projectsUpdate(accessToken: String?, projectId: kotlin.Int, request: InlineObject54ApiModel): ProjectApiModel {
         val path = "/projects/{project_id}".replace("{"+"project_id"+"}", "$projectId")
 
         return httpClient.request {
@@ -460,7 +460,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsUpdateCard(accessToken: String?, cardId: kotlin.Int, request: InlineObject50Model): ProjectMinusCardModel {
+    override suspend fun projectsUpdateCard(accessToken: String?, cardId: kotlin.Int, request: InlineObject50ApiModel): ProjectMinusCardApiModel {
         val path = "/projects/columns/cards/{card_id}".replace("{"+"card_id"+"}", "$cardId")
 
         return httpClient.request {
@@ -470,7 +470,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsUpdateColumn(accessToken: String?, columnId: kotlin.Int, request: InlineObject52Model): ProjectMinusColumnModel {
+    override suspend fun projectsUpdateColumn(accessToken: String?, columnId: kotlin.Int, request: InlineObject52ApiModel): ProjectMinusColumnApiModel {
         val path = "/projects/columns/{column_id}".replace("{"+"column_id"+"}", "$columnId")
 
         return httpClient.request {

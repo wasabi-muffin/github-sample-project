@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -33,9 +33,9 @@ interface OauthAuthorizationsApi {
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).  **Warning:** Apps must use the [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow) to obtain OAuth tokens that work with GitHub SAML organizations. OAuth tokens created using the Authorizations API will be unable to access GitHub SAML organizations. For more information, see the [blog post](https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api).  Creates OAuth tokens using [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication). If you have two-factor authentication setup, Basic Authentication for this endpoint requires that you use a one-time password (OTP) and your username and password instead of tokens. For more information, see \&quot;[Working with two-factor authentication](https://docs.github.com/rest/overview/other-authentication-methods#working-with-two-factor-authentication).\&quot;  To create tokens for a particular OAuth application using this endpoint, you must authenticate as the user you want to create an authorization for and provide the app&#39;s client ID and secret, found on your OAuth application&#39;s settings page. If your OAuth application intends to create multiple tokens for one user, use &#x60;fingerprint&#x60; to differentiate between them.  You can also create tokens on GitHub from the [personal access tokens settings](https://github.com/settings/tokens) page. Read more about these tokens in [the GitHub Help documentation](https://docs.github.com/articles/creating-an-access-token-for-command-line-use).  Organizations that enforce SAML SSO require personal access tokens to be allowed. Read more about allowing tokens in [the GitHub Help documentation](https://docs.github.com/articles/about-identity-and-access-management-with-saml-single-sign-on).
     *
     * @param request  (optional)
-    * @return AuthorizationModel
+    * @return AuthorizationApiModel
     */
-    suspend fun oauthAuthorizationsCreateAuthorization(accessToken: String? = null, request: InlineObject7Model): AuthorizationModel
+    suspend fun oauthAuthorizationsCreateAuthorization(accessToken: String? = null, request: InlineObject7ApiModel): AuthorizationApiModel
 
     /**
     * Delete an authorization
@@ -60,18 +60,18 @@ interface OauthAuthorizationsApi {
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
-    * @return AuthorizationModel
+    * @return AuthorizationApiModel
     */
-    suspend fun oauthAuthorizationsGetAuthorization(accessToken: String? = null, authorizationId: kotlin.Int): AuthorizationModel
+    suspend fun oauthAuthorizationsGetAuthorization(accessToken: String? = null, authorizationId: kotlin.Int): AuthorizationApiModel
 
     /**
     * Get a single grant
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
-    * @return ApplicationMinusGrantModel
+    * @return ApplicationMinusGrantApiModel
     */
-    suspend fun oauthAuthorizationsGetGrant(accessToken: String? = null, grantId: kotlin.Int): ApplicationMinusGrantModel
+    suspend fun oauthAuthorizationsGetGrant(accessToken: String? = null, grantId: kotlin.Int): ApplicationMinusGrantApiModel
 
     /**
     * Get-or-create an authorization for a specific app
@@ -79,9 +79,9 @@ interface OauthAuthorizationsApi {
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).  **Warning:** Apps must use the [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow) to obtain OAuth tokens that work with GitHub SAML organizations. OAuth tokens created using the Authorizations API will be unable to access GitHub SAML organizations. For more information, see the [blog post](https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api).  Creates a new authorization for the specified OAuth application, only if an authorization for that application doesn&#39;t already exist for the user. The URL includes the 20 character client ID for the OAuth app that is requesting the token. It returns the user&#39;s existing authorization for the application if one is present. Otherwise, it creates and returns a new one.  If you have two-factor authentication setup, Basic Authentication for this endpoint requires that you use a one-time password (OTP) and your username and password instead of tokens. For more information, see \&quot;[Working with two-factor authentication](https://docs.github.com/rest/overview/other-authentication-methods#working-with-two-factor-authentication).\&quot;  **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
     * @param request 
-    * @return AuthorizationModel
+    * @return AuthorizationApiModel
     */
-    suspend fun oauthAuthorizationsGetOrCreateAuthorizationForApp(accessToken: String? = null, clientId: kotlin.String, request: InlineObject8Model): AuthorizationModel
+    suspend fun oauthAuthorizationsGetOrCreateAuthorizationForApp(accessToken: String? = null, clientId: kotlin.String, request: InlineObject8ApiModel): AuthorizationApiModel
 
     /**
     * Get-or-create an authorization for a specific app and fingerprint
@@ -89,27 +89,27 @@ interface OauthAuthorizationsApi {
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).  **Warning:** Apps must use the [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow) to obtain OAuth tokens that work with GitHub SAML organizations. OAuth tokens created using the Authorizations API will be unable to access GitHub SAML organizations. For more information, see the [blog post](https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api).  This method will create a new authorization for the specified OAuth application, only if an authorization for that application and fingerprint do not already exist for the user. The URL includes the 20 character client ID for the OAuth app that is requesting the token. &#x60;fingerprint&#x60; is a unique string to distinguish an authorization from others created for the same client ID and user. It returns the user&#39;s existing authorization for the application if one is present. Otherwise, it creates and returns a new one.  If you have two-factor authentication setup, Basic Authentication for this endpoint requires that you use a one-time password (OTP) and your username and password instead of tokens. For more information, see \&quot;[Working with two-factor authentication](https://docs.github.com/rest/overview/other-authentication-methods#working-with-two-factor-authentication).\&quot;
     *
     * @param request 
-    * @return AuthorizationModel
+    * @return AuthorizationApiModel
     */
-    suspend fun oauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprint(accessToken: String? = null, clientId: kotlin.String, fingerprint: kotlin.String, request: InlineObject9Model): AuthorizationModel
+    suspend fun oauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprint(accessToken: String? = null, clientId: kotlin.String, fingerprint: kotlin.String, request: InlineObject9ApiModel): AuthorizationApiModel
 
     /**
     * List your authorizations
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
     *
-    * @return kotlin.collections.List<AuthorizationModel>
+    * @return kotlin.collections.List<AuthorizationApiModel>
     */
-    suspend fun oauthAuthorizationsListAuthorizations(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, clientId: kotlin.String? = null): kotlin.collections.List<AuthorizationModel>
+    suspend fun oauthAuthorizationsListAuthorizations(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, clientId: kotlin.String? = null): kotlin.collections.List<AuthorizationApiModel>
 
     /**
     * List your grants
     *
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).  You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the [list your authorizations](https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations) API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized). The &#x60;scopes&#x60; returned are the union of scopes authorized for the application. For example, if an application has one token with &#x60;repo&#x60; scope and another token with &#x60;user&#x60; scope, the grant will return &#x60;[\&quot;repo\&quot;, \&quot;user\&quot;]&#x60;.
     *
-    * @return kotlin.collections.List<ApplicationMinusGrantModel>
+    * @return kotlin.collections.List<ApplicationMinusGrantApiModel>
     */
-    suspend fun oauthAuthorizationsListGrants(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, clientId: kotlin.String? = null): kotlin.collections.List<ApplicationMinusGrantModel>
+    suspend fun oauthAuthorizationsListGrants(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, clientId: kotlin.String? = null): kotlin.collections.List<ApplicationMinusGrantApiModel>
 
     /**
     * Update an existing authorization
@@ -117,16 +117,16 @@ interface OauthAuthorizationsApi {
     * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).  If you have two-factor authentication setup, Basic Authentication for this endpoint requires that you use a one-time password (OTP) and your username and password instead of tokens. For more information, see \&quot;[Working with two-factor authentication](https://docs.github.com/rest/overview/other-authentication-methods#working-with-two-factor-authentication).\&quot;  You can only send one of these scope keys at a time.
     *
     * @param request  (optional)
-    * @return AuthorizationModel
+    * @return AuthorizationApiModel
     */
-    suspend fun oauthAuthorizationsUpdateAuthorization(accessToken: String? = null, authorizationId: kotlin.Int, request: InlineObject10Model): AuthorizationModel
+    suspend fun oauthAuthorizationsUpdateAuthorization(accessToken: String? = null, authorizationId: kotlin.Int, request: InlineObject10ApiModel): AuthorizationApiModel
 
 }
 
 class HttpClientOauthAuthorizationsApi(private val httpClientProvider: HttpClientProvider) : OauthAuthorizationsApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun oauthAuthorizationsCreateAuthorization(accessToken: String?, request: InlineObject7Model): AuthorizationModel {
+    override suspend fun oauthAuthorizationsCreateAuthorization(accessToken: String?, request: InlineObject7ApiModel): AuthorizationApiModel {
         val path = "/authorizations"
 
         return httpClient.request {
@@ -154,7 +154,7 @@ class HttpClientOauthAuthorizationsApi(private val httpClientProvider: HttpClien
         }
     }
 
-    override suspend fun oauthAuthorizationsGetAuthorization(accessToken: String?, authorizationId: kotlin.Int): AuthorizationModel {
+    override suspend fun oauthAuthorizationsGetAuthorization(accessToken: String?, authorizationId: kotlin.Int): AuthorizationApiModel {
         val path = "/authorizations/{authorization_id}".replace("{"+"authorization_id"+"}", "$authorizationId")
 
         return httpClient.request {
@@ -163,7 +163,7 @@ class HttpClientOauthAuthorizationsApi(private val httpClientProvider: HttpClien
         }
     }
 
-    override suspend fun oauthAuthorizationsGetGrant(accessToken: String?, grantId: kotlin.Int): ApplicationMinusGrantModel {
+    override suspend fun oauthAuthorizationsGetGrant(accessToken: String?, grantId: kotlin.Int): ApplicationMinusGrantApiModel {
         val path = "/applications/grants/{grant_id}".replace("{"+"grant_id"+"}", "$grantId")
 
         return httpClient.request {
@@ -172,7 +172,7 @@ class HttpClientOauthAuthorizationsApi(private val httpClientProvider: HttpClien
         }
     }
 
-    override suspend fun oauthAuthorizationsGetOrCreateAuthorizationForApp(accessToken: String?, clientId: kotlin.String, request: InlineObject8Model): AuthorizationModel {
+    override suspend fun oauthAuthorizationsGetOrCreateAuthorizationForApp(accessToken: String?, clientId: kotlin.String, request: InlineObject8ApiModel): AuthorizationApiModel {
         val path = "/authorizations/clients/{client_id}".replace("{"+"client_id"+"}", "$clientId")
 
         return httpClient.request {
@@ -182,7 +182,7 @@ class HttpClientOauthAuthorizationsApi(private val httpClientProvider: HttpClien
         }
     }
 
-    override suspend fun oauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprint(accessToken: String?, clientId: kotlin.String, fingerprint: kotlin.String, request: InlineObject9Model): AuthorizationModel {
+    override suspend fun oauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprint(accessToken: String?, clientId: kotlin.String, fingerprint: kotlin.String, request: InlineObject9ApiModel): AuthorizationApiModel {
         val path = "/authorizations/clients/{client_id}/{fingerprint}".replace("{"+"client_id"+"}", "$clientId").replace("{"+"fingerprint"+"}", "$fingerprint")
 
         return httpClient.request {
@@ -192,7 +192,7 @@ class HttpClientOauthAuthorizationsApi(private val httpClientProvider: HttpClien
         }
     }
 
-    override suspend fun oauthAuthorizationsListAuthorizations(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?, clientId: kotlin.String?): kotlin.collections.List<AuthorizationModel> {
+    override suspend fun oauthAuthorizationsListAuthorizations(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?, clientId: kotlin.String?): kotlin.collections.List<AuthorizationApiModel> {
         val path = "/authorizations"
 
         return httpClient.request {
@@ -204,7 +204,7 @@ class HttpClientOauthAuthorizationsApi(private val httpClientProvider: HttpClien
         }
     }
 
-    override suspend fun oauthAuthorizationsListGrants(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?, clientId: kotlin.String?): kotlin.collections.List<ApplicationMinusGrantModel> {
+    override suspend fun oauthAuthorizationsListGrants(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?, clientId: kotlin.String?): kotlin.collections.List<ApplicationMinusGrantApiModel> {
         val path = "/applications/grants"
 
         return httpClient.request {
@@ -216,7 +216,7 @@ class HttpClientOauthAuthorizationsApi(private val httpClientProvider: HttpClien
         }
     }
 
-    override suspend fun oauthAuthorizationsUpdateAuthorization(accessToken: String?, authorizationId: kotlin.Int, request: InlineObject10Model): AuthorizationModel {
+    override suspend fun oauthAuthorizationsUpdateAuthorization(accessToken: String?, authorizationId: kotlin.Int, request: InlineObject10ApiModel): AuthorizationApiModel {
         val path = "/authorizations/{authorization_id}".replace("{"+"authorization_id"+"}", "$authorizationId")
 
         return httpClient.request {

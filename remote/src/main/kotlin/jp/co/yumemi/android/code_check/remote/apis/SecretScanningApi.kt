@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -32,27 +32,27 @@ interface SecretScanningApi {
     *
     * Gets a single secret scanning alert detected in a private repository. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the &#x60;repo&#x60; scope or &#x60;security_events&#x60; scope.  GitHub Apps must have the &#x60;secret_scanning_alerts&#x60; read permission to use this endpoint.
     *
-    * @return SecretMinusScanningMinusAlertModel
+    * @return SecretMinusScanningMinusAlertApiModel
     */
-    suspend fun secretScanningGetAlert(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int): SecretMinusScanningMinusAlertModel
+    suspend fun secretScanningGetAlert(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int): SecretMinusScanningMinusAlertApiModel
 
     /**
     * List secret scanning alerts for an organization
     *
     * Lists secret scanning alerts for eligible repositories in an organization, from newest to oldest. To use this endpoint, you must be an administrator or security manager for the organization, and you must use an access token with the &#x60;repo&#x60; scope or &#x60;security_events&#x60; scope.  GitHub Apps must have the &#x60;secret_scanning_alerts&#x60; read permission to use this endpoint.
     *
-    * @return kotlin.collections.List<OrganizationMinusSecretMinusScanningMinusAlertModel>
+    * @return kotlin.collections.List<OrganizationMinusSecretMinusScanningMinusAlertApiModel>
     */
-    suspend fun secretScanningListAlertsForOrg(accessToken: String? = null, org: kotlin.String, state: kotlin.String? = null, secretType: kotlin.String? = null, resolution: kotlin.String? = null, page: kotlin.Int? = null, perPage: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusSecretMinusScanningMinusAlertModel>
+    suspend fun secretScanningListAlertsForOrg(accessToken: String? = null, org: kotlin.String, state: kotlin.String? = null, secretType: kotlin.String? = null, resolution: kotlin.String? = null, page: kotlin.Int? = null, perPage: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusSecretMinusScanningMinusAlertApiModel>
 
     /**
     * List secret scanning alerts for a repository
     *
     * Lists secret scanning alerts for a private repository, from newest to oldest. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the &#x60;repo&#x60; scope or &#x60;security_events&#x60; scope.  GitHub Apps must have the &#x60;secret_scanning_alerts&#x60; read permission to use this endpoint.
     *
-    * @return kotlin.collections.List<SecretMinusScanningMinusAlertModel>
+    * @return kotlin.collections.List<SecretMinusScanningMinusAlertApiModel>
     */
-    suspend fun secretScanningListAlertsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, state: kotlin.String? = null, secretType: kotlin.String? = null, resolution: kotlin.String? = null, page: kotlin.Int? = null, perPage: kotlin.Int? = null): kotlin.collections.List<SecretMinusScanningMinusAlertModel>
+    suspend fun secretScanningListAlertsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, state: kotlin.String? = null, secretType: kotlin.String? = null, resolution: kotlin.String? = null, page: kotlin.Int? = null, perPage: kotlin.Int? = null): kotlin.collections.List<SecretMinusScanningMinusAlertApiModel>
 
     /**
     * Update a secret scanning alert
@@ -60,16 +60,16 @@ interface SecretScanningApi {
     * Updates the status of a secret scanning alert in a private repository. To use this endpoint, you must be an administrator for the repository or organization, and you must use an access token with the &#x60;repo&#x60; scope or &#x60;security_events&#x60; scope.  GitHub Apps must have the &#x60;secret_scanning_alerts&#x60; write permission to use this endpoint.
     *
     * @param request 
-    * @return SecretMinusScanningMinusAlertModel
+    * @return SecretMinusScanningMinusAlertApiModel
     */
-    suspend fun secretScanningUpdateAlert(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int, request: InlineObject135Model): SecretMinusScanningMinusAlertModel
+    suspend fun secretScanningUpdateAlert(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int, request: InlineObject135ApiModel): SecretMinusScanningMinusAlertApiModel
 
 }
 
 class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProvider) : SecretScanningApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun secretScanningGetAlert(accessToken: String?, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int): SecretMinusScanningMinusAlertModel {
+    override suspend fun secretScanningGetAlert(accessToken: String?, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int): SecretMinusScanningMinusAlertApiModel {
         val path = "/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
 
         return httpClient.request {
@@ -78,7 +78,7 @@ class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProv
         }
     }
 
-    override suspend fun secretScanningListAlertsForOrg(accessToken: String?, org: kotlin.String, state: kotlin.String?, secretType: kotlin.String?, resolution: kotlin.String?, page: kotlin.Int?, perPage: kotlin.Int?): kotlin.collections.List<OrganizationMinusSecretMinusScanningMinusAlertModel> {
+    override suspend fun secretScanningListAlertsForOrg(accessToken: String?, org: kotlin.String, state: kotlin.String?, secretType: kotlin.String?, resolution: kotlin.String?, page: kotlin.Int?, perPage: kotlin.Int?): kotlin.collections.List<OrganizationMinusSecretMinusScanningMinusAlertApiModel> {
         val path = "/orgs/{org}/secret-scanning/alerts".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -92,7 +92,7 @@ class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProv
         }
     }
 
-    override suspend fun secretScanningListAlertsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, secretType: kotlin.String?, resolution: kotlin.String?, page: kotlin.Int?, perPage: kotlin.Int?): kotlin.collections.List<SecretMinusScanningMinusAlertModel> {
+    override suspend fun secretScanningListAlertsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, secretType: kotlin.String?, resolution: kotlin.String?, page: kotlin.Int?, perPage: kotlin.Int?): kotlin.collections.List<SecretMinusScanningMinusAlertApiModel> {
         val path = "/repos/{owner}/{repo}/secret-scanning/alerts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -106,7 +106,7 @@ class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProv
         }
     }
 
-    override suspend fun secretScanningUpdateAlert(accessToken: String?, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int, request: InlineObject135Model): SecretMinusScanningMinusAlertModel {
+    override suspend fun secretScanningUpdateAlert(accessToken: String?, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int, request: InlineObject135ApiModel): SecretMinusScanningMinusAlertApiModel {
         val path = "/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
 
         return httpClient.request {

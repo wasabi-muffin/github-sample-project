@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -32,25 +32,25 @@ interface CodesOfConductApi {
     *
     * 
     *
-    * @return kotlin.collections.List<CodeMinusOfMinusConductModel>
+    * @return kotlin.collections.List<CodeMinusOfMinusConductApiModel>
     */
-    suspend fun codesOfConductGetAllCodesOfConduct(accessToken: String? = null): kotlin.collections.List<CodeMinusOfMinusConductModel>
+    suspend fun codesOfConductGetAllCodesOfConduct(accessToken: String? = null): kotlin.collections.List<CodeMinusOfMinusConductApiModel>
 
     /**
     * Get a code of conduct
     *
     * 
     *
-    * @return CodeMinusOfMinusConductModel
+    * @return CodeMinusOfMinusConductApiModel
     */
-    suspend fun codesOfConductGetConductCode(accessToken: String? = null, key: kotlin.String): CodeMinusOfMinusConductModel
+    suspend fun codesOfConductGetConductCode(accessToken: String? = null, key: kotlin.String): CodeMinusOfMinusConductApiModel
 
 }
 
 class HttpClientCodesOfConductApi(private val httpClientProvider: HttpClientProvider) : CodesOfConductApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun codesOfConductGetAllCodesOfConduct(accessToken: String?): kotlin.collections.List<CodeMinusOfMinusConductModel> {
+    override suspend fun codesOfConductGetAllCodesOfConduct(accessToken: String?): kotlin.collections.List<CodeMinusOfMinusConductApiModel> {
         val path = "/codes_of_conduct"
 
         return httpClient.request {
@@ -59,7 +59,7 @@ class HttpClientCodesOfConductApi(private val httpClientProvider: HttpClientProv
         }
     }
 
-    override suspend fun codesOfConductGetConductCode(accessToken: String?, key: kotlin.String): CodeMinusOfMinusConductModel {
+    override suspend fun codesOfConductGetConductCode(accessToken: String?, key: kotlin.String): CodeMinusOfMinusConductApiModel {
         val path = "/codes_of_conduct/{key}".replace("{"+"key"+"}", "$key")
 
         return httpClient.request {

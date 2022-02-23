@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -42,9 +42,9 @@ interface AppsApi {
     * OAuth applications can use a special API method for checking OAuth token validity without exceeding the normal rate limits for failed login attempts. Authentication works differently with this particular endpoint. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) to use this endpoint, where the username is the OAuth application &#x60;client_id&#x60; and the password is its &#x60;client_secret&#x60;. Invalid tokens will return &#x60;404 NOT FOUND&#x60;.
     *
     * @param request 
-    * @return AuthorizationModel
+    * @return AuthorizationApiModel
     */
-    suspend fun appsCheckToken(accessToken: String? = null, clientId: kotlin.String, request: InlineObject3Model): AuthorizationModel
+    suspend fun appsCheckToken(accessToken: String? = null, clientId: kotlin.String, request: InlineObject3ApiModel): AuthorizationApiModel
 
     /**
     * Create a GitHub App from a manifest
@@ -52,9 +52,9 @@ interface AppsApi {
     * Use this endpoint to complete the handshake necessary when implementing the [GitHub App Manifest flow](https://docs.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/). When you create a GitHub App with the manifest flow, you receive a temporary &#x60;code&#x60; used to retrieve the GitHub App&#39;s &#x60;id&#x60;, &#x60;pem&#x60; (private key), and &#x60;webhook_secret&#x60;.
     *
     * @param request  (optional)
-    * @return IntegrationModel
+    * @return IntegrationApiModel
     */
-    suspend fun appsCreateFromManifest(accessToken: String? = null, code: kotlin.String, request: kotlin.Any): IntegrationModel
+    suspend fun appsCreateFromManifest(accessToken: String? = null, code: kotlin.String, request: kotlin.Any): IntegrationApiModel
 
     /**
     * Create an installation access token for an app
@@ -62,9 +62,9 @@ interface AppsApi {
     * Creates an installation access token that enables a GitHub App to make authenticated API requests for the app&#39;s installation on an organization or individual account. Installation tokens expire one hour from the time you create them. Using an expired token produces a status code of &#x60;401 - Unauthorized&#x60;, and requires creating a new installation token. By default the installation token has access to all repositories that the installation can access. To restrict the access to specific repositories, you can provide the &#x60;repository_ids&#x60; when creating the token. When you omit &#x60;repository_ids&#x60;, the response does not contain the &#x60;repositories&#x60; key.  You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
     * @param request  (optional)
-    * @return InstallationMinusTokenModel
+    * @return InstallationMinusTokenApiModel
     */
-    suspend fun appsCreateInstallationAccessToken(accessToken: String? = null, installationId: kotlin.Int, request: InlineObject1Model): InstallationMinusTokenModel
+    suspend fun appsCreateInstallationAccessToken(accessToken: String? = null, installationId: kotlin.Int, request: InlineObject1ApiModel): InstallationMinusTokenApiModel
 
     /**
     * Delete an app authorization
@@ -74,7 +74,7 @@ interface AppsApi {
     * @param request 
     * @return void
     */
-    suspend fun appsDeleteAuthorization(accessToken: String? = null, clientId: kotlin.String, request: InlineObject2Model)
+    suspend fun appsDeleteAuthorization(accessToken: String? = null, clientId: kotlin.String, request: InlineObject2ApiModel)
 
     /**
     * Delete an installation for the authenticated app
@@ -93,178 +93,178 @@ interface AppsApi {
     * @param request 
     * @return void
     */
-    suspend fun appsDeleteToken(accessToken: String? = null, clientId: kotlin.String, request: InlineObject4Model)
+    suspend fun appsDeleteToken(accessToken: String? = null, clientId: kotlin.String, request: InlineObject4ApiModel)
 
     /**
     * Get the authenticated app
     *
     * Returns the GitHub App associated with the authentication credentials used. To see how many app installations are associated with this GitHub App, see the &#x60;installations_count&#x60; in the response. For more details about your app&#39;s installations, see the \&quot;[List installations for the authenticated app](https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app)\&quot; endpoint.  You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
-    * @return IntegrationModel
+    * @return IntegrationApiModel
     */
-    suspend fun appsGetAuthenticated(accessToken: String? = null): IntegrationModel
+    suspend fun appsGetAuthenticated(accessToken: String? = null): IntegrationApiModel
 
     /**
     * Get an app
     *
     * **Note**: The &#x60;:app_slug&#x60; is just the URL-friendly name of your GitHub App. You can find this on the settings page for your GitHub App (e.g., &#x60;https://github.com/settings/apps/:app_slug&#x60;).  If the GitHub App you specify is public, you can access this endpoint without authenticating. If the GitHub App you specify is private, you must authenticate with a [personal access token](https://docs.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
     *
-    * @return IntegrationModel
+    * @return IntegrationApiModel
     */
-    suspend fun appsGetBySlug(accessToken: String? = null, appSlug: kotlin.String): IntegrationModel
+    suspend fun appsGetBySlug(accessToken: String? = null, appSlug: kotlin.String): IntegrationApiModel
 
     /**
     * Get an installation for the authenticated app
     *
     * Enables an authenticated GitHub App to find an installation&#39;s information using the installation id.  You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
-    * @return InstallationModel
+    * @return InstallationApiModel
     */
-    suspend fun appsGetInstallation(accessToken: String? = null, installationId: kotlin.Int): InstallationModel
+    suspend fun appsGetInstallation(accessToken: String? = null, installationId: kotlin.Int): InstallationApiModel
 
     /**
     * Get an organization installation for the authenticated app
     *
     * Enables an authenticated GitHub App to find the organization&#39;s installation information.  You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
-    * @return InstallationModel
+    * @return InstallationApiModel
     */
-    suspend fun appsGetOrgInstallation(accessToken: String? = null, org: kotlin.String): InstallationModel
+    suspend fun appsGetOrgInstallation(accessToken: String? = null, org: kotlin.String): InstallationApiModel
 
     /**
     * Get a repository installation for the authenticated app
     *
     * Enables an authenticated GitHub App to find the repository&#39;s installation information. The installation&#39;s account type will be either an organization or a user account, depending which account the repository belongs to.  You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
-    * @return InstallationModel
+    * @return InstallationApiModel
     */
-    suspend fun appsGetRepoInstallation(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): InstallationModel
+    suspend fun appsGetRepoInstallation(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): InstallationApiModel
 
     /**
     * Get a subscription plan for an account
     *
     * Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub App. When someone submits a plan change that won&#39;t be processed until the end of their billing cycle, you will also see the upcoming pending change.  GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
-    * @return MarketplaceMinusPurchaseModel
+    * @return MarketplaceMinusPurchaseApiModel
     */
-    suspend fun appsGetSubscriptionPlanForAccount(accessToken: String? = null, accountId: kotlin.Int): MarketplaceMinusPurchaseModel
+    suspend fun appsGetSubscriptionPlanForAccount(accessToken: String? = null, accountId: kotlin.Int): MarketplaceMinusPurchaseApiModel
 
     /**
     * Get a subscription plan for an account (stubbed)
     *
     * Shows whether the user or organization account actively subscribes to a plan listed by the authenticated GitHub App. When someone submits a plan change that won&#39;t be processed until the end of their billing cycle, you will also see the upcoming pending change.  GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
-    * @return MarketplaceMinusPurchaseModel
+    * @return MarketplaceMinusPurchaseApiModel
     */
-    suspend fun appsGetSubscriptionPlanForAccountStubbed(accessToken: String? = null, accountId: kotlin.Int): MarketplaceMinusPurchaseModel
+    suspend fun appsGetSubscriptionPlanForAccountStubbed(accessToken: String? = null, accountId: kotlin.Int): MarketplaceMinusPurchaseApiModel
 
     /**
     * Get a user installation for the authenticated app
     *
     * Enables an authenticated GitHub App to find the user’s installation information.  You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
-    * @return InstallationModel
+    * @return InstallationApiModel
     */
-    suspend fun appsGetUserInstallation(accessToken: String? = null, username: kotlin.String): InstallationModel
+    suspend fun appsGetUserInstallation(accessToken: String? = null, username: kotlin.String): InstallationApiModel
 
     /**
     * Get a webhook configuration for an app
     *
     * Returns the webhook configuration for a GitHub App. For more information about configuring a webhook for your app, see \&quot;[Creating a GitHub App](/developers/apps/creating-a-github-app).\&quot;  You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
-    * @return WebhookMinusConfigModel
+    * @return WebhookMinusConfigApiModel
     */
-    suspend fun appsGetWebhookConfigForApp(accessToken: String? = null): WebhookMinusConfigModel
+    suspend fun appsGetWebhookConfigForApp(accessToken: String? = null): WebhookMinusConfigApiModel
 
     /**
     * List accounts for a plan
     *
     * Returns user and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won&#39;t be processed until the end of their billing cycle, you will also see the upcoming pending change.  GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
-    * @return kotlin.collections.List<MarketplaceMinusPurchaseModel>
+    * @return kotlin.collections.List<MarketplaceMinusPurchaseApiModel>
     */
-    suspend fun appsListAccountsForPlan(accessToken: String? = null, planId: kotlin.Int, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MarketplaceMinusPurchaseModel>
+    suspend fun appsListAccountsForPlan(accessToken: String? = null, planId: kotlin.Int, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MarketplaceMinusPurchaseApiModel>
 
     /**
     * List accounts for a plan (stubbed)
     *
     * Returns repository and organization accounts associated with the specified plan, including free plans. For per-seat pricing, you see the list of accounts that have purchased the plan, including the number of seats purchased. When someone submits a plan change that won&#39;t be processed until the end of their billing cycle, you will also see the upcoming pending change.  GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
-    * @return kotlin.collections.List<MarketplaceMinusPurchaseModel>
+    * @return kotlin.collections.List<MarketplaceMinusPurchaseApiModel>
     */
-    suspend fun appsListAccountsForPlanStubbed(accessToken: String? = null, planId: kotlin.Int, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MarketplaceMinusPurchaseModel>
+    suspend fun appsListAccountsForPlanStubbed(accessToken: String? = null, planId: kotlin.Int, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MarketplaceMinusPurchaseApiModel>
 
     /**
     * List repositories accessible to the user access token
     *
     * List repositories that the authenticated user has explicit permission (&#x60;:read&#x60;, &#x60;:write&#x60;, or &#x60;:admin&#x60;) to access for an installation.  The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.  You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint.  The access the user has to each repository is included in the hash under the &#x60;permissions&#x60; key.
     *
-    * @return InlineResponse20032Model
+    * @return InlineResponse20032ApiModel
     */
-    suspend fun appsListInstallationReposForAuthenticatedUser(accessToken: String? = null, installationId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20032Model
+    suspend fun appsListInstallationReposForAuthenticatedUser(accessToken: String? = null, installationId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20032ApiModel
 
     /**
     * List installations for the authenticated app
     *
     * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.  The permissions the installation has are included under the &#x60;permissions&#x60; key.
     *
-    * @return kotlin.collections.List<InstallationModel>
+    * @return kotlin.collections.List<InstallationApiModel>
     */
-    suspend fun appsListInstallations(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, since: kotlin.String? = null, outdated: kotlin.String? = null): kotlin.collections.List<InstallationModel>
+    suspend fun appsListInstallations(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, since: kotlin.String? = null, outdated: kotlin.String? = null): kotlin.collections.List<InstallationApiModel>
 
     /**
     * List app installations accessible to the user access token
     *
     * Lists installations of your GitHub App that the authenticated user has explicit permission (&#x60;:read&#x60;, &#x60;:write&#x60;, or &#x60;:admin&#x60;) to access.  You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint.  The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.  You can find the permissions for the installation under the &#x60;permissions&#x60; key.
     *
-    * @return InlineResponse20012Model
+    * @return InlineResponse20012ApiModel
     */
-    suspend fun appsListInstallationsForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20012Model
+    suspend fun appsListInstallationsForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20012ApiModel
 
     /**
     * List plans
     *
     * Lists all plans that are part of your GitHub Marketplace listing.  GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
-    * @return kotlin.collections.List<MarketplaceMinusListingMinusPlanModel>
+    * @return kotlin.collections.List<MarketplaceMinusListingMinusPlanApiModel>
     */
-    suspend fun appsListPlans(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MarketplaceMinusListingMinusPlanModel>
+    suspend fun appsListPlans(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MarketplaceMinusListingMinusPlanApiModel>
 
     /**
     * List plans (stubbed)
     *
     * Lists all plans that are part of your GitHub Marketplace listing.  GitHub Apps must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint. OAuth Apps must use [basic authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) with their client ID and client secret to access this endpoint.
     *
-    * @return kotlin.collections.List<MarketplaceMinusListingMinusPlanModel>
+    * @return kotlin.collections.List<MarketplaceMinusListingMinusPlanApiModel>
     */
-    suspend fun appsListPlansStubbed(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MarketplaceMinusListingMinusPlanModel>
+    suspend fun appsListPlansStubbed(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MarketplaceMinusListingMinusPlanApiModel>
 
     /**
     * List repositories accessible to the app installation
     *
     * List repositories that an app installation can access.  You must use an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
     *
-    * @return InlineResponse2001Model
+    * @return InlineResponse2001ApiModel
     */
-    suspend fun appsListReposAccessibleToInstallation(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2001Model
+    suspend fun appsListReposAccessibleToInstallation(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2001ApiModel
 
     /**
     * List subscriptions for the authenticated user
     *
     * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
     *
-    * @return kotlin.collections.List<UserMinusMarketplaceMinusPurchaseModel>
+    * @return kotlin.collections.List<UserMinusMarketplaceMinusPurchaseApiModel>
     */
-    suspend fun appsListSubscriptionsForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<UserMinusMarketplaceMinusPurchaseModel>
+    suspend fun appsListSubscriptionsForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<UserMinusMarketplaceMinusPurchaseApiModel>
 
     /**
     * List subscriptions for the authenticated user (stubbed)
     *
     * Lists the active subscriptions for the authenticated user. You must use a [user-to-server OAuth access token](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-users-on-your-site), created for a user who has authorized your GitHub App, to access this endpoint. . OAuth Apps must authenticate using an [OAuth token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/).
     *
-    * @return kotlin.collections.List<UserMinusMarketplaceMinusPurchaseModel>
+    * @return kotlin.collections.List<UserMinusMarketplaceMinusPurchaseApiModel>
     */
-    suspend fun appsListSubscriptionsForAuthenticatedUserStubbed(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<UserMinusMarketplaceMinusPurchaseModel>
+    suspend fun appsListSubscriptionsForAuthenticatedUserStubbed(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<UserMinusMarketplaceMinusPurchaseApiModel>
 
     /**
     * Redeliver a delivery for an app webhook
@@ -290,9 +290,9 @@ interface AppsApi {
     * OAuth applications can use this API method to reset a valid OAuth token without end-user involvement. Applications must save the \&quot;token\&quot; property in the response because changes take effect immediately. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application&#39;s &#x60;client_id&#x60; and &#x60;client_secret&#x60; as the username and password. Invalid tokens will return &#x60;404 NOT FOUND&#x60;.
     *
     * @param request 
-    * @return AuthorizationModel
+    * @return AuthorizationApiModel
     */
-    suspend fun appsResetToken(accessToken: String? = null, clientId: kotlin.String, request: InlineObject5Model): AuthorizationModel
+    suspend fun appsResetToken(accessToken: String? = null, clientId: kotlin.String, request: InlineObject5ApiModel): AuthorizationApiModel
 
     /**
     * Revoke an installation access token
@@ -309,9 +309,9 @@ interface AppsApi {
     * Use a non-scoped user-to-server OAuth access token to create a repository scoped and/or permission scoped user-to-server OAuth access token. You can specify which repositories the token can access and which permissions are granted to the token. You must use [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication) when accessing this endpoint, using the OAuth application&#39;s &#x60;client_id&#x60; and &#x60;client_secret&#x60; as the username and password. Invalid tokens will return &#x60;404 NOT FOUND&#x60;.
     *
     * @param request 
-    * @return AuthorizationModel
+    * @return AuthorizationApiModel
     */
-    suspend fun appsScopeToken(accessToken: String? = null, clientId: kotlin.String, request: InlineObject6Model): AuthorizationModel
+    suspend fun appsScopeToken(accessToken: String? = null, clientId: kotlin.String, request: InlineObject6ApiModel): AuthorizationApiModel
 
     /**
     * Suspend an app installation
@@ -337,9 +337,9 @@ interface AppsApi {
     * Updates the webhook configuration for a GitHub App. For more information about configuring a webhook for your app, see \&quot;[Creating a GitHub App](/developers/apps/creating-a-github-app).\&quot;  You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     *
     * @param request  (optional)
-    * @return WebhookMinusConfigModel
+    * @return WebhookMinusConfigApiModel
     */
-    suspend fun appsUpdateWebhookConfigForApp(accessToken: String? = null, request: InlineObjectModel): WebhookMinusConfigModel
+    suspend fun appsUpdateWebhookConfigForApp(accessToken: String? = null, request: InlineObjectApiModel): WebhookMinusConfigApiModel
 
 }
 
@@ -355,7 +355,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsCheckToken(accessToken: String?, clientId: kotlin.String, request: InlineObject3Model): AuthorizationModel {
+    override suspend fun appsCheckToken(accessToken: String?, clientId: kotlin.String, request: InlineObject3ApiModel): AuthorizationApiModel {
         val path = "/applications/{client_id}/token".replace("{"+"client_id"+"}", "$clientId")
 
         return httpClient.request {
@@ -365,7 +365,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsCreateFromManifest(accessToken: String?, code: kotlin.String, request: kotlin.Any): IntegrationModel {
+    override suspend fun appsCreateFromManifest(accessToken: String?, code: kotlin.String, request: kotlin.Any): IntegrationApiModel {
         val path = "/app-manifests/{code}/conversions".replace("{"+"code"+"}", "$code")
 
         return httpClient.request {
@@ -375,7 +375,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsCreateInstallationAccessToken(accessToken: String?, installationId: kotlin.Int, request: InlineObject1Model): InstallationMinusTokenModel {
+    override suspend fun appsCreateInstallationAccessToken(accessToken: String?, installationId: kotlin.Int, request: InlineObject1ApiModel): InstallationMinusTokenApiModel {
         val path = "/app/installations/{installation_id}/access_tokens".replace("{"+"installation_id"+"}", "$installationId")
 
         return httpClient.request {
@@ -385,7 +385,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsDeleteAuthorization(accessToken: String?, clientId: kotlin.String, request: InlineObject2Model) {
+    override suspend fun appsDeleteAuthorization(accessToken: String?, clientId: kotlin.String, request: InlineObject2ApiModel) {
         val path = "/applications/{client_id}/grant".replace("{"+"client_id"+"}", "$clientId")
 
         return httpClient.request {
@@ -404,7 +404,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsDeleteToken(accessToken: String?, clientId: kotlin.String, request: InlineObject4Model) {
+    override suspend fun appsDeleteToken(accessToken: String?, clientId: kotlin.String, request: InlineObject4ApiModel) {
         val path = "/applications/{client_id}/token".replace("{"+"client_id"+"}", "$clientId")
 
         return httpClient.request {
@@ -414,7 +414,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsGetAuthenticated(accessToken: String?): IntegrationModel {
+    override suspend fun appsGetAuthenticated(accessToken: String?): IntegrationApiModel {
         val path = "/app"
 
         return httpClient.request {
@@ -423,7 +423,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsGetBySlug(accessToken: String?, appSlug: kotlin.String): IntegrationModel {
+    override suspend fun appsGetBySlug(accessToken: String?, appSlug: kotlin.String): IntegrationApiModel {
         val path = "/apps/{app_slug}".replace("{"+"app_slug"+"}", "$appSlug")
 
         return httpClient.request {
@@ -432,7 +432,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsGetInstallation(accessToken: String?, installationId: kotlin.Int): InstallationModel {
+    override suspend fun appsGetInstallation(accessToken: String?, installationId: kotlin.Int): InstallationApiModel {
         val path = "/app/installations/{installation_id}".replace("{"+"installation_id"+"}", "$installationId")
 
         return httpClient.request {
@@ -441,7 +441,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsGetOrgInstallation(accessToken: String?, org: kotlin.String): InstallationModel {
+    override suspend fun appsGetOrgInstallation(accessToken: String?, org: kotlin.String): InstallationApiModel {
         val path = "/orgs/{org}/installation".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -450,7 +450,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsGetRepoInstallation(accessToken: String?, owner: kotlin.String, repo: kotlin.String): InstallationModel {
+    override suspend fun appsGetRepoInstallation(accessToken: String?, owner: kotlin.String, repo: kotlin.String): InstallationApiModel {
         val path = "/repos/{owner}/{repo}/installation".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -459,7 +459,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsGetSubscriptionPlanForAccount(accessToken: String?, accountId: kotlin.Int): MarketplaceMinusPurchaseModel {
+    override suspend fun appsGetSubscriptionPlanForAccount(accessToken: String?, accountId: kotlin.Int): MarketplaceMinusPurchaseApiModel {
         val path = "/marketplace_listing/accounts/{account_id}".replace("{"+"account_id"+"}", "$accountId")
 
         return httpClient.request {
@@ -468,7 +468,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsGetSubscriptionPlanForAccountStubbed(accessToken: String?, accountId: kotlin.Int): MarketplaceMinusPurchaseModel {
+    override suspend fun appsGetSubscriptionPlanForAccountStubbed(accessToken: String?, accountId: kotlin.Int): MarketplaceMinusPurchaseApiModel {
         val path = "/marketplace_listing/stubbed/accounts/{account_id}".replace("{"+"account_id"+"}", "$accountId")
 
         return httpClient.request {
@@ -477,7 +477,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsGetUserInstallation(accessToken: String?, username: kotlin.String): InstallationModel {
+    override suspend fun appsGetUserInstallation(accessToken: String?, username: kotlin.String): InstallationApiModel {
         val path = "/users/{username}/installation".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -486,7 +486,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsGetWebhookConfigForApp(accessToken: String?): WebhookMinusConfigModel {
+    override suspend fun appsGetWebhookConfigForApp(accessToken: String?): WebhookMinusConfigApiModel {
         val path = "/app/hook/config"
 
         return httpClient.request {
@@ -495,7 +495,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsListAccountsForPlan(accessToken: String?, planId: kotlin.Int, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MarketplaceMinusPurchaseModel> {
+    override suspend fun appsListAccountsForPlan(accessToken: String?, planId: kotlin.Int, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MarketplaceMinusPurchaseApiModel> {
         val path = "/marketplace_listing/plans/{plan_id}/accounts".replace("{"+"plan_id"+"}", "$planId")
 
         return httpClient.request {
@@ -508,7 +508,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsListAccountsForPlanStubbed(accessToken: String?, planId: kotlin.Int, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MarketplaceMinusPurchaseModel> {
+    override suspend fun appsListAccountsForPlanStubbed(accessToken: String?, planId: kotlin.Int, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MarketplaceMinusPurchaseApiModel> {
         val path = "/marketplace_listing/stubbed/plans/{plan_id}/accounts".replace("{"+"plan_id"+"}", "$planId")
 
         return httpClient.request {
@@ -521,7 +521,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsListInstallationReposForAuthenticatedUser(accessToken: String?, installationId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20032Model {
+    override suspend fun appsListInstallationReposForAuthenticatedUser(accessToken: String?, installationId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20032ApiModel {
         val path = "/user/installations/{installation_id}/repositories".replace("{"+"installation_id"+"}", "$installationId")
 
         return httpClient.request {
@@ -532,7 +532,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsListInstallations(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?, since: kotlin.String?, outdated: kotlin.String?): kotlin.collections.List<InstallationModel> {
+    override suspend fun appsListInstallations(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?, since: kotlin.String?, outdated: kotlin.String?): kotlin.collections.List<InstallationApiModel> {
         val path = "/app/installations"
 
         return httpClient.request {
@@ -545,7 +545,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsListInstallationsForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20012Model {
+    override suspend fun appsListInstallationsForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20012ApiModel {
         val path = "/user/installations"
 
         return httpClient.request {
@@ -556,7 +556,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsListPlans(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MarketplaceMinusListingMinusPlanModel> {
+    override suspend fun appsListPlans(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MarketplaceMinusListingMinusPlanApiModel> {
         val path = "/marketplace_listing/plans"
 
         return httpClient.request {
@@ -567,7 +567,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsListPlansStubbed(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MarketplaceMinusListingMinusPlanModel> {
+    override suspend fun appsListPlansStubbed(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MarketplaceMinusListingMinusPlanApiModel> {
         val path = "/marketplace_listing/stubbed/plans"
 
         return httpClient.request {
@@ -578,7 +578,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsListReposAccessibleToInstallation(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2001Model {
+    override suspend fun appsListReposAccessibleToInstallation(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2001ApiModel {
         val path = "/installation/repositories"
 
         return httpClient.request {
@@ -589,7 +589,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsListSubscriptionsForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<UserMinusMarketplaceMinusPurchaseModel> {
+    override suspend fun appsListSubscriptionsForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<UserMinusMarketplaceMinusPurchaseApiModel> {
         val path = "/user/marketplace_purchases"
 
         return httpClient.request {
@@ -600,7 +600,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsListSubscriptionsForAuthenticatedUserStubbed(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<UserMinusMarketplaceMinusPurchaseModel> {
+    override suspend fun appsListSubscriptionsForAuthenticatedUserStubbed(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<UserMinusMarketplaceMinusPurchaseApiModel> {
         val path = "/user/marketplace_purchases/stubbed"
 
         return httpClient.request {
@@ -629,7 +629,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsResetToken(accessToken: String?, clientId: kotlin.String, request: InlineObject5Model): AuthorizationModel {
+    override suspend fun appsResetToken(accessToken: String?, clientId: kotlin.String, request: InlineObject5ApiModel): AuthorizationApiModel {
         val path = "/applications/{client_id}/token".replace("{"+"client_id"+"}", "$clientId")
 
         return httpClient.request {
@@ -648,7 +648,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsScopeToken(accessToken: String?, clientId: kotlin.String, request: InlineObject6Model): AuthorizationModel {
+    override suspend fun appsScopeToken(accessToken: String?, clientId: kotlin.String, request: InlineObject6ApiModel): AuthorizationApiModel {
         val path = "/applications/{client_id}/token/scoped".replace("{"+"client_id"+"}", "$clientId")
 
         return httpClient.request {
@@ -676,7 +676,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsUpdateWebhookConfigForApp(accessToken: String?, request: InlineObjectModel): WebhookMinusConfigModel {
+    override suspend fun appsUpdateWebhookConfigForApp(accessToken: String?, request: InlineObjectApiModel): WebhookMinusConfigApiModel {
         val path = "/app/hook/config"
 
         return httpClient.request {

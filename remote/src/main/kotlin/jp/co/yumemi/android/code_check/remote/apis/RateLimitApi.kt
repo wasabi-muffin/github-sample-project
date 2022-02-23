@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -32,16 +32,16 @@ interface RateLimitApi {
     *
     * **Note:** Accessing this endpoint does not count against your REST API rate limit.  **Note:** The &#x60;rate&#x60; object is deprecated. If you&#39;re writing new API client code or updating existing code, you should use the &#x60;core&#x60; object instead of the &#x60;rate&#x60; object. The &#x60;core&#x60; object contains the same information that is present in the &#x60;rate&#x60; object.
     *
-    * @return RateMinusLimitMinusOverviewModel
+    * @return RateMinusLimitMinusOverviewApiModel
     */
-    suspend fun rateLimitGet(accessToken: String? = null): RateMinusLimitMinusOverviewModel
+    suspend fun rateLimitGet(accessToken: String? = null): RateMinusLimitMinusOverviewApiModel
 
 }
 
 class HttpClientRateLimitApi(private val httpClientProvider: HttpClientProvider) : RateLimitApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun rateLimitGet(accessToken: String?): RateMinusLimitMinusOverviewModel {
+    override suspend fun rateLimitGet(accessToken: String?): RateMinusLimitMinusOverviewApiModel {
         val path = "/rate_limit"
 
         return httpClient.request {
