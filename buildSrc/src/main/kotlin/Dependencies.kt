@@ -111,7 +111,11 @@ object Dependencies {
     }
 
     object Ktor {
+        const val clientCore = "io.ktor:ktor-client-core:${Versions.ktor}"
         const val clientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
+        const val clientJson = "io.ktor:ktor-client-json:${Versions.ktor}"
+        const val clientLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
+        const val clientSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
     }
 
     object Coil {
