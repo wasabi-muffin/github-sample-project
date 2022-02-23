@@ -4,7 +4,7 @@ import jp.co.yumemi.android.code_check.data.models.RepoSearchModel
 import jp.co.yumemi.android.code_check.domain.entities.GithubRepo
 
 object SearchMapper {
-    fun repoModelToEntity(model: RepoSearchModel): GithubRepo = GithubRepo(
+    fun modelToEntity(model: RepoSearchModel): GithubRepo = GithubRepo(
         name = model.name,
         ownerIconUrl = model.ownerIconUrl,
         language = model.language,

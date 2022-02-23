@@ -11,5 +11,5 @@ class SearchDataRepository(
     override suspend fun searchRepos(searchText: String): List<GithubRepo> =
         searchRemoteDataSource
             .searchRepos(searchText = searchText)
-            .map(SearchMapper::repoModelToEntity)
+            .map(SearchMapper::modelToEntity)
 }

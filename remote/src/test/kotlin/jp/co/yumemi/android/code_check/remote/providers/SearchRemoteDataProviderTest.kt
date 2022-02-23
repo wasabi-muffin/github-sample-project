@@ -134,7 +134,7 @@ class SearchRemoteDataProviderTest {
     @Test
     fun `test when api throws an error`() {
         coEvery {
-            searchRemoteDataSource.searchRepos(any(), any())
+            searchApi.searchRepos(any(), any())
         } throws testException
 
         coroutineTestRule.runBlockingTest {
