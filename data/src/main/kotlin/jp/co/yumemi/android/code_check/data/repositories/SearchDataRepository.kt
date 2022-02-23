@@ -1,6 +1,5 @@
 package jp.co.yumemi.android.code_check.data.repositories
 
-import android.util.Log
 import jp.co.yumemi.android.code_check.data.mappers.SearchMapper
 import jp.co.yumemi.android.code_check.data.sources.SearchLocalDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
