@@ -12,8 +12,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
+import androidx.room.Room
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
 import jp.co.yumemi.android.code_check.domain.entities.GithubRepo
+import jp.co.yumemi.android.code_check.local.core.AppDatabase
+import jp.co.yumemi.android.code_check.local.core.DefaultDatabaseProvider
 
 class OneFragment: Fragment(R.layout.fragment_one){
 
@@ -23,7 +26,10 @@ class OneFragment: Fragment(R.layout.fragment_one){
 
         val _binding= FragmentOneBinding.bind(view)
 
-        val _viewModel= OneViewModel()
+        // TODO: Use DI
+        val _viewModel= OneViewModel(
+            DefaultDatabaseProvider<AppDatabase>(requireContext()).provide(AppDatabase::class.java, "database")
+        )
 
         val _layoutManager= LinearLayoutManager(context!!)
         val _dividerItemDecoration=
