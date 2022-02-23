@@ -4,6 +4,7 @@ import org.gradle.kotlin.dsl.project
 
 enum class Modules(val path: String) {
     Test(":test-internal"),
+    Presentation(":presentation"),
     Domain(":domain"),
     Data(":data"),
     Remote(":remote"),
