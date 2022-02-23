@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 
 /**
- * Abstract class that implements a [Store] that provides unidirectional dataflow logic
+ * Default implementation of a [Store] that provides unidirectional dataflow logic
  */
 @FlowPreview
 @ExperimentalCoroutinesApi
