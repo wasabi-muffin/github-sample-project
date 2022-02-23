@@ -6,6 +6,7 @@ enum class Modules(val path: String) {
     Test(":test-internal"),
     Domain(":domain"),
     Data(":data"),
+    Remote(":remote"),
 }
 
 fun DependencyHandlerScope.project(module: Modules): Dependency? = "implementation"(project(module.path))
