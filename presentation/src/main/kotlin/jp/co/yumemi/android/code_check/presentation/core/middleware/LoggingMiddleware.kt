@@ -1,12 +1,12 @@
-package io.github.gmvalentino8.cyklone.middleware
+package jp.co.yumemi.android.code_check.presentation.core.middleware
 
-import io.github.gmvalentino8.cyklone.contract.Action
-import io.github.gmvalentino8.cyklone.contract.Contract
-import io.github.gmvalentino8.cyklone.contract.Event
-import io.github.gmvalentino8.cyklone.contract.Intent
-import io.github.gmvalentino8.cyklone.contract.Result
-import io.github.gmvalentino8.cyklone.contract.State
-import io.github.gmvalentino8.cyklone.contract.ViewState
+import jp.co.yumemi.android.code_check.presentation.core.contract.Action
+import jp.co.yumemi.android.code_check.presentation.core.contract.Contract
+import jp.co.yumemi.android.code_check.presentation.core.contract.Event
+import jp.co.yumemi.android.code_check.presentation.core.contract.Intent
+import jp.co.yumemi.android.code_check.presentation.core.contract.Result
+import jp.co.yumemi.android.code_check.presentation.core.contract.State
+import jp.co.yumemi.android.code_check.presentation.core.contract.ViewState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onEach
