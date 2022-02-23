@@ -1,6 +1,7 @@
 plugins {
     id(Dependencies.Plugin.androidLibrary)
     id(Dependencies.Plugin.kotlinAndroid)
+    id(Dependencies.Plugin.kotlinKapt)
     id(Dependencies.Plugin.serialization)
 }
 
@@ -11,6 +12,8 @@ dependencies {
     projectTest(Modules.Test)
 
     implementation(Dependencies.Kotlinx.serializationJson)
+    implementation(Dependencies.Kotlinx.datetime)
     implementation(Dependencies.Room.runtime)
-    annotationProcessor(Dependencies.Room.compiler)
+    implementation(Dependencies.Room.coroutines)
+    kapt(Dependencies.Room.compiler)
 }
