@@ -3,7 +3,7 @@ github.dismiss_out_of_range_messages
 # danger-jacoco
 # ref: https://github.com/Malinskiy/danger-jacoco
 # jacoco.minimum_class_coverage_percentage = 80
-jacoco.report("build/reports/kover/report.xml")
+jacoco.report("build/kover/kover-result.xml")
 
 if status_report[:warnings].empty?
   markdown("All tests passed.")

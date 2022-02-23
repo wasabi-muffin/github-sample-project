@@ -38,6 +38,10 @@ ktlint {
     }
 }
 
+tasks.withType(kotlinx.kover.tasks.KoverMergedXmlReportTask::class) {
+    xmlReportFile.set(file("build/kover/kover-result.xml"))
+}
+
 tasks.register("clean", Delete::class) {
     group = "cleanup"
     delete(rootProject.buildDir)
