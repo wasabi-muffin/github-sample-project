@@ -84,6 +84,7 @@ object Dependencies {
     }
 
     object Kotlinx {
+        const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
         const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}"
         const val serializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
         const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.datetime}"

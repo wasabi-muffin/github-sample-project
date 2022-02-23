@@ -10,5 +10,5 @@ setupAndroid()
 dependencies {
     projectTest(Modules.Test)
 
-    implementation(Dependencies.Kotlinx.coroutinesAndroid)
+    implementation(Dependencies.Kotlinx.coroutinesCore)
 }
