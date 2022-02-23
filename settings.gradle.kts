@@ -9,6 +9,7 @@ dependencyResolutionManagement {
 }
 
 include(":app")
+include(":presentation")
 include(":domain")
 include(":data")
 include(":remote")
