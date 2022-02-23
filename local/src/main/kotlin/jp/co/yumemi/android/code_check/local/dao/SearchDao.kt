@@ -12,5 +12,5 @@ interface SearchDao {
     suspend fun insertAll(vararg recentSearch: RecentSearchDbModel)
 
     @Query("SELECT * FROM recentsearchdbmodel")
-    suspend fun getAll(): Array<RecentSearchDbModel>
+    suspend fun getAll(): List<RecentSearchDbModel>
 }

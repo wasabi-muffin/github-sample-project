@@ -8,10 +8,10 @@ import jp.co.yumemi.android.code_check.local.models.RecentSearchDbModel
 import kotlinx.datetime.Clock
 
 class SearchLocalDataProvider(
-    private val searchDatabase: SearchDao
+    private val searchDao: SearchDao
 ) : SearchLocalDataSource {
     override suspend fun saveRecentSearch(searchText: String) {
-        searchDatabase.insertAll(
+        searchDao.insertAll(
             RecentSearchDbModel(
                 searchText = searchText,
                 timestamp = Clock.System.now().epochSeconds
@@ -19,8 +19,7 @@ class SearchLocalDataProvider(
         )
     }
 
-    override suspend fun getRecentSearches(): List<RecentSearchModel> = searchDatabase
+    override suspend fun getRecentSearches(): List<RecentSearchModel> = searchDao
         .getAll()
-        .toList()
         .map(RecentSearchMapper::dbToData)
 }
