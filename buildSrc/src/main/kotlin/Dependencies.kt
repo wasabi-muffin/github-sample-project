@@ -41,6 +41,9 @@ object Versions {
     // Ktor
     const val ktor = "1.6.4"
 
+    // Room
+    const val room = "2.4.1"
+
     // Coil
     const val coil = "1.3.2"
 
@@ -96,6 +99,11 @@ object Dependencies {
         const val lifecycleViewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleKtx}"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    }
+
+    object Room {
+        const val runtime = "androidx.room:room-runtime:${Versions.room}"
+        const val compiler = "androidx.room:room-compiler:${Versions.room}"
     }
 
     object Test {
