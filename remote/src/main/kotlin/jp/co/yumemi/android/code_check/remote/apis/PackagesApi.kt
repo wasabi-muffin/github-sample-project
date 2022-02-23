@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -86,108 +86,108 @@ interface PackagesApi {
     *
     * Returns all package versions for a package owned by the authenticated user.  To use this endpoint, you must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return kotlin.collections.List<PackageMinusVersionModel>
+    * @return kotlin.collections.List<PackageMinusVersionApiModel>
     */
-    suspend fun packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null, state: kotlin.String? = null): kotlin.collections.List<PackageMinusVersionModel>
+    suspend fun packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null, state: kotlin.String? = null): kotlin.collections.List<PackageMinusVersionApiModel>
 
     /**
     * Get all package versions for a package owned by an organization
     *
     * Returns all package versions for a package owned by an organization.  To use this endpoint, you must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return kotlin.collections.List<PackageMinusVersionModel>
+    * @return kotlin.collections.List<PackageMinusVersionApiModel>
     */
-    suspend fun packagesGetAllPackageVersionsForPackageOwnedByOrg(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null, state: kotlin.String? = null): kotlin.collections.List<PackageMinusVersionModel>
+    suspend fun packagesGetAllPackageVersionsForPackageOwnedByOrg(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null, state: kotlin.String? = null): kotlin.collections.List<PackageMinusVersionApiModel>
 
     /**
     * Get all package versions for a package owned by a user
     *
     * Returns all package versions for a public package owned by a specified user.  To use this endpoint, you must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return kotlin.collections.List<PackageMinusVersionModel>
+    * @return kotlin.collections.List<PackageMinusVersionApiModel>
     */
-    suspend fun packagesGetAllPackageVersionsForPackageOwnedByUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, username: kotlin.String): kotlin.collections.List<PackageMinusVersionModel>
+    suspend fun packagesGetAllPackageVersionsForPackageOwnedByUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, username: kotlin.String): kotlin.collections.List<PackageMinusVersionApiModel>
 
     /**
     * Get a package for the authenticated user
     *
     * Gets a specific package for a package owned by the authenticated user.  To use this endpoint, you must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return PackageModel
+    * @return PackageApiModel
     */
-    suspend fun packagesGetPackageForAuthenticatedUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String): PackageModel
+    suspend fun packagesGetPackageForAuthenticatedUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String): PackageApiModel
 
     /**
     * Get a package for an organization
     *
     * Gets a specific package in an organization.  To use this endpoint, you must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return PackageModel
+    * @return PackageApiModel
     */
-    suspend fun packagesGetPackageForOrganization(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String): PackageModel
+    suspend fun packagesGetPackageForOrganization(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String): PackageApiModel
 
     /**
     * Get a package for a user
     *
     * Gets a specific package metadata for a public package owned by a user.  To use this endpoint, you must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return PackageModel
+    * @return PackageApiModel
     */
-    suspend fun packagesGetPackageForUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, username: kotlin.String): PackageModel
+    suspend fun packagesGetPackageForUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, username: kotlin.String): PackageApiModel
 
     /**
     * Get a package version for the authenticated user
     *
     * Gets a specific package version for a package owned by the authenticated user.  To use this endpoint, you must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return PackageMinusVersionModel
+    * @return PackageMinusVersionApiModel
     */
-    suspend fun packagesGetPackageVersionForAuthenticatedUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, packageVersionId: kotlin.Int): PackageMinusVersionModel
+    suspend fun packagesGetPackageVersionForAuthenticatedUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, packageVersionId: kotlin.Int): PackageMinusVersionApiModel
 
     /**
     * Get a package version for an organization
     *
     * Gets a specific package version in an organization.  You must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return PackageMinusVersionModel
+    * @return PackageMinusVersionApiModel
     */
-    suspend fun packagesGetPackageVersionForOrganization(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String, packageVersionId: kotlin.Int): PackageMinusVersionModel
+    suspend fun packagesGetPackageVersionForOrganization(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String, packageVersionId: kotlin.Int): PackageMinusVersionApiModel
 
     /**
     * Get a package version for a user
     *
     * Gets a specific package version for a public package owned by a specified user.  At this time, to use this endpoint, you must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return PackageMinusVersionModel
+    * @return PackageMinusVersionApiModel
     */
-    suspend fun packagesGetPackageVersionForUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, packageVersionId: kotlin.Int, username: kotlin.String): PackageMinusVersionModel
+    suspend fun packagesGetPackageVersionForUser(accessToken: String? = null, packageType: kotlin.String, packageName: kotlin.String, packageVersionId: kotlin.Int, username: kotlin.String): PackageMinusVersionApiModel
 
     /**
     * List packages for the authenticated user&#39;s namespace
     *
     * Lists packages owned by the authenticated user within the user&#39;s namespace.  To use this endpoint, you must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return kotlin.collections.List<PackageModel>
+    * @return kotlin.collections.List<PackageApiModel>
     */
-    suspend fun packagesListPackagesForAuthenticatedUser(accessToken: String? = null, packageType: kotlin.String? = null, visibility: kotlin.String? = null): kotlin.collections.List<PackageModel>
+    suspend fun packagesListPackagesForAuthenticatedUser(accessToken: String? = null, packageType: kotlin.String? = null, visibility: kotlin.String? = null): kotlin.collections.List<PackageApiModel>
 
     /**
     * List packages for an organization
     *
     * Lists all packages in an organization readable by the user.  To use this endpoint, you must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return kotlin.collections.List<PackageModel>
+    * @return kotlin.collections.List<PackageApiModel>
     */
-    suspend fun packagesListPackagesForOrganization(accessToken: String? = null, org: kotlin.String, packageType: kotlin.String? = null, visibility: kotlin.String? = null): kotlin.collections.List<PackageModel>
+    suspend fun packagesListPackagesForOrganization(accessToken: String? = null, org: kotlin.String, packageType: kotlin.String? = null, visibility: kotlin.String? = null): kotlin.collections.List<PackageApiModel>
 
     /**
     * List packages for a user
     *
     * Lists all packages in a user&#39;s namespace for which the requesting user has access.  To use this endpoint, you must authenticate using an access token with the &#x60;packages:read&#x60; scope. If &#x60;package_type&#x60; is not &#x60;container&#x60;, your token must also include the &#x60;repo&#x60; scope.
     *
-    * @return kotlin.collections.List<PackageModel>
+    * @return kotlin.collections.List<PackageApiModel>
     */
-    suspend fun packagesListPackagesForUser(accessToken: String? = null, username: kotlin.String, packageType: kotlin.String? = null, visibility: kotlin.String? = null): kotlin.collections.List<PackageModel>
+    suspend fun packagesListPackagesForUser(accessToken: String? = null, username: kotlin.String, packageType: kotlin.String? = null, visibility: kotlin.String? = null): kotlin.collections.List<PackageApiModel>
 
     /**
     * Restore a package for the authenticated user
@@ -302,7 +302,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?, state: kotlin.String?): kotlin.collections.List<PackageMinusVersionModel> {
+    override suspend fun packagesGetAllPackageVersionsForPackageOwnedByAuthenticatedUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?, state: kotlin.String?): kotlin.collections.List<PackageMinusVersionApiModel> {
         val path = "/user/packages/{package_type}/{package_name}/versions".replace("{"+"package_type"+"}", "$packageType").replace("{"+"package_name"+"}", "$packageName")
 
         return httpClient.request {
@@ -314,7 +314,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesGetAllPackageVersionsForPackageOwnedByOrg(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?, state: kotlin.String?): kotlin.collections.List<PackageMinusVersionModel> {
+    override suspend fun packagesGetAllPackageVersionsForPackageOwnedByOrg(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?, state: kotlin.String?): kotlin.collections.List<PackageMinusVersionApiModel> {
         val path = "/orgs/{org}/packages/{package_type}/{package_name}/versions".replace("{"+"package_type"+"}", "$packageType").replace("{"+"package_name"+"}", "$packageName").replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -326,7 +326,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesGetAllPackageVersionsForPackageOwnedByUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, username: kotlin.String): kotlin.collections.List<PackageMinusVersionModel> {
+    override suspend fun packagesGetAllPackageVersionsForPackageOwnedByUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, username: kotlin.String): kotlin.collections.List<PackageMinusVersionApiModel> {
         val path = "/users/{username}/packages/{package_type}/{package_name}/versions".replace("{"+"package_type"+"}", "$packageType").replace("{"+"package_name"+"}", "$packageName").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -335,7 +335,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesGetPackageForAuthenticatedUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String): PackageModel {
+    override suspend fun packagesGetPackageForAuthenticatedUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String): PackageApiModel {
         val path = "/user/packages/{package_type}/{package_name}".replace("{"+"package_type"+"}", "$packageType").replace("{"+"package_name"+"}", "$packageName")
 
         return httpClient.request {
@@ -344,7 +344,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesGetPackageForOrganization(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String): PackageModel {
+    override suspend fun packagesGetPackageForOrganization(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String): PackageApiModel {
         val path = "/orgs/{org}/packages/{package_type}/{package_name}".replace("{"+"package_type"+"}", "$packageType").replace("{"+"package_name"+"}", "$packageName").replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -353,7 +353,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesGetPackageForUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, username: kotlin.String): PackageModel {
+    override suspend fun packagesGetPackageForUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, username: kotlin.String): PackageApiModel {
         val path = "/users/{username}/packages/{package_type}/{package_name}".replace("{"+"package_type"+"}", "$packageType").replace("{"+"package_name"+"}", "$packageName").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -362,7 +362,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesGetPackageVersionForAuthenticatedUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, packageVersionId: kotlin.Int): PackageMinusVersionModel {
+    override suspend fun packagesGetPackageVersionForAuthenticatedUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, packageVersionId: kotlin.Int): PackageMinusVersionApiModel {
         val path = "/user/packages/{package_type}/{package_name}/versions/{package_version_id}".replace("{"+"package_type"+"}", "$packageType").replace("{"+"package_name"+"}", "$packageName").replace("{"+"package_version_id"+"}", "$packageVersionId")
 
         return httpClient.request {
@@ -371,7 +371,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesGetPackageVersionForOrganization(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String, packageVersionId: kotlin.Int): PackageMinusVersionModel {
+    override suspend fun packagesGetPackageVersionForOrganization(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, org: kotlin.String, packageVersionId: kotlin.Int): PackageMinusVersionApiModel {
         val path = "/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}".replace("{"+"package_type"+"}", "$packageType").replace("{"+"package_name"+"}", "$packageName").replace("{"+"org"+"}", "$org").replace("{"+"package_version_id"+"}", "$packageVersionId")
 
         return httpClient.request {
@@ -380,7 +380,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesGetPackageVersionForUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, packageVersionId: kotlin.Int, username: kotlin.String): PackageMinusVersionModel {
+    override suspend fun packagesGetPackageVersionForUser(accessToken: String?, packageType: kotlin.String, packageName: kotlin.String, packageVersionId: kotlin.Int, username: kotlin.String): PackageMinusVersionApiModel {
         val path = "/users/{username}/packages/{package_type}/{package_name}/versions/{package_version_id}".replace("{"+"package_type"+"}", "$packageType").replace("{"+"package_name"+"}", "$packageName").replace("{"+"package_version_id"+"}", "$packageVersionId").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -389,7 +389,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesListPackagesForAuthenticatedUser(accessToken: String?, packageType: kotlin.String?, visibility: kotlin.String?): kotlin.collections.List<PackageModel> {
+    override suspend fun packagesListPackagesForAuthenticatedUser(accessToken: String?, packageType: kotlin.String?, visibility: kotlin.String?): kotlin.collections.List<PackageApiModel> {
         val path = "/user/packages"
 
         return httpClient.request {
@@ -400,7 +400,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesListPackagesForOrganization(accessToken: String?, org: kotlin.String, packageType: kotlin.String?, visibility: kotlin.String?): kotlin.collections.List<PackageModel> {
+    override suspend fun packagesListPackagesForOrganization(accessToken: String?, org: kotlin.String, packageType: kotlin.String?, visibility: kotlin.String?): kotlin.collections.List<PackageApiModel> {
         val path = "/orgs/{org}/packages".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -411,7 +411,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun packagesListPackagesForUser(accessToken: String?, username: kotlin.String, packageType: kotlin.String?, visibility: kotlin.String?): kotlin.collections.List<PackageModel> {
+    override suspend fun packagesListPackagesForUser(accessToken: String?, username: kotlin.String, packageType: kotlin.String?, visibility: kotlin.String?): kotlin.collections.List<PackageApiModel> {
         val path = "/users/{username}/packages".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {

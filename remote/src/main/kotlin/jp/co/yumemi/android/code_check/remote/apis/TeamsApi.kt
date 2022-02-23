@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -42,9 +42,9 @@ interface TeamsApi {
     * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  Adds an organization member to a team. An authenticated organization owner or team maintainer can add organization members to a team.  **Note:** When you have team synchronization set up for a team with your organization&#39;s identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team&#39;s membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see \&quot;[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/).\&quot;  An organization owner can add someone who is not part of the team&#39;s organization to a team. When an organization owner adds someone to a team who is not an organization member, this endpoint will send an invitation to the person via email. This newly-created membership will be in the \&quot;pending\&quot; state until the person accepts the invitation, at which point the membership will transition to the \&quot;active\&quot; state and the user will be added as a member of the team.  If the user is already a member of the team, this endpoint will update the role of the team member&#39;s role. To update the membership of a team member, the authenticated user must be an organization owner or a team maintainer.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;PUT /organizations/{org_id}/team/{team_id}/memberships/{username}&#x60;.
     *
     * @param request  (optional)
-    * @return TeamMinusMembershipModel
+    * @return TeamMinusMembershipApiModel
     */
-    suspend fun teamsAddOrUpdateMembershipForUserInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, username: kotlin.String, request: InlineObject46Model): TeamMinusMembershipModel
+    suspend fun teamsAddOrUpdateMembershipForUserInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, username: kotlin.String, request: InlineObject46ApiModel): TeamMinusMembershipApiModel
 
     /**
     * Add or update team membership for a user (Legacy)
@@ -52,9 +52,9 @@ interface TeamsApi {
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team membership for a user](https://docs.github.com/rest/reference/teams#add-or-update-team-membership-for-a-user) endpoint.  Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  If the user is already a member of the team&#39;s organization, this endpoint will add the user to the team. To add a membership between an organization member and a team, the authenticated user must be an organization owner or a team maintainer.  **Note:** When you have team synchronization set up for a team with your organization&#39;s identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team&#39;s membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see \&quot;[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/).\&quot;  If the user is unaffiliated with the team&#39;s organization, this endpoint will send an invitation to the user via email. This newly-created membership will be in the \&quot;pending\&quot; state until the user accepts the invitation, at which point the membership will transition to the \&quot;active\&quot; state and the user will be added as a member of the team. To add a membership between an unaffiliated user and a team, the authenticated user must be an organization owner.  If the user is already a member of the team, this endpoint will update the role of the team member&#39;s role. To update the membership of a team member, the authenticated user must be an organization owner or a team maintainer.
     *
     * @param request  (optional)
-    * @return TeamMinusMembershipModel
+    * @return TeamMinusMembershipApiModel
     */
-    suspend fun teamsAddOrUpdateMembershipForUserLegacy(accessToken: String? = null, teamId: kotlin.Int, username: kotlin.String, request: InlineObject158Model): TeamMinusMembershipModel
+    suspend fun teamsAddOrUpdateMembershipForUserLegacy(accessToken: String? = null, teamId: kotlin.Int, username: kotlin.String, request: InlineObject158ApiModel): TeamMinusMembershipApiModel
 
     /**
     * Add or update team project permissions
@@ -64,7 +64,7 @@ interface TeamsApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun teamsAddOrUpdateProjectPermissionsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, projectId: kotlin.Int, request: InlineObject47Model)
+    suspend fun teamsAddOrUpdateProjectPermissionsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, projectId: kotlin.Int, request: InlineObject47ApiModel)
 
     /**
     * Add or update team project permissions (Legacy)
@@ -74,7 +74,7 @@ interface TeamsApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun teamsAddOrUpdateProjectPermissionsLegacy(accessToken: String? = null, teamId: kotlin.Int, projectId: kotlin.Int, request: InlineObject159Model)
+    suspend fun teamsAddOrUpdateProjectPermissionsLegacy(accessToken: String? = null, teamId: kotlin.Int, projectId: kotlin.Int, request: InlineObject159ApiModel)
 
     /**
     * Add or update team repository permissions
@@ -84,7 +84,7 @@ interface TeamsApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun teamsAddOrUpdateRepoPermissionsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String, request: InlineObject48Model)
+    suspend fun teamsAddOrUpdateRepoPermissionsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String, request: InlineObject48ApiModel)
 
     /**
     * Add or update team repository permissions (Legacy)
@@ -94,43 +94,43 @@ interface TeamsApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun teamsAddOrUpdateRepoPermissionsLegacy(accessToken: String? = null, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String, request: InlineObject160Model)
+    suspend fun teamsAddOrUpdateRepoPermissionsLegacy(accessToken: String? = null, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String, request: InlineObject160ApiModel)
 
     /**
     * Check team permissions for a project
     *
     * Checks whether a team has &#x60;read&#x60;, &#x60;write&#x60;, or &#x60;admin&#x60; permissions for an organization project. The response includes projects inherited from a parent team.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/projects/{project_id}&#x60;.
     *
-    * @return TeamMinusProjectModel
+    * @return TeamMinusProjectApiModel
     */
-    suspend fun teamsCheckPermissionsForProjectInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, projectId: kotlin.Int): TeamMinusProjectModel
+    suspend fun teamsCheckPermissionsForProjectInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, projectId: kotlin.Int): TeamMinusProjectApiModel
 
     /**
     * Check team permissions for a project (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Check team permissions for a project](https://docs.github.com/rest/reference/teams#check-team-permissions-for-a-project) endpoint.  Checks whether a team has &#x60;read&#x60;, &#x60;write&#x60;, or &#x60;admin&#x60; permissions for an organization project. The response includes projects inherited from a parent team.
     *
-    * @return TeamMinusProjectModel
+    * @return TeamMinusProjectApiModel
     */
-    suspend fun teamsCheckPermissionsForProjectLegacy(accessToken: String? = null, teamId: kotlin.Int, projectId: kotlin.Int): TeamMinusProjectModel
+    suspend fun teamsCheckPermissionsForProjectLegacy(accessToken: String? = null, teamId: kotlin.Int, projectId: kotlin.Int): TeamMinusProjectApiModel
 
     /**
     * Check team permissions for a repository
     *
     * Checks whether a team has &#x60;admin&#x60;, &#x60;push&#x60;, &#x60;maintain&#x60;, &#x60;triage&#x60;, or &#x60;pull&#x60; permission for a repository. Repositories inherited through a parent team will also be checked.  You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the &#x60;application/vnd.github.v3.repository+json&#x60; accept header.  If a team doesn&#39;t have permission for the repository, you will receive a &#x60;404 Not Found&#x60; response status.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}&#x60;.
     *
-    * @return TeamMinusRepositoryModel
+    * @return TeamMinusRepositoryApiModel
     */
-    suspend fun teamsCheckPermissionsForRepoInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryModel
+    suspend fun teamsCheckPermissionsForRepoInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryApiModel
 
     /**
     * Check team permissions for a repository (Legacy)
     *
     * **Note**: Repositories inherited through a parent team will also be checked.  **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Check team permissions for a repository](https://docs.github.com/rest/reference/teams#check-team-permissions-for-a-repository) endpoint.  You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the &#x60;Accept&#x60; header:
     *
-    * @return TeamMinusRepositoryModel
+    * @return TeamMinusRepositoryApiModel
     */
-    suspend fun teamsCheckPermissionsForRepoLegacy(accessToken: String? = null, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryModel
+    suspend fun teamsCheckPermissionsForRepoLegacy(accessToken: String? = null, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryApiModel
 
     /**
     * Create a team
@@ -138,9 +138,9 @@ interface TeamsApi {
     * To create a team, the authenticated user must be a member or owner of &#x60;{org}&#x60;. By default, organization members can create teams. Organization owners can limit team creation to organization owners. For more information, see \&quot;[Setting team creation permissions](https://docs.github.com/en/articles/setting-team-creation-permissions-in-your-organization).\&quot;  When you create a new team, you automatically become a team maintainer without explicitly adding yourself to the optional array of &#x60;maintainers&#x60;. For more information, see \&quot;[About teams](https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-teams)\&quot;.
     *
     * @param request 
-    * @return TeamMinusFullModel
+    * @return TeamMinusFullApiModel
     */
-    suspend fun teamsCreate(accessToken: String? = null, org: kotlin.String, request: InlineObject37Model): TeamMinusFullModel
+    suspend fun teamsCreate(accessToken: String? = null, org: kotlin.String, request: InlineObject37ApiModel): TeamMinusFullApiModel
 
     /**
     * Create a discussion comment
@@ -148,9 +148,9 @@ interface TeamsApi {
     * Creates a new comment on a team discussion. OAuth access tokens require the &#x60;write:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).  This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See \&quot;[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)\&quot; and \&quot;[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)\&quot; for details.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;POST /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments&#x60;.
     *
     * @param request 
-    * @return TeamMinusDiscussionMinusCommentModel
+    * @return TeamMinusDiscussionMinusCommentApiModel
     */
-    suspend fun teamsCreateDiscussionCommentInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, request: InlineObject41Model): TeamMinusDiscussionMinusCommentModel
+    suspend fun teamsCreateDiscussionCommentInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, request: InlineObject41ApiModel): TeamMinusDiscussionMinusCommentApiModel
 
     /**
     * Create a discussion comment (Legacy)
@@ -158,9 +158,9 @@ interface TeamsApi {
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Create a discussion comment](https://docs.github.com/rest/reference/teams#create-a-discussion-comment) endpoint.  Creates a new comment on a team discussion. OAuth access tokens require the &#x60;write:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).  This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See \&quot;[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)\&quot; and \&quot;[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)\&quot; for details.
     *
     * @param request 
-    * @return TeamMinusDiscussionMinusCommentModel
+    * @return TeamMinusDiscussionMinusCommentApiModel
     */
-    suspend fun teamsCreateDiscussionCommentLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int, request: InlineObject154Model): TeamMinusDiscussionMinusCommentModel
+    suspend fun teamsCreateDiscussionCommentLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int, request: InlineObject154ApiModel): TeamMinusDiscussionMinusCommentApiModel
 
     /**
     * Create a discussion
@@ -168,9 +168,9 @@ interface TeamsApi {
     * Creates a new discussion post on a team&#39;s page. OAuth access tokens require the &#x60;write:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).  This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See \&quot;[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)\&quot; and \&quot;[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)\&quot; for details.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;POST /organizations/{org_id}/team/{team_id}/discussions&#x60;.
     *
     * @param request 
-    * @return TeamMinusDiscussionModel
+    * @return TeamMinusDiscussionApiModel
     */
-    suspend fun teamsCreateDiscussionInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject39Model): TeamMinusDiscussionModel
+    suspend fun teamsCreateDiscussionInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject39ApiModel): TeamMinusDiscussionApiModel
 
     /**
     * Create a discussion (Legacy)
@@ -178,9 +178,9 @@ interface TeamsApi {
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [&#x60;Create a discussion&#x60;](https://docs.github.com/rest/reference/teams#create-a-discussion) endpoint.  Creates a new discussion post on a team&#39;s page. OAuth access tokens require the &#x60;write:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).  This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See \&quot;[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)\&quot; and \&quot;[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)\&quot; for details.
     *
     * @param request 
-    * @return TeamMinusDiscussionModel
+    * @return TeamMinusDiscussionApiModel
     */
-    suspend fun teamsCreateDiscussionLegacy(accessToken: String? = null, teamId: kotlin.Int, request: InlineObject152Model): TeamMinusDiscussionModel
+    suspend fun teamsCreateDiscussionLegacy(accessToken: String? = null, teamId: kotlin.Int, request: InlineObject152ApiModel): TeamMinusDiscussionApiModel
 
     /**
     * Create or update IdP group connections
@@ -188,9 +188,9 @@ interface TeamsApi {
     * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  Creates, updates, or removes a connection between a team and an IdP group. When adding groups to a team, you must include all new and existing groups to avoid replacing existing groups with the new ones. Specifying an empty &#x60;groups&#x60; array will remove all connections for a team.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;PATCH /organizations/{org_id}/team/{team_id}/team-sync/group-mappings&#x60;.
     *
     * @param request 
-    * @return GroupMinusMappingModel
+    * @return GroupMinusMappingApiModel
     */
-    suspend fun teamsCreateOrUpdateIdpGroupConnectionsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject49Model): GroupMinusMappingModel
+    suspend fun teamsCreateOrUpdateIdpGroupConnectionsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject49ApiModel): GroupMinusMappingApiModel
 
     /**
     * Create or update IdP group connections (Legacy)
@@ -198,9 +198,9 @@ interface TeamsApi {
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [&#x60;Create or update IdP group connections&#x60;](https://docs.github.com/rest/reference/teams#create-or-update-idp-group-connections) endpoint.  Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  Creates, updates, or removes a connection between a team and an IdP group. When adding groups to a team, you must include all new and existing groups to avoid replacing existing groups with the new ones. Specifying an empty &#x60;groups&#x60; array will remove all connections for a team.
     *
     * @param request 
-    * @return GroupMinusMappingModel
+    * @return GroupMinusMappingApiModel
     */
-    suspend fun teamsCreateOrUpdateIdpGroupConnectionsLegacy(accessToken: String? = null, teamId: kotlin.Int, request: InlineObject161Model): GroupMinusMappingModel
+    suspend fun teamsCreateOrUpdateIdpGroupConnectionsLegacy(accessToken: String? = null, teamId: kotlin.Int, request: InlineObject161ApiModel): GroupMinusMappingApiModel
 
     /**
     * Delete a discussion comment
@@ -261,63 +261,63 @@ interface TeamsApi {
     *
     * Displays information about the specific group&#39;s usage.  Provides a list of the group&#39;s external members as well as a list of teams that this group is connected to.  You can manage team membership with your identity provider using Enterprise Managed Users for GitHub Enterprise Cloud. For more information, see \&quot;[GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products)\&quot; in the GitHub Help documentation.
     *
-    * @return ExternalMinusGroupModel
+    * @return ExternalMinusGroupApiModel
     */
-    suspend fun teamsExternalIdpGroupInfoForOrg(accessToken: String? = null, org: kotlin.String, groupId: kotlin.Int): ExternalMinusGroupModel
+    suspend fun teamsExternalIdpGroupInfoForOrg(accessToken: String? = null, org: kotlin.String, groupId: kotlin.Int): ExternalMinusGroupApiModel
 
     /**
     * Get a team by name
     *
     * Gets a team using the team&#39;s &#x60;slug&#x60;. GitHub generates the &#x60;slug&#x60; from the team &#x60;name&#x60;.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}&#x60;.
     *
-    * @return TeamMinusFullModel
+    * @return TeamMinusFullApiModel
     */
-    suspend fun teamsGetByName(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String): TeamMinusFullModel
+    suspend fun teamsGetByName(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String): TeamMinusFullApiModel
 
     /**
     * Get a discussion comment
     *
     * Get a specific comment on a team discussion. OAuth access tokens require the &#x60;read:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}&#x60;.
     *
-    * @return TeamMinusDiscussionMinusCommentModel
+    * @return TeamMinusDiscussionMinusCommentApiModel
     */
-    suspend fun teamsGetDiscussionCommentInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, commentNumber: kotlin.Int): TeamMinusDiscussionMinusCommentModel
+    suspend fun teamsGetDiscussionCommentInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, commentNumber: kotlin.Int): TeamMinusDiscussionMinusCommentApiModel
 
     /**
     * Get a discussion comment (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get a discussion comment](https://docs.github.com/rest/reference/teams#get-a-discussion-comment) endpoint.  Get a specific comment on a team discussion. OAuth access tokens require the &#x60;read:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
-    * @return TeamMinusDiscussionMinusCommentModel
+    * @return TeamMinusDiscussionMinusCommentApiModel
     */
-    suspend fun teamsGetDiscussionCommentLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int, commentNumber: kotlin.Int): TeamMinusDiscussionMinusCommentModel
+    suspend fun teamsGetDiscussionCommentLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int, commentNumber: kotlin.Int): TeamMinusDiscussionMinusCommentApiModel
 
     /**
     * Get a discussion
     *
     * Get a specific discussion on a team&#39;s page. OAuth access tokens require the &#x60;read:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}&#x60;.
     *
-    * @return TeamMinusDiscussionModel
+    * @return TeamMinusDiscussionApiModel
     */
-    suspend fun teamsGetDiscussionInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int): TeamMinusDiscussionModel
+    suspend fun teamsGetDiscussionInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int): TeamMinusDiscussionApiModel
 
     /**
     * Get a discussion (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get a discussion](https://docs.github.com/rest/reference/teams#get-a-discussion) endpoint.  Get a specific discussion on a team&#39;s page. OAuth access tokens require the &#x60;read:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
-    * @return TeamMinusDiscussionModel
+    * @return TeamMinusDiscussionApiModel
     */
-    suspend fun teamsGetDiscussionLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int): TeamMinusDiscussionModel
+    suspend fun teamsGetDiscussionLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int): TeamMinusDiscussionApiModel
 
     /**
     * Get a team (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the [Get a team by name](https://docs.github.com/rest/reference/teams#get-a-team-by-name) endpoint.
     *
-    * @return TeamMinusFullModel
+    * @return TeamMinusFullApiModel
     */
-    suspend fun teamsGetLegacy(accessToken: String? = null, teamId: kotlin.Int): TeamMinusFullModel
+    suspend fun teamsGetLegacy(accessToken: String? = null, teamId: kotlin.Int): TeamMinusFullApiModel
 
     /**
     * Get team member (Legacy)
@@ -333,18 +333,18 @@ interface TeamsApi {
     *
     * Team members will include the members of child teams.  To get a user&#39;s membership with a team, the team must be visible to the authenticated user.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/memberships/{username}&#x60;.  **Note:** The response contains the &#x60;state&#x60; of the membership and the member&#39;s &#x60;role&#x60;.  The &#x60;role&#x60; for organization owners is set to &#x60;maintainer&#x60;. For more information about &#x60;maintainer&#x60; roles, see see [Create a team](https://docs.github.com/rest/reference/teams#create-a-team).
     *
-    * @return TeamMinusMembershipModel
+    * @return TeamMinusMembershipApiModel
     */
-    suspend fun teamsGetMembershipForUserInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, username: kotlin.String): TeamMinusMembershipModel
+    suspend fun teamsGetMembershipForUserInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, username: kotlin.String): TeamMinusMembershipApiModel
 
     /**
     * Get team membership for a user (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get team membership for a user](https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user) endpoint.  Team members will include the members of child teams.  To get a user&#39;s membership with a team, the team must be visible to the authenticated user.  **Note:** The response contains the &#x60;state&#x60; of the membership and the member&#39;s &#x60;role&#x60;.  The &#x60;role&#x60; for organization owners is set to &#x60;maintainer&#x60;. For more information about &#x60;maintainer&#x60; roles, see [Create a team](https://docs.github.com/rest/reference/teams#create-a-team).
     *
-    * @return TeamMinusMembershipModel
+    * @return TeamMinusMembershipApiModel
     */
-    suspend fun teamsGetMembershipForUserLegacy(accessToken: String? = null, teamId: kotlin.Int, username: kotlin.String): TeamMinusMembershipModel
+    suspend fun teamsGetMembershipForUserLegacy(accessToken: String? = null, teamId: kotlin.Int, username: kotlin.String): TeamMinusMembershipApiModel
 
     /**
     * Update the connection between an external group and a team
@@ -352,198 +352,198 @@ interface TeamsApi {
     * Creates a connection between a team and an external group.  Only one external group can be linked to a team.  You can manage team membership with your identity provider using Enterprise Managed Users for GitHub Enterprise Cloud. For more information, see \&quot;[GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products)\&quot; in the GitHub Help documentation.
     *
     * @param request 
-    * @return ExternalMinusGroupModel
+    * @return ExternalMinusGroupApiModel
     */
-    suspend fun teamsLinkExternalIdpGroupToTeamForOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject45Model): ExternalMinusGroupModel
+    suspend fun teamsLinkExternalIdpGroupToTeamForOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject45ApiModel): ExternalMinusGroupApiModel
 
     /**
     * List teams
     *
     * Lists all teams in an organization that are visible to the authenticated user.
     *
-    * @return kotlin.collections.List<TeamModel>
+    * @return kotlin.collections.List<TeamApiModel>
     */
-    suspend fun teamsList(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamModel>
+    suspend fun teamsList(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamApiModel>
 
     /**
     * List child teams
     *
     * Lists the child teams of the team specified by &#x60;{team_slug}&#x60;.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/teams&#x60;.
     *
-    * @return kotlin.collections.List<TeamModel>
+    * @return kotlin.collections.List<TeamApiModel>
     */
-    suspend fun teamsListChildInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamModel>
+    suspend fun teamsListChildInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamApiModel>
 
     /**
     * List child teams (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [&#x60;List child teams&#x60;](https://docs.github.com/rest/reference/teams#list-child-teams) endpoint.
     *
-    * @return kotlin.collections.List<TeamModel>
+    * @return kotlin.collections.List<TeamApiModel>
     */
-    suspend fun teamsListChildLegacy(accessToken: String? = null, teamId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamModel>
+    suspend fun teamsListChildLegacy(accessToken: String? = null, teamId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamApiModel>
 
     /**
     * List discussion comments
     *
     * List all comments on a team discussion. OAuth access tokens require the &#x60;read:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments&#x60;.
     *
-    * @return kotlin.collections.List<TeamMinusDiscussionMinusCommentModel>
+    * @return kotlin.collections.List<TeamMinusDiscussionMinusCommentApiModel>
     */
-    suspend fun teamsListDiscussionCommentsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusDiscussionMinusCommentModel>
+    suspend fun teamsListDiscussionCommentsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusDiscussionMinusCommentApiModel>
 
     /**
     * List discussion comments (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List discussion comments](https://docs.github.com/rest/reference/teams#list-discussion-comments) endpoint.  List all comments on a team discussion. OAuth access tokens require the &#x60;read:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
-    * @return kotlin.collections.List<TeamMinusDiscussionMinusCommentModel>
+    * @return kotlin.collections.List<TeamMinusDiscussionMinusCommentApiModel>
     */
-    suspend fun teamsListDiscussionCommentsLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusDiscussionMinusCommentModel>
+    suspend fun teamsListDiscussionCommentsLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusDiscussionMinusCommentApiModel>
 
     /**
     * List discussions
     *
     * List all discussions on a team&#39;s page. OAuth access tokens require the &#x60;read:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/discussions&#x60;.
     *
-    * @return kotlin.collections.List<TeamMinusDiscussionModel>
+    * @return kotlin.collections.List<TeamMinusDiscussionApiModel>
     */
-    suspend fun teamsListDiscussionsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, pinned: kotlin.String? = null): kotlin.collections.List<TeamMinusDiscussionModel>
+    suspend fun teamsListDiscussionsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, pinned: kotlin.String? = null): kotlin.collections.List<TeamMinusDiscussionApiModel>
 
     /**
     * List discussions (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [&#x60;List discussions&#x60;](https://docs.github.com/rest/reference/teams#list-discussions) endpoint.  List all discussions on a team&#39;s page. OAuth access tokens require the &#x60;read:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
-    * @return kotlin.collections.List<TeamMinusDiscussionModel>
+    * @return kotlin.collections.List<TeamMinusDiscussionApiModel>
     */
-    suspend fun teamsListDiscussionsLegacy(accessToken: String? = null, teamId: kotlin.Int, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusDiscussionModel>
+    suspend fun teamsListDiscussionsLegacy(accessToken: String? = null, teamId: kotlin.Int, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusDiscussionApiModel>
 
     /**
     * List external groups in an organization
     *
     * Lists external groups available in an organization. You can query the groups using the &#x60;display_name&#x60; parameter, only groups with a &#x60;group_name&#x60; containing the text provided in the &#x60;display_name&#x60; parameter will be returned.  You can also limit your page results using the &#x60;per_page&#x60; parameter. GitHub generates a url-encoded &#x60;page&#x60; token using a cursor value for where the next page begins. For more information on cursor pagination, see \&quot;[Offset and Cursor Pagination explained](https://dev.to/jackmarchant/offset-and-cursor-pagination-explained-b89).\&quot;  You can manage team membership with your identity provider using Enterprise Managed Users for GitHub Enterprise Cloud. For more information, see \&quot;[GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products)\&quot; in the GitHub Help documentation.
     *
-    * @return ExternalMinusGroupsModel
+    * @return ExternalMinusGroupsApiModel
     */
-    suspend fun teamsListExternalIdpGroupsForOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null, displayName: kotlin.String? = null): ExternalMinusGroupsModel
+    suspend fun teamsListExternalIdpGroupsForOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null, displayName: kotlin.String? = null): ExternalMinusGroupsApiModel
 
     /**
     * List teams for the authenticated user
     *
     * List all of the teams across all of the organizations to which the authenticated user belongs. This method requires &#x60;user&#x60;, &#x60;repo&#x60;, or &#x60;read:org&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/) when authenticating via [OAuth](https://docs.github.com/apps/building-oauth-apps/).
     *
-    * @return kotlin.collections.List<TeamMinusFullModel>
+    * @return kotlin.collections.List<TeamMinusFullApiModel>
     */
-    suspend fun teamsListForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusFullModel>
+    suspend fun teamsListForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusFullApiModel>
 
     /**
     * List IdP groups for a team (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [&#x60;List IdP groups for a team&#x60;](https://docs.github.com/rest/reference/teams#list-idp-groups-for-a-team) endpoint.  Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  List IdP groups connected to a team on GitHub.
     *
-    * @return GroupMinusMappingModel
+    * @return GroupMinusMappingApiModel
     */
-    suspend fun teamsListIdpGroupsForLegacy(accessToken: String? = null, teamId: kotlin.Int): GroupMinusMappingModel
+    suspend fun teamsListIdpGroupsForLegacy(accessToken: String? = null, teamId: kotlin.Int): GroupMinusMappingApiModel
 
     /**
     * List IdP groups for an organization
     *
     * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  List IdP groups available in an organization. You can limit your page results using the &#x60;per_page&#x60; parameter. GitHub generates a url-encoded &#x60;page&#x60; token using a cursor value for where the next page begins. For more information on cursor pagination, see \&quot;[Offset and Cursor Pagination explained](https://dev.to/jackmarchant/offset-and-cursor-pagination-explained-b89).\&quot;
     *
-    * @return GroupMinusMappingModel
+    * @return GroupMinusMappingApiModel
     */
-    suspend fun teamsListIdpGroupsForOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.String? = null): GroupMinusMappingModel
+    suspend fun teamsListIdpGroupsForOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.String? = null): GroupMinusMappingApiModel
 
     /**
     * List IdP groups for a team
     *
     * Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.  List IdP groups connected to a team on GitHub.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/team-sync/group-mappings&#x60;.
     *
-    * @return GroupMinusMappingModel
+    * @return GroupMinusMappingApiModel
     */
-    suspend fun teamsListIdpGroupsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String): GroupMinusMappingModel
+    suspend fun teamsListIdpGroupsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String): GroupMinusMappingApiModel
 
     /**
     * List a connection between an external group and a team
     *
     * Lists a connection between a team and an external group.  You can manage team membership with your identity provider using Enterprise Managed Users for GitHub Enterprise Cloud. For more information, see \&quot;[GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products)\&quot; in the GitHub Help documentation.
     *
-    * @return ExternalMinusGroupsModel
+    * @return ExternalMinusGroupsApiModel
     */
-    suspend fun teamsListLinkedExternalIdpGroupsToTeamForOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String): ExternalMinusGroupsModel
+    suspend fun teamsListLinkedExternalIdpGroupsToTeamForOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String): ExternalMinusGroupsApiModel
 
     /**
     * List team members
     *
     * Team members will include the members of child teams.  To list members in a team, the team must be visible to the authenticated user.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun teamsListMembersInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, role: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun teamsListMembersInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, role: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List team members (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [&#x60;List team members&#x60;](https://docs.github.com/rest/reference/teams#list-team-members) endpoint.  Team members will include the members of child teams.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun teamsListMembersLegacy(accessToken: String? = null, teamId: kotlin.Int, role: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun teamsListMembersLegacy(accessToken: String? = null, teamId: kotlin.Int, role: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List pending team invitations
     *
     * The return hash contains a &#x60;role&#x60; field which refers to the Organization Invitation role and will be one of the following values: &#x60;direct_member&#x60;, &#x60;admin&#x60;, &#x60;billing_manager&#x60;, &#x60;hiring_manager&#x60;, or &#x60;reinstate&#x60;. If the invitee is not a GitHub member, the &#x60;login&#x60; field in the return hash will be &#x60;null&#x60;.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/invitations&#x60;.
     *
-    * @return kotlin.collections.List<OrganizationMinusInvitationModel>
+    * @return kotlin.collections.List<OrganizationMinusInvitationApiModel>
     */
-    suspend fun teamsListPendingInvitationsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusInvitationModel>
+    suspend fun teamsListPendingInvitationsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusInvitationApiModel>
 
     /**
     * List pending team invitations (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [&#x60;List pending team invitations&#x60;](https://docs.github.com/rest/reference/teams#list-pending-team-invitations) endpoint.  The return hash contains a &#x60;role&#x60; field which refers to the Organization Invitation role and will be one of the following values: &#x60;direct_member&#x60;, &#x60;admin&#x60;, &#x60;billing_manager&#x60;, &#x60;hiring_manager&#x60;, or &#x60;reinstate&#x60;. If the invitee is not a GitHub member, the &#x60;login&#x60; field in the return hash will be &#x60;null&#x60;.
     *
-    * @return kotlin.collections.List<OrganizationMinusInvitationModel>
+    * @return kotlin.collections.List<OrganizationMinusInvitationApiModel>
     */
-    suspend fun teamsListPendingInvitationsLegacy(accessToken: String? = null, teamId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusInvitationModel>
+    suspend fun teamsListPendingInvitationsLegacy(accessToken: String? = null, teamId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusInvitationApiModel>
 
     /**
     * List team projects
     *
     * Lists the organization projects for a team.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/projects&#x60;.
     *
-    * @return kotlin.collections.List<TeamMinusProjectModel>
+    * @return kotlin.collections.List<TeamMinusProjectApiModel>
     */
-    suspend fun teamsListProjectsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusProjectModel>
+    suspend fun teamsListProjectsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusProjectApiModel>
 
     /**
     * List team projects (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [&#x60;List team projects&#x60;](https://docs.github.com/rest/reference/teams#list-team-projects) endpoint.  Lists the organization projects for a team.
     *
-    * @return kotlin.collections.List<TeamMinusProjectModel>
+    * @return kotlin.collections.List<TeamMinusProjectApiModel>
     */
-    suspend fun teamsListProjectsLegacy(accessToken: String? = null, teamId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusProjectModel>
+    suspend fun teamsListProjectsLegacy(accessToken: String? = null, teamId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamMinusProjectApiModel>
 
     /**
     * List team repositories
     *
     * Lists a team&#39;s repositories visible to the authenticated user.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/repos&#x60;.
     *
-    * @return kotlin.collections.List<MinimalMinusRepositoryModel>
+    * @return kotlin.collections.List<MinimalMinusRepositoryApiModel>
     */
-    suspend fun teamsListReposInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryModel>
+    suspend fun teamsListReposInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryApiModel>
 
     /**
     * List team repositories (Legacy)
     *
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List team repositories](https://docs.github.com/rest/reference/teams#list-team-repositories) endpoint.
     *
-    * @return kotlin.collections.List<MinimalMinusRepositoryModel>
+    * @return kotlin.collections.List<MinimalMinusRepositoryApiModel>
     */
-    suspend fun teamsListReposLegacy(accessToken: String? = null, teamId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryModel>
+    suspend fun teamsListReposLegacy(accessToken: String? = null, teamId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryApiModel>
 
     /**
     * Remove team member (Legacy)
@@ -623,9 +623,9 @@ interface TeamsApi {
     * Edits the body text of a discussion comment. OAuth access tokens require the &#x60;write:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;PATCH /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}&#x60;.
     *
     * @param request 
-    * @return TeamMinusDiscussionMinusCommentModel
+    * @return TeamMinusDiscussionMinusCommentApiModel
     */
-    suspend fun teamsUpdateDiscussionCommentInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, commentNumber: kotlin.Int, request: InlineObject42Model): TeamMinusDiscussionMinusCommentModel
+    suspend fun teamsUpdateDiscussionCommentInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, commentNumber: kotlin.Int, request: InlineObject42ApiModel): TeamMinusDiscussionMinusCommentApiModel
 
     /**
     * Update a discussion comment (Legacy)
@@ -633,9 +633,9 @@ interface TeamsApi {
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a discussion comment](https://docs.github.com/rest/reference/teams#update-a-discussion-comment) endpoint.  Edits the body text of a discussion comment. OAuth access tokens require the &#x60;write:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * @param request 
-    * @return TeamMinusDiscussionMinusCommentModel
+    * @return TeamMinusDiscussionMinusCommentApiModel
     */
-    suspend fun teamsUpdateDiscussionCommentLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int, commentNumber: kotlin.Int, request: InlineObject155Model): TeamMinusDiscussionMinusCommentModel
+    suspend fun teamsUpdateDiscussionCommentLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int, commentNumber: kotlin.Int, request: InlineObject155ApiModel): TeamMinusDiscussionMinusCommentApiModel
 
     /**
     * Update a discussion
@@ -643,9 +643,9 @@ interface TeamsApi {
     * Edits the title and body text of a discussion post. Only the parameters you provide are updated. OAuth access tokens require the &#x60;write:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;PATCH /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}&#x60;.
     *
     * @param request  (optional)
-    * @return TeamMinusDiscussionModel
+    * @return TeamMinusDiscussionApiModel
     */
-    suspend fun teamsUpdateDiscussionInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, request: InlineObject40Model): TeamMinusDiscussionModel
+    suspend fun teamsUpdateDiscussionInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, request: InlineObject40ApiModel): TeamMinusDiscussionApiModel
 
     /**
     * Update a discussion (Legacy)
@@ -653,9 +653,9 @@ interface TeamsApi {
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a discussion](https://docs.github.com/rest/reference/teams#update-a-discussion) endpoint.  Edits the title and body text of a discussion post. Only the parameters you provide are updated. OAuth access tokens require the &#x60;write:discussion&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * @param request  (optional)
-    * @return TeamMinusDiscussionModel
+    * @return TeamMinusDiscussionApiModel
     */
-    suspend fun teamsUpdateDiscussionLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int, request: InlineObject153Model): TeamMinusDiscussionModel
+    suspend fun teamsUpdateDiscussionLegacy(accessToken: String? = null, teamId: kotlin.Int, discussionNumber: kotlin.Int, request: InlineObject153ApiModel): TeamMinusDiscussionApiModel
 
     /**
     * Update a team
@@ -663,9 +663,9 @@ interface TeamsApi {
     * To edit a team, the authenticated user must either be an organization owner or a team maintainer.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;PATCH /organizations/{org_id}/team/{team_id}&#x60;.
     *
     * @param request  (optional)
-    * @return TeamMinusFullModel
+    * @return TeamMinusFullApiModel
     */
-    suspend fun teamsUpdateInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject38Model): TeamMinusFullModel
+    suspend fun teamsUpdateInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject38ApiModel): TeamMinusFullApiModel
 
     /**
     * Update a team (Legacy)
@@ -673,9 +673,9 @@ interface TeamsApi {
     * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a team](https://docs.github.com/rest/reference/teams#update-a-team) endpoint.  To edit a team, the authenticated user must either be an organization owner or a team maintainer.  **Note:** With nested teams, the &#x60;privacy&#x60; for parent teams cannot be &#x60;secret&#x60;.
     *
     * @param request 
-    * @return TeamMinusFullModel
+    * @return TeamMinusFullApiModel
     */
-    suspend fun teamsUpdateLegacy(accessToken: String? = null, teamId: kotlin.Int, request: InlineObject151Model): TeamMinusFullModel
+    suspend fun teamsUpdateLegacy(accessToken: String? = null, teamId: kotlin.Int, request: InlineObject151ApiModel): TeamMinusFullApiModel
 
 }
 
@@ -691,7 +691,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsAddOrUpdateMembershipForUserInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, username: kotlin.String, request: InlineObject46Model): TeamMinusMembershipModel {
+    override suspend fun teamsAddOrUpdateMembershipForUserInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, username: kotlin.String, request: InlineObject46ApiModel): TeamMinusMembershipApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/memberships/{username}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -701,7 +701,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsAddOrUpdateMembershipForUserLegacy(accessToken: String?, teamId: kotlin.Int, username: kotlin.String, request: InlineObject158Model): TeamMinusMembershipModel {
+    override suspend fun teamsAddOrUpdateMembershipForUserLegacy(accessToken: String?, teamId: kotlin.Int, username: kotlin.String, request: InlineObject158ApiModel): TeamMinusMembershipApiModel {
         val path = "/teams/{team_id}/memberships/{username}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -711,7 +711,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsAddOrUpdateProjectPermissionsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, projectId: kotlin.Int, request: InlineObject47Model) {
+    override suspend fun teamsAddOrUpdateProjectPermissionsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, projectId: kotlin.Int, request: InlineObject47ApiModel) {
         val path = "/orgs/{org}/teams/{team_slug}/projects/{project_id}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"project_id"+"}", "$projectId")
 
         return httpClient.request {
@@ -721,7 +721,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsAddOrUpdateProjectPermissionsLegacy(accessToken: String?, teamId: kotlin.Int, projectId: kotlin.Int, request: InlineObject159Model) {
+    override suspend fun teamsAddOrUpdateProjectPermissionsLegacy(accessToken: String?, teamId: kotlin.Int, projectId: kotlin.Int, request: InlineObject159ApiModel) {
         val path = "/teams/{team_id}/projects/{project_id}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"project_id"+"}", "$projectId")
 
         return httpClient.request {
@@ -731,7 +731,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsAddOrUpdateRepoPermissionsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String, request: InlineObject48Model) {
+    override suspend fun teamsAddOrUpdateRepoPermissionsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String, request: InlineObject48ApiModel) {
         val path = "/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -741,7 +741,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsAddOrUpdateRepoPermissionsLegacy(accessToken: String?, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String, request: InlineObject160Model) {
+    override suspend fun teamsAddOrUpdateRepoPermissionsLegacy(accessToken: String?, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String, request: InlineObject160ApiModel) {
         val path = "/teams/{team_id}/repos/{owner}/{repo}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -751,7 +751,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCheckPermissionsForProjectInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, projectId: kotlin.Int): TeamMinusProjectModel {
+    override suspend fun teamsCheckPermissionsForProjectInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, projectId: kotlin.Int): TeamMinusProjectApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/projects/{project_id}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"project_id"+"}", "$projectId")
 
         return httpClient.request {
@@ -760,7 +760,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCheckPermissionsForProjectLegacy(accessToken: String?, teamId: kotlin.Int, projectId: kotlin.Int): TeamMinusProjectModel {
+    override suspend fun teamsCheckPermissionsForProjectLegacy(accessToken: String?, teamId: kotlin.Int, projectId: kotlin.Int): TeamMinusProjectApiModel {
         val path = "/teams/{team_id}/projects/{project_id}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"project_id"+"}", "$projectId")
 
         return httpClient.request {
@@ -769,7 +769,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCheckPermissionsForRepoInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryModel {
+    override suspend fun teamsCheckPermissionsForRepoInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -778,7 +778,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCheckPermissionsForRepoLegacy(accessToken: String?, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryModel {
+    override suspend fun teamsCheckPermissionsForRepoLegacy(accessToken: String?, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryApiModel {
         val path = "/teams/{team_id}/repos/{owner}/{repo}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -787,7 +787,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCreate(accessToken: String?, org: kotlin.String, request: InlineObject37Model): TeamMinusFullModel {
+    override suspend fun teamsCreate(accessToken: String?, org: kotlin.String, request: InlineObject37ApiModel): TeamMinusFullApiModel {
         val path = "/orgs/{org}/teams".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -797,7 +797,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCreateDiscussionCommentInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, request: InlineObject41Model): TeamMinusDiscussionMinusCommentModel {
+    override suspend fun teamsCreateDiscussionCommentInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, request: InlineObject41ApiModel): TeamMinusDiscussionMinusCommentApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"discussion_number"+"}", "$discussionNumber")
 
         return httpClient.request {
@@ -807,7 +807,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCreateDiscussionCommentLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int, request: InlineObject154Model): TeamMinusDiscussionMinusCommentModel {
+    override suspend fun teamsCreateDiscussionCommentLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int, request: InlineObject154ApiModel): TeamMinusDiscussionMinusCommentApiModel {
         val path = "/teams/{team_id}/discussions/{discussion_number}/comments".replace("{"+"team_id"+"}", "$teamId").replace("{"+"discussion_number"+"}", "$discussionNumber")
 
         return httpClient.request {
@@ -817,7 +817,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCreateDiscussionInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject39Model): TeamMinusDiscussionModel {
+    override suspend fun teamsCreateDiscussionInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject39ApiModel): TeamMinusDiscussionApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/discussions".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -827,7 +827,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCreateDiscussionLegacy(accessToken: String?, teamId: kotlin.Int, request: InlineObject152Model): TeamMinusDiscussionModel {
+    override suspend fun teamsCreateDiscussionLegacy(accessToken: String?, teamId: kotlin.Int, request: InlineObject152ApiModel): TeamMinusDiscussionApiModel {
         val path = "/teams/{team_id}/discussions".replace("{"+"team_id"+"}", "$teamId")
 
         return httpClient.request {
@@ -837,7 +837,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCreateOrUpdateIdpGroupConnectionsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject49Model): GroupMinusMappingModel {
+    override suspend fun teamsCreateOrUpdateIdpGroupConnectionsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject49ApiModel): GroupMinusMappingApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/team-sync/group-mappings".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -847,7 +847,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCreateOrUpdateIdpGroupConnectionsLegacy(accessToken: String?, teamId: kotlin.Int, request: InlineObject161Model): GroupMinusMappingModel {
+    override suspend fun teamsCreateOrUpdateIdpGroupConnectionsLegacy(accessToken: String?, teamId: kotlin.Int, request: InlineObject161ApiModel): GroupMinusMappingApiModel {
         val path = "/teams/{team_id}/team-sync/group-mappings".replace("{"+"team_id"+"}", "$teamId")
 
         return httpClient.request {
@@ -911,7 +911,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsExternalIdpGroupInfoForOrg(accessToken: String?, org: kotlin.String, groupId: kotlin.Int): ExternalMinusGroupModel {
+    override suspend fun teamsExternalIdpGroupInfoForOrg(accessToken: String?, org: kotlin.String, groupId: kotlin.Int): ExternalMinusGroupApiModel {
         val path = "/orgs/{org}/external-group/{group_id}".replace("{"+"org"+"}", "$org").replace("{"+"group_id"+"}", "$groupId")
 
         return httpClient.request {
@@ -920,7 +920,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsGetByName(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String): TeamMinusFullModel {
+    override suspend fun teamsGetByName(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String): TeamMinusFullApiModel {
         val path = "/orgs/{org}/teams/{team_slug}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -929,7 +929,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsGetDiscussionCommentInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, commentNumber: kotlin.Int): TeamMinusDiscussionMinusCommentModel {
+    override suspend fun teamsGetDiscussionCommentInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, commentNumber: kotlin.Int): TeamMinusDiscussionMinusCommentApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"discussion_number"+"}", "$discussionNumber").replace("{"+"comment_number"+"}", "$commentNumber")
 
         return httpClient.request {
@@ -938,7 +938,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsGetDiscussionCommentLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int, commentNumber: kotlin.Int): TeamMinusDiscussionMinusCommentModel {
+    override suspend fun teamsGetDiscussionCommentLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int, commentNumber: kotlin.Int): TeamMinusDiscussionMinusCommentApiModel {
         val path = "/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"discussion_number"+"}", "$discussionNumber").replace("{"+"comment_number"+"}", "$commentNumber")
 
         return httpClient.request {
@@ -947,7 +947,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsGetDiscussionInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int): TeamMinusDiscussionModel {
+    override suspend fun teamsGetDiscussionInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int): TeamMinusDiscussionApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"discussion_number"+"}", "$discussionNumber")
 
         return httpClient.request {
@@ -956,7 +956,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsGetDiscussionLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int): TeamMinusDiscussionModel {
+    override suspend fun teamsGetDiscussionLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int): TeamMinusDiscussionApiModel {
         val path = "/teams/{team_id}/discussions/{discussion_number}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"discussion_number"+"}", "$discussionNumber")
 
         return httpClient.request {
@@ -965,7 +965,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsGetLegacy(accessToken: String?, teamId: kotlin.Int): TeamMinusFullModel {
+    override suspend fun teamsGetLegacy(accessToken: String?, teamId: kotlin.Int): TeamMinusFullApiModel {
         val path = "/teams/{team_id}".replace("{"+"team_id"+"}", "$teamId")
 
         return httpClient.request {
@@ -983,7 +983,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsGetMembershipForUserInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, username: kotlin.String): TeamMinusMembershipModel {
+    override suspend fun teamsGetMembershipForUserInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, username: kotlin.String): TeamMinusMembershipApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/memberships/{username}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -992,7 +992,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsGetMembershipForUserLegacy(accessToken: String?, teamId: kotlin.Int, username: kotlin.String): TeamMinusMembershipModel {
+    override suspend fun teamsGetMembershipForUserLegacy(accessToken: String?, teamId: kotlin.Int, username: kotlin.String): TeamMinusMembershipApiModel {
         val path = "/teams/{team_id}/memberships/{username}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -1001,7 +1001,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsLinkExternalIdpGroupToTeamForOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject45Model): ExternalMinusGroupModel {
+    override suspend fun teamsLinkExternalIdpGroupToTeamForOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject45ApiModel): ExternalMinusGroupApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/external-groups".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -1011,7 +1011,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsList(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamModel> {
+    override suspend fun teamsList(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamApiModel> {
         val path = "/orgs/{org}/teams".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1022,7 +1022,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListChildInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamModel> {
+    override suspend fun teamsListChildInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamApiModel> {
         val path = "/orgs/{org}/teams/{team_slug}/teams".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -1033,7 +1033,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListChildLegacy(accessToken: String?, teamId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamModel> {
+    override suspend fun teamsListChildLegacy(accessToken: String?, teamId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamApiModel> {
         val path = "/teams/{team_id}/teams".replace("{"+"team_id"+"}", "$teamId")
 
         return httpClient.request {
@@ -1044,7 +1044,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListDiscussionCommentsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusDiscussionMinusCommentModel> {
+    override suspend fun teamsListDiscussionCommentsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusDiscussionMinusCommentApiModel> {
         val path = "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"discussion_number"+"}", "$discussionNumber")
 
         return httpClient.request {
@@ -1056,7 +1056,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListDiscussionCommentsLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusDiscussionMinusCommentModel> {
+    override suspend fun teamsListDiscussionCommentsLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusDiscussionMinusCommentApiModel> {
         val path = "/teams/{team_id}/discussions/{discussion_number}/comments".replace("{"+"team_id"+"}", "$teamId").replace("{"+"discussion_number"+"}", "$discussionNumber")
 
         return httpClient.request {
@@ -1068,7 +1068,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListDiscussionsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?, pinned: kotlin.String?): kotlin.collections.List<TeamMinusDiscussionModel> {
+    override suspend fun teamsListDiscussionsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?, pinned: kotlin.String?): kotlin.collections.List<TeamMinusDiscussionApiModel> {
         val path = "/orgs/{org}/teams/{team_slug}/discussions".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -1081,7 +1081,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListDiscussionsLegacy(accessToken: String?, teamId: kotlin.Int, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusDiscussionModel> {
+    override suspend fun teamsListDiscussionsLegacy(accessToken: String?, teamId: kotlin.Int, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusDiscussionApiModel> {
         val path = "/teams/{team_id}/discussions".replace("{"+"team_id"+"}", "$teamId")
 
         return httpClient.request {
@@ -1093,7 +1093,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListExternalIdpGroupsForOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?, displayName: kotlin.String?): ExternalMinusGroupsModel {
+    override suspend fun teamsListExternalIdpGroupsForOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?, displayName: kotlin.String?): ExternalMinusGroupsApiModel {
         val path = "/orgs/{org}/external-groups".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1105,7 +1105,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusFullModel> {
+    override suspend fun teamsListForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusFullApiModel> {
         val path = "/user/teams"
 
         return httpClient.request {
@@ -1116,7 +1116,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListIdpGroupsForLegacy(accessToken: String?, teamId: kotlin.Int): GroupMinusMappingModel {
+    override suspend fun teamsListIdpGroupsForLegacy(accessToken: String?, teamId: kotlin.Int): GroupMinusMappingApiModel {
         val path = "/teams/{team_id}/team-sync/group-mappings".replace("{"+"team_id"+"}", "$teamId")
 
         return httpClient.request {
@@ -1125,7 +1125,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListIdpGroupsForOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.String?): GroupMinusMappingModel {
+    override suspend fun teamsListIdpGroupsForOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.String?): GroupMinusMappingApiModel {
         val path = "/orgs/{org}/team-sync/groups".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1136,7 +1136,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListIdpGroupsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String): GroupMinusMappingModel {
+    override suspend fun teamsListIdpGroupsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String): GroupMinusMappingApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/team-sync/group-mappings".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -1145,7 +1145,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListLinkedExternalIdpGroupsToTeamForOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String): ExternalMinusGroupsModel {
+    override suspend fun teamsListLinkedExternalIdpGroupsToTeamForOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String): ExternalMinusGroupsApiModel {
         val path = "/organizations/{org}/team/{team_slug}/external-groups".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -1154,7 +1154,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListMembersInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, role: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun teamsListMembersInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, role: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/orgs/{org}/teams/{team_slug}/members".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -1166,7 +1166,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListMembersLegacy(accessToken: String?, teamId: kotlin.Int, role: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun teamsListMembersLegacy(accessToken: String?, teamId: kotlin.Int, role: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/teams/{team_id}/members".replace("{"+"team_id"+"}", "$teamId")
 
         return httpClient.request {
@@ -1178,7 +1178,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListPendingInvitationsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusInvitationModel> {
+    override suspend fun teamsListPendingInvitationsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusInvitationApiModel> {
         val path = "/orgs/{org}/teams/{team_slug}/invitations".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -1189,7 +1189,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListPendingInvitationsLegacy(accessToken: String?, teamId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusInvitationModel> {
+    override suspend fun teamsListPendingInvitationsLegacy(accessToken: String?, teamId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusInvitationApiModel> {
         val path = "/teams/{team_id}/invitations".replace("{"+"team_id"+"}", "$teamId")
 
         return httpClient.request {
@@ -1200,7 +1200,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListProjectsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusProjectModel> {
+    override suspend fun teamsListProjectsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusProjectApiModel> {
         val path = "/orgs/{org}/teams/{team_slug}/projects".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -1211,7 +1211,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListProjectsLegacy(accessToken: String?, teamId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusProjectModel> {
+    override suspend fun teamsListProjectsLegacy(accessToken: String?, teamId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamMinusProjectApiModel> {
         val path = "/teams/{team_id}/projects".replace("{"+"team_id"+"}", "$teamId")
 
         return httpClient.request {
@@ -1222,7 +1222,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListReposInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryModel> {
+    override suspend fun teamsListReposInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryApiModel> {
         val path = "/orgs/{org}/teams/{team_slug}/repos".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -1233,7 +1233,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsListReposLegacy(accessToken: String?, teamId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryModel> {
+    override suspend fun teamsListReposLegacy(accessToken: String?, teamId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryApiModel> {
         val path = "/teams/{team_id}/repos".replace("{"+"team_id"+"}", "$teamId")
 
         return httpClient.request {
@@ -1316,7 +1316,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsUpdateDiscussionCommentInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, commentNumber: kotlin.Int, request: InlineObject42Model): TeamMinusDiscussionMinusCommentModel {
+    override suspend fun teamsUpdateDiscussionCommentInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, commentNumber: kotlin.Int, request: InlineObject42ApiModel): TeamMinusDiscussionMinusCommentApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"discussion_number"+"}", "$discussionNumber").replace("{"+"comment_number"+"}", "$commentNumber")
 
         return httpClient.request {
@@ -1326,7 +1326,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsUpdateDiscussionCommentLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int, commentNumber: kotlin.Int, request: InlineObject155Model): TeamMinusDiscussionMinusCommentModel {
+    override suspend fun teamsUpdateDiscussionCommentLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int, commentNumber: kotlin.Int, request: InlineObject155ApiModel): TeamMinusDiscussionMinusCommentApiModel {
         val path = "/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"discussion_number"+"}", "$discussionNumber").replace("{"+"comment_number"+"}", "$commentNumber")
 
         return httpClient.request {
@@ -1336,7 +1336,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsUpdateDiscussionInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, request: InlineObject40Model): TeamMinusDiscussionModel {
+    override suspend fun teamsUpdateDiscussionInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, discussionNumber: kotlin.Int, request: InlineObject40ApiModel): TeamMinusDiscussionApiModel {
         val path = "/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"discussion_number"+"}", "$discussionNumber")
 
         return httpClient.request {
@@ -1346,7 +1346,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsUpdateDiscussionLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int, request: InlineObject153Model): TeamMinusDiscussionModel {
+    override suspend fun teamsUpdateDiscussionLegacy(accessToken: String?, teamId: kotlin.Int, discussionNumber: kotlin.Int, request: InlineObject153ApiModel): TeamMinusDiscussionApiModel {
         val path = "/teams/{team_id}/discussions/{discussion_number}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"discussion_number"+"}", "$discussionNumber")
 
         return httpClient.request {
@@ -1356,7 +1356,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsUpdateInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject38Model): TeamMinusFullModel {
+    override suspend fun teamsUpdateInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, request: InlineObject38ApiModel): TeamMinusFullApiModel {
         val path = "/orgs/{org}/teams/{team_slug}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug")
 
         return httpClient.request {
@@ -1366,7 +1366,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsUpdateLegacy(accessToken: String?, teamId: kotlin.Int, request: InlineObject151Model): TeamMinusFullModel {
+    override suspend fun teamsUpdateLegacy(accessToken: String?, teamId: kotlin.Int, request: InlineObject151ApiModel): TeamMinusFullApiModel {
         val path = "/teams/{team_id}".replace("{"+"team_id"+"}", "$teamId")
 
         return httpClient.request {

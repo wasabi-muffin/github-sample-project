@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -69,9 +69,9 @@ interface UsersApi {
     * Adds a GPG key to the authenticated user&#39;s GitHub account. Requires that you are authenticated via Basic Auth, or OAuth with at least &#x60;write:gpg_key&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * @param request 
-    * @return GpgMinusKeyModel
+    * @return GpgMinusKeyApiModel
     */
-    suspend fun usersCreateGpgKeyForAuthenticatedUser(accessToken: String? = null, request: InlineObject166Model): GpgMinusKeyModel
+    suspend fun usersCreateGpgKeyForAuthenticatedUser(accessToken: String? = null, request: InlineObject166ApiModel): GpgMinusKeyApiModel
 
     /**
     * Create a public SSH key for the authenticated user
@@ -79,9 +79,9 @@ interface UsersApi {
     * Adds a public SSH key to the authenticated user&#39;s GitHub account. Requires that you are authenticated via Basic Auth, or OAuth with at least &#x60;write:public_key&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
     * @param request 
-    * @return KeyModel
+    * @return KeyApiModel
     */
-    suspend fun usersCreatePublicSshKeyForAuthenticatedUser(accessToken: String? = null, request: InlineObject167Model): KeyModel
+    suspend fun usersCreatePublicSshKeyForAuthenticatedUser(accessToken: String? = null, request: InlineObject167ApiModel): KeyApiModel
 
     /**
     * Delete a GPG key for the authenticated user
@@ -115,135 +115,135 @@ interface UsersApi {
     *
     * Provides publicly available information about someone with a GitHub account.  GitHub Apps with the &#x60;Plan&#x60; user permission can use this endpoint to retrieve information about a user&#39;s GitHub plan. The GitHub App must be authenticated as a user. See \&quot;[Identifying and authorizing users for GitHub Apps](https://docs.github.com/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/)\&quot; for details about authentication. For an example response, see &#39;Response with GitHub plan information&#39; below\&quot;  The &#x60;email&#x60; key in the following response is the publicly visible email address from your GitHub [profile page](https://github.com/settings/profile). When setting up your profile, you can select a primary email address to be “public” which provides an email entry for this endpoint. If you do not set a public email address for &#x60;email&#x60;, then it will have a value of &#x60;null&#x60;. You only see publicly visible email addresses when authenticated with GitHub. For more information, see [Authentication](https://docs.github.com/rest/overview/resources-in-the-rest-api#authentication).  The Emails API enables you to list all of your email addresses, and toggle a primary email to be visible publicly. For more information, see \&quot;[Emails API](https://docs.github.com/rest/reference/users#emails)\&quot;.
     *
-    * @return PublicMinusUserModel
+    * @return PublicMinusUserApiModel
     */
-    suspend fun usersGetByUsername(accessToken: String? = null, username: kotlin.String): PublicMinusUserModel
+    suspend fun usersGetByUsername(accessToken: String? = null, username: kotlin.String): PublicMinusUserApiModel
 
     /**
     * Get contextual information for a user
     *
     * Provides hovercard information when authenticated through basic auth or OAuth with the &#x60;repo&#x60; scope. You can find out more about someone in relation to their pull requests, issues, repositories, and organizations.  The &#x60;subject_type&#x60; and &#x60;subject_id&#x60; parameters provide context for the person&#39;s hovercard, which returns more information than without the parameters. For example, if you wanted to find out more about &#x60;octocat&#x60; who owns the &#x60;Spoon-Knife&#x60; repository via cURL, it would look like this:  &#x60;&#x60;&#x60;shell  curl -u username:token   https://api.github.com/users/octocat/hovercard?subject_type&#x3D;repository&amp;subject_id&#x3D;1300192 &#x60;&#x60;&#x60;
     *
-    * @return HovercardModel
+    * @return HovercardApiModel
     */
-    suspend fun usersGetContextForUser(accessToken: String? = null, username: kotlin.String, subjectType: kotlin.String? = null, subjectId: kotlin.String? = null): HovercardModel
+    suspend fun usersGetContextForUser(accessToken: String? = null, username: kotlin.String, subjectType: kotlin.String? = null, subjectId: kotlin.String? = null): HovercardApiModel
 
     /**
     * Get a GPG key for the authenticated user
     *
     * View extended details for a single GPG key. Requires that you are authenticated via Basic Auth or via OAuth with at least &#x60;read:gpg_key&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
-    * @return GpgMinusKeyModel
+    * @return GpgMinusKeyApiModel
     */
-    suspend fun usersGetGpgKeyForAuthenticatedUser(accessToken: String? = null, gpgKeyId: kotlin.Int): GpgMinusKeyModel
+    suspend fun usersGetGpgKeyForAuthenticatedUser(accessToken: String? = null, gpgKeyId: kotlin.Int): GpgMinusKeyApiModel
 
     /**
     * Get a public SSH key for the authenticated user
     *
     * View extended details for a single public SSH key. Requires that you are authenticated via Basic Auth or via OAuth with at least &#x60;read:public_key&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
-    * @return KeyModel
+    * @return KeyApiModel
     */
-    suspend fun usersGetPublicSshKeyForAuthenticatedUser(accessToken: String? = null, keyId: kotlin.Int): KeyModel
+    suspend fun usersGetPublicSshKeyForAuthenticatedUser(accessToken: String? = null, keyId: kotlin.Int): KeyApiModel
 
     /**
     * List users
     *
     * Lists all users, in the order that they signed up on GitHub. This list includes personal user accounts and organization accounts.  Note: Pagination is powered exclusively by the &#x60;since&#x60; parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of users.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun usersList(accessToken: String? = null, since: kotlin.Int? = null, perPage: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun usersList(accessToken: String? = null, since: kotlin.Int? = null, perPage: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List users blocked by the authenticated user
     *
     * List the users you&#39;ve blocked on your personal account.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun usersListBlockedByAuthenticatedUser(accessToken: String? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun usersListBlockedByAuthenticatedUser(accessToken: String? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List the people the authenticated user follows
     *
     * Lists the people who the authenticated user follows.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun usersListFollowedByAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun usersListFollowedByAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List followers of the authenticated user
     *
     * Lists the people following the authenticated user.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun usersListFollowersForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun usersListFollowersForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List followers of a user
     *
     * Lists the people following the specified user.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun usersListFollowersForUser(accessToken: String? = null, username: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun usersListFollowersForUser(accessToken: String? = null, username: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List the people a user follows
     *
     * Lists the people who the specified user follows.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun usersListFollowingForUser(accessToken: String? = null, username: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun usersListFollowingForUser(accessToken: String? = null, username: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List GPG keys for the authenticated user
     *
     * Lists the current user&#39;s GPG keys. Requires that you are authenticated via Basic Auth or via OAuth with at least &#x60;read:gpg_key&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
-    * @return kotlin.collections.List<GpgMinusKeyModel>
+    * @return kotlin.collections.List<GpgMinusKeyApiModel>
     */
-    suspend fun usersListGpgKeysForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GpgMinusKeyModel>
+    suspend fun usersListGpgKeysForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GpgMinusKeyApiModel>
 
     /**
     * List GPG keys for a user
     *
     * Lists the GPG keys for a user. This information is accessible by anyone.
     *
-    * @return kotlin.collections.List<GpgMinusKeyModel>
+    * @return kotlin.collections.List<GpgMinusKeyApiModel>
     */
-    suspend fun usersListGpgKeysForUser(accessToken: String? = null, username: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GpgMinusKeyModel>
+    suspend fun usersListGpgKeysForUser(accessToken: String? = null, username: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GpgMinusKeyApiModel>
 
     /**
     * List public email addresses for the authenticated user
     *
     * Lists your publicly visible email address, which you can set with the [Set primary email visibility for the authenticated user](https://docs.github.com/rest/reference/users#set-primary-email-visibility-for-the-authenticated-user) endpoint. This endpoint is accessible with the &#x60;user:email&#x60; scope.
     *
-    * @return kotlin.collections.List<EmailModel>
+    * @return kotlin.collections.List<EmailApiModel>
     */
-    suspend fun usersListPublicEmailsForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<EmailModel>
+    suspend fun usersListPublicEmailsForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<EmailApiModel>
 
     /**
     * List public keys for a user
     *
     * Lists the _verified_ public SSH keys for a user. This is accessible by anyone.
     *
-    * @return kotlin.collections.List<KeyMinusSimpleModel>
+    * @return kotlin.collections.List<KeyMinusSimpleApiModel>
     */
-    suspend fun usersListPublicKeysForUser(accessToken: String? = null, username: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<KeyMinusSimpleModel>
+    suspend fun usersListPublicKeysForUser(accessToken: String? = null, username: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<KeyMinusSimpleApiModel>
 
     /**
     * List public SSH keys for the authenticated user
     *
     * Lists the public SSH keys for the authenticated user&#39;s GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least &#x60;read:public_key&#x60; [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
     *
-    * @return kotlin.collections.List<KeyModel>
+    * @return kotlin.collections.List<KeyApiModel>
     */
-    suspend fun usersListPublicSshKeysForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<KeyModel>
+    suspend fun usersListPublicSshKeysForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<KeyApiModel>
 
     /**
     * Set primary email visibility for the authenticated user
@@ -251,9 +251,9 @@ interface UsersApi {
     * Sets the visibility for your primary email addresses.
     *
     * @param request 
-    * @return kotlin.collections.List<EmailModel>
+    * @return kotlin.collections.List<EmailApiModel>
     */
-    suspend fun usersSetPrimaryEmailVisibilityForAuthenticatedUser(accessToken: String? = null, request: InlineObject165Model): kotlin.collections.List<EmailModel>
+    suspend fun usersSetPrimaryEmailVisibilityForAuthenticatedUser(accessToken: String? = null, request: InlineObject165ApiModel): kotlin.collections.List<EmailApiModel>
 
     /**
     * Unblock a user
@@ -314,7 +314,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersCreateGpgKeyForAuthenticatedUser(accessToken: String?, request: InlineObject166Model): GpgMinusKeyModel {
+    override suspend fun usersCreateGpgKeyForAuthenticatedUser(accessToken: String?, request: InlineObject166ApiModel): GpgMinusKeyApiModel {
         val path = "/user/gpg_keys"
 
         return httpClient.request {
@@ -324,7 +324,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersCreatePublicSshKeyForAuthenticatedUser(accessToken: String?, request: InlineObject167Model): KeyModel {
+    override suspend fun usersCreatePublicSshKeyForAuthenticatedUser(accessToken: String?, request: InlineObject167ApiModel): KeyApiModel {
         val path = "/user/keys"
 
         return httpClient.request {
@@ -361,7 +361,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersGetByUsername(accessToken: String?, username: kotlin.String): PublicMinusUserModel {
+    override suspend fun usersGetByUsername(accessToken: String?, username: kotlin.String): PublicMinusUserApiModel {
         val path = "/users/{username}".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -370,7 +370,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersGetContextForUser(accessToken: String?, username: kotlin.String, subjectType: kotlin.String?, subjectId: kotlin.String?): HovercardModel {
+    override suspend fun usersGetContextForUser(accessToken: String?, username: kotlin.String, subjectType: kotlin.String?, subjectId: kotlin.String?): HovercardApiModel {
         val path = "/users/{username}/hovercard".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -381,7 +381,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersGetGpgKeyForAuthenticatedUser(accessToken: String?, gpgKeyId: kotlin.Int): GpgMinusKeyModel {
+    override suspend fun usersGetGpgKeyForAuthenticatedUser(accessToken: String?, gpgKeyId: kotlin.Int): GpgMinusKeyApiModel {
         val path = "/user/gpg_keys/{gpg_key_id}".replace("{"+"gpg_key_id"+"}", "$gpgKeyId")
 
         return httpClient.request {
@@ -390,7 +390,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersGetPublicSshKeyForAuthenticatedUser(accessToken: String?, keyId: kotlin.Int): KeyModel {
+    override suspend fun usersGetPublicSshKeyForAuthenticatedUser(accessToken: String?, keyId: kotlin.Int): KeyApiModel {
         val path = "/user/keys/{key_id}".replace("{"+"key_id"+"}", "$keyId")
 
         return httpClient.request {
@@ -399,7 +399,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersList(accessToken: String?, since: kotlin.Int?, perPage: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun usersList(accessToken: String?, since: kotlin.Int?, perPage: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/users"
 
         return httpClient.request {
@@ -410,7 +410,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersListBlockedByAuthenticatedUser(accessToken: String?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun usersListBlockedByAuthenticatedUser(accessToken: String?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/user/blocks"
 
         return httpClient.request {
@@ -419,7 +419,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersListFollowedByAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun usersListFollowedByAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/user/following"
 
         return httpClient.request {
@@ -430,7 +430,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersListFollowersForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun usersListFollowersForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/user/followers"
 
         return httpClient.request {
@@ -441,7 +441,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersListFollowersForUser(accessToken: String?, username: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun usersListFollowersForUser(accessToken: String?, username: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/users/{username}/followers".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -452,7 +452,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersListFollowingForUser(accessToken: String?, username: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun usersListFollowingForUser(accessToken: String?, username: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/users/{username}/following".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -463,7 +463,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersListGpgKeysForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GpgMinusKeyModel> {
+    override suspend fun usersListGpgKeysForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GpgMinusKeyApiModel> {
         val path = "/user/gpg_keys"
 
         return httpClient.request {
@@ -474,7 +474,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersListGpgKeysForUser(accessToken: String?, username: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GpgMinusKeyModel> {
+    override suspend fun usersListGpgKeysForUser(accessToken: String?, username: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GpgMinusKeyApiModel> {
         val path = "/users/{username}/gpg_keys".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -485,7 +485,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersListPublicEmailsForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<EmailModel> {
+    override suspend fun usersListPublicEmailsForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<EmailApiModel> {
         val path = "/user/public_emails"
 
         return httpClient.request {
@@ -496,7 +496,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersListPublicKeysForUser(accessToken: String?, username: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<KeyMinusSimpleModel> {
+    override suspend fun usersListPublicKeysForUser(accessToken: String?, username: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<KeyMinusSimpleApiModel> {
         val path = "/users/{username}/keys".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -507,7 +507,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersListPublicSshKeysForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<KeyModel> {
+    override suspend fun usersListPublicSshKeysForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<KeyApiModel> {
         val path = "/user/keys"
 
         return httpClient.request {
@@ -518,7 +518,7 @@ class HttpClientUsersApi(private val httpClientProvider: HttpClientProvider) : U
         }
     }
 
-    override suspend fun usersSetPrimaryEmailVisibilityForAuthenticatedUser(accessToken: String?, request: InlineObject165Model): kotlin.collections.List<EmailModel> {
+    override suspend fun usersSetPrimaryEmailVisibilityForAuthenticatedUser(accessToken: String?, request: InlineObject165ApiModel): kotlin.collections.List<EmailApiModel> {
         val path = "/user/email/visibility"
 
         return httpClient.request {

@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -44,7 +44,7 @@ interface DependabotApi {
     * @param request 
     * @return kotlin.Any
     */
-    suspend fun dependabotCreateOrUpdateOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, request: InlineObject28Model): kotlin.Any
+    suspend fun dependabotCreateOrUpdateOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, request: InlineObject28ApiModel): kotlin.Any
 
     /**
     * Create or update a repository secret
@@ -54,7 +54,7 @@ interface DependabotApi {
     * @param request 
     * @return kotlin.Any
     */
-    suspend fun dependabotCreateOrUpdateRepoSecret(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String, request: InlineObject80Model): kotlin.Any
+    suspend fun dependabotCreateOrUpdateRepoSecret(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String, request: InlineObject80ApiModel): kotlin.Any
 
     /**
     * Delete an organization secret
@@ -79,63 +79,63 @@ interface DependabotApi {
     *
     * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;dependabot_secrets&#x60; organization permission to use this endpoint.
     *
-    * @return DependabotMinusPublicMinusKeyModel
+    * @return DependabotMinusPublicMinusKeyApiModel
     */
-    suspend fun dependabotGetOrgPublicKey(accessToken: String? = null, org: kotlin.String): DependabotMinusPublicMinusKeyModel
+    suspend fun dependabotGetOrgPublicKey(accessToken: String? = null, org: kotlin.String): DependabotMinusPublicMinusKeyApiModel
 
     /**
     * Get an organization secret
     *
     * Gets a single organization secret without revealing its encrypted value. You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;dependabot_secrets&#x60; organization permission to use this endpoint.
     *
-    * @return OrganizationMinusDependabotMinusSecretModel
+    * @return OrganizationMinusDependabotMinusSecretApiModel
     */
-    suspend fun dependabotGetOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String): OrganizationMinusDependabotMinusSecretModel
+    suspend fun dependabotGetOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String): OrganizationMinusDependabotMinusSecretApiModel
 
     /**
     * Get a repository public key
     *
     * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;dependabot_secrets&#x60; repository permission to use this endpoint.
     *
-    * @return DependabotMinusPublicMinusKeyModel
+    * @return DependabotMinusPublicMinusKeyApiModel
     */
-    suspend fun dependabotGetRepoPublicKey(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): DependabotMinusPublicMinusKeyModel
+    suspend fun dependabotGetRepoPublicKey(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): DependabotMinusPublicMinusKeyApiModel
 
     /**
     * Get a repository secret
     *
     * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;dependabot_secrets&#x60; repository permission to use this endpoint.
     *
-    * @return DependabotMinusSecretModel
+    * @return DependabotMinusSecretApiModel
     */
-    suspend fun dependabotGetRepoSecret(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String): DependabotMinusSecretModel
+    suspend fun dependabotGetRepoSecret(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String): DependabotMinusSecretApiModel
 
     /**
     * List organization secrets
     *
     * Lists all secrets available in an organization without revealing their encrypted values. You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;dependabot_secrets&#x60; organization permission to use this endpoint.
     *
-    * @return InlineResponse20011Model
+    * @return InlineResponse20011ApiModel
     */
-    suspend fun dependabotListOrgSecrets(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20011Model
+    suspend fun dependabotListOrgSecrets(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20011ApiModel
 
     /**
     * List repository secrets
     *
     * Lists all secrets available in a repository without revealing their encrypted values. You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;dependabot_secrets&#x60; repository permission to use this endpoint.
     *
-    * @return InlineResponse20022Model
+    * @return InlineResponse20022ApiModel
     */
-    suspend fun dependabotListRepoSecrets(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20022Model
+    suspend fun dependabotListRepoSecrets(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20022ApiModel
 
     /**
     * List selected repositories for an organization secret
     *
     * Lists all repositories that have been selected when the &#x60;visibility&#x60; for repository access to a secret is set to &#x60;selected&#x60;. You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;dependabot_secrets&#x60; organization permission to use this endpoint.
     *
-    * @return InlineResponse20010Model
+    * @return InlineResponse20010ApiModel
     */
-    suspend fun dependabotListSelectedReposForOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): InlineResponse20010Model
+    suspend fun dependabotListSelectedReposForOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): InlineResponse20010ApiModel
 
     /**
     * Remove selected repository from an organization secret
@@ -154,7 +154,7 @@ interface DependabotApi {
     * @param request 
     * @return void
     */
-    suspend fun dependabotSetSelectedReposForOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, request: InlineObject29Model)
+    suspend fun dependabotSetSelectedReposForOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, request: InlineObject29ApiModel)
 
 }
 
@@ -170,7 +170,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun dependabotCreateOrUpdateOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, request: InlineObject28Model): kotlin.Any {
+    override suspend fun dependabotCreateOrUpdateOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, request: InlineObject28ApiModel): kotlin.Any {
         val path = "/orgs/{org}/dependabot/secrets/{secret_name}".replace("{"+"org"+"}", "$org").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -180,7 +180,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun dependabotCreateOrUpdateRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String, request: InlineObject80Model): kotlin.Any {
+    override suspend fun dependabotCreateOrUpdateRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String, request: InlineObject80ApiModel): kotlin.Any {
         val path = "/repos/{owner}/{repo}/dependabot/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -208,7 +208,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun dependabotGetOrgPublicKey(accessToken: String?, org: kotlin.String): DependabotMinusPublicMinusKeyModel {
+    override suspend fun dependabotGetOrgPublicKey(accessToken: String?, org: kotlin.String): DependabotMinusPublicMinusKeyApiModel {
         val path = "/orgs/{org}/dependabot/secrets/public-key".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -217,7 +217,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun dependabotGetOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String): OrganizationMinusDependabotMinusSecretModel {
+    override suspend fun dependabotGetOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String): OrganizationMinusDependabotMinusSecretApiModel {
         val path = "/orgs/{org}/dependabot/secrets/{secret_name}".replace("{"+"org"+"}", "$org").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -226,7 +226,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun dependabotGetRepoPublicKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String): DependabotMinusPublicMinusKeyModel {
+    override suspend fun dependabotGetRepoPublicKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String): DependabotMinusPublicMinusKeyApiModel {
         val path = "/repos/{owner}/{repo}/dependabot/secrets/public-key".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -235,7 +235,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun dependabotGetRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String): DependabotMinusSecretModel {
+    override suspend fun dependabotGetRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String): DependabotMinusSecretApiModel {
         val path = "/repos/{owner}/{repo}/dependabot/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -244,7 +244,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun dependabotListOrgSecrets(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20011Model {
+    override suspend fun dependabotListOrgSecrets(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20011ApiModel {
         val path = "/orgs/{org}/dependabot/secrets".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -255,7 +255,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun dependabotListRepoSecrets(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20022Model {
+    override suspend fun dependabotListRepoSecrets(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20022ApiModel {
         val path = "/repos/{owner}/{repo}/dependabot/secrets".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -266,7 +266,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun dependabotListSelectedReposForOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): InlineResponse20010Model {
+    override suspend fun dependabotListSelectedReposForOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): InlineResponse20010ApiModel {
         val path = "/orgs/{org}/dependabot/secrets/{secret_name}/repositories".replace("{"+"org"+"}", "$org").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -286,7 +286,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun dependabotSetSelectedReposForOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, request: InlineObject29Model) {
+    override suspend fun dependabotSetSelectedReposForOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, request: InlineObject29ApiModel) {
         val path = "/orgs/{org}/dependabot/secrets/{secret_name}/repositories".replace("{"+"org"+"}", "$org").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {

@@ -5,9 +5,9 @@ import io.kotest.matchers.types.shouldBeTypeOf
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import jp.co.yumemi.android.code_check.data.models.InlineResponse20028Model
-import jp.co.yumemi.android.code_check.data.models.RepoMinusSearchMinusResultMinusItemModel
 import jp.co.yumemi.android.code_check.remote.apis.SearchApi
+import jp.co.yumemi.android.code_check.remote.models.InlineResponse20028ApiModel
+import jp.co.yumemi.android.code_check.remote.models.RepoMinusSearchMinusResultMinusItemApiModel
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
 import jp.co.yumemi.android.code_check.test.runBlockingTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,11 +26,11 @@ class SearchRemoteDataProviderTest {
     fun `test when search is successful`() {
         coEvery {
             searchApi.searchRepos(any(), any())
-        } returns InlineResponse20028Model(
+        } returns InlineResponse20028ApiModel(
             totalCount = 5,
             incompleteResults = false,
             items = List(5) { index ->
-                RepoMinusSearchMinusResultMinusItemModel(
+                RepoMinusSearchMinusResultMinusItemApiModel(
                     id = index,
                     nodeId = "",
                     name = "",
@@ -125,7 +125,7 @@ class SearchRemoteDataProviderTest {
             val result = searchRemoteDataSource.searchRepos("", "")
             result.size shouldBe 5
             result.forEachIndexed { index, repo ->
-                repo.fullName shouldBe "name$index"
+                repo.name shouldBe "name$index"
             }
             coVerify { searchApi.searchRepos("", "") }
         }
@@ -134,7 +134,7 @@ class SearchRemoteDataProviderTest {
     @Test
     fun `test when api throws an error`() {
         coEvery {
-            searchRemoteDataSource.searchRepos(any(), any())
+            searchApi.searchRepos(any(), any())
         } throws testException
 
         coroutineTestRule.runBlockingTest {

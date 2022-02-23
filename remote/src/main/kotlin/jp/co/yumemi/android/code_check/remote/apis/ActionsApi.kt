@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -33,9 +33,9 @@ interface ActionsApi {
     * Add custom labels to a self-hosted runner configured in an organization.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
     * @param request 
-    * @return InlineResponse2008Model
+    * @return InlineResponse2008ApiModel
     */
-    suspend fun actionsAddCustomLabelsToSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int, request: InlineObject25Model): InlineResponse2008Model
+    suspend fun actionsAddCustomLabelsToSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int, request: InlineObject25ApiModel): InlineResponse2008ApiModel
 
     /**
     * Add custom labels to a self-hosted runner for a repository
@@ -43,9 +43,9 @@ interface ActionsApi {
     * Add custom labels to a self-hosted runner configured in a repository.  You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint.
     *
     * @param request 
-    * @return InlineResponse2008Model
+    * @return InlineResponse2008ApiModel
     */
-    suspend fun actionsAddCustomLabelsToSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, request: InlineObject60Model): InlineResponse2008Model
+    suspend fun actionsAddCustomLabelsToSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, request: InlineObject60ApiModel): InlineResponse2008ApiModel
 
     /**
     * Add repository access to a self-hosted runner group in an organization
@@ -100,7 +100,7 @@ interface ActionsApi {
     * @param request 
     * @return kotlin.Any
     */
-    suspend fun actionsCreateOrUpdateEnvironmentSecret(accessToken: String? = null, repositoryId: kotlin.Int, environmentName: kotlin.String, secretName: kotlin.String, request: InlineObject141Model): kotlin.Any
+    suspend fun actionsCreateOrUpdateEnvironmentSecret(accessToken: String? = null, repositoryId: kotlin.Int, environmentName: kotlin.String, secretName: kotlin.String, request: InlineObject141ApiModel): kotlin.Any
 
     /**
     * Create or update an organization secret
@@ -110,7 +110,7 @@ interface ActionsApi {
     * @param request 
     * @return kotlin.Any
     */
-    suspend fun actionsCreateOrUpdateOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, request: InlineObject26Model): kotlin.Any
+    suspend fun actionsCreateOrUpdateOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, request: InlineObject26ApiModel): kotlin.Any
 
     /**
     * Create or update a repository secret
@@ -120,43 +120,43 @@ interface ActionsApi {
     * @param request 
     * @return kotlin.Any
     */
-    suspend fun actionsCreateOrUpdateRepoSecret(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String, request: InlineObject62Model): kotlin.Any
+    suspend fun actionsCreateOrUpdateRepoSecret(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String, request: InlineObject62ApiModel): kotlin.Any
 
     /**
     * Create a registration token for an organization
     *
     * Returns a token that you can pass to the &#x60;config&#x60; script. The token expires after one hour.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.  #### Example using registration token  Configure your self-hosted runner, replacing &#x60;TOKEN&#x60; with the registration token provided by this endpoint.  &#x60;&#x60;&#x60; ./config.sh --url https://github.com/octo-org --token TOKEN &#x60;&#x60;&#x60;
     *
-    * @return AuthenticationMinusTokenModel
+    * @return AuthenticationMinusTokenApiModel
     */
-    suspend fun actionsCreateRegistrationTokenForOrg(accessToken: String? = null, org: kotlin.String): AuthenticationMinusTokenModel
+    suspend fun actionsCreateRegistrationTokenForOrg(accessToken: String? = null, org: kotlin.String): AuthenticationMinusTokenApiModel
 
     /**
     * Create a registration token for a repository
     *
     * Returns a token that you can pass to the &#x60;config&#x60; script. The token expires after one hour. You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint.  #### Example using registration token   Configure your self-hosted runner, replacing &#x60;TOKEN&#x60; with the registration token provided by this endpoint.  &#x60;&#x60;&#x60; ./config.sh --url https://github.com/octo-org/octo-repo-artifacts --token TOKEN &#x60;&#x60;&#x60;
     *
-    * @return AuthenticationMinusTokenModel
+    * @return AuthenticationMinusTokenApiModel
     */
-    suspend fun actionsCreateRegistrationTokenForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): AuthenticationMinusTokenModel
+    suspend fun actionsCreateRegistrationTokenForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): AuthenticationMinusTokenApiModel
 
     /**
     * Create a remove token for an organization
     *
     * Returns a token that you can pass to the &#x60;config&#x60; script to remove a self-hosted runner from an organization. The token expires after one hour.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.  #### Example using remove token  To remove your self-hosted runner from an organization, replace &#x60;TOKEN&#x60; with the remove token provided by this endpoint.  &#x60;&#x60;&#x60; ./config.sh remove --token TOKEN &#x60;&#x60;&#x60;
     *
-    * @return AuthenticationMinusTokenModel
+    * @return AuthenticationMinusTokenApiModel
     */
-    suspend fun actionsCreateRemoveTokenForOrg(accessToken: String? = null, org: kotlin.String): AuthenticationMinusTokenModel
+    suspend fun actionsCreateRemoveTokenForOrg(accessToken: String? = null, org: kotlin.String): AuthenticationMinusTokenApiModel
 
     /**
     * Create a remove token for a repository
     *
     * Returns a token that you can pass to remove a self-hosted runner from a repository. The token expires after one hour. You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint.  #### Example using remove token   To remove your self-hosted runner from a repository, replace TOKEN with the remove token provided by this endpoint.  &#x60;&#x60;&#x60; ./config.sh remove --token TOKEN &#x60;&#x60;&#x60;
     *
-    * @return AuthenticationMinusTokenModel
+    * @return AuthenticationMinusTokenApiModel
     */
-    suspend fun actionsCreateRemoveTokenForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): AuthenticationMinusTokenModel
+    suspend fun actionsCreateRemoveTokenForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): AuthenticationMinusTokenApiModel
 
     /**
     * Create a self-hosted runner group for an organization
@@ -164,9 +164,9 @@ interface ActionsApi {
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud and GitHub Enterprise Server. For more information, see \&quot;[GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products).\&quot;  Creates a new self-hosted runner group for an organization.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
     * @param request 
-    * @return RunnerMinusGroupsMinusOrgModel
+    * @return RunnerMinusGroupsMinusOrgApiModel
     */
-    suspend fun actionsCreateSelfHostedRunnerGroupForOrg(accessToken: String? = null, org: kotlin.String, request: InlineObject20Model): RunnerMinusGroupsMinusOrgModel
+    suspend fun actionsCreateSelfHostedRunnerGroupForOrg(accessToken: String? = null, org: kotlin.String, request: InlineObject20ApiModel): RunnerMinusGroupsMinusOrgApiModel
 
     /**
     * Create a workflow dispatch event
@@ -176,7 +176,7 @@ interface ActionsApi {
     * @param request 
     * @return void
     */
-    suspend fun actionsCreateWorkflowDispatch(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int, request: InlineObject63Model)
+    suspend fun actionsCreateWorkflowDispatch(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int, request: InlineObject63ApiModel)
 
     /**
     * Delete an artifact
@@ -336,396 +336,396 @@ interface ActionsApi {
     *
     * Gets the selected actions that are allowed in an organization. To use this endpoint, the organization permission policy for &#x60;allowed_actions&#x60; must be configured to &#x60;selected&#x60;. For more information, see \&quot;[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization).\&quot;\&quot;  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;administration&#x60; organization permission to use this API.
     *
-    * @return SelectedMinusActionsModel
+    * @return SelectedMinusActionsApiModel
     */
-    suspend fun actionsGetAllowedActionsOrganization(accessToken: String? = null, org: kotlin.String): SelectedMinusActionsModel
+    suspend fun actionsGetAllowedActionsOrganization(accessToken: String? = null, org: kotlin.String): SelectedMinusActionsApiModel
 
     /**
     * Get allowed actions for a repository
     *
     * Gets the settings for selected actions that are allowed in a repository. To use this endpoint, the repository policy for &#x60;allowed_actions&#x60; must be configured to &#x60;selected&#x60;. For more information, see \&quot;[Set GitHub Actions permissions for a repository](#set-github-actions-permissions-for-a-repository).\&quot;  You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;administration&#x60; repository permission to use this API.
     *
-    * @return SelectedMinusActionsModel
+    * @return SelectedMinusActionsApiModel
     */
-    suspend fun actionsGetAllowedActionsRepository(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): SelectedMinusActionsModel
+    suspend fun actionsGetAllowedActionsRepository(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): SelectedMinusActionsApiModel
 
     /**
     * Get an artifact
     *
     * Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return ArtifactModel
+    * @return ArtifactApiModel
     */
-    suspend fun actionsGetArtifact(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, artifactId: kotlin.Int): ArtifactModel
+    suspend fun actionsGetArtifact(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, artifactId: kotlin.Int): ArtifactApiModel
 
     /**
     * Get an environment public key
     *
     * Get the public key for an environment, which you need to encrypt environment secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;secrets&#x60; repository permission to use this endpoint.
     *
-    * @return ActionsMinusPublicMinusKeyModel
+    * @return ActionsMinusPublicMinusKeyApiModel
     */
-    suspend fun actionsGetEnvironmentPublicKey(accessToken: String? = null, repositoryId: kotlin.Int, environmentName: kotlin.String): ActionsMinusPublicMinusKeyModel
+    suspend fun actionsGetEnvironmentPublicKey(accessToken: String? = null, repositoryId: kotlin.Int, environmentName: kotlin.String): ActionsMinusPublicMinusKeyApiModel
 
     /**
     * Get an environment secret
     *
     * Gets a single environment secret without revealing its encrypted value. You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;secrets&#x60; repository permission to use this endpoint.
     *
-    * @return ActionsMinusSecretModel
+    * @return ActionsMinusSecretApiModel
     */
-    suspend fun actionsGetEnvironmentSecret(accessToken: String? = null, repositoryId: kotlin.Int, environmentName: kotlin.String, secretName: kotlin.String): ActionsMinusSecretModel
+    suspend fun actionsGetEnvironmentSecret(accessToken: String? = null, repositoryId: kotlin.Int, environmentName: kotlin.String, secretName: kotlin.String): ActionsMinusSecretApiModel
 
     /**
     * Get default workflow permissions
     *
     * Gets the default workflow permissions granted to the &#x60;GITHUB_TOKEN&#x60; when running workflows in an organization, as well if GitHub Actions can submit approving pull request reviews.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;administration&#x60; organization permission to use this API.
     *
-    * @return ActionsMinusGetMinusDefaultMinusWorkflowMinusPermissionsModel
+    * @return ActionsMinusGetMinusDefaultMinusWorkflowMinusPermissionsApiModel
     */
-    suspend fun actionsGetGithubActionsDefaultWorkflowPermissionsOrganization(accessToken: String? = null, org: kotlin.String): ActionsMinusGetMinusDefaultMinusWorkflowMinusPermissionsModel
+    suspend fun actionsGetGithubActionsDefaultWorkflowPermissionsOrganization(accessToken: String? = null, org: kotlin.String): ActionsMinusGetMinusDefaultMinusWorkflowMinusPermissionsApiModel
 
     /**
     * Get GitHub Actions permissions for an organization
     *
     * Gets the GitHub Actions permissions policy for repositories and allowed actions in an organization.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;administration&#x60; organization permission to use this API.
     *
-    * @return ActionsMinusOrganizationMinusPermissionsModel
+    * @return ActionsMinusOrganizationMinusPermissionsApiModel
     */
-    suspend fun actionsGetGithubActionsPermissionsOrganization(accessToken: String? = null, org: kotlin.String): ActionsMinusOrganizationMinusPermissionsModel
+    suspend fun actionsGetGithubActionsPermissionsOrganization(accessToken: String? = null, org: kotlin.String): ActionsMinusOrganizationMinusPermissionsApiModel
 
     /**
     * Get GitHub Actions permissions for a repository
     *
     * Gets the GitHub Actions permissions policy for a repository, including whether GitHub Actions is enabled and the actions allowed to run in the repository.  You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;administration&#x60; repository permission to use this API.
     *
-    * @return ActionsMinusRepositoryMinusPermissionsModel
+    * @return ActionsMinusRepositoryMinusPermissionsApiModel
     */
-    suspend fun actionsGetGithubActionsPermissionsRepository(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ActionsMinusRepositoryMinusPermissionsModel
+    suspend fun actionsGetGithubActionsPermissionsRepository(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ActionsMinusRepositoryMinusPermissionsApiModel
 
     /**
     * Get a job for a workflow run
     *
     * Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return JobModel
+    * @return JobApiModel
     */
-    suspend fun actionsGetJobForWorkflowRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, jobId: kotlin.Int): JobModel
+    suspend fun actionsGetJobForWorkflowRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, jobId: kotlin.Int): JobApiModel
 
     /**
     * Get an organization public key
     *
     * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;secrets&#x60; organization permission to use this endpoint.
     *
-    * @return ActionsMinusPublicMinusKeyModel
+    * @return ActionsMinusPublicMinusKeyApiModel
     */
-    suspend fun actionsGetOrgPublicKey(accessToken: String? = null, org: kotlin.String): ActionsMinusPublicMinusKeyModel
+    suspend fun actionsGetOrgPublicKey(accessToken: String? = null, org: kotlin.String): ActionsMinusPublicMinusKeyApiModel
 
     /**
     * Get an organization secret
     *
     * Gets a single organization secret without revealing its encrypted value. You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;secrets&#x60; organization permission to use this endpoint.
     *
-    * @return OrganizationMinusActionsMinusSecretModel
+    * @return OrganizationMinusActionsMinusSecretApiModel
     */
-    suspend fun actionsGetOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String): OrganizationMinusActionsMinusSecretModel
+    suspend fun actionsGetOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String): OrganizationMinusActionsMinusSecretApiModel
 
     /**
     * Get pending deployments for a workflow run
     *
     * Get all deployment environments for a workflow run that are waiting for protection rules to pass.  Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return kotlin.collections.List<PendingMinusDeploymentModel>
+    * @return kotlin.collections.List<PendingMinusDeploymentApiModel>
     */
-    suspend fun actionsGetPendingDeploymentsForRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.collections.List<PendingMinusDeploymentModel>
+    suspend fun actionsGetPendingDeploymentsForRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.collections.List<PendingMinusDeploymentApiModel>
 
     /**
     * Get a repository public key
     *
     * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;secrets&#x60; repository permission to use this endpoint.
     *
-    * @return ActionsMinusPublicMinusKeyModel
+    * @return ActionsMinusPublicMinusKeyApiModel
     */
-    suspend fun actionsGetRepoPublicKey(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ActionsMinusPublicMinusKeyModel
+    suspend fun actionsGetRepoPublicKey(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ActionsMinusPublicMinusKeyApiModel
 
     /**
     * Get a repository secret
     *
     * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;secrets&#x60; repository permission to use this endpoint.
     *
-    * @return ActionsMinusSecretModel
+    * @return ActionsMinusSecretApiModel
     */
-    suspend fun actionsGetRepoSecret(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String): ActionsMinusSecretModel
+    suspend fun actionsGetRepoSecret(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String): ActionsMinusSecretApiModel
 
     /**
     * Get the review history for a workflow run
     *
     * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return kotlin.collections.List<EnvironmentMinusApprovalsModel>
+    * @return kotlin.collections.List<EnvironmentMinusApprovalsApiModel>
     */
-    suspend fun actionsGetReviewsForRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.collections.List<EnvironmentMinusApprovalsModel>
+    suspend fun actionsGetReviewsForRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.collections.List<EnvironmentMinusApprovalsApiModel>
 
     /**
     * Get a self-hosted runner for an organization
     *
     * Gets a specific self-hosted runner configured in an organization.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
-    * @return RunnerModel
+    * @return RunnerApiModel
     */
-    suspend fun actionsGetSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int): RunnerModel
+    suspend fun actionsGetSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int): RunnerApiModel
 
     /**
     * Get a self-hosted runner for a repository
     *
     * Gets a specific self-hosted runner configured in a repository.  You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint.
     *
-    * @return RunnerModel
+    * @return RunnerApiModel
     */
-    suspend fun actionsGetSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): RunnerModel
+    suspend fun actionsGetSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): RunnerApiModel
 
     /**
     * Get a self-hosted runner group for an organization
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see \&quot;[GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products).\&quot;  Gets a specific self-hosted runner group for an organization.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
-    * @return RunnerMinusGroupsMinusOrgModel
+    * @return RunnerMinusGroupsMinusOrgApiModel
     */
-    suspend fun actionsGetSelfHostedRunnerGroupForOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int): RunnerMinusGroupsMinusOrgModel
+    suspend fun actionsGetSelfHostedRunnerGroupForOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int): RunnerMinusGroupsMinusOrgApiModel
 
     /**
     * Get a workflow
     *
     * Gets a specific workflow. You can replace &#x60;workflow_id&#x60; with the workflow file name. For example, you could use &#x60;main.yaml&#x60;. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return WorkflowModel
+    * @return WorkflowApiModel
     */
-    suspend fun actionsGetWorkflow(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int): WorkflowModel
+    suspend fun actionsGetWorkflow(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int): WorkflowApiModel
 
     /**
     * Get a workflow run
     *
     * Gets a specific workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return WorkflowMinusRunModel
+    * @return WorkflowMinusRunApiModel
     */
-    suspend fun actionsGetWorkflowRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, excludePullRequests: kotlin.Boolean? = null): WorkflowMinusRunModel
+    suspend fun actionsGetWorkflowRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, excludePullRequests: kotlin.Boolean? = null): WorkflowMinusRunApiModel
 
     /**
     * Get a workflow run attempt
     *
     * Gets a specific workflow run attempt. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return WorkflowMinusRunModel
+    * @return WorkflowMinusRunApiModel
     */
-    suspend fun actionsGetWorkflowRunAttempt(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, attemptNumber: kotlin.Int, excludePullRequests: kotlin.Boolean? = null): WorkflowMinusRunModel
+    suspend fun actionsGetWorkflowRunAttempt(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, attemptNumber: kotlin.Int, excludePullRequests: kotlin.Boolean? = null): WorkflowMinusRunApiModel
 
     /**
     * Get workflow run usage
     *
     * Gets the number of billable minutes and total run time for a specific workflow run. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see \&quot;[Managing billing for GitHub Actions](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)\&quot;.  Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return WorkflowMinusRunMinusUsageModel
+    * @return WorkflowMinusRunMinusUsageApiModel
     */
-    suspend fun actionsGetWorkflowRunUsage(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): WorkflowMinusRunMinusUsageModel
+    suspend fun actionsGetWorkflowRunUsage(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): WorkflowMinusRunMinusUsageApiModel
 
     /**
     * Get workflow usage
     *
     * Gets the number of billable minutes used by a specific workflow during the current billing cycle. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see \&quot;[Managing billing for GitHub Actions](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)\&quot;.  You can replace &#x60;workflow_id&#x60; with the workflow file name. For example, you could use &#x60;main.yaml&#x60;. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return WorkflowMinusUsageModel
+    * @return WorkflowMinusUsageApiModel
     */
-    suspend fun actionsGetWorkflowUsage(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int): WorkflowMinusUsageModel
+    suspend fun actionsGetWorkflowUsage(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int): WorkflowMinusUsageApiModel
 
     /**
     * List artifacts for a repository
     *
     * Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return InlineResponse20013Model
+    * @return InlineResponse20013ApiModel
     */
-    suspend fun actionsListArtifactsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20013Model
+    suspend fun actionsListArtifactsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20013ApiModel
 
     /**
     * List environment secrets
     *
     * Lists all secrets available in an environment without revealing their encrypted values. You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;secrets&#x60; repository permission to use this endpoint.
     *
-    * @return InlineResponse20016Model
+    * @return InlineResponse20016ApiModel
     */
-    suspend fun actionsListEnvironmentSecrets(accessToken: String? = null, repositoryId: kotlin.Int, environmentName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20016Model
+    suspend fun actionsListEnvironmentSecrets(accessToken: String? = null, repositoryId: kotlin.Int, environmentName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20016ApiModel
 
     /**
     * List jobs for a workflow run
     *
     * Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
     *
-    * @return InlineResponse20015Model
+    * @return InlineResponse20015ApiModel
     */
-    suspend fun actionsListJobsForWorkflowRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, filter: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20015Model
+    suspend fun actionsListJobsForWorkflowRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, filter: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20015ApiModel
 
     /**
     * List jobs for a workflow run attempt
     *
     * Lists jobs for a specific workflow run attempt. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
     *
-    * @return InlineResponse20015Model
+    * @return InlineResponse20015ApiModel
     */
-    suspend fun actionsListJobsForWorkflowRunAttempt(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, attemptNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20015Model
+    suspend fun actionsListJobsForWorkflowRunAttempt(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, attemptNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20015ApiModel
 
     /**
     * List labels for a self-hosted runner for an organization
     *
     * Lists all labels for a self-hosted runner configured in an organization.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse2008Model
+    * @return InlineResponse2008ApiModel
     */
-    suspend fun actionsListLabelsForSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int): InlineResponse2008Model
+    suspend fun actionsListLabelsForSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int): InlineResponse2008ApiModel
 
     /**
     * List labels for a self-hosted runner for a repository
     *
     * Lists all labels for a self-hosted runner configured in a repository.  You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse2008Model
+    * @return InlineResponse2008ApiModel
     */
-    suspend fun actionsListLabelsForSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): InlineResponse2008Model
+    suspend fun actionsListLabelsForSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): InlineResponse2008ApiModel
 
     /**
     * List organization secrets
     *
     * Lists all secrets available in an organization without revealing their encrypted values. You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;secrets&#x60; organization permission to use this endpoint.
     *
-    * @return InlineResponse2009Model
+    * @return InlineResponse2009ApiModel
     */
-    suspend fun actionsListOrgSecrets(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2009Model
+    suspend fun actionsListOrgSecrets(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2009ApiModel
 
     /**
     * List repository access to a self-hosted runner group in an organization
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud and GitHub Enterprise Server. For more information, see \&quot;[GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products).\&quot;  Lists the repositories with access to a self-hosted runner group configured in an organization.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse2005Model
+    * @return InlineResponse2005ApiModel
     */
-    suspend fun actionsListRepoAccessToSelfHostedRunnerGroupInOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int, page: kotlin.Int? = null, perPage: kotlin.Int? = null): InlineResponse2005Model
+    suspend fun actionsListRepoAccessToSelfHostedRunnerGroupInOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int, page: kotlin.Int? = null, perPage: kotlin.Int? = null): InlineResponse2005ApiModel
 
     /**
     * List repository secrets
     *
     * Lists all secrets available in a repository without revealing their encrypted values. You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;secrets&#x60; repository permission to use this endpoint.
     *
-    * @return InlineResponse20016Model
+    * @return InlineResponse20016ApiModel
     */
-    suspend fun actionsListRepoSecrets(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20016Model
+    suspend fun actionsListRepoSecrets(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20016ApiModel
 
     /**
     * List repository workflows
     *
     * Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return InlineResponse20017Model
+    * @return InlineResponse20017ApiModel
     */
-    suspend fun actionsListRepoWorkflows(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20017Model
+    suspend fun actionsListRepoWorkflows(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20017ApiModel
 
     /**
     * List runner applications for an organization
     *
     * Lists binaries for the runner application that you can download and run.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
-    * @return kotlin.collections.List<RunnerMinusApplicationModel>
+    * @return kotlin.collections.List<RunnerMinusApplicationApiModel>
     */
-    suspend fun actionsListRunnerApplicationsForOrg(accessToken: String? = null, org: kotlin.String): kotlin.collections.List<RunnerMinusApplicationModel>
+    suspend fun actionsListRunnerApplicationsForOrg(accessToken: String? = null, org: kotlin.String): kotlin.collections.List<RunnerMinusApplicationApiModel>
 
     /**
     * List runner applications for a repository
     *
     * Lists binaries for the runner application that you can download and run.  You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint.
     *
-    * @return kotlin.collections.List<RunnerMinusApplicationModel>
+    * @return kotlin.collections.List<RunnerMinusApplicationApiModel>
     */
-    suspend fun actionsListRunnerApplicationsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<RunnerMinusApplicationModel>
+    suspend fun actionsListRunnerApplicationsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<RunnerMinusApplicationApiModel>
 
     /**
     * List selected repositories for an organization secret
     *
     * Lists all repositories that have been selected when the &#x60;visibility&#x60; for repository access to a secret is set to &#x60;selected&#x60;. You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;secrets&#x60; organization permission to use this endpoint.
     *
-    * @return InlineResponse20010Model
+    * @return InlineResponse20010ApiModel
     */
-    suspend fun actionsListSelectedReposForOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): InlineResponse20010Model
+    suspend fun actionsListSelectedReposForOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): InlineResponse20010ApiModel
 
     /**
     * List selected repositories enabled for GitHub Actions in an organization
     *
     * Lists the selected repositories that are enabled for GitHub Actions in an organization. To use this endpoint, the organization permission policy for &#x60;enabled_repositories&#x60; must be configured to &#x60;selected&#x60;. For more information, see \&quot;[Set GitHub Actions permissions for an organization](#set-github-actions-permissions-for-an-organization).\&quot;  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint. GitHub Apps must have the &#x60;administration&#x60; organization permission to use this API.
     *
-    * @return InlineResponse2003Model
+    * @return InlineResponse2003ApiModel
     */
-    suspend fun actionsListSelectedRepositoriesEnabledGithubActionsOrganization(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2003Model
+    suspend fun actionsListSelectedRepositoriesEnabledGithubActionsOrganization(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2003ApiModel
 
     /**
     * List self-hosted runner groups for an organization
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see \&quot;[GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products).\&quot;  Lists all self-hosted runner groups configured in an organization and inherited from an enterprise.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse2004Model
+    * @return InlineResponse2004ApiModel
     */
-    suspend fun actionsListSelfHostedRunnerGroupsForOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2004Model
+    suspend fun actionsListSelfHostedRunnerGroupsForOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2004ApiModel
 
     /**
     * List self-hosted runners for an organization
     *
     * Lists all self-hosted runners configured in an organization.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse2007Model
+    * @return InlineResponse2007ApiModel
     */
-    suspend fun actionsListSelfHostedRunnersForOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2007Model
+    suspend fun actionsListSelfHostedRunnersForOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2007ApiModel
 
     /**
     * List self-hosted runners for a repository
     *
     * Lists all self-hosted runners configured in a repository. You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse2007Model
+    * @return InlineResponse2007ApiModel
     */
-    suspend fun actionsListSelfHostedRunnersForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2007Model
+    suspend fun actionsListSelfHostedRunnersForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2007ApiModel
 
     /**
     * List self-hosted runners in a group for an organization
     *
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see \&quot;[GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products).\&quot;  Lists self-hosted runners that are in a specific organization group.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse2006Model
+    * @return InlineResponse2006ApiModel
     */
-    suspend fun actionsListSelfHostedRunnersInGroupForOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2006Model
+    suspend fun actionsListSelfHostedRunnersInGroupForOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse2006ApiModel
 
     /**
     * List workflow run artifacts
     *
     * Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return InlineResponse20013Model
+    * @return InlineResponse20013ApiModel
     */
-    suspend fun actionsListWorkflowRunArtifacts(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20013Model
+    suspend fun actionsListWorkflowRunArtifacts(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20013ApiModel
 
     /**
     * List workflow runs
     *
     * List all workflow runs for a workflow. You can replace &#x60;workflow_id&#x60; with the workflow file name. For example, you could use &#x60;main.yaml&#x60;. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).  Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope.
     *
-    * @return InlineResponse20014Model
+    * @return InlineResponse20014ApiModel
     */
-    suspend fun actionsListWorkflowRuns(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int, actor: kotlin.String? = null, branch: kotlin.String? = null, event: kotlin.String? = null, status: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, created: kotlin.String? = null, excludePullRequests: kotlin.Boolean? = null, checkSuiteId: kotlin.Int? = null): InlineResponse20014Model
+    suspend fun actionsListWorkflowRuns(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int, actor: kotlin.String? = null, branch: kotlin.String? = null, event: kotlin.String? = null, status: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, created: kotlin.String? = null, excludePullRequests: kotlin.Boolean? = null, checkSuiteId: kotlin.Int? = null): InlineResponse20014ApiModel
 
     /**
     * List workflow runs for a repository
     *
     * Lists all workflow runs for a repository. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).  Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the &#x60;repo&#x60; scope. GitHub Apps must have the &#x60;actions:read&#x60; permission to use this endpoint.
     *
-    * @return InlineResponse20014Model
+    * @return InlineResponse20014ApiModel
     */
-    suspend fun actionsListWorkflowRunsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, actor: kotlin.String? = null, branch: kotlin.String? = null, event: kotlin.String? = null, status: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, created: kotlin.String? = null, excludePullRequests: kotlin.Boolean? = null, checkSuiteId: kotlin.Int? = null): InlineResponse20014Model
+    suspend fun actionsListWorkflowRunsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, actor: kotlin.String? = null, branch: kotlin.String? = null, event: kotlin.String? = null, status: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null, created: kotlin.String? = null, excludePullRequests: kotlin.Boolean? = null, checkSuiteId: kotlin.Int? = null): InlineResponse20014ApiModel
 
     /**
     * Re-run a workflow
@@ -741,36 +741,36 @@ interface ActionsApi {
     *
     * Remove all custom labels from a self-hosted runner configured in an organization. Returns the remaining read-only labels from the runner.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse2008Model
+    * @return InlineResponse2008ApiModel
     */
-    suspend fun actionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int): InlineResponse2008Model
+    suspend fun actionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int): InlineResponse2008ApiModel
 
     /**
     * Remove all custom labels from a self-hosted runner for a repository
     *
     * Remove all custom labels from a self-hosted runner configured in a repository. Returns the remaining read-only labels from the runner.  You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse2008Model
+    * @return InlineResponse2008ApiModel
     */
-    suspend fun actionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): InlineResponse2008Model
+    suspend fun actionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): InlineResponse2008ApiModel
 
     /**
     * Remove a custom label from a self-hosted runner for an organization
     *
     * Remove a custom label from a self-hosted runner configured in an organization. Returns the remaining labels from the runner.  This endpoint returns a &#x60;404 Not Found&#x60; status if the custom label is not present on the runner.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse2008Model
+    * @return InlineResponse2008ApiModel
     */
-    suspend fun actionsRemoveCustomLabelFromSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int, name: kotlin.String): InlineResponse2008Model
+    suspend fun actionsRemoveCustomLabelFromSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int, name: kotlin.String): InlineResponse2008ApiModel
 
     /**
     * Remove a custom label from a self-hosted runner for a repository
     *
     * Remove a custom label from a self-hosted runner configured in a repository. Returns the remaining labels from the runner.  This endpoint returns a &#x60;404 Not Found&#x60; status if the custom label is not present on the runner.  You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse2008Model
+    * @return InlineResponse2008ApiModel
     */
-    suspend fun actionsRemoveCustomLabelFromSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, name: kotlin.String): InlineResponse2008Model
+    suspend fun actionsRemoveCustomLabelFromSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, name: kotlin.String): InlineResponse2008ApiModel
 
     /**
     * Remove repository access to a self-hosted runner group in an organization
@@ -805,9 +805,9 @@ interface ActionsApi {
     * Approve or reject pending deployments that are waiting on approval by a required reviewer.  Anyone with read access to the repository contents and deployments can use this endpoint.
     *
     * @param request 
-    * @return kotlin.collections.List<DeploymentModel>
+    * @return kotlin.collections.List<DeploymentApiModel>
     */
-    suspend fun actionsReviewPendingDeploymentsForRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, request: InlineObject61Model): kotlin.collections.List<DeploymentModel>
+    suspend fun actionsReviewPendingDeploymentsForRun(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, request: InlineObject61ApiModel): kotlin.collections.List<DeploymentApiModel>
 
     /**
     * Set allowed actions for an organization
@@ -817,7 +817,7 @@ interface ActionsApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun actionsSetAllowedActionsOrganization(accessToken: String? = null, org: kotlin.String, request: SelectedMinusActionsModel)
+    suspend fun actionsSetAllowedActionsOrganization(accessToken: String? = null, org: kotlin.String, request: SelectedMinusActionsApiModel)
 
     /**
     * Set allowed actions for a repository
@@ -827,7 +827,7 @@ interface ActionsApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun actionsSetAllowedActionsRepository(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: SelectedMinusActionsModel)
+    suspend fun actionsSetAllowedActionsRepository(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: SelectedMinusActionsApiModel)
 
     /**
     * Set custom labels for a self-hosted runner for an organization
@@ -835,9 +835,9 @@ interface ActionsApi {
     * Remove all previous custom labels and set the new custom labels for a specific self-hosted runner configured in an organization.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
     * @param request 
-    * @return InlineResponse2008Model
+    * @return InlineResponse2008ApiModel
     */
-    suspend fun actionsSetCustomLabelsForSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int, request: InlineObject24Model): InlineResponse2008Model
+    suspend fun actionsSetCustomLabelsForSelfHostedRunnerForOrg(accessToken: String? = null, org: kotlin.String, runnerId: kotlin.Int, request: InlineObject24ApiModel): InlineResponse2008ApiModel
 
     /**
     * Set custom labels for a self-hosted runner for a repository
@@ -845,9 +845,9 @@ interface ActionsApi {
     * Remove all previous custom labels and set the new custom labels for a specific self-hosted runner configured in a repository.  You must authenticate using an access token with the &#x60;repo&#x60; scope to use this endpoint.
     *
     * @param request 
-    * @return InlineResponse2008Model
+    * @return InlineResponse2008ApiModel
     */
-    suspend fun actionsSetCustomLabelsForSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, request: InlineObject59Model): InlineResponse2008Model
+    suspend fun actionsSetCustomLabelsForSelfHostedRunnerForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, request: InlineObject59ApiModel): InlineResponse2008ApiModel
 
     /**
     * Set default workflow permissions
@@ -857,7 +857,7 @@ interface ActionsApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun actionsSetGithubActionsDefaultWorkflowPermissionsOrganization(accessToken: String? = null, org: kotlin.String, request: ActionsMinusSetMinusDefaultMinusWorkflowMinusPermissionsModel)
+    suspend fun actionsSetGithubActionsDefaultWorkflowPermissionsOrganization(accessToken: String? = null, org: kotlin.String, request: ActionsMinusSetMinusDefaultMinusWorkflowMinusPermissionsApiModel)
 
     /**
     * Set GitHub Actions permissions for an organization
@@ -867,7 +867,7 @@ interface ActionsApi {
     * @param request 
     * @return void
     */
-    suspend fun actionsSetGithubActionsPermissionsOrganization(accessToken: String? = null, org: kotlin.String, request: InlineObject18Model)
+    suspend fun actionsSetGithubActionsPermissionsOrganization(accessToken: String? = null, org: kotlin.String, request: InlineObject18ApiModel)
 
     /**
     * Set GitHub Actions permissions for a repository
@@ -877,7 +877,7 @@ interface ActionsApi {
     * @param request 
     * @return void
     */
-    suspend fun actionsSetGithubActionsPermissionsRepository(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject58Model)
+    suspend fun actionsSetGithubActionsPermissionsRepository(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject58ApiModel)
 
     /**
     * Set repository access for a self-hosted runner group in an organization
@@ -887,7 +887,7 @@ interface ActionsApi {
     * @param request 
     * @return void
     */
-    suspend fun actionsSetRepoAccessToSelfHostedRunnerGroupInOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject22Model)
+    suspend fun actionsSetRepoAccessToSelfHostedRunnerGroupInOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject22ApiModel)
 
     /**
     * Set selected repositories for an organization secret
@@ -897,7 +897,7 @@ interface ActionsApi {
     * @param request 
     * @return void
     */
-    suspend fun actionsSetSelectedReposForOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, request: InlineObject27Model)
+    suspend fun actionsSetSelectedReposForOrgSecret(accessToken: String? = null, org: kotlin.String, secretName: kotlin.String, request: InlineObject27ApiModel)
 
     /**
     * Set selected repositories enabled for GitHub Actions in an organization
@@ -907,7 +907,7 @@ interface ActionsApi {
     * @param request 
     * @return void
     */
-    suspend fun actionsSetSelectedRepositoriesEnabledGithubActionsOrganization(accessToken: String? = null, org: kotlin.String, request: InlineObject19Model)
+    suspend fun actionsSetSelectedRepositoriesEnabledGithubActionsOrganization(accessToken: String? = null, org: kotlin.String, request: InlineObject19ApiModel)
 
     /**
     * Set self-hosted runners in a group for an organization
@@ -917,7 +917,7 @@ interface ActionsApi {
     * @param request 
     * @return void
     */
-    suspend fun actionsSetSelfHostedRunnersInGroupForOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject23Model)
+    suspend fun actionsSetSelfHostedRunnersInGroupForOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject23ApiModel)
 
     /**
     * Update a self-hosted runner group for an organization
@@ -925,16 +925,16 @@ interface ActionsApi {
     * The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see \&quot;[GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products).\&quot;  Updates the &#x60;name&#x60; and &#x60;visibility&#x60; of a self-hosted runner group in an organization.  You must authenticate using an access token with the &#x60;admin:org&#x60; scope to use this endpoint.
     *
     * @param request 
-    * @return RunnerMinusGroupsMinusOrgModel
+    * @return RunnerMinusGroupsMinusOrgApiModel
     */
-    suspend fun actionsUpdateSelfHostedRunnerGroupForOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject21Model): RunnerMinusGroupsMinusOrgModel
+    suspend fun actionsUpdateSelfHostedRunnerGroupForOrg(accessToken: String? = null, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject21ApiModel): RunnerMinusGroupsMinusOrgApiModel
 
 }
 
 class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) : ActionsApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun actionsAddCustomLabelsToSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int, request: InlineObject25Model): InlineResponse2008Model {
+    override suspend fun actionsAddCustomLabelsToSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int, request: InlineObject25ApiModel): InlineResponse2008ApiModel {
         val path = "/orgs/{org}/actions/runners/{runner_id}/labels".replace("{"+"org"+"}", "$org").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
@@ -944,7 +944,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsAddCustomLabelsToSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, request: InlineObject60Model): InlineResponse2008Model {
+    override suspend fun actionsAddCustomLabelsToSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, request: InlineObject60ApiModel): InlineResponse2008ApiModel {
         val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
@@ -999,7 +999,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsCreateOrUpdateEnvironmentSecret(accessToken: String?, repositoryId: kotlin.Int, environmentName: kotlin.String, secretName: kotlin.String, request: InlineObject141Model): kotlin.Any {
+    override suspend fun actionsCreateOrUpdateEnvironmentSecret(accessToken: String?, repositoryId: kotlin.Int, environmentName: kotlin.String, secretName: kotlin.String, request: InlineObject141ApiModel): kotlin.Any {
         val path = "/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}".replace("{"+"repository_id"+"}", "$repositoryId").replace("{"+"environment_name"+"}", "$environmentName").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -1009,7 +1009,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsCreateOrUpdateOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, request: InlineObject26Model): kotlin.Any {
+    override suspend fun actionsCreateOrUpdateOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, request: InlineObject26ApiModel): kotlin.Any {
         val path = "/orgs/{org}/actions/secrets/{secret_name}".replace("{"+"org"+"}", "$org").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -1019,7 +1019,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsCreateOrUpdateRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String, request: InlineObject62Model): kotlin.Any {
+    override suspend fun actionsCreateOrUpdateRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String, request: InlineObject62ApiModel): kotlin.Any {
         val path = "/repos/{owner}/{repo}/actions/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -1029,7 +1029,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsCreateRegistrationTokenForOrg(accessToken: String?, org: kotlin.String): AuthenticationMinusTokenModel {
+    override suspend fun actionsCreateRegistrationTokenForOrg(accessToken: String?, org: kotlin.String): AuthenticationMinusTokenApiModel {
         val path = "/orgs/{org}/actions/runners/registration-token".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1038,7 +1038,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsCreateRegistrationTokenForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): AuthenticationMinusTokenModel {
+    override suspend fun actionsCreateRegistrationTokenForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): AuthenticationMinusTokenApiModel {
         val path = "/repos/{owner}/{repo}/actions/runners/registration-token".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1047,7 +1047,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsCreateRemoveTokenForOrg(accessToken: String?, org: kotlin.String): AuthenticationMinusTokenModel {
+    override suspend fun actionsCreateRemoveTokenForOrg(accessToken: String?, org: kotlin.String): AuthenticationMinusTokenApiModel {
         val path = "/orgs/{org}/actions/runners/remove-token".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1056,7 +1056,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsCreateRemoveTokenForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): AuthenticationMinusTokenModel {
+    override suspend fun actionsCreateRemoveTokenForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): AuthenticationMinusTokenApiModel {
         val path = "/repos/{owner}/{repo}/actions/runners/remove-token".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1065,7 +1065,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsCreateSelfHostedRunnerGroupForOrg(accessToken: String?, org: kotlin.String, request: InlineObject20Model): RunnerMinusGroupsMinusOrgModel {
+    override suspend fun actionsCreateSelfHostedRunnerGroupForOrg(accessToken: String?, org: kotlin.String, request: InlineObject20ApiModel): RunnerMinusGroupsMinusOrgApiModel {
         val path = "/orgs/{org}/actions/runner-groups".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1075,7 +1075,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsCreateWorkflowDispatch(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int, request: InlineObject63Model) {
+    override suspend fun actionsCreateWorkflowDispatch(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int, request: InlineObject63ApiModel) {
         val path = "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
 
         return httpClient.request {
@@ -1238,7 +1238,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetAllowedActionsOrganization(accessToken: String?, org: kotlin.String): SelectedMinusActionsModel {
+    override suspend fun actionsGetAllowedActionsOrganization(accessToken: String?, org: kotlin.String): SelectedMinusActionsApiModel {
         val path = "/orgs/{org}/actions/permissions/selected-actions".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1247,7 +1247,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetAllowedActionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String): SelectedMinusActionsModel {
+    override suspend fun actionsGetAllowedActionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String): SelectedMinusActionsApiModel {
         val path = "/repos/{owner}/{repo}/actions/permissions/selected-actions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1256,7 +1256,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetArtifact(accessToken: String?, owner: kotlin.String, repo: kotlin.String, artifactId: kotlin.Int): ArtifactModel {
+    override suspend fun actionsGetArtifact(accessToken: String?, owner: kotlin.String, repo: kotlin.String, artifactId: kotlin.Int): ArtifactApiModel {
         val path = "/repos/{owner}/{repo}/actions/artifacts/{artifact_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"artifact_id"+"}", "$artifactId")
 
         return httpClient.request {
@@ -1265,7 +1265,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetEnvironmentPublicKey(accessToken: String?, repositoryId: kotlin.Int, environmentName: kotlin.String): ActionsMinusPublicMinusKeyModel {
+    override suspend fun actionsGetEnvironmentPublicKey(accessToken: String?, repositoryId: kotlin.Int, environmentName: kotlin.String): ActionsMinusPublicMinusKeyApiModel {
         val path = "/repositories/{repository_id}/environments/{environment_name}/secrets/public-key".replace("{"+"repository_id"+"}", "$repositoryId").replace("{"+"environment_name"+"}", "$environmentName")
 
         return httpClient.request {
@@ -1274,7 +1274,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetEnvironmentSecret(accessToken: String?, repositoryId: kotlin.Int, environmentName: kotlin.String, secretName: kotlin.String): ActionsMinusSecretModel {
+    override suspend fun actionsGetEnvironmentSecret(accessToken: String?, repositoryId: kotlin.Int, environmentName: kotlin.String, secretName: kotlin.String): ActionsMinusSecretApiModel {
         val path = "/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}".replace("{"+"repository_id"+"}", "$repositoryId").replace("{"+"environment_name"+"}", "$environmentName").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -1283,7 +1283,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetGithubActionsDefaultWorkflowPermissionsOrganization(accessToken: String?, org: kotlin.String): ActionsMinusGetMinusDefaultMinusWorkflowMinusPermissionsModel {
+    override suspend fun actionsGetGithubActionsDefaultWorkflowPermissionsOrganization(accessToken: String?, org: kotlin.String): ActionsMinusGetMinusDefaultMinusWorkflowMinusPermissionsApiModel {
         val path = "/orgs/{org}/actions/permissions/workflow".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1292,7 +1292,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetGithubActionsPermissionsOrganization(accessToken: String?, org: kotlin.String): ActionsMinusOrganizationMinusPermissionsModel {
+    override suspend fun actionsGetGithubActionsPermissionsOrganization(accessToken: String?, org: kotlin.String): ActionsMinusOrganizationMinusPermissionsApiModel {
         val path = "/orgs/{org}/actions/permissions".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1301,7 +1301,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetGithubActionsPermissionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ActionsMinusRepositoryMinusPermissionsModel {
+    override suspend fun actionsGetGithubActionsPermissionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ActionsMinusRepositoryMinusPermissionsApiModel {
         val path = "/repos/{owner}/{repo}/actions/permissions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1310,7 +1310,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetJobForWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, jobId: kotlin.Int): JobModel {
+    override suspend fun actionsGetJobForWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, jobId: kotlin.Int): JobApiModel {
         val path = "/repos/{owner}/{repo}/actions/jobs/{job_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"job_id"+"}", "$jobId")
 
         return httpClient.request {
@@ -1319,7 +1319,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetOrgPublicKey(accessToken: String?, org: kotlin.String): ActionsMinusPublicMinusKeyModel {
+    override suspend fun actionsGetOrgPublicKey(accessToken: String?, org: kotlin.String): ActionsMinusPublicMinusKeyApiModel {
         val path = "/orgs/{org}/actions/secrets/public-key".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1328,7 +1328,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String): OrganizationMinusActionsMinusSecretModel {
+    override suspend fun actionsGetOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String): OrganizationMinusActionsMinusSecretApiModel {
         val path = "/orgs/{org}/actions/secrets/{secret_name}".replace("{"+"org"+"}", "$org").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -1337,7 +1337,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetPendingDeploymentsForRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.collections.List<PendingMinusDeploymentModel> {
+    override suspend fun actionsGetPendingDeploymentsForRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.collections.List<PendingMinusDeploymentApiModel> {
         val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
@@ -1346,7 +1346,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetRepoPublicKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ActionsMinusPublicMinusKeyModel {
+    override suspend fun actionsGetRepoPublicKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ActionsMinusPublicMinusKeyApiModel {
         val path = "/repos/{owner}/{repo}/actions/secrets/public-key".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1355,7 +1355,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String): ActionsMinusSecretModel {
+    override suspend fun actionsGetRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String): ActionsMinusSecretApiModel {
         val path = "/repos/{owner}/{repo}/actions/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -1364,7 +1364,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetReviewsForRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.collections.List<EnvironmentMinusApprovalsModel> {
+    override suspend fun actionsGetReviewsForRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.collections.List<EnvironmentMinusApprovalsApiModel> {
         val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/approvals".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
@@ -1373,7 +1373,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int): RunnerModel {
+    override suspend fun actionsGetSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int): RunnerApiModel {
         val path = "/orgs/{org}/actions/runners/{runner_id}".replace("{"+"org"+"}", "$org").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
@@ -1382,7 +1382,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): RunnerModel {
+    override suspend fun actionsGetSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): RunnerApiModel {
         val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
@@ -1391,7 +1391,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetSelfHostedRunnerGroupForOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int): RunnerMinusGroupsMinusOrgModel {
+    override suspend fun actionsGetSelfHostedRunnerGroupForOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int): RunnerMinusGroupsMinusOrgApiModel {
         val path = "/orgs/{org}/actions/runner-groups/{runner_group_id}".replace("{"+"org"+"}", "$org").replace("{"+"runner_group_id"+"}", "$runnerGroupId")
 
         return httpClient.request {
@@ -1400,7 +1400,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetWorkflow(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int): WorkflowModel {
+    override suspend fun actionsGetWorkflow(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int): WorkflowApiModel {
         val path = "/repos/{owner}/{repo}/actions/workflows/{workflow_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
 
         return httpClient.request {
@@ -1409,7 +1409,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, excludePullRequests: kotlin.Boolean?): WorkflowMinusRunModel {
+    override suspend fun actionsGetWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, excludePullRequests: kotlin.Boolean?): WorkflowMinusRunApiModel {
         val path = "/repos/{owner}/{repo}/actions/runs/{run_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
@@ -1419,7 +1419,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetWorkflowRunAttempt(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, attemptNumber: kotlin.Int, excludePullRequests: kotlin.Boolean?): WorkflowMinusRunModel {
+    override suspend fun actionsGetWorkflowRunAttempt(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, attemptNumber: kotlin.Int, excludePullRequests: kotlin.Boolean?): WorkflowMinusRunApiModel {
         val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId").replace("{"+"attempt_number"+"}", "$attemptNumber")
 
         return httpClient.request {
@@ -1429,7 +1429,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetWorkflowRunUsage(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): WorkflowMinusRunMinusUsageModel {
+    override suspend fun actionsGetWorkflowRunUsage(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): WorkflowMinusRunMinusUsageApiModel {
         val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/timing".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
@@ -1438,7 +1438,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsGetWorkflowUsage(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int): WorkflowMinusUsageModel {
+    override suspend fun actionsGetWorkflowUsage(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int): WorkflowMinusUsageApiModel {
         val path = "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
 
         return httpClient.request {
@@ -1447,7 +1447,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListArtifactsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20013Model {
+    override suspend fun actionsListArtifactsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20013ApiModel {
         val path = "/repos/{owner}/{repo}/actions/artifacts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1458,7 +1458,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListEnvironmentSecrets(accessToken: String?, repositoryId: kotlin.Int, environmentName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20016Model {
+    override suspend fun actionsListEnvironmentSecrets(accessToken: String?, repositoryId: kotlin.Int, environmentName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20016ApiModel {
         val path = "/repositories/{repository_id}/environments/{environment_name}/secrets".replace("{"+"repository_id"+"}", "$repositoryId").replace("{"+"environment_name"+"}", "$environmentName")
 
         return httpClient.request {
@@ -1469,7 +1469,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListJobsForWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, filter: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20015Model {
+    override suspend fun actionsListJobsForWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, filter: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20015ApiModel {
         val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/jobs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
@@ -1481,7 +1481,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListJobsForWorkflowRunAttempt(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, attemptNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20015Model {
+    override suspend fun actionsListJobsForWorkflowRunAttempt(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, attemptNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20015ApiModel {
         val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId").replace("{"+"attempt_number"+"}", "$attemptNumber")
 
         return httpClient.request {
@@ -1492,7 +1492,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListLabelsForSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int): InlineResponse2008Model {
+    override suspend fun actionsListLabelsForSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int): InlineResponse2008ApiModel {
         val path = "/orgs/{org}/actions/runners/{runner_id}/labels".replace("{"+"org"+"}", "$org").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
@@ -1501,7 +1501,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListLabelsForSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): InlineResponse2008Model {
+    override suspend fun actionsListLabelsForSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): InlineResponse2008ApiModel {
         val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
@@ -1510,7 +1510,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListOrgSecrets(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2009Model {
+    override suspend fun actionsListOrgSecrets(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2009ApiModel {
         val path = "/orgs/{org}/actions/secrets".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1521,7 +1521,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListRepoAccessToSelfHostedRunnerGroupInOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int, page: kotlin.Int?, perPage: kotlin.Int?): InlineResponse2005Model {
+    override suspend fun actionsListRepoAccessToSelfHostedRunnerGroupInOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int, page: kotlin.Int?, perPage: kotlin.Int?): InlineResponse2005ApiModel {
         val path = "/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories".replace("{"+"org"+"}", "$org").replace("{"+"runner_group_id"+"}", "$runnerGroupId")
 
         return httpClient.request {
@@ -1532,7 +1532,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListRepoSecrets(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20016Model {
+    override suspend fun actionsListRepoSecrets(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20016ApiModel {
         val path = "/repos/{owner}/{repo}/actions/secrets".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1543,7 +1543,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListRepoWorkflows(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20017Model {
+    override suspend fun actionsListRepoWorkflows(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20017ApiModel {
         val path = "/repos/{owner}/{repo}/actions/workflows".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1554,7 +1554,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListRunnerApplicationsForOrg(accessToken: String?, org: kotlin.String): kotlin.collections.List<RunnerMinusApplicationModel> {
+    override suspend fun actionsListRunnerApplicationsForOrg(accessToken: String?, org: kotlin.String): kotlin.collections.List<RunnerMinusApplicationApiModel> {
         val path = "/orgs/{org}/actions/runners/downloads".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1563,7 +1563,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListRunnerApplicationsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<RunnerMinusApplicationModel> {
+    override suspend fun actionsListRunnerApplicationsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<RunnerMinusApplicationApiModel> {
         val path = "/repos/{owner}/{repo}/actions/runners/downloads".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1572,7 +1572,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListSelectedReposForOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): InlineResponse20010Model {
+    override suspend fun actionsListSelectedReposForOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): InlineResponse20010ApiModel {
         val path = "/orgs/{org}/actions/secrets/{secret_name}/repositories".replace("{"+"org"+"}", "$org").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -1583,7 +1583,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListSelectedRepositoriesEnabledGithubActionsOrganization(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2003Model {
+    override suspend fun actionsListSelectedRepositoriesEnabledGithubActionsOrganization(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2003ApiModel {
         val path = "/orgs/{org}/actions/permissions/repositories".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1594,7 +1594,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListSelfHostedRunnerGroupsForOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2004Model {
+    override suspend fun actionsListSelfHostedRunnerGroupsForOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2004ApiModel {
         val path = "/orgs/{org}/actions/runner-groups".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1605,7 +1605,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListSelfHostedRunnersForOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2007Model {
+    override suspend fun actionsListSelfHostedRunnersForOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2007ApiModel {
         val path = "/orgs/{org}/actions/runners".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1616,7 +1616,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListSelfHostedRunnersForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2007Model {
+    override suspend fun actionsListSelfHostedRunnersForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2007ApiModel {
         val path = "/repos/{owner}/{repo}/actions/runners".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1627,7 +1627,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListSelfHostedRunnersInGroupForOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2006Model {
+    override suspend fun actionsListSelfHostedRunnersInGroupForOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2006ApiModel {
         val path = "/orgs/{org}/actions/runner-groups/{runner_group_id}/runners".replace("{"+"org"+"}", "$org").replace("{"+"runner_group_id"+"}", "$runnerGroupId")
 
         return httpClient.request {
@@ -1638,7 +1638,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListWorkflowRunArtifacts(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20013Model {
+    override suspend fun actionsListWorkflowRunArtifacts(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20013ApiModel {
         val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
@@ -1649,7 +1649,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListWorkflowRuns(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int, actor: kotlin.String?, branch: kotlin.String?, event: kotlin.String?, status: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?, created: kotlin.String?, excludePullRequests: kotlin.Boolean?, checkSuiteId: kotlin.Int?): InlineResponse20014Model {
+    override suspend fun actionsListWorkflowRuns(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int, actor: kotlin.String?, branch: kotlin.String?, event: kotlin.String?, status: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?, created: kotlin.String?, excludePullRequests: kotlin.Boolean?, checkSuiteId: kotlin.Int?): InlineResponse20014ApiModel {
         val path = "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
 
         return httpClient.request {
@@ -1667,7 +1667,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsListWorkflowRunsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, actor: kotlin.String?, branch: kotlin.String?, event: kotlin.String?, status: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?, created: kotlin.String?, excludePullRequests: kotlin.Boolean?, checkSuiteId: kotlin.Int?): InlineResponse20014Model {
+    override suspend fun actionsListWorkflowRunsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, actor: kotlin.String?, branch: kotlin.String?, event: kotlin.String?, status: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?, created: kotlin.String?, excludePullRequests: kotlin.Boolean?, checkSuiteId: kotlin.Int?): InlineResponse20014ApiModel {
         val path = "/repos/{owner}/{repo}/actions/runs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1694,7 +1694,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int): InlineResponse2008Model {
+    override suspend fun actionsRemoveAllCustomLabelsFromSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int): InlineResponse2008ApiModel {
         val path = "/orgs/{org}/actions/runners/{runner_id}/labels".replace("{"+"org"+"}", "$org").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
@@ -1703,7 +1703,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): InlineResponse2008Model {
+    override suspend fun actionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): InlineResponse2008ApiModel {
         val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
@@ -1712,7 +1712,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsRemoveCustomLabelFromSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int, name: kotlin.String): InlineResponse2008Model {
+    override suspend fun actionsRemoveCustomLabelFromSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int, name: kotlin.String): InlineResponse2008ApiModel {
         val path = "/orgs/{org}/actions/runners/{runner_id}/labels/{name}".replace("{"+"org"+"}", "$org").replace("{"+"runner_id"+"}", "$runnerId").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
@@ -1721,7 +1721,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsRemoveCustomLabelFromSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, name: kotlin.String): InlineResponse2008Model {
+    override suspend fun actionsRemoveCustomLabelFromSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, name: kotlin.String): InlineResponse2008ApiModel {
         val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
@@ -1757,7 +1757,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsReviewPendingDeploymentsForRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, request: InlineObject61Model): kotlin.collections.List<DeploymentModel> {
+    override suspend fun actionsReviewPendingDeploymentsForRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, request: InlineObject61ApiModel): kotlin.collections.List<DeploymentApiModel> {
         val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
@@ -1767,7 +1767,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsSetAllowedActionsOrganization(accessToken: String?, org: kotlin.String, request: SelectedMinusActionsModel) {
+    override suspend fun actionsSetAllowedActionsOrganization(accessToken: String?, org: kotlin.String, request: SelectedMinusActionsApiModel) {
         val path = "/orgs/{org}/actions/permissions/selected-actions".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1777,7 +1777,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsSetAllowedActionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: SelectedMinusActionsModel) {
+    override suspend fun actionsSetAllowedActionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: SelectedMinusActionsApiModel) {
         val path = "/repos/{owner}/{repo}/actions/permissions/selected-actions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1787,7 +1787,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsSetCustomLabelsForSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int, request: InlineObject24Model): InlineResponse2008Model {
+    override suspend fun actionsSetCustomLabelsForSelfHostedRunnerForOrg(accessToken: String?, org: kotlin.String, runnerId: kotlin.Int, request: InlineObject24ApiModel): InlineResponse2008ApiModel {
         val path = "/orgs/{org}/actions/runners/{runner_id}/labels".replace("{"+"org"+"}", "$org").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
@@ -1797,7 +1797,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsSetCustomLabelsForSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, request: InlineObject59Model): InlineResponse2008Model {
+    override suspend fun actionsSetCustomLabelsForSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, request: InlineObject59ApiModel): InlineResponse2008ApiModel {
         val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
@@ -1807,7 +1807,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsSetGithubActionsDefaultWorkflowPermissionsOrganization(accessToken: String?, org: kotlin.String, request: ActionsMinusSetMinusDefaultMinusWorkflowMinusPermissionsModel) {
+    override suspend fun actionsSetGithubActionsDefaultWorkflowPermissionsOrganization(accessToken: String?, org: kotlin.String, request: ActionsMinusSetMinusDefaultMinusWorkflowMinusPermissionsApiModel) {
         val path = "/orgs/{org}/actions/permissions/workflow".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1817,7 +1817,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsSetGithubActionsPermissionsOrganization(accessToken: String?, org: kotlin.String, request: InlineObject18Model) {
+    override suspend fun actionsSetGithubActionsPermissionsOrganization(accessToken: String?, org: kotlin.String, request: InlineObject18ApiModel) {
         val path = "/orgs/{org}/actions/permissions".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1827,7 +1827,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsSetGithubActionsPermissionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject58Model) {
+    override suspend fun actionsSetGithubActionsPermissionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject58ApiModel) {
         val path = "/repos/{owner}/{repo}/actions/permissions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -1837,7 +1837,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsSetRepoAccessToSelfHostedRunnerGroupInOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject22Model) {
+    override suspend fun actionsSetRepoAccessToSelfHostedRunnerGroupInOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject22ApiModel) {
         val path = "/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories".replace("{"+"org"+"}", "$org").replace("{"+"runner_group_id"+"}", "$runnerGroupId")
 
         return httpClient.request {
@@ -1847,7 +1847,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsSetSelectedReposForOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, request: InlineObject27Model) {
+    override suspend fun actionsSetSelectedReposForOrgSecret(accessToken: String?, org: kotlin.String, secretName: kotlin.String, request: InlineObject27ApiModel) {
         val path = "/orgs/{org}/actions/secrets/{secret_name}/repositories".replace("{"+"org"+"}", "$org").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -1857,7 +1857,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsSetSelectedRepositoriesEnabledGithubActionsOrganization(accessToken: String?, org: kotlin.String, request: InlineObject19Model) {
+    override suspend fun actionsSetSelectedRepositoriesEnabledGithubActionsOrganization(accessToken: String?, org: kotlin.String, request: InlineObject19ApiModel) {
         val path = "/orgs/{org}/actions/permissions/repositories".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -1867,7 +1867,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsSetSelfHostedRunnersInGroupForOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject23Model) {
+    override suspend fun actionsSetSelfHostedRunnersInGroupForOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject23ApiModel) {
         val path = "/orgs/{org}/actions/runner-groups/{runner_group_id}/runners".replace("{"+"org"+"}", "$org").replace("{"+"runner_group_id"+"}", "$runnerGroupId")
 
         return httpClient.request {
@@ -1877,7 +1877,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun actionsUpdateSelfHostedRunnerGroupForOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject21Model): RunnerMinusGroupsMinusOrgModel {
+    override suspend fun actionsUpdateSelfHostedRunnerGroupForOrg(accessToken: String?, org: kotlin.String, runnerGroupId: kotlin.Int, request: InlineObject21ApiModel): RunnerMinusGroupsMinusOrgApiModel {
         val path = "/orgs/{org}/actions/runner-groups/{runner_group_id}".replace("{"+"org"+"}", "$org").replace("{"+"runner_group_id"+"}", "$runnerGroupId")
 
         return httpClient.request {

@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -35,7 +35,7 @@ interface MarkdownApi {
     * @param request 
     * @return kotlin.String
     */
-    suspend fun markdownRender(accessToken: String? = null, request: InlineObject14Model): kotlin.String
+    suspend fun markdownRender(accessToken: String? = null, request: InlineObject14ApiModel): kotlin.String
 
     /**
     * Render a Markdown document in raw mode
@@ -52,7 +52,7 @@ interface MarkdownApi {
 class HttpClientMarkdownApi(private val httpClientProvider: HttpClientProvider) : MarkdownApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun markdownRender(accessToken: String?, request: InlineObject14Model): kotlin.String {
+    override suspend fun markdownRender(accessToken: String?, request: InlineObject14ApiModel): kotlin.String {
         val path = "/markdown"
 
         return httpClient.request {

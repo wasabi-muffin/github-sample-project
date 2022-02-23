@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -77,81 +77,81 @@ interface MigrationsApi {
     *
     * Each type of source control system represents authors in a different way. For example, a Git commit author has a display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will make the author information valid, but the author might not be correct. For example, it will change the bare Subversion username &#x60;hubot&#x60; into something like &#x60;hubot &lt;hubot@12341234-abab-fefe-8787-fedcba987654&gt;&#x60;.  This endpoint and the [Map a commit author](https://docs.github.com/rest/reference/migrations#map-a-commit-author) endpoint allow you to provide correct Git author information.
     *
-    * @return kotlin.collections.List<PorterMinusAuthorModel>
+    * @return kotlin.collections.List<PorterMinusAuthorApiModel>
     */
-    suspend fun migrationsGetCommitAuthors(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, since: kotlin.Int? = null): kotlin.collections.List<PorterMinusAuthorModel>
+    suspend fun migrationsGetCommitAuthors(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, since: kotlin.Int? = null): kotlin.collections.List<PorterMinusAuthorApiModel>
 
     /**
     * Get an import status
     *
     * View the progress of an import.  **Import status**  This section includes details about the possible values of the &#x60;status&#x60; field of the Import Progress response.  An import that does not have errors will progress through these steps:  *   &#x60;detecting&#x60; - the \&quot;detection\&quot; step of the import is in progress because the request did not include a &#x60;vcs&#x60; parameter. The import is identifying the type of source control present at the URL. *   &#x60;importing&#x60; - the \&quot;raw\&quot; step of the import is in progress. This is where commit data is fetched from the original repository. The import progress response will include &#x60;commit_count&#x60; (the total number of raw commits that will be imported) and &#x60;percent&#x60; (0 - 100, the current progress through the import). *   &#x60;mapping&#x60; - the \&quot;rewrite\&quot; step of the import is in progress. This is where SVN branches are converted to Git branches, and where author updates are applied. The import progress response does not include progress information. *   &#x60;pushing&#x60; - the \&quot;push\&quot; step of the import is in progress. This is where the importer updates the repository on GitHub. The import progress response will include &#x60;push_percent&#x60;, which is the percent value reported by &#x60;git push&#x60; when it is \&quot;Writing objects\&quot;. *   &#x60;complete&#x60; - the import is complete, and the repository is ready on GitHub.  If there are problems, you will see one of these in the &#x60;status&#x60; field:  *   &#x60;auth_failed&#x60; - the import requires authentication in order to connect to the original repository. To update authentication for the import, please see the [Update an import](https://docs.github.com/rest/reference/migrations#update-an-import) section. *   &#x60;error&#x60; - the import encountered an error. The import progress response will include the &#x60;failed_step&#x60; and an error message. Contact [GitHub Support](https://support.github.com/contact?tags&#x3D;dotcom-rest-api) for more information. *   &#x60;detection_needs_auth&#x60; - the importer requires authentication for the originating repository to continue detection. To update authentication for the import, please see the [Update an import](https://docs.github.com/rest/reference/migrations#update-an-import) section. *   &#x60;detection_found_nothing&#x60; - the importer didn&#39;t recognize any source control at the URL. To resolve, [Cancel the import](https://docs.github.com/rest/reference/migrations#cancel-an-import) and [retry](https://docs.github.com/rest/reference/migrations#start-an-import) with the correct URL. *   &#x60;detection_found_multiple&#x60; - the importer found several projects or repositories at the provided URL. When this is the case, the Import Progress response will also include a &#x60;project_choices&#x60; field with the possible project choices as values. To update project choice, please see the [Update an import](https://docs.github.com/rest/reference/migrations#update-an-import) section.  **The project_choices field**  When multiple projects are found at the provided URL, the response hash will include a &#x60;project_choices&#x60; field, the value of which is an array of hashes each representing a project choice. The exact key/value pairs of the project hashes will differ depending on the version control type.  **Git LFS related fields**  This section includes details about Git LFS related fields that may be present in the Import Progress response.  *   &#x60;use_lfs&#x60; - describes whether the import has been opted in or out of using Git LFS. The value can be &#x60;opt_in&#x60;, &#x60;opt_out&#x60;, or &#x60;undecided&#x60; if no action has been taken. *   &#x60;has_large_files&#x60; - the boolean value describing whether files larger than 100MB were found during the &#x60;importing&#x60; step. *   &#x60;large_files_size&#x60; - the total size in gigabytes of files larger than 100MB found in the originating repository. *   &#x60;large_files_count&#x60; - the total number of files larger than 100MB found in the originating repository. To see a list of these files, make a \&quot;Get Large Files\&quot; request.
     *
-    * @return ImportModel
+    * @return ImportApiModel
     */
-    suspend fun migrationsGetImportStatus(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ImportModel
+    suspend fun migrationsGetImportStatus(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ImportApiModel
 
     /**
     * Get large files
     *
     * List files larger than 100MB found during the import
     *
-    * @return kotlin.collections.List<PorterMinusLargeMinusFileModel>
+    * @return kotlin.collections.List<PorterMinusLargeMinusFileApiModel>
     */
-    suspend fun migrationsGetLargeFiles(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<PorterMinusLargeMinusFileModel>
+    suspend fun migrationsGetLargeFiles(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<PorterMinusLargeMinusFileApiModel>
 
     /**
     * Get a user migration status
     *
     * Fetches a single user migration. The response includes the &#x60;state&#x60; of the migration, which can be one of the following values:  *   &#x60;pending&#x60; - the migration hasn&#39;t started yet. *   &#x60;exporting&#x60; - the migration is in progress. *   &#x60;exported&#x60; - the migration finished successfully. *   &#x60;failed&#x60; - the migration failed.  Once the migration has been &#x60;exported&#x60; you can [download the migration archive](https://docs.github.com/rest/reference/migrations#download-a-user-migration-archive).
     *
-    * @return MigrationModel
+    * @return MigrationApiModel
     */
-    suspend fun migrationsGetStatusForAuthenticatedUser(accessToken: String? = null, migrationId: kotlin.Int, exclude: kotlin.collections.List<kotlin.String>? = null): MigrationModel
+    suspend fun migrationsGetStatusForAuthenticatedUser(accessToken: String? = null, migrationId: kotlin.Int, exclude: kotlin.collections.List<kotlin.String>? = null): MigrationApiModel
 
     /**
     * Get an organization migration status
     *
     * Fetches the status of a migration.  The &#x60;state&#x60; of a migration can be one of the following values:  *   &#x60;pending&#x60;, which means the migration hasn&#39;t started yet. *   &#x60;exporting&#x60;, which means the migration is in progress. *   &#x60;exported&#x60;, which means the migration finished successfully. *   &#x60;failed&#x60;, which means the migration failed.
     *
-    * @return MigrationModel
+    * @return MigrationApiModel
     */
-    suspend fun migrationsGetStatusForOrg(accessToken: String? = null, org: kotlin.String, migrationId: kotlin.Int, exclude: kotlin.collections.List<kotlin.String>? = null): MigrationModel
+    suspend fun migrationsGetStatusForOrg(accessToken: String? = null, org: kotlin.String, migrationId: kotlin.Int, exclude: kotlin.collections.List<kotlin.String>? = null): MigrationApiModel
 
     /**
     * List user migrations
     *
     * Lists all migrations a user has started.
     *
-    * @return kotlin.collections.List<MigrationModel>
+    * @return kotlin.collections.List<MigrationApiModel>
     */
-    suspend fun migrationsListForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MigrationModel>
+    suspend fun migrationsListForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MigrationApiModel>
 
     /**
     * List organization migrations
     *
     * Lists the most recent migrations.
     *
-    * @return kotlin.collections.List<MigrationModel>
+    * @return kotlin.collections.List<MigrationApiModel>
     */
-    suspend fun migrationsListForOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null, exclude: kotlin.collections.List<kotlin.String>? = null): kotlin.collections.List<MigrationModel>
+    suspend fun migrationsListForOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null, exclude: kotlin.collections.List<kotlin.String>? = null): kotlin.collections.List<MigrationApiModel>
 
     /**
     * List repositories for a user migration
     *
     * Lists all the repositories for this user migration.
     *
-    * @return kotlin.collections.List<MinimalMinusRepositoryModel>
+    * @return kotlin.collections.List<MinimalMinusRepositoryApiModel>
     */
-    suspend fun migrationsListReposForAuthenticatedUser(accessToken: String? = null, migrationId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryModel>
+    suspend fun migrationsListReposForAuthenticatedUser(accessToken: String? = null, migrationId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryApiModel>
 
     /**
     * List repositories in an organization migration
     *
     * List all the repositories for this organization migration.
     *
-    * @return kotlin.collections.List<MinimalMinusRepositoryModel>
+    * @return kotlin.collections.List<MinimalMinusRepositoryApiModel>
     */
-    suspend fun migrationsListReposForOrg(accessToken: String? = null, org: kotlin.String, migrationId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryModel>
+    suspend fun migrationsListReposForOrg(accessToken: String? = null, org: kotlin.String, migrationId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryApiModel>
 
     /**
     * Map a commit author
@@ -159,9 +159,9 @@ interface MigrationsApi {
     * Update an author&#39;s identity for the import. Your application can continue updating authors any time before you push new commits to the repository.
     *
     * @param request  (optional)
-    * @return PorterMinusAuthorModel
+    * @return PorterMinusAuthorApiModel
     */
-    suspend fun migrationsMapCommitAuthor(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, authorId: kotlin.Int, request: InlineObject96Model): PorterMinusAuthorModel
+    suspend fun migrationsMapCommitAuthor(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, authorId: kotlin.Int, request: InlineObject96ApiModel): PorterMinusAuthorApiModel
 
     /**
     * Update Git LFS preference
@@ -169,9 +169,9 @@ interface MigrationsApi {
     * You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.github.com). You can learn more about our LFS feature and working with large files [on our help site](https://docs.github.com/articles/versioning-large-files/).
     *
     * @param request 
-    * @return ImportModel
+    * @return ImportApiModel
     */
-    suspend fun migrationsSetLfsPreference(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject97Model): ImportModel
+    suspend fun migrationsSetLfsPreference(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject97ApiModel): ImportApiModel
 
     /**
     * Start a user migration
@@ -179,9 +179,9 @@ interface MigrationsApi {
     * Initiates the generation of a user migration archive.
     *
     * @param request 
-    * @return MigrationModel
+    * @return MigrationApiModel
     */
-    suspend fun migrationsStartForAuthenticatedUser(accessToken: String? = null, request: InlineObject169Model): MigrationModel
+    suspend fun migrationsStartForAuthenticatedUser(accessToken: String? = null, request: InlineObject169ApiModel): MigrationApiModel
 
     /**
     * Start an organization migration
@@ -189,9 +189,9 @@ interface MigrationsApi {
     * Initiates the generation of a migration archive.
     *
     * @param request 
-    * @return MigrationModel
+    * @return MigrationApiModel
     */
-    suspend fun migrationsStartForOrg(accessToken: String? = null, org: kotlin.String, request: InlineObject34Model): MigrationModel
+    suspend fun migrationsStartForOrg(accessToken: String? = null, org: kotlin.String, request: InlineObject34ApiModel): MigrationApiModel
 
     /**
     * Start an import
@@ -199,9 +199,9 @@ interface MigrationsApi {
     * Start a source import to a GitHub repository using GitHub Importer.
     *
     * @param request 
-    * @return ImportModel
+    * @return ImportApiModel
     */
-    suspend fun migrationsStartImport(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject94Model): ImportModel
+    suspend fun migrationsStartImport(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject94ApiModel): ImportApiModel
 
     /**
     * Unlock a user repository
@@ -227,9 +227,9 @@ interface MigrationsApi {
     * An import can be updated with credentials or a project choice by passing in the appropriate parameters in this API request. If no parameters are provided, the import will be restarted.
     *
     * @param request  (optional)
-    * @return ImportModel
+    * @return ImportApiModel
     */
-    suspend fun migrationsUpdateImport(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject95Model): ImportModel
+    suspend fun migrationsUpdateImport(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject95ApiModel): ImportApiModel
 
 }
 
@@ -281,7 +281,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsGetCommitAuthors(accessToken: String?, owner: kotlin.String, repo: kotlin.String, since: kotlin.Int?): kotlin.collections.List<PorterMinusAuthorModel> {
+    override suspend fun migrationsGetCommitAuthors(accessToken: String?, owner: kotlin.String, repo: kotlin.String, since: kotlin.Int?): kotlin.collections.List<PorterMinusAuthorApiModel> {
         val path = "/repos/{owner}/{repo}/import/authors".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -291,7 +291,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsGetImportStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ImportModel {
+    override suspend fun migrationsGetImportStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ImportApiModel {
         val path = "/repos/{owner}/{repo}/import".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -300,7 +300,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsGetLargeFiles(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<PorterMinusLargeMinusFileModel> {
+    override suspend fun migrationsGetLargeFiles(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<PorterMinusLargeMinusFileApiModel> {
         val path = "/repos/{owner}/{repo}/import/large_files".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -309,7 +309,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsGetStatusForAuthenticatedUser(accessToken: String?, migrationId: kotlin.Int, exclude: kotlin.collections.List<kotlin.String>?): MigrationModel {
+    override suspend fun migrationsGetStatusForAuthenticatedUser(accessToken: String?, migrationId: kotlin.Int, exclude: kotlin.collections.List<kotlin.String>?): MigrationApiModel {
         val path = "/user/migrations/{migration_id}".replace("{"+"migration_id"+"}", "$migrationId")
 
         return httpClient.request {
@@ -319,7 +319,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsGetStatusForOrg(accessToken: String?, org: kotlin.String, migrationId: kotlin.Int, exclude: kotlin.collections.List<kotlin.String>?): MigrationModel {
+    override suspend fun migrationsGetStatusForOrg(accessToken: String?, org: kotlin.String, migrationId: kotlin.Int, exclude: kotlin.collections.List<kotlin.String>?): MigrationApiModel {
         val path = "/orgs/{org}/migrations/{migration_id}".replace("{"+"org"+"}", "$org").replace("{"+"migration_id"+"}", "$migrationId")
 
         return httpClient.request {
@@ -329,7 +329,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsListForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MigrationModel> {
+    override suspend fun migrationsListForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MigrationApiModel> {
         val path = "/user/migrations"
 
         return httpClient.request {
@@ -340,7 +340,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsListForOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?, exclude: kotlin.collections.List<kotlin.String>?): kotlin.collections.List<MigrationModel> {
+    override suspend fun migrationsListForOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?, exclude: kotlin.collections.List<kotlin.String>?): kotlin.collections.List<MigrationApiModel> {
         val path = "/orgs/{org}/migrations".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -352,7 +352,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsListReposForAuthenticatedUser(accessToken: String?, migrationId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryModel> {
+    override suspend fun migrationsListReposForAuthenticatedUser(accessToken: String?, migrationId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryApiModel> {
         val path = "/user/migrations/{migration_id}/repositories".replace("{"+"migration_id"+"}", "$migrationId")
 
         return httpClient.request {
@@ -363,7 +363,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsListReposForOrg(accessToken: String?, org: kotlin.String, migrationId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryModel> {
+    override suspend fun migrationsListReposForOrg(accessToken: String?, org: kotlin.String, migrationId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryApiModel> {
         val path = "/orgs/{org}/migrations/{migration_id}/repositories".replace("{"+"org"+"}", "$org").replace("{"+"migration_id"+"}", "$migrationId")
 
         return httpClient.request {
@@ -374,7 +374,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsMapCommitAuthor(accessToken: String?, owner: kotlin.String, repo: kotlin.String, authorId: kotlin.Int, request: InlineObject96Model): PorterMinusAuthorModel {
+    override suspend fun migrationsMapCommitAuthor(accessToken: String?, owner: kotlin.String, repo: kotlin.String, authorId: kotlin.Int, request: InlineObject96ApiModel): PorterMinusAuthorApiModel {
         val path = "/repos/{owner}/{repo}/import/authors/{author_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"author_id"+"}", "$authorId")
 
         return httpClient.request {
@@ -384,7 +384,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsSetLfsPreference(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject97Model): ImportModel {
+    override suspend fun migrationsSetLfsPreference(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject97ApiModel): ImportApiModel {
         val path = "/repos/{owner}/{repo}/import/lfs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -394,7 +394,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsStartForAuthenticatedUser(accessToken: String?, request: InlineObject169Model): MigrationModel {
+    override suspend fun migrationsStartForAuthenticatedUser(accessToken: String?, request: InlineObject169ApiModel): MigrationApiModel {
         val path = "/user/migrations"
 
         return httpClient.request {
@@ -404,7 +404,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsStartForOrg(accessToken: String?, org: kotlin.String, request: InlineObject34Model): MigrationModel {
+    override suspend fun migrationsStartForOrg(accessToken: String?, org: kotlin.String, request: InlineObject34ApiModel): MigrationApiModel {
         val path = "/orgs/{org}/migrations".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -414,7 +414,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsStartImport(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject94Model): ImportModel {
+    override suspend fun migrationsStartImport(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject94ApiModel): ImportApiModel {
         val path = "/repos/{owner}/{repo}/import".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -442,7 +442,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun migrationsUpdateImport(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject95Model): ImportModel {
+    override suspend fun migrationsUpdateImport(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject95ApiModel): ImportApiModel {
         val path = "/repos/{owner}/{repo}/import".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {

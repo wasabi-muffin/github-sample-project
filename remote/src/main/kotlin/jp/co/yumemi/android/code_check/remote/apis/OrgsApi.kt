@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -87,9 +87,9 @@ interface OrgsApi {
     * Invite people to an organization by using their GitHub user ID or their email address. In order to create invitations in an organization, the authenticated user must be an organization owner.  This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See \&quot;[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)\&quot; and \&quot;[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)\&quot; for details.
     *
     * @param request  (optional)
-    * @return OrganizationMinusInvitationModel
+    * @return OrganizationMinusInvitationApiModel
     */
-    suspend fun orgsCreateInvitation(accessToken: String? = null, org: kotlin.String, request: InlineObject32Model): OrganizationMinusInvitationModel
+    suspend fun orgsCreateInvitation(accessToken: String? = null, org: kotlin.String, request: InlineObject32ApiModel): OrganizationMinusInvitationApiModel
 
     /**
     * Create an organization webhook
@@ -97,189 +97,189 @@ interface OrgsApi {
     * Here&#39;s how you can create a hook that posts payloads in JSON format:
     *
     * @param request 
-    * @return OrgMinusHookModel
+    * @return OrgMinusHookApiModel
     */
-    suspend fun orgsCreateWebhook(accessToken: String? = null, org: kotlin.String, request: InlineObject30Model): OrgMinusHookModel
+    suspend fun orgsCreateWebhook(accessToken: String? = null, org: kotlin.String, request: InlineObject30ApiModel): OrgMinusHookApiModel
 
     /**
     * Get an organization
     *
     * To see many of the organization response values, you need to be an authenticated organization owner with the &#x60;admin:org&#x60; scope. When the value of &#x60;two_factor_requirement_enabled&#x60; is &#x60;true&#x60;, the organization requires all members, billing managers, and outside collaborators to enable [two-factor authentication](https://docs.github.com/articles/securing-your-account-with-two-factor-authentication-2fa/).  GitHub Apps with the &#x60;Organization plan&#x60; permission can use this endpoint to retrieve information about an organization&#39;s GitHub plan. See \&quot;[Authenticating with GitHub Apps](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/)\&quot; for details. For an example response, see &#39;Response with GitHub plan information&#39; below.\&quot;
     *
-    * @return OrganizationMinusFullModel
+    * @return OrganizationMinusFullApiModel
     */
-    suspend fun orgsGet(accessToken: String? = null, org: kotlin.String): OrganizationMinusFullModel
+    suspend fun orgsGet(accessToken: String? = null, org: kotlin.String): OrganizationMinusFullApiModel
 
     /**
     * Get an organization membership for the authenticated user
     *
     * 
     *
-    * @return OrgMinusMembershipModel
+    * @return OrgMinusMembershipApiModel
     */
-    suspend fun orgsGetMembershipForAuthenticatedUser(accessToken: String? = null, org: kotlin.String): OrgMinusMembershipModel
+    suspend fun orgsGetMembershipForAuthenticatedUser(accessToken: String? = null, org: kotlin.String): OrgMinusMembershipApiModel
 
     /**
     * Get organization membership for a user
     *
     * In order to get a user&#39;s membership with an organization, the authenticated user must be an organization member. The &#x60;state&#x60; parameter in the response can be used to identify the user&#39;s membership status.
     *
-    * @return OrgMinusMembershipModel
+    * @return OrgMinusMembershipApiModel
     */
-    suspend fun orgsGetMembershipForUser(accessToken: String? = null, org: kotlin.String, username: kotlin.String): OrgMinusMembershipModel
+    suspend fun orgsGetMembershipForUser(accessToken: String? = null, org: kotlin.String, username: kotlin.String): OrgMinusMembershipApiModel
 
     /**
     * Get a webhook configuration for an organization
     *
     * Returns the webhook configuration for an organization. To get more information about the webhook, including the &#x60;active&#x60; state and &#x60;events&#x60;, use \&quot;[Get an organization webhook ](/rest/reference/orgs#get-an-organization-webhook).\&quot;  Access tokens must have the &#x60;admin:org_hook&#x60; scope, and GitHub Apps must have the &#x60;organization_hooks:read&#x60; permission.
     *
-    * @return WebhookMinusConfigModel
+    * @return WebhookMinusConfigApiModel
     */
-    suspend fun orgsGetWebhookConfigForOrg(accessToken: String? = null, org: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigModel
+    suspend fun orgsGetWebhookConfigForOrg(accessToken: String? = null, org: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigApiModel
 
     /**
     * List organizations
     *
     * Lists all organizations, in the order that they were created on GitHub.  **Note:** Pagination is powered exclusively by the &#x60;since&#x60; parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of organizations.
     *
-    * @return kotlin.collections.List<OrganizationMinusSimpleModel>
+    * @return kotlin.collections.List<OrganizationMinusSimpleApiModel>
     */
-    suspend fun orgsList(accessToken: String? = null, since: kotlin.Int? = null, perPage: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusSimpleModel>
+    suspend fun orgsList(accessToken: String? = null, since: kotlin.Int? = null, perPage: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusSimpleApiModel>
 
     /**
     * List app installations for an organization
     *
     * Lists all GitHub Apps in an organization. The installation count includes all GitHub Apps installed on repositories in the organization. You must be an organization owner with &#x60;admin:read&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse20012Model
+    * @return InlineResponse20012ApiModel
     */
-    suspend fun orgsListAppInstallations(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20012Model
+    suspend fun orgsListAppInstallations(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20012ApiModel
 
     /**
     * List users blocked by an organization
     *
     * List the users blocked by an organization.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun orgsListBlockedUsers(accessToken: String? = null, org: kotlin.String): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun orgsListBlockedUsers(accessToken: String? = null, org: kotlin.String): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List custom repository roles in an organization
     *
     * List the custom repository roles available in this organization. In order to see custom repository roles in an organization, the authenticated user must be an organization owner.  For more information on custom repository roles, see \&quot;[Managing custom repository roles for an organization](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-custom-repository-roles-for-an-organization)\&quot;.
     *
-    * @return InlineResponse2002Model
+    * @return InlineResponse2002ApiModel
     */
-    suspend fun orgsListCustomRoles(accessToken: String? = null, organizationId: kotlin.String): InlineResponse2002Model
+    suspend fun orgsListCustomRoles(accessToken: String? = null, organizationId: kotlin.String): InlineResponse2002ApiModel
 
     /**
     * List failed organization invitations
     *
     * The return hash contains &#x60;failed_at&#x60; and &#x60;failed_reason&#x60; fields which represent the time at which the invitation failed and the reason for the failure.
     *
-    * @return kotlin.collections.List<OrganizationMinusInvitationModel>
+    * @return kotlin.collections.List<OrganizationMinusInvitationApiModel>
     */
-    suspend fun orgsListFailedInvitations(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusInvitationModel>
+    suspend fun orgsListFailedInvitations(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusInvitationApiModel>
 
     /**
     * List organizations for the authenticated user
     *
     * List organizations for the authenticated user.  **OAuth scope requirements**  This only lists organizations that your authorization allows you to operate on in some way (e.g., you can list teams with &#x60;read:org&#x60; scope, you can publicize your organization membership with &#x60;user&#x60; scope, etc.). Therefore, this API requires at least &#x60;user&#x60; or &#x60;read:org&#x60; scope. OAuth requests with insufficient scope receive a &#x60;403 Forbidden&#x60; response.
     *
-    * @return kotlin.collections.List<OrganizationMinusSimpleModel>
+    * @return kotlin.collections.List<OrganizationMinusSimpleApiModel>
     */
-    suspend fun orgsListForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusSimpleModel>
+    suspend fun orgsListForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusSimpleApiModel>
 
     /**
     * List organizations for a user
     *
     * List [public organization memberships](https://docs.github.com/articles/publicizing-or-concealing-organization-membership) for the specified user.  This method only lists _public_ memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the [List organizations for the authenticated user](https://docs.github.com/rest/reference/orgs#list-organizations-for-the-authenticated-user) API instead.
     *
-    * @return kotlin.collections.List<OrganizationMinusSimpleModel>
+    * @return kotlin.collections.List<OrganizationMinusSimpleApiModel>
     */
-    suspend fun orgsListForUser(accessToken: String? = null, username: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusSimpleModel>
+    suspend fun orgsListForUser(accessToken: String? = null, username: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusSimpleApiModel>
 
     /**
     * List organization invitation teams
     *
     * List all teams associated with an invitation. In order to see invitations in an organization, the authenticated user must be an organization owner.
     *
-    * @return kotlin.collections.List<TeamModel>
+    * @return kotlin.collections.List<TeamApiModel>
     */
-    suspend fun orgsListInvitationTeams(accessToken: String? = null, org: kotlin.String, invitationId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamModel>
+    suspend fun orgsListInvitationTeams(accessToken: String? = null, org: kotlin.String, invitationId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamApiModel>
 
     /**
     * List organization members
     *
     * List all users who are members of an organization. If the authenticated user is also a member of this organization then both concealed and public members will be returned.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun orgsListMembers(accessToken: String? = null, org: kotlin.String, filter: kotlin.String? = null, role: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun orgsListMembers(accessToken: String? = null, org: kotlin.String, filter: kotlin.String? = null, role: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List organization memberships for the authenticated user
     *
     * 
     *
-    * @return kotlin.collections.List<OrgMinusMembershipModel>
+    * @return kotlin.collections.List<OrgMinusMembershipApiModel>
     */
-    suspend fun orgsListMembershipsForAuthenticatedUser(accessToken: String? = null, state: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrgMinusMembershipModel>
+    suspend fun orgsListMembershipsForAuthenticatedUser(accessToken: String? = null, state: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrgMinusMembershipApiModel>
 
     /**
     * List outside collaborators for an organization
     *
     * List all users who are outside collaborators of an organization.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun orgsListOutsideCollaborators(accessToken: String? = null, org: kotlin.String, filter: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun orgsListOutsideCollaborators(accessToken: String? = null, org: kotlin.String, filter: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List pending organization invitations
     *
     * The return hash contains a &#x60;role&#x60; field which refers to the Organization Invitation role and will be one of the following values: &#x60;direct_member&#x60;, &#x60;admin&#x60;, &#x60;billing_manager&#x60;, &#x60;hiring_manager&#x60;, or &#x60;reinstate&#x60;. If the invitee is not a GitHub member, the &#x60;login&#x60; field in the return hash will be &#x60;null&#x60;.
     *
-    * @return kotlin.collections.List<OrganizationMinusInvitationModel>
+    * @return kotlin.collections.List<OrganizationMinusInvitationApiModel>
     */
-    suspend fun orgsListPendingInvitations(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusInvitationModel>
+    suspend fun orgsListPendingInvitations(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrganizationMinusInvitationApiModel>
 
     /**
     * List public organization members
     *
     * Members of an organization can choose to have their membership publicized or not.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun orgsListPublicMembers(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun orgsListPublicMembers(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List SAML SSO authorizations for an organization
     *
     * Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub&#39;s products](https://docs.github.com/github/getting-started-with-github/githubs-products).  An authenticated organization owner with the &#x60;read:org&#x60; scope can list all credential authorizations for an organization that uses SAML single sign-on (SSO). The credentials are either personal access tokens or SSH keys that organization members have authorized for the organization. For more information, see [About authentication with SAML single sign-on](https://docs.github.com/en/articles/about-authentication-with-saml-single-sign-on).
     *
-    * @return kotlin.collections.List<CredentialMinusAuthorizationModel>
+    * @return kotlin.collections.List<CredentialMinusAuthorizationApiModel>
     */
-    suspend fun orgsListSamlSsoAuthorizations(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null, login: kotlin.String? = null): kotlin.collections.List<CredentialMinusAuthorizationModel>
+    suspend fun orgsListSamlSsoAuthorizations(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null, login: kotlin.String? = null): kotlin.collections.List<CredentialMinusAuthorizationApiModel>
 
     /**
     * List deliveries for an organization webhook
     *
     * Returns a list of webhook deliveries for a webhook configured in an organization.
     *
-    * @return kotlin.collections.List<HookMinusDeliveryMinusItemModel>
+    * @return kotlin.collections.List<HookMinusDeliveryMinusItemApiModel>
     */
-    suspend fun orgsListWebhookDeliveries(accessToken: String? = null, org: kotlin.String, hookId: kotlin.Int, perPage: kotlin.Int? = null, cursor: kotlin.String? = null): kotlin.collections.List<HookMinusDeliveryMinusItemModel>
+    suspend fun orgsListWebhookDeliveries(accessToken: String? = null, org: kotlin.String, hookId: kotlin.Int, perPage: kotlin.Int? = null, cursor: kotlin.String? = null): kotlin.collections.List<HookMinusDeliveryMinusItemApiModel>
 
     /**
     * List organization webhooks
     *
     * 
     *
-    * @return kotlin.collections.List<OrgMinusHookModel>
+    * @return kotlin.collections.List<OrgMinusHookApiModel>
     */
-    suspend fun orgsListWebhooks(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrgMinusHookModel>
+    suspend fun orgsListWebhooks(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<OrgMinusHookApiModel>
 
     /**
     * Ping an organization webhook
@@ -350,9 +350,9 @@ interface OrgsApi {
     * Only authenticated organization owners can add a member to the organization or update the member&#39;s role.  *   If the authenticated user is _adding_ a member to the organization, the invited user will receive an email inviting them to the organization. The user&#39;s [membership status](https://docs.github.com/rest/reference/orgs#get-organization-membership-for-a-user) will be &#x60;pending&#x60; until they accept the invitation.      *   Authenticated users can _update_ a user&#39;s membership by passing the &#x60;role&#x60; parameter. If the authenticated user changes a member&#39;s role to &#x60;admin&#x60;, the affected user will receive an email notifying them that they&#39;ve been made an organization owner. If the authenticated user changes an owner&#39;s role to &#x60;member&#x60;, no email will be sent.  **Rate limits**  To prevent abuse, the authenticated user is limited to 50 organization invitations per 24 hour period. If the organization is more than one month old or on a paid plan, the limit is 500 invitations per 24 hour period.
     *
     * @param request  (optional)
-    * @return OrgMinusMembershipModel
+    * @return OrgMinusMembershipApiModel
     */
-    suspend fun orgsSetMembershipForUser(accessToken: String? = null, org: kotlin.String, username: kotlin.String, request: InlineObject33Model): OrgMinusMembershipModel
+    suspend fun orgsSetMembershipForUser(accessToken: String? = null, org: kotlin.String, username: kotlin.String, request: InlineObject33ApiModel): OrgMinusMembershipApiModel
 
     /**
     * Set public organization membership for the authenticated user
@@ -378,9 +378,9 @@ interface OrgsApi {
     * **Parameter Deprecation Notice:** GitHub will replace and discontinue &#x60;members_allowed_repository_creation_type&#x60; in favor of more granular permissions. The new input parameters are &#x60;members_can_create_public_repositories&#x60;, &#x60;members_can_create_private_repositories&#x60; for all organizations and &#x60;members_can_create_internal_repositories&#x60; for organizations associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes).  Enables an authenticated organization owner with the &#x60;admin:org&#x60; scope to update the organization&#39;s profile and member privileges.
     *
     * @param request  (optional)
-    * @return OrganizationMinusFullModel
+    * @return OrganizationMinusFullApiModel
     */
-    suspend fun orgsUpdate(accessToken: String? = null, org: kotlin.String, request: InlineObject17Model): OrganizationMinusFullModel
+    suspend fun orgsUpdate(accessToken: String? = null, org: kotlin.String, request: InlineObject17ApiModel): OrganizationMinusFullApiModel
 
     /**
     * Update an organization membership for the authenticated user
@@ -388,9 +388,9 @@ interface OrgsApi {
     * 
     *
     * @param request 
-    * @return OrgMinusMembershipModel
+    * @return OrgMinusMembershipApiModel
     */
-    suspend fun orgsUpdateMembershipForAuthenticatedUser(accessToken: String? = null, org: kotlin.String, request: InlineObject168Model): OrgMinusMembershipModel
+    suspend fun orgsUpdateMembershipForAuthenticatedUser(accessToken: String? = null, org: kotlin.String, request: InlineObject168ApiModel): OrgMinusMembershipApiModel
 
     /**
     * Update a webhook configuration for an organization
@@ -398,9 +398,9 @@ interface OrgsApi {
     * Updates the webhook configuration for an organization. To update more information about the webhook, including the &#x60;active&#x60; state and &#x60;events&#x60;, use \&quot;[Update an organization webhook ](/rest/reference/orgs#update-an-organization-webhook).\&quot;  Access tokens must have the &#x60;admin:org_hook&#x60; scope, and GitHub Apps must have the &#x60;organization_hooks:write&#x60; permission.
     *
     * @param request  (optional)
-    * @return WebhookMinusConfigModel
+    * @return WebhookMinusConfigApiModel
     */
-    suspend fun orgsUpdateWebhookConfigForOrg(accessToken: String? = null, org: kotlin.String, hookId: kotlin.Int, request: InlineObject31Model): WebhookMinusConfigModel
+    suspend fun orgsUpdateWebhookConfigForOrg(accessToken: String? = null, org: kotlin.String, hookId: kotlin.Int, request: InlineObject31ApiModel): WebhookMinusConfigApiModel
 
 }
 
@@ -461,7 +461,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsCreateInvitation(accessToken: String?, org: kotlin.String, request: InlineObject32Model): OrganizationMinusInvitationModel {
+    override suspend fun orgsCreateInvitation(accessToken: String?, org: kotlin.String, request: InlineObject32ApiModel): OrganizationMinusInvitationApiModel {
         val path = "/orgs/{org}/invitations".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -471,7 +471,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsCreateWebhook(accessToken: String?, org: kotlin.String, request: InlineObject30Model): OrgMinusHookModel {
+    override suspend fun orgsCreateWebhook(accessToken: String?, org: kotlin.String, request: InlineObject30ApiModel): OrgMinusHookApiModel {
         val path = "/orgs/{org}/hooks".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -481,7 +481,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsGet(accessToken: String?, org: kotlin.String): OrganizationMinusFullModel {
+    override suspend fun orgsGet(accessToken: String?, org: kotlin.String): OrganizationMinusFullApiModel {
         val path = "/orgs/{org}".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -490,7 +490,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsGetMembershipForAuthenticatedUser(accessToken: String?, org: kotlin.String): OrgMinusMembershipModel {
+    override suspend fun orgsGetMembershipForAuthenticatedUser(accessToken: String?, org: kotlin.String): OrgMinusMembershipApiModel {
         val path = "/user/memberships/orgs/{org}".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -499,7 +499,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsGetMembershipForUser(accessToken: String?, org: kotlin.String, username: kotlin.String): OrgMinusMembershipModel {
+    override suspend fun orgsGetMembershipForUser(accessToken: String?, org: kotlin.String, username: kotlin.String): OrgMinusMembershipApiModel {
         val path = "/orgs/{org}/memberships/{username}".replace("{"+"org"+"}", "$org").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -508,7 +508,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsGetWebhookConfigForOrg(accessToken: String?, org: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigModel {
+    override suspend fun orgsGetWebhookConfigForOrg(accessToken: String?, org: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigApiModel {
         val path = "/orgs/{org}/hooks/{hook_id}/config".replace("{"+"org"+"}", "$org").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
@@ -517,7 +517,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsList(accessToken: String?, since: kotlin.Int?, perPage: kotlin.Int?): kotlin.collections.List<OrganizationMinusSimpleModel> {
+    override suspend fun orgsList(accessToken: String?, since: kotlin.Int?, perPage: kotlin.Int?): kotlin.collections.List<OrganizationMinusSimpleApiModel> {
         val path = "/organizations"
 
         return httpClient.request {
@@ -528,7 +528,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListAppInstallations(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20012Model {
+    override suspend fun orgsListAppInstallations(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20012ApiModel {
         val path = "/orgs/{org}/installations".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -539,7 +539,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListBlockedUsers(accessToken: String?, org: kotlin.String): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun orgsListBlockedUsers(accessToken: String?, org: kotlin.String): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/orgs/{org}/blocks".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -548,7 +548,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListCustomRoles(accessToken: String?, organizationId: kotlin.String): InlineResponse2002Model {
+    override suspend fun orgsListCustomRoles(accessToken: String?, organizationId: kotlin.String): InlineResponse2002ApiModel {
         val path = "/organizations/{organization_id}/custom_roles".replace("{"+"organization_id"+"}", "$organizationId")
 
         return httpClient.request {
@@ -557,7 +557,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListFailedInvitations(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusInvitationModel> {
+    override suspend fun orgsListFailedInvitations(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusInvitationApiModel> {
         val path = "/orgs/{org}/failed_invitations".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -568,7 +568,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusSimpleModel> {
+    override suspend fun orgsListForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusSimpleApiModel> {
         val path = "/user/orgs"
 
         return httpClient.request {
@@ -579,7 +579,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListForUser(accessToken: String?, username: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusSimpleModel> {
+    override suspend fun orgsListForUser(accessToken: String?, username: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusSimpleApiModel> {
         val path = "/users/{username}/orgs".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -590,7 +590,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListInvitationTeams(accessToken: String?, org: kotlin.String, invitationId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamModel> {
+    override suspend fun orgsListInvitationTeams(accessToken: String?, org: kotlin.String, invitationId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamApiModel> {
         val path = "/orgs/{org}/invitations/{invitation_id}/teams".replace("{"+"org"+"}", "$org").replace("{"+"invitation_id"+"}", "$invitationId")
 
         return httpClient.request {
@@ -601,7 +601,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListMembers(accessToken: String?, org: kotlin.String, filter: kotlin.String?, role: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun orgsListMembers(accessToken: String?, org: kotlin.String, filter: kotlin.String?, role: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/orgs/{org}/members".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -614,7 +614,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListMembershipsForAuthenticatedUser(accessToken: String?, state: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrgMinusMembershipModel> {
+    override suspend fun orgsListMembershipsForAuthenticatedUser(accessToken: String?, state: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrgMinusMembershipApiModel> {
         val path = "/user/memberships/orgs"
 
         return httpClient.request {
@@ -626,7 +626,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListOutsideCollaborators(accessToken: String?, org: kotlin.String, filter: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun orgsListOutsideCollaborators(accessToken: String?, org: kotlin.String, filter: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/orgs/{org}/outside_collaborators".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -638,7 +638,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListPendingInvitations(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusInvitationModel> {
+    override suspend fun orgsListPendingInvitations(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrganizationMinusInvitationApiModel> {
         val path = "/orgs/{org}/invitations".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -649,7 +649,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListPublicMembers(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun orgsListPublicMembers(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/orgs/{org}/public_members".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -660,7 +660,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListSamlSsoAuthorizations(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?, login: kotlin.String?): kotlin.collections.List<CredentialMinusAuthorizationModel> {
+    override suspend fun orgsListSamlSsoAuthorizations(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?, login: kotlin.String?): kotlin.collections.List<CredentialMinusAuthorizationApiModel> {
         val path = "/orgs/{org}/credential-authorizations".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -672,7 +672,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListWebhookDeliveries(accessToken: String?, org: kotlin.String, hookId: kotlin.Int, perPage: kotlin.Int?, cursor: kotlin.String?): kotlin.collections.List<HookMinusDeliveryMinusItemModel> {
+    override suspend fun orgsListWebhookDeliveries(accessToken: String?, org: kotlin.String, hookId: kotlin.Int, perPage: kotlin.Int?, cursor: kotlin.String?): kotlin.collections.List<HookMinusDeliveryMinusItemApiModel> {
         val path = "/orgs/{org}/hooks/{hook_id}/deliveries".replace("{"+"org"+"}", "$org").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
@@ -683,7 +683,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsListWebhooks(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrgMinusHookModel> {
+    override suspend fun orgsListWebhooks(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<OrgMinusHookApiModel> {
         val path = "/orgs/{org}/hooks".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -757,7 +757,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsSetMembershipForUser(accessToken: String?, org: kotlin.String, username: kotlin.String, request: InlineObject33Model): OrgMinusMembershipModel {
+    override suspend fun orgsSetMembershipForUser(accessToken: String?, org: kotlin.String, username: kotlin.String, request: InlineObject33ApiModel): OrgMinusMembershipApiModel {
         val path = "/orgs/{org}/memberships/{username}".replace("{"+"org"+"}", "$org").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -785,7 +785,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsUpdate(accessToken: String?, org: kotlin.String, request: InlineObject17Model): OrganizationMinusFullModel {
+    override suspend fun orgsUpdate(accessToken: String?, org: kotlin.String, request: InlineObject17ApiModel): OrganizationMinusFullApiModel {
         val path = "/orgs/{org}".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -795,7 +795,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsUpdateMembershipForAuthenticatedUser(accessToken: String?, org: kotlin.String, request: InlineObject168Model): OrgMinusMembershipModel {
+    override suspend fun orgsUpdateMembershipForAuthenticatedUser(accessToken: String?, org: kotlin.String, request: InlineObject168ApiModel): OrgMinusMembershipApiModel {
         val path = "/user/memberships/orgs/{org}".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -805,7 +805,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         }
     }
 
-    override suspend fun orgsUpdateWebhookConfigForOrg(accessToken: String?, org: kotlin.String, hookId: kotlin.Int, request: InlineObject31Model): WebhookMinusConfigModel {
+    override suspend fun orgsUpdateWebhookConfigForOrg(accessToken: String?, org: kotlin.String, hookId: kotlin.Int, request: InlineObject31ApiModel): WebhookMinusConfigApiModel {
         val path = "/orgs/{org}/hooks/{hook_id}/config".replace("{"+"org"+"}", "$org").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {

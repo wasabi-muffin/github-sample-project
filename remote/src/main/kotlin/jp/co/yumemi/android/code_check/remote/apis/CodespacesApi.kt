@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -41,9 +41,9 @@ interface CodespacesApi {
     *
     * List the machine types a codespace can transition to use.  You must authenticate using an access token with the &#x60;codespace&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse20020Model
+    * @return InlineResponse20020ApiModel
     */
-    suspend fun codespacesCodespaceMachinesForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String): InlineResponse20020Model
+    suspend fun codespacesCodespaceMachinesForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String): InlineResponse20020ApiModel
 
     /**
     * Create or update a secret for the authenticated user
@@ -53,7 +53,7 @@ interface CodespacesApi {
     * @param request 
     * @return kotlin.Any
     */
-    suspend fun codespacesCreateOrUpdateSecretForAuthenticatedUser(accessToken: String? = null, secretName: kotlin.String, request: InlineObject162Model): kotlin.Any
+    suspend fun codespacesCreateOrUpdateSecretForAuthenticatedUser(accessToken: String? = null, secretName: kotlin.String, request: InlineObject162ApiModel): kotlin.Any
 
     /**
     * Create a codespace from a pull request
@@ -61,9 +61,9 @@ interface CodespacesApi {
     * Creates a codespace owned by the authenticated user for the specified pull request.  You must authenticate using an access token with the &#x60;codespace&#x60; scope to use this endpoint.
     *
     * @param request 
-    * @return CodespaceModel
+    * @return CodespaceApiModel
     */
-    suspend fun codespacesCreateWithPrForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject121Model): CodespaceModel
+    suspend fun codespacesCreateWithPrForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject121ApiModel): CodespaceApiModel
 
     /**
     * Create a codespace in a repository
@@ -71,9 +71,9 @@ interface CodespacesApi {
     * Creates a codespace owned by the authenticated user in the specified repository.  You must authenticate using an access token with the &#x60;codespace&#x60; scope to use this endpoint.
     *
     * @param request 
-    * @return CodespaceModel
+    * @return CodespaceApiModel
     */
-    suspend fun codespacesCreateWithRepoForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject73Model): CodespaceModel
+    suspend fun codespacesCreateWithRepoForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject73ApiModel): CodespaceApiModel
 
     /**
     * Delete a codespace for the authenticated user
@@ -98,72 +98,72 @@ interface CodespacesApi {
     *
     * Triggers an export of the specified codespace and returns a URL and ID where the status of the export can be monitored.  You must authenticate using a personal access token with the &#x60;codespace&#x60; scope to use this endpoint.
     *
-    * @return CodespaceMinusExportMinusDetailsModel
+    * @return CodespaceMinusExportMinusDetailsApiModel
     */
-    suspend fun codespacesExportForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String): CodespaceMinusExportMinusDetailsModel
+    suspend fun codespacesExportForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String): CodespaceMinusExportMinusDetailsApiModel
 
     /**
     * Get details about a codespace export
     *
     * Gets information about an export of a codespace.  You must authenticate using a personal access token with the &#x60;codespace&#x60; scope to use this endpoint.
     *
-    * @return CodespaceMinusExportMinusDetailsModel
+    * @return CodespaceMinusExportMinusDetailsApiModel
     */
-    suspend fun codespacesGetExportDetailsForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String, exportId: kotlin.String): CodespaceMinusExportMinusDetailsModel
+    suspend fun codespacesGetExportDetailsForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String, exportId: kotlin.String): CodespaceMinusExportMinusDetailsApiModel
 
     /**
     * Get a codespace for the authenticated user
     *
     * Gets information about a user&#39;s codespace.  You must authenticate using an access token with the &#x60;codespace&#x60; scope to use this endpoint.
     *
-    * @return CodespaceModel
+    * @return CodespaceApiModel
     */
-    suspend fun codespacesGetForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String): CodespaceModel
+    suspend fun codespacesGetForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String): CodespaceApiModel
 
     /**
     * Get public key for the authenticated user
     *
     * Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with one of the &#39;read:user&#39; or &#39;user&#39; scopes in their personal access token. User must have Codespaces access to use this endpoint.
     *
-    * @return CodespacesMinusUserMinusPublicMinusKeyModel
+    * @return CodespacesMinusUserMinusPublicMinusKeyApiModel
     */
-    suspend fun codespacesGetPublicKeyForAuthenticatedUser(accessToken: String? = null): CodespacesMinusUserMinusPublicMinusKeyModel
+    suspend fun codespacesGetPublicKeyForAuthenticatedUser(accessToken: String? = null): CodespacesMinusUserMinusPublicMinusKeyApiModel
 
     /**
     * Get a secret for the authenticated user
     *
     * Gets a secret available to a user&#39;s codespaces without revealing its encrypted value. You must authenticate using an access token with the &#x60;user&#x60; or &#x60;read:user&#x60; scope to use this endpoint. User must have Codespaces access to use this endpoint.
     *
-    * @return CodespacesMinusSecretModel
+    * @return CodespacesMinusSecretApiModel
     */
-    suspend fun codespacesGetSecretForAuthenticatedUser(accessToken: String? = null, secretName: kotlin.String): CodespacesMinusSecretModel
+    suspend fun codespacesGetSecretForAuthenticatedUser(accessToken: String? = null, secretName: kotlin.String): CodespacesMinusSecretApiModel
 
     /**
     * List codespaces in a repository for the authenticated user
     *
     * Lists the codespaces associated to a specified repository and the authenticated user.  You must authenticate using an access token with the &#x60;codespace&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse20019Model
+    * @return InlineResponse20019ApiModel
     */
-    suspend fun codespacesListInRepositoryForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20019Model
+    suspend fun codespacesListInRepositoryForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20019ApiModel
 
     /**
     * List selected repositories for a user secret
     *
     * List the repositories that have been granted the ability to use a user&#39;s codespace secret. You must authenticate using an access token with the &#x60;user&#x60; or &#x60;read:user&#x60; scope to use this endpoint. User must have Codespaces access to use this endpoint.
     *
-    * @return InlineResponse20010Model
+    * @return InlineResponse20010ApiModel
     */
-    suspend fun codespacesListRepositoriesForSecretForAuthenticatedUser(accessToken: String? = null, secretName: kotlin.String): InlineResponse20010Model
+    suspend fun codespacesListRepositoriesForSecretForAuthenticatedUser(accessToken: String? = null, secretName: kotlin.String): InlineResponse20010ApiModel
 
     /**
     * List secrets for the authenticated user
     *
     * Lists all secrets available for a user&#39;s Codespaces without revealing their encrypted values. You must authenticate using an access token with the &#x60;user&#x60; or &#x60;read:user&#x60; scope to use this endpoint. User must have Codespaces access to use this endpoint.
     *
-    * @return InlineResponse20031Model
+    * @return InlineResponse20031ApiModel
     */
-    suspend fun codespacesListSecretsForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20031Model
+    suspend fun codespacesListSecretsForAuthenticatedUser(accessToken: String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20031ApiModel
 
     /**
     * Remove a selected repository from a user secret
@@ -179,9 +179,9 @@ interface CodespacesApi {
     *
     * List the machine types available for a given repository based on its configuration.  Location is required.  You must authenticate using an access token with the &#x60;codespace&#x60; scope to use this endpoint.
     *
-    * @return InlineResponse20020Model
+    * @return InlineResponse20020ApiModel
     */
-    suspend fun codespacesRepoMachinesForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, location: kotlin.String? = null): InlineResponse20020Model
+    suspend fun codespacesRepoMachinesForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, location: kotlin.String? = null): InlineResponse20020ApiModel
 
     /**
     * Set selected repositories for a user secret
@@ -191,25 +191,25 @@ interface CodespacesApi {
     * @param request 
     * @return void
     */
-    suspend fun codespacesSetRepositoriesForSecretForAuthenticatedUser(accessToken: String? = null, secretName: kotlin.String, request: InlineObject163Model)
+    suspend fun codespacesSetRepositoriesForSecretForAuthenticatedUser(accessToken: String? = null, secretName: kotlin.String, request: InlineObject163ApiModel)
 
     /**
     * Start a codespace for the authenticated user
     *
     * Starts a user&#39;s codespace.  You must authenticate using an access token with the &#x60;codespace&#x60; scope to use this endpoint.
     *
-    * @return CodespaceModel
+    * @return CodespaceApiModel
     */
-    suspend fun codespacesStartForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String): CodespaceModel
+    suspend fun codespacesStartForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String): CodespaceApiModel
 
     /**
     * Stop a codespace for the authenticated user
     *
     * Stops a user&#39;s codespace.  You must authenticate using an access token with the &#x60;codespace&#x60; scope to use this endpoint.
     *
-    * @return CodespaceModel
+    * @return CodespaceApiModel
     */
-    suspend fun codespacesStopForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String): CodespaceModel
+    suspend fun codespacesStopForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String): CodespaceApiModel
 
     /**
     * Update a codespace for the authenticated user
@@ -217,9 +217,9 @@ interface CodespacesApi {
     * Updates a codespace owned by the authenticated user. Currently only the codespace&#39;s machine type and recent folders can be modified using this endpoint.  If you specify a new machine type it will be applied the next time your codespace is started.  You must authenticate using an access token with the &#x60;codespace&#x60; scope to use this endpoint.
     *
     * @param request  (optional)
-    * @return CodespaceModel
+    * @return CodespaceApiModel
     */
-    suspend fun codespacesUpdateForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String, request: InlineObject164Model): CodespaceModel
+    suspend fun codespacesUpdateForAuthenticatedUser(accessToken: String? = null, codespaceName: kotlin.String, request: InlineObject164ApiModel): CodespaceApiModel
 
 }
 
@@ -235,7 +235,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesCodespaceMachinesForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String): InlineResponse20020Model {
+    override suspend fun codespacesCodespaceMachinesForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String): InlineResponse20020ApiModel {
         val path = "/user/codespaces/{codespace_name}/machines".replace("{"+"codespace_name"+"}", "$codespaceName")
 
         return httpClient.request {
@@ -244,7 +244,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesCreateOrUpdateSecretForAuthenticatedUser(accessToken: String?, secretName: kotlin.String, request: InlineObject162Model): kotlin.Any {
+    override suspend fun codespacesCreateOrUpdateSecretForAuthenticatedUser(accessToken: String?, secretName: kotlin.String, request: InlineObject162ApiModel): kotlin.Any {
         val path = "/user/codespaces/secrets/{secret_name}".replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -254,7 +254,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesCreateWithPrForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject121Model): CodespaceModel {
+    override suspend fun codespacesCreateWithPrForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject121ApiModel): CodespaceApiModel {
         val path = "/repos/{owner}/{repo}/pulls/{pull_number}/codespaces".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
@@ -264,7 +264,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesCreateWithRepoForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject73Model): CodespaceModel {
+    override suspend fun codespacesCreateWithRepoForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject73ApiModel): CodespaceApiModel {
         val path = "/repos/{owner}/{repo}/codespaces".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -292,7 +292,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesExportForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String): CodespaceMinusExportMinusDetailsModel {
+    override suspend fun codespacesExportForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String): CodespaceMinusExportMinusDetailsApiModel {
         val path = "/user/codespaces/{codespace_name}/exports".replace("{"+"codespace_name"+"}", "$codespaceName")
 
         return httpClient.request {
@@ -301,7 +301,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesGetExportDetailsForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String, exportId: kotlin.String): CodespaceMinusExportMinusDetailsModel {
+    override suspend fun codespacesGetExportDetailsForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String, exportId: kotlin.String): CodespaceMinusExportMinusDetailsApiModel {
         val path = "/user/codespaces/{codespace_name}/exports/{export_id}".replace("{"+"codespace_name"+"}", "$codespaceName").replace("{"+"export_id"+"}", "$exportId")
 
         return httpClient.request {
@@ -310,7 +310,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesGetForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String): CodespaceModel {
+    override suspend fun codespacesGetForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String): CodespaceApiModel {
         val path = "/user/codespaces/{codespace_name}".replace("{"+"codespace_name"+"}", "$codespaceName")
 
         return httpClient.request {
@@ -319,7 +319,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesGetPublicKeyForAuthenticatedUser(accessToken: String?): CodespacesMinusUserMinusPublicMinusKeyModel {
+    override suspend fun codespacesGetPublicKeyForAuthenticatedUser(accessToken: String?): CodespacesMinusUserMinusPublicMinusKeyApiModel {
         val path = "/user/codespaces/secrets/public-key"
 
         return httpClient.request {
@@ -328,7 +328,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesGetSecretForAuthenticatedUser(accessToken: String?, secretName: kotlin.String): CodespacesMinusSecretModel {
+    override suspend fun codespacesGetSecretForAuthenticatedUser(accessToken: String?, secretName: kotlin.String): CodespacesMinusSecretApiModel {
         val path = "/user/codespaces/secrets/{secret_name}".replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -337,7 +337,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesListInRepositoryForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20019Model {
+    override suspend fun codespacesListInRepositoryForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20019ApiModel {
         val path = "/repos/{owner}/{repo}/codespaces".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -348,7 +348,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesListRepositoriesForSecretForAuthenticatedUser(accessToken: String?, secretName: kotlin.String): InlineResponse20010Model {
+    override suspend fun codespacesListRepositoriesForSecretForAuthenticatedUser(accessToken: String?, secretName: kotlin.String): InlineResponse20010ApiModel {
         val path = "/user/codespaces/secrets/{secret_name}/repositories".replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -357,7 +357,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesListSecretsForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20031Model {
+    override suspend fun codespacesListSecretsForAuthenticatedUser(accessToken: String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20031ApiModel {
         val path = "/user/codespaces/secrets"
 
         return httpClient.request {
@@ -377,7 +377,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesRepoMachinesForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, location: kotlin.String?): InlineResponse20020Model {
+    override suspend fun codespacesRepoMachinesForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, location: kotlin.String?): InlineResponse20020ApiModel {
         val path = "/repos/{owner}/{repo}/codespaces/machines".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -387,7 +387,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesSetRepositoriesForSecretForAuthenticatedUser(accessToken: String?, secretName: kotlin.String, request: InlineObject163Model) {
+    override suspend fun codespacesSetRepositoriesForSecretForAuthenticatedUser(accessToken: String?, secretName: kotlin.String, request: InlineObject163ApiModel) {
         val path = "/user/codespaces/secrets/{secret_name}/repositories".replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
@@ -397,7 +397,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesStartForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String): CodespaceModel {
+    override suspend fun codespacesStartForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String): CodespaceApiModel {
         val path = "/user/codespaces/{codespace_name}/start".replace("{"+"codespace_name"+"}", "$codespaceName")
 
         return httpClient.request {
@@ -406,7 +406,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesStopForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String): CodespaceModel {
+    override suspend fun codespacesStopForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String): CodespaceApiModel {
         val path = "/user/codespaces/{codespace_name}/stop".replace("{"+"codespace_name"+"}", "$codespaceName")
 
         return httpClient.request {
@@ -415,7 +415,7 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesUpdateForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String, request: InlineObject164Model): CodespaceModel {
+    override suspend fun codespacesUpdateForAuthenticatedUser(accessToken: String?, codespaceName: kotlin.String, request: InlineObject164ApiModel): CodespaceApiModel {
         val path = "/user/codespaces/{codespace_name}".replace("{"+"codespace_name"+"}", "$codespaceName")
 
         return httpClient.request {

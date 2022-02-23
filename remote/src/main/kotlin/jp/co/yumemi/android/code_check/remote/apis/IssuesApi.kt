@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -33,9 +33,9 @@ interface IssuesApi {
     * Adds up to 10 assignees to an issue. Users already assigned to an issue are not replaced.
     *
     * @param request  (optional)
-    * @return IssueModel
+    * @return IssueApiModel
     */
-    suspend fun issuesAddAssignees(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject103Model): IssueModel
+    suspend fun issuesAddAssignees(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject103ApiModel): IssueApiModel
 
     /**
     * Check if a user can be assigned
@@ -52,9 +52,9 @@ interface IssuesApi {
     * Any user with pull access to a repository can create an issue. If [issues are disabled in the repository](https://docs.github.com/articles/disabling-issues/), the API returns a &#x60;410 Gone&#x60; status.  This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See \&quot;[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)\&quot; and \&quot;[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)\&quot; for details.
     *
     * @param request 
-    * @return IssueModel
+    * @return IssueApiModel
     */
-    suspend fun issuesCreate(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject99Model): IssueModel
+    suspend fun issuesCreate(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject99ApiModel): IssueApiModel
 
     /**
     * Create an issue comment
@@ -62,9 +62,9 @@ interface IssuesApi {
     * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See \&quot;[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)\&quot; and \&quot;[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)\&quot; for details.
     *
     * @param request 
-    * @return IssueMinusCommentModel
+    * @return IssueMinusCommentApiModel
     */
-    suspend fun issuesCreateComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject105Model): IssueMinusCommentModel
+    suspend fun issuesCreateComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject105ApiModel): IssueMinusCommentApiModel
 
     /**
     * Create a label
@@ -72,9 +72,9 @@ interface IssuesApi {
     * 
     *
     * @param request 
-    * @return LabelModel
+    * @return LabelApiModel
     */
-    suspend fun issuesCreateLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject109Model): LabelModel
+    suspend fun issuesCreateLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject109ApiModel): LabelApiModel
 
     /**
     * Create a milestone
@@ -82,9 +82,9 @@ interface IssuesApi {
     * 
     *
     * @param request 
-    * @return MilestoneModel
+    * @return MilestoneApiModel
     */
-    suspend fun issuesCreateMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject113Model): MilestoneModel
+    suspend fun issuesCreateMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject113ApiModel): MilestoneApiModel
 
     /**
     * Delete an issue comment
@@ -118,153 +118,153 @@ interface IssuesApi {
     *
     * The API returns a [&#x60;301 Moved Permanently&#x60; status](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-redirects-redirects) if the issue was [transferred](https://docs.github.com/articles/transferring-an-issue-to-another-repository/) to another repository. If the issue was transferred to or deleted from a repository where the authenticated user lacks read access, the API returns a &#x60;404 Not Found&#x60; status. If the issue was deleted from a repository where the authenticated user has read access, the API returns a &#x60;410 Gone&#x60; status. To receive webhook events for transferred and deleted issues, subscribe to the [&#x60;issues&#x60;](https://docs.github.com/webhooks/event-payloads/#issues) webhook.  **Note**: GitHub&#39;s REST API v3 considers every pull request an issue, but not every issue is a pull request. For this reason, \&quot;Issues\&quot; endpoints may return both issues and pull requests in the response. You can identify pull requests by the &#x60;pull_request&#x60; key. Be aware that the &#x60;id&#x60; of a pull request returned from \&quot;Issues\&quot; endpoints will be an _issue id_. To find out the pull request id, use the \&quot;[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)\&quot; endpoint.
     *
-    * @return IssueModel
+    * @return IssueApiModel
     */
-    suspend fun issuesGet(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int): IssueModel
+    suspend fun issuesGet(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int): IssueApiModel
 
     /**
     * Get an issue comment
     *
     * 
     *
-    * @return IssueMinusCommentModel
+    * @return IssueMinusCommentApiModel
     */
-    suspend fun issuesGetComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): IssueMinusCommentModel
+    suspend fun issuesGetComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): IssueMinusCommentApiModel
 
     /**
     * Get an issue event
     *
     * 
     *
-    * @return IssueMinusEventModel
+    * @return IssueMinusEventApiModel
     */
-    suspend fun issuesGetEvent(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, eventId: kotlin.Int): IssueMinusEventModel
+    suspend fun issuesGetEvent(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, eventId: kotlin.Int): IssueMinusEventApiModel
 
     /**
     * Get a label
     *
     * 
     *
-    * @return LabelModel
+    * @return LabelApiModel
     */
-    suspend fun issuesGetLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, name: kotlin.String): LabelModel
+    suspend fun issuesGetLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, name: kotlin.String): LabelApiModel
 
     /**
     * Get a milestone
     *
     * 
     *
-    * @return MilestoneModel
+    * @return MilestoneApiModel
     */
-    suspend fun issuesGetMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int): MilestoneModel
+    suspend fun issuesGetMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int): MilestoneApiModel
 
     /**
     * List issues assigned to the authenticated user
     *
     * List issues assigned to the authenticated user across all visible repositories including owned repositories, member repositories, and organization repositories. You can use the &#x60;filter&#x60; query parameter to fetch issues that are not necessarily assigned to you.   **Note**: GitHub&#39;s REST API v3 considers every pull request an issue, but not every issue is a pull request. For this reason, \&quot;Issues\&quot; endpoints may return both issues and pull requests in the response. You can identify pull requests by the &#x60;pull_request&#x60; key. Be aware that the &#x60;id&#x60; of a pull request returned from \&quot;Issues\&quot; endpoints will be an _issue id_. To find out the pull request id, use the \&quot;[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)\&quot; endpoint.
     *
-    * @return kotlin.collections.List<IssueModel>
+    * @return kotlin.collections.List<IssueApiModel>
     */
-    suspend fun issuesList(accessToken: String? = null, filter: kotlin.String? = null, state: kotlin.String? = null, labels: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, collab: kotlin.Boolean? = null, orgs: kotlin.Boolean? = null, owned: kotlin.Boolean? = null, pulls: kotlin.Boolean? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueModel>
+    suspend fun issuesList(accessToken: String? = null, filter: kotlin.String? = null, state: kotlin.String? = null, labels: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, collab: kotlin.Boolean? = null, orgs: kotlin.Boolean? = null, owned: kotlin.Boolean? = null, pulls: kotlin.Boolean? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueApiModel>
 
     /**
     * List assignees
     *
     * Lists the [available assignees](https://docs.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
     *
-    * @return kotlin.collections.List<SimpleMinusUserModel>
+    * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun issuesListAssignees(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserModel>
+    suspend fun issuesListAssignees(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List issue comments
     *
     * Issue Comments are ordered by ascending ID.
     *
-    * @return kotlin.collections.List<IssueMinusCommentModel>
+    * @return kotlin.collections.List<IssueMinusCommentApiModel>
     */
-    suspend fun issuesListComments(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusCommentModel>
+    suspend fun issuesListComments(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusCommentApiModel>
 
     /**
     * List issue comments for a repository
     *
     * By default, Issue Comments are ordered by ascending ID.
     *
-    * @return kotlin.collections.List<IssueMinusCommentModel>
+    * @return kotlin.collections.List<IssueMinusCommentApiModel>
     */
-    suspend fun issuesListCommentsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusCommentModel>
+    suspend fun issuesListCommentsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusCommentApiModel>
 
     /**
     * List issue events
     *
     * 
     *
-    * @return kotlin.collections.List<LabeledMinusIssueMinusEventModel>
+    * @return kotlin.collections.List<LabeledMinusIssueMinusEventApiModel>
     */
-    suspend fun issuesListEvents(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabeledMinusIssueMinusEventModel>
+    suspend fun issuesListEvents(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabeledMinusIssueMinusEventApiModel>
 
     /**
     * List issue events for a repository
     *
     * 
     *
-    * @return kotlin.collections.List<IssueMinusEventModel>
+    * @return kotlin.collections.List<IssueMinusEventApiModel>
     */
-    suspend fun issuesListEventsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusEventModel>
+    suspend fun issuesListEventsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusEventApiModel>
 
     /**
     * List user account issues assigned to the authenticated user
     *
     * List issues across owned and member repositories assigned to the authenticated user.  **Note**: GitHub&#39;s REST API v3 considers every pull request an issue, but not every issue is a pull request. For this reason, \&quot;Issues\&quot; endpoints may return both issues and pull requests in the response. You can identify pull requests by the &#x60;pull_request&#x60; key. Be aware that the &#x60;id&#x60; of a pull request returned from \&quot;Issues\&quot; endpoints will be an _issue id_. To find out the pull request id, use the \&quot;[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)\&quot; endpoint.
     *
-    * @return kotlin.collections.List<IssueModel>
+    * @return kotlin.collections.List<IssueApiModel>
     */
-    suspend fun issuesListForAuthenticatedUser(accessToken: String? = null, filter: kotlin.String? = null, state: kotlin.String? = null, labels: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueModel>
+    suspend fun issuesListForAuthenticatedUser(accessToken: String? = null, filter: kotlin.String? = null, state: kotlin.String? = null, labels: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueApiModel>
 
     /**
     * List organization issues assigned to the authenticated user
     *
     * List issues in an organization assigned to the authenticated user.  **Note**: GitHub&#39;s REST API v3 considers every pull request an issue, but not every issue is a pull request. For this reason, \&quot;Issues\&quot; endpoints may return both issues and pull requests in the response. You can identify pull requests by the &#x60;pull_request&#x60; key. Be aware that the &#x60;id&#x60; of a pull request returned from \&quot;Issues\&quot; endpoints will be an _issue id_. To find out the pull request id, use the \&quot;[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)\&quot; endpoint.
     *
-    * @return kotlin.collections.List<IssueModel>
+    * @return kotlin.collections.List<IssueApiModel>
     */
-    suspend fun issuesListForOrg(accessToken: String? = null, org: kotlin.String, filter: kotlin.String? = null, state: kotlin.String? = null, labels: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueModel>
+    suspend fun issuesListForOrg(accessToken: String? = null, org: kotlin.String, filter: kotlin.String? = null, state: kotlin.String? = null, labels: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueApiModel>
 
     /**
     * List repository issues
     *
     * List issues in a repository.  **Note**: GitHub&#39;s REST API v3 considers every pull request an issue, but not every issue is a pull request. For this reason, \&quot;Issues\&quot; endpoints may return both issues and pull requests in the response. You can identify pull requests by the &#x60;pull_request&#x60; key. Be aware that the &#x60;id&#x60; of a pull request returned from \&quot;Issues\&quot; endpoints will be an _issue id_. To find out the pull request id, use the \&quot;[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)\&quot; endpoint.
     *
-    * @return kotlin.collections.List<IssueModel>
+    * @return kotlin.collections.List<IssueApiModel>
     */
-    suspend fun issuesListForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestone: kotlin.String? = null, state: kotlin.String? = null, assignee: kotlin.String? = null, creator: kotlin.String? = null, mentioned: kotlin.String? = null, labels: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueModel>
+    suspend fun issuesListForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestone: kotlin.String? = null, state: kotlin.String? = null, assignee: kotlin.String? = null, creator: kotlin.String? = null, mentioned: kotlin.String? = null, labels: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueApiModel>
 
     /**
     * List labels for issues in a milestone
     *
     * 
     *
-    * @return kotlin.collections.List<LabelModel>
+    * @return kotlin.collections.List<LabelApiModel>
     */
-    suspend fun issuesListLabelsForMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabelModel>
+    suspend fun issuesListLabelsForMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabelApiModel>
 
     /**
     * List labels for a repository
     *
     * 
     *
-    * @return kotlin.collections.List<LabelModel>
+    * @return kotlin.collections.List<LabelApiModel>
     */
-    suspend fun issuesListLabelsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabelModel>
+    suspend fun issuesListLabelsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabelApiModel>
 
     /**
     * List milestones
     *
     * 
     *
-    * @return kotlin.collections.List<MilestoneModel>
+    * @return kotlin.collections.List<MilestoneApiModel>
     */
-    suspend fun issuesListMilestones(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, state: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MilestoneModel>
+    suspend fun issuesListMilestones(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, state: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MilestoneApiModel>
 
     /**
     * Lock an issue
@@ -274,7 +274,7 @@ interface IssuesApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun issuesLock(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject106Model)
+    suspend fun issuesLock(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject106ApiModel)
 
     /**
     * Remove assignees from an issue
@@ -282,18 +282,18 @@ interface IssuesApi {
     * Removes one or more assignees from an issue.
     *
     * @param request  (optional)
-    * @return IssueModel
+    * @return IssueApiModel
     */
-    suspend fun issuesRemoveAssignees(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject104Model): IssueModel
+    suspend fun issuesRemoveAssignees(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject104ApiModel): IssueApiModel
 
     /**
     * Remove a label from an issue
     *
     * Removes the specified label from the issue, and returns the remaining labels on the issue. This endpoint returns a &#x60;404 Not Found&#x60; status if the label does not exist.
     *
-    * @return kotlin.collections.List<LabelModel>
+    * @return kotlin.collections.List<LabelApiModel>
     */
-    suspend fun issuesRemoveLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, name: kotlin.String): kotlin.collections.List<LabelModel>
+    suspend fun issuesRemoveLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, name: kotlin.String): kotlin.collections.List<LabelApiModel>
 
     /**
     * Unlock an issue
@@ -310,9 +310,9 @@ interface IssuesApi {
     * Issue owners and users with push access can edit an issue.
     *
     * @param request  (optional)
-    * @return IssueModel
+    * @return IssueApiModel
     */
-    suspend fun issuesUpdate(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject102Model): IssueModel
+    suspend fun issuesUpdate(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject102ApiModel): IssueApiModel
 
     /**
     * Update an issue comment
@@ -320,9 +320,9 @@ interface IssuesApi {
     * 
     *
     * @param request 
-    * @return IssueMinusCommentModel
+    * @return IssueMinusCommentApiModel
     */
-    suspend fun issuesUpdateComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject100Model): IssueMinusCommentModel
+    suspend fun issuesUpdateComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject100ApiModel): IssueMinusCommentApiModel
 
     /**
     * Update a label
@@ -330,9 +330,9 @@ interface IssuesApi {
     * 
     *
     * @param request  (optional)
-    * @return LabelModel
+    * @return LabelApiModel
     */
-    suspend fun issuesUpdateLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, name: kotlin.String, request: InlineObject110Model): LabelModel
+    suspend fun issuesUpdateLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, name: kotlin.String, request: InlineObject110ApiModel): LabelApiModel
 
     /**
     * Update a milestone
@@ -340,16 +340,16 @@ interface IssuesApi {
     * 
     *
     * @param request  (optional)
-    * @return MilestoneModel
+    * @return MilestoneApiModel
     */
-    suspend fun issuesUpdateMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, request: InlineObject114Model): MilestoneModel
+    suspend fun issuesUpdateMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, request: InlineObject114ApiModel): MilestoneApiModel
 
 }
 
 class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : IssuesApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun issuesAddAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject103Model): IssueModel {
+    override suspend fun issuesAddAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject103ApiModel): IssueApiModel {
         val path = "/repos/{owner}/{repo}/issues/{issue_number}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
@@ -368,7 +368,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesCreate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject99Model): IssueModel {
+    override suspend fun issuesCreate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject99ApiModel): IssueApiModel {
         val path = "/repos/{owner}/{repo}/issues".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -378,7 +378,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesCreateComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject105Model): IssueMinusCommentModel {
+    override suspend fun issuesCreateComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject105ApiModel): IssueMinusCommentApiModel {
         val path = "/repos/{owner}/{repo}/issues/{issue_number}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
@@ -388,7 +388,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesCreateLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject109Model): LabelModel {
+    override suspend fun issuesCreateLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject109ApiModel): LabelApiModel {
         val path = "/repos/{owner}/{repo}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -398,7 +398,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesCreateMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject113Model): MilestoneModel {
+    override suspend fun issuesCreateMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject113ApiModel): MilestoneApiModel {
         val path = "/repos/{owner}/{repo}/milestones".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -435,7 +435,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesGet(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int): IssueModel {
+    override suspend fun issuesGet(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int): IssueApiModel {
         val path = "/repos/{owner}/{repo}/issues/{issue_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
@@ -444,7 +444,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesGetComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): IssueMinusCommentModel {
+    override suspend fun issuesGetComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): IssueMinusCommentApiModel {
         val path = "/repos/{owner}/{repo}/issues/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
@@ -453,7 +453,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesGetEvent(accessToken: String?, owner: kotlin.String, repo: kotlin.String, eventId: kotlin.Int): IssueMinusEventModel {
+    override suspend fun issuesGetEvent(accessToken: String?, owner: kotlin.String, repo: kotlin.String, eventId: kotlin.Int): IssueMinusEventApiModel {
         val path = "/repos/{owner}/{repo}/issues/events/{event_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"event_id"+"}", "$eventId")
 
         return httpClient.request {
@@ -462,7 +462,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesGetLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, name: kotlin.String): LabelModel {
+    override suspend fun issuesGetLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, name: kotlin.String): LabelApiModel {
         val path = "/repos/{owner}/{repo}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
@@ -471,7 +471,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesGetMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int): MilestoneModel {
+    override suspend fun issuesGetMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int): MilestoneApiModel {
         val path = "/repos/{owner}/{repo}/milestones/{milestone_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
 
         return httpClient.request {
@@ -480,7 +480,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesList(accessToken: String?, filter: kotlin.String?, state: kotlin.String?, labels: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, collab: kotlin.Boolean?, orgs: kotlin.Boolean?, owned: kotlin.Boolean?, pulls: kotlin.Boolean?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueModel> {
+    override suspend fun issuesList(accessToken: String?, filter: kotlin.String?, state: kotlin.String?, labels: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, collab: kotlin.Boolean?, orgs: kotlin.Boolean?, owned: kotlin.Boolean?, pulls: kotlin.Boolean?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueApiModel> {
         val path = "/issues"
 
         return httpClient.request {
@@ -501,7 +501,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserModel> {
+    override suspend fun issuesListAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
         val path = "/repos/{owner}/{repo}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -512,7 +512,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListComments(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusCommentModel> {
+    override suspend fun issuesListComments(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusCommentApiModel> {
         val path = "/repos/{owner}/{repo}/issues/{issue_number}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
@@ -524,7 +524,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListCommentsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusCommentModel> {
+    override suspend fun issuesListCommentsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusCommentApiModel> {
         val path = "/repos/{owner}/{repo}/issues/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -538,7 +538,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListEvents(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabeledMinusIssueMinusEventModel> {
+    override suspend fun issuesListEvents(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabeledMinusIssueMinusEventApiModel> {
         val path = "/repos/{owner}/{repo}/issues/{issue_number}/events".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
@@ -549,7 +549,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListEventsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusEventModel> {
+    override suspend fun issuesListEventsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusEventApiModel> {
         val path = "/repos/{owner}/{repo}/issues/events".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -560,7 +560,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListForAuthenticatedUser(accessToken: String?, filter: kotlin.String?, state: kotlin.String?, labels: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueModel> {
+    override suspend fun issuesListForAuthenticatedUser(accessToken: String?, filter: kotlin.String?, state: kotlin.String?, labels: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueApiModel> {
         val path = "/user/issues"
 
         return httpClient.request {
@@ -577,7 +577,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListForOrg(accessToken: String?, org: kotlin.String, filter: kotlin.String?, state: kotlin.String?, labels: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueModel> {
+    override suspend fun issuesListForOrg(accessToken: String?, org: kotlin.String, filter: kotlin.String?, state: kotlin.String?, labels: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueApiModel> {
         val path = "/orgs/{org}/issues".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -594,7 +594,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestone: kotlin.String?, state: kotlin.String?, assignee: kotlin.String?, creator: kotlin.String?, mentioned: kotlin.String?, labels: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueModel> {
+    override suspend fun issuesListForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestone: kotlin.String?, state: kotlin.String?, assignee: kotlin.String?, creator: kotlin.String?, mentioned: kotlin.String?, labels: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueApiModel> {
         val path = "/repos/{owner}/{repo}/issues".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -614,7 +614,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListLabelsForMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabelModel> {
+    override suspend fun issuesListLabelsForMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabelApiModel> {
         val path = "/repos/{owner}/{repo}/milestones/{milestone_number}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
 
         return httpClient.request {
@@ -625,7 +625,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListLabelsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabelModel> {
+    override suspend fun issuesListLabelsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabelApiModel> {
         val path = "/repos/{owner}/{repo}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -636,7 +636,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListMilestones(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MilestoneModel> {
+    override suspend fun issuesListMilestones(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MilestoneApiModel> {
         val path = "/repos/{owner}/{repo}/milestones".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
@@ -650,7 +650,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesLock(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject106Model) {
+    override suspend fun issuesLock(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject106ApiModel) {
         val path = "/repos/{owner}/{repo}/issues/{issue_number}/lock".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
@@ -660,7 +660,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesRemoveAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject104Model): IssueModel {
+    override suspend fun issuesRemoveAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject104ApiModel): IssueApiModel {
         val path = "/repos/{owner}/{repo}/issues/{issue_number}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
@@ -670,7 +670,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesRemoveLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, name: kotlin.String): kotlin.collections.List<LabelModel> {
+    override suspend fun issuesRemoveLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, name: kotlin.String): kotlin.collections.List<LabelApiModel> {
         val path = "/repos/{owner}/{repo}/issues/{issue_number}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
@@ -688,7 +688,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesUpdate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject102Model): IssueModel {
+    override suspend fun issuesUpdate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject102ApiModel): IssueApiModel {
         val path = "/repos/{owner}/{repo}/issues/{issue_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
@@ -698,7 +698,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesUpdateComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject100Model): IssueMinusCommentModel {
+    override suspend fun issuesUpdateComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject100ApiModel): IssueMinusCommentApiModel {
         val path = "/repos/{owner}/{repo}/issues/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
@@ -708,7 +708,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesUpdateLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, name: kotlin.String, request: InlineObject110Model): LabelModel {
+    override suspend fun issuesUpdateLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, name: kotlin.String, request: InlineObject110ApiModel): LabelApiModel {
         val path = "/repos/{owner}/{repo}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
@@ -718,7 +718,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesUpdateMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, request: InlineObject114Model): MilestoneModel {
+    override suspend fun issuesUpdateMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, request: InlineObject114ApiModel): MilestoneApiModel {
         val path = "/repos/{owner}/{repo}/milestones/{milestone_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
 
         return httpClient.request {

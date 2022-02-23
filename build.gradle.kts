@@ -47,8 +47,9 @@ tasks.withType(kotlinx.kover.tasks.KoverMergedTask::class) {
         "*.domain.core.*",
         "*.domain.entity.*",
         "*.data.models.*",
-        "*.remote.apis.*",
         "*.remote.core.*",
+        "*.remote.models.*",
+        "*.remote.apis.*",
     )
 }
 

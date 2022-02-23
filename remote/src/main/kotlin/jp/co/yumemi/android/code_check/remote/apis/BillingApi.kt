@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.apis
 
 import io.ktor.client.request.request
-import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.models.*
 import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpMethod
@@ -32,70 +32,70 @@ interface BillingApi {
     *
     * Gets the summary of the free and paid GitHub Actions minutes used.  Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage returned includes any minute multipliers for macOS and Windows runners, and is rounded up to the nearest whole minute. For more information, see \&quot;[Managing billing for GitHub Actions](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)\&quot;.  Access tokens must have the &#x60;repo&#x60; or &#x60;admin:org&#x60; scope.
     *
-    * @return ActionsMinusBillingMinusUsageModel
+    * @return ActionsMinusBillingMinusUsageApiModel
     */
-    suspend fun billingGetGithubActionsBillingOrg(accessToken: String? = null, org: kotlin.String): ActionsMinusBillingMinusUsageModel
+    suspend fun billingGetGithubActionsBillingOrg(accessToken: String? = null, org: kotlin.String): ActionsMinusBillingMinusUsageApiModel
 
     /**
     * Get GitHub Actions billing for a user
     *
     * Gets the summary of the free and paid GitHub Actions minutes used.  Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage returned includes any minute multipliers for macOS and Windows runners, and is rounded up to the nearest whole minute. For more information, see \&quot;[Managing billing for GitHub Actions](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)\&quot;.  Access tokens must have the &#x60;user&#x60; scope.
     *
-    * @return ActionsMinusBillingMinusUsageModel
+    * @return ActionsMinusBillingMinusUsageApiModel
     */
-    suspend fun billingGetGithubActionsBillingUser(accessToken: String? = null, username: kotlin.String): ActionsMinusBillingMinusUsageModel
+    suspend fun billingGetGithubActionsBillingUser(accessToken: String? = null, username: kotlin.String): ActionsMinusBillingMinusUsageApiModel
 
     /**
     * Get GitHub Advanced Security active committers for an organization
     *
     * Gets the GitHub Advanced Security active committers for an organization per repository. Each distinct user login across all repositories is counted as a single Advanced Security seat, so the total_advanced_security_committers is not the sum of advanced_security_committers for each repository. If this organization defers to an enterprise for billing, the total_advanced_security_committers returned from the organization API may include some users that are in more than one organization, so they will only consume a single Advanced Security seat at the enterprise level.
     *
-    * @return AdvancedMinusSecurityMinusActiveMinusCommittersModel
+    * @return AdvancedMinusSecurityMinusActiveMinusCommittersApiModel
     */
-    suspend fun billingGetGithubAdvancedSecurityBillingOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): AdvancedMinusSecurityMinusActiveMinusCommittersModel
+    suspend fun billingGetGithubAdvancedSecurityBillingOrg(accessToken: String? = null, org: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): AdvancedMinusSecurityMinusActiveMinusCommittersApiModel
 
     /**
     * Get GitHub Packages billing for an organization
     *
     * Gets the free and paid storage used for GitHub Packages in gigabytes.  Paid minutes only apply to packages stored for private repositories. For more information, see \&quot;[Managing billing for GitHub Packages](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages).\&quot;  Access tokens must have the &#x60;repo&#x60; or &#x60;admin:org&#x60; scope.
     *
-    * @return PackagesMinusBillingMinusUsageModel
+    * @return PackagesMinusBillingMinusUsageApiModel
     */
-    suspend fun billingGetGithubPackagesBillingOrg(accessToken: String? = null, org: kotlin.String): PackagesMinusBillingMinusUsageModel
+    suspend fun billingGetGithubPackagesBillingOrg(accessToken: String? = null, org: kotlin.String): PackagesMinusBillingMinusUsageApiModel
 
     /**
     * Get GitHub Packages billing for a user
     *
     * Gets the free and paid storage used for GitHub Packages in gigabytes.  Paid minutes only apply to packages stored for private repositories. For more information, see \&quot;[Managing billing for GitHub Packages](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages).\&quot;  Access tokens must have the &#x60;user&#x60; scope.
     *
-    * @return PackagesMinusBillingMinusUsageModel
+    * @return PackagesMinusBillingMinusUsageApiModel
     */
-    suspend fun billingGetGithubPackagesBillingUser(accessToken: String? = null, username: kotlin.String): PackagesMinusBillingMinusUsageModel
+    suspend fun billingGetGithubPackagesBillingUser(accessToken: String? = null, username: kotlin.String): PackagesMinusBillingMinusUsageApiModel
 
     /**
     * Get shared storage billing for an organization
     *
     * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.  Paid minutes only apply to packages stored for private repositories. For more information, see \&quot;[Managing billing for GitHub Packages](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages).\&quot;  Access tokens must have the &#x60;repo&#x60; or &#x60;admin:org&#x60; scope.
     *
-    * @return CombinedMinusBillingMinusUsageModel
+    * @return CombinedMinusBillingMinusUsageApiModel
     */
-    suspend fun billingGetSharedStorageBillingOrg(accessToken: String? = null, org: kotlin.String): CombinedMinusBillingMinusUsageModel
+    suspend fun billingGetSharedStorageBillingOrg(accessToken: String? = null, org: kotlin.String): CombinedMinusBillingMinusUsageApiModel
 
     /**
     * Get shared storage billing for a user
     *
     * Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.  Paid minutes only apply to packages stored for private repositories. For more information, see \&quot;[Managing billing for GitHub Packages](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages).\&quot;  Access tokens must have the &#x60;user&#x60; scope.
     *
-    * @return CombinedMinusBillingMinusUsageModel
+    * @return CombinedMinusBillingMinusUsageApiModel
     */
-    suspend fun billingGetSharedStorageBillingUser(accessToken: String? = null, username: kotlin.String): CombinedMinusBillingMinusUsageModel
+    suspend fun billingGetSharedStorageBillingUser(accessToken: String? = null, username: kotlin.String): CombinedMinusBillingMinusUsageApiModel
 
 }
 
 class HttpClientBillingApi(private val httpClientProvider: HttpClientProvider) : BillingApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun billingGetGithubActionsBillingOrg(accessToken: String?, org: kotlin.String): ActionsMinusBillingMinusUsageModel {
+    override suspend fun billingGetGithubActionsBillingOrg(accessToken: String?, org: kotlin.String): ActionsMinusBillingMinusUsageApiModel {
         val path = "/orgs/{org}/settings/billing/actions".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -104,7 +104,7 @@ class HttpClientBillingApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun billingGetGithubActionsBillingUser(accessToken: String?, username: kotlin.String): ActionsMinusBillingMinusUsageModel {
+    override suspend fun billingGetGithubActionsBillingUser(accessToken: String?, username: kotlin.String): ActionsMinusBillingMinusUsageApiModel {
         val path = "/users/{username}/settings/billing/actions".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -113,7 +113,7 @@ class HttpClientBillingApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun billingGetGithubAdvancedSecurityBillingOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): AdvancedMinusSecurityMinusActiveMinusCommittersModel {
+    override suspend fun billingGetGithubAdvancedSecurityBillingOrg(accessToken: String?, org: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): AdvancedMinusSecurityMinusActiveMinusCommittersApiModel {
         val path = "/orgs/{org}/settings/billing/advanced-security".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -124,7 +124,7 @@ class HttpClientBillingApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun billingGetGithubPackagesBillingOrg(accessToken: String?, org: kotlin.String): PackagesMinusBillingMinusUsageModel {
+    override suspend fun billingGetGithubPackagesBillingOrg(accessToken: String?, org: kotlin.String): PackagesMinusBillingMinusUsageApiModel {
         val path = "/orgs/{org}/settings/billing/packages".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -133,7 +133,7 @@ class HttpClientBillingApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun billingGetGithubPackagesBillingUser(accessToken: String?, username: kotlin.String): PackagesMinusBillingMinusUsageModel {
+    override suspend fun billingGetGithubPackagesBillingUser(accessToken: String?, username: kotlin.String): PackagesMinusBillingMinusUsageApiModel {
         val path = "/users/{username}/settings/billing/packages".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
@@ -142,7 +142,7 @@ class HttpClientBillingApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun billingGetSharedStorageBillingOrg(accessToken: String?, org: kotlin.String): CombinedMinusBillingMinusUsageModel {
+    override suspend fun billingGetSharedStorageBillingOrg(accessToken: String?, org: kotlin.String): CombinedMinusBillingMinusUsageApiModel {
         val path = "/orgs/{org}/settings/billing/shared-storage".replace("{"+"org"+"}", "$org")
 
         return httpClient.request {
@@ -151,7 +151,7 @@ class HttpClientBillingApi(private val httpClientProvider: HttpClientProvider) :
         }
     }
 
-    override suspend fun billingGetSharedStorageBillingUser(accessToken: String?, username: kotlin.String): CombinedMinusBillingMinusUsageModel {
+    override suspend fun billingGetSharedStorageBillingUser(accessToken: String?, username: kotlin.String): CombinedMinusBillingMinusUsageApiModel {
         val path = "/users/{username}/settings/billing/shared-storage".replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
