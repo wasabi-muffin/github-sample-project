@@ -40,8 +40,10 @@ ktlint {
 
 tasks.withType(kotlinx.kover.tasks.KoverMergedTask::class) {
     excludes = listOf(
-        "**.domain.core.*",
-        "**.domain.entity.*"
+        "*.test.*",
+        "*.databinding.*",
+        "*.domain.core.*",
+        "*.domain.entities.*"
     )
 }
 
