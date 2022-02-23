@@ -4,7 +4,6 @@ import jp.co.yumemi.android.code_check.presentation.core.contract.Event
 import jp.co.yumemi.android.code_check.presentation.core.contract.Intent
 import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.contract.ViewState
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.StateFlow
 
 /**
@@ -25,11 +24,4 @@ interface Store<I : Intent, VS : ViewState, E : Event> {
      * Cancels all jobs within the store
      */
     fun dispose()
-
-    /**
-     * Collect used for Kotlin Native
-     */
-    fun collect(
-        onState: ((State<VS, E>) -> Unit),
-    ): Job
 }
