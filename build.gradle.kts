@@ -39,6 +39,19 @@ ktlint {
     }
 }
 
+tasks.withType(kotlinx.kover.tasks.KoverMergedTask::class) {
+    excludes = listOf(
+        "*.BuildConfig",
+        "*.databinding.*",
+        "*.test.*",
+        "*.domain.core.*",
+        "*.domain.entity.*",
+        "*.data.models.*",
+        "*.remote.apis.*",
+        "*.remote.core.*",
+    )
+}
+
 tasks.register("clean", Delete::class) {
     group = "cleanup"
     delete(rootProject.buildDir)
