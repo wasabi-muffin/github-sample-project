@@ -14,6 +14,7 @@ buildscript {
         classpath(Dependencies.Gradle.android)
         classpath(Dependencies.Gradle.kotlin)
         classpath(Dependencies.Gradle.safeArgs)
+        classpath(Dependencies.Gradle.serialization)
     }
 }
 

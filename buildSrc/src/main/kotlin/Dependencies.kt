@@ -35,6 +35,9 @@ object Versions {
     const val lifecycleKtx = "2.3.1"
     const val navigation = "2.3.5"
 
+    // Serialization
+    const val serialization = "1.3.2"
+
     // Ktor
     const val ktor = "1.6.4"
 
@@ -59,6 +62,7 @@ object Dependencies {
         const val android = "com.android.tools.build:gradle:${Versions.gradle}"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
+        const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
     }
 
     object Plugin {
@@ -71,10 +75,12 @@ object Dependencies {
         const val ktlint = "org.jlleitschuh.gradle.ktlint"
         const val kover = "org.jetbrains.kotlinx.kover"
         const val dokka = "org.jetbrains.dokka"
+        const val serialization = "kotlinx-serialization"
     }
 
     object Kotlinx {
         const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}"
+        const val serializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
     }
 
     object Android {
