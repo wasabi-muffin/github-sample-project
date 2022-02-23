@@ -1,0 +1,19 @@
+{
+  "generatorName": "kotlin",
+  "templateDir": "openapi-generator/templates",
+  "inputSpec": "openapi-generator/api.github.com.yaml",
+  "packageName": "jp.co.yumemi.android.code_check.remote",
+  "apiPackage": "jp.co.yumemi.android.code_check.remote.apis",
+  "modelPackage": "jp.co.yumemi.android.code_check.data.models",
+  "modelNameSuffix": "Model",
+  "dateLibrary": "string",
+  "serializableModel": "true",
+  "serializationLibrary": "kotlinx_serialization",
+  "useCoroutines": "true",
+  "generateApiTests": "false",
+  "typeMappings": {
+    "array": "kotlin.collections.List",
+    "URI": "kotlin.String",
+    "java.math.BigDecimal": "kotlin.Double"
+  }
+}

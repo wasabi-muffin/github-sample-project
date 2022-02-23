@@ -1,0 +1,67 @@
+import kotlinx.serialization.*
+{{#hasEnums}}
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+{{/hasEnums}}
+
+/**
+ * {{{description}}}
+{{#allVars}}
+ * @param {{{name}}} {{{description}}}
+{{/allVars}}
+ */
+@Serializable
+{{#isDeprecated}}
+@Deprecated(message = "This schema is deprecated.")
+{{/isDeprecated}}
+{{#nonPublicApi}}internal {{/nonPublicApi}}{{#discriminator}}interface{{/discriminator}}{{^discriminator}}data class{{/discriminator}} {{classname}}{{^discriminator}}(
+{{#allVars}}
+{{#required}}{{>data_class_req_var}}{{/required}}{{^required}}{{>data_class_opt_var}}{{/required}}{{^-last}},{{/-last}}
+{{/allVars}}
+){{/discriminator}}{{#vendorExtensions.x-has-data-class-body}} {
+{{/vendorExtensions.x-has-data-class-body}}
+{{#discriminator}}{{#vars}}{{#required}}
+{{>interface_req_var}}{{/required}}{{^required}}
+{{>interface_opt_var}}{{/required}}{{/vars}}{{/discriminator}}
+{{#hasEnums}}
+{{#vars}}
+{{#isEnum}}
+    /**
+     * {{{description}}}
+     * Values: {{#allowableValues}}{{#enumVars}}{{&name}}{{^-last}},{{/-last}}{{/enumVars}}{{/allowableValues}}
+     */
+    @Serializable(with = {{nameInCamelCase}}.Serializer::class)
+    {{#nonPublicApi}}internal {{/nonPublicApi}}enum class {{{nameInCamelCase}}}(val value: {{^isContainer}}{{dataType}}{{/isContainer}}{{#isContainer}}kotlin.String{{/isContainer}}) {
+    {{#allowableValues}}
+    {{#enumVars}}
+        {{&name}}({{{value}}}){{^-last}},{{/-last}}{{#-last}};{{/-last}}
+    {{/enumVars}}
+    {{/allowableValues}}
+
+        @kotlinx.serialization.Serializer(forClass = {{{nameInCamelCase}}}::class)
+        {{#nonPublicApi}}internal {{/nonPublicApi}}object Serializer {
+            override fun deserialize(decoder: Decoder): {{{nameInCamelCase}}} {
+                val decoded = decoder.decodeString()
+                return values().first { it.value == decoded }
+            }
+
+            override val descriptor: SerialDescriptor
+                get() = PrimitiveSerialDescriptor(
+                    "{{classname}}.{{{nameInCamelCase}}}.Serializer",
+                    PrimitiveKind.STRING
+                )
+
+            override fun serialize(encoder: Encoder, value: {{{nameInCamelCase}}}) {
+                return encoder.encodeString(value.value)
+            }
+        }
+    }
+{{/isEnum}}
+{{/vars}}
+{{/hasEnums}}
+{{#vendorExtensions.x-has-data-class-body}}
+}
+{{/vendorExtensions.x-has-data-class-body}}
