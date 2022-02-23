@@ -9,7 +9,8 @@ class SearchRemoteDataProvider(
     private val searchApi: SearchApi
 ) : SearchRemoteDataSource {
     override suspend fun searchRepos(
-        token: String?, searchText: String
+        token: String?,
+        searchText: String
     ): List<RepoSearchModel> = searchApi
         .searchRepos(accessToken = token, q = searchText)
         .items
