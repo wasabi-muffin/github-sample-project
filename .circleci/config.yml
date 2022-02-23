@@ -100,8 +100,8 @@ jobs:
       - gradle:
           title: code coverage
           task: koverMergedXmlReport
-      - danger:
-          path: ./Dangerfile-Test
+#      - danger:
+#          path: ./Dangerfile-Test
       - store_test_results:
           path: build/reports/kover/
 

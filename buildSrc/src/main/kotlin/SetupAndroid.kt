@@ -24,13 +24,6 @@ fun Project.setupAndroid() {
             targetCompatibility = JavaVersion.VERSION_11
         }
 
-        buildTypes {
-            getByName("release") {
-                isMinifyEnabled = true
-                proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            }
-        }
-
         lintOptions {
             isCheckDependencies = true
             xmlReport = true
@@ -56,6 +49,7 @@ fun Project.setupAndroid() {
     }
 
     setupAndroidApp()
+    setupAndroidLibrary()
 }
 
 private fun Project.setupAndroidApp() {
@@ -64,8 +58,25 @@ private fun Project.setupAndroidApp() {
             applicationId = "jp.co.yumemi.android.codecheck"
         }
 
+        buildTypes {
+            getByName("release") {
+                isMinifyEnabled = true
+                proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            }
+        }
+
         buildFeatures {
             viewBinding = true
+        }
+    }
+}
+
+private fun Project.setupAndroidLibrary() {
+    extensions.findByType(LibraryExtension::class.java)?.apply {
+        buildTypes {
+            getByName("release") {
+                isMinifyEnabled = false
+            }
         }
     }
 }
