@@ -1,0 +1,43 @@
+{{>licenseInfo}}
+package {{packageName}}.apis
+
+import io.ktor.client.request.request
+import jp.co.yumemi.android.code_check.data.models.*
+import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
+import io.ktor.client.request.parameter
+import io.ktor.http.HttpMethod
+
+{{#operations}}
+interface {{classname}} {
+{{#operation}}
+    /**
+    * {{summary}}
+    *
+    * {{notes}}
+    *
+    {{#bodyParams}}* @param request {{description}}{{^required}} (optional{{#defaultValue}}, default to {{{.}}}{{/defaultValue}}){{/required}}
+    {{/bodyParams}}* @return {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}
+    */
+    suspend fun {{operationId}}(accessToken: String? = null{{#pathParams}}, {{paramName}}: {{{dataType}}}{{/pathParams}}{{#queryParams}}, {{paramName}}: {{{dataType}}}? = null{{/queryParams}}{{#bodyParams}}, request: {{{dataType}}}{{#defaultValue}} = "{{{defaultValue}}}"{{/defaultValue}}{{#hasMore}}, {{/hasMore}}{{/bodyParams}}){{#returnType}}: {{{returnType}}}{{/returnType}}
+
+{{/operation}}
+}
+
+class HttpClient{{classname}}(private val httpClientProvider: HttpClientProvider) : {{classname}} {
+    internal val httpClient = httpClientProvider.provide()
+
+{{#operation}}
+    override suspend fun {{operationId}}(accessToken: String?{{#pathParams}}, {{paramName}}: {{{dataType}}}{{/pathParams}}{{#queryParams}}, {{paramName}}: {{{dataType}}}?{{/queryParams}}{{#bodyParams}}, request: {{{dataType}}}{{#hasMore}}, {{/hasMore}}{{/bodyParams}}){{#returnType}}: {{{returnType}}}{{/returnType}} {
+        val path = "{{path}}"{{#pathParams}}.replace("{"+"{{baseName}}"+"}", "${{paramName}}"){{/pathParams}}
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.{{#lambda.titlecase}}{{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}{{/lambda.titlecase}}{{#bodyParams}}
+            body = request{{/bodyParams}}{{#queryParams}}
+            parameter("{{paramName}}", {{paramName}}){{/queryParams}}
+        }
+    }
+
+{{/operation}}
+}
+{{/operations}}

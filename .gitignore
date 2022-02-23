@@ -91,3 +91,6 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+
+# OpenApi
+openapi-generator/output
