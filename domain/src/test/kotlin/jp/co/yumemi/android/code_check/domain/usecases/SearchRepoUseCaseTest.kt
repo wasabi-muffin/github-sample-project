@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.domain
+package jp.co.yumemi.android.code_check.domain.usecases
 
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeTypeOf
@@ -11,8 +11,6 @@ import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.entities.GithubRepo
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
-import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoExecutor
-import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
 import jp.co.yumemi.android.code_check.test.runBlockingTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
