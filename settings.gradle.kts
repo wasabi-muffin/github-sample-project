@@ -10,4 +10,5 @@ dependencyResolutionManagement {
 
 include(":app")
 include(":domain")
+include(":data")
 include(":test-internal")

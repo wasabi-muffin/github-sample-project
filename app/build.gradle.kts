@@ -11,6 +11,7 @@ setupAndroid()
 dependencies {
     // Projects
     project(Modules.Domain)
+    project(Modules.Data)
 
     // AndroidX
     implementation(Dependencies.AndroidX.core)
