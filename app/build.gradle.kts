@@ -23,8 +23,9 @@ dependencies {
     implementation(Dependencies.AndroidX.appCompat)
     implementation(Dependencies.AndroidX.constraintLayout)
     implementation(Dependencies.AndroidX.recyclerView)
-    implementation(Dependencies.AndroidX.lifecycleRuntimeKtx)
-    implementation(Dependencies.AndroidX.lifecycleViewmodelKtx)
+    implementation(Dependencies.AndroidX.lifecycleRuntime)
+    implementation(Dependencies.AndroidX.lifecycleViewModel)
+    implementation(Dependencies.AndroidX.lifecycleSavedState)
 
     implementation(Dependencies.AndroidX.navigationFragment)
     implementation(Dependencies.AndroidX.navigationUi)

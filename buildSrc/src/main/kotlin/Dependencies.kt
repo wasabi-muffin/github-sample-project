@@ -33,7 +33,7 @@ object Versions {
     const val appCompat = "1.3.1"
     const val constraintLayout = "2.1.1"
     const val recyclerView = "1.2.1"
-    const val lifecycleKtx = "2.4.1"
+    const val lifecycle = "2.4.1"
     const val navigation = "2.3.5"
 
     // Jetpack Compose
@@ -103,8 +103,9 @@ object Dependencies {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
         const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
-        const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleKtx}"
-        const val lifecycleViewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleKtx}"
+        const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
+        const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+        const val lifecycleSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle}"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     }
