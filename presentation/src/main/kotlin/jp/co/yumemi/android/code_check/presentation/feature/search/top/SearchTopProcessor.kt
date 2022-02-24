@@ -3,6 +3,12 @@ package jp.co.yumemi.android.code_check.presentation.feature.search.top
 import jp.co.yumemi.android.code_check.domain.usecases.ClearRecentSearchesUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.GetRecentSearchesUseCase
 import jp.co.yumemi.android.code_check.presentation.core.contract.State
+import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopAction
+import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopEvent
+import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopIntent
+import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopResult
+import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopSideEffect
+import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.components.StateMachineProcessor
 
 class SearchTopProcessor(

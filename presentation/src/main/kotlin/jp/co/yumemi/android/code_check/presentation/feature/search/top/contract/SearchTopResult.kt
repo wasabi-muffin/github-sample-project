@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.presentation.feature.search.top
+package jp.co.yumemi.android.code_check.presentation.feature.search.top.contract
 
 import jp.co.yumemi.android.code_check.domain.entities.RecentSearch
 import jp.co.yumemi.android.code_check.presentation.core.contract.ProcessEventResult
