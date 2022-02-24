@@ -3,6 +3,7 @@ plugins {
     id(Dependencies.Plugin.kotlinAndroid)
     id(Dependencies.Plugin.kotlinKapt)
     id(Dependencies.Plugin.parcelize)
+    id(Dependencies.Plugin.hilt)
 }
 
 setupAndroid()
@@ -26,4 +27,6 @@ dependencies {
     implementation(Dependencies.Compose.material)
     implementation(Dependencies.Compose.foundation)
     implementation(Dependencies.Compose.foundationLayout)
+    implementation(Dependencies.Hilt.android)
+    kapt(Dependencies.Hilt.compiler)
 }
