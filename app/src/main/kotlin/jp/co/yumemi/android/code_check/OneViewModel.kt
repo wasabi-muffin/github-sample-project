@@ -4,7 +4,9 @@
 package jp.co.yumemi.android.code_check
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Date
+import javax.inject.Inject
 import jp.co.yumemi.android.code_check.TopActivity.Companion.lastSearchDate
 import jp.co.yumemi.android.code_check.data.repositories.SearchDataRepository
 import jp.co.yumemi.android.code_check.domain.core.DomainError
@@ -25,17 +27,10 @@ import kotlinx.coroutines.runBlocking
 /**
  * TwoFragment で使う
  */
-class OneViewModel(
-    database: AppDatabase
+@HiltViewModel
+class OneViewModel @Inject constructor(
+    private val searchRepoUseCase: SearchRepoUseCase
 ) : ViewModel() {
-    // TODO: DI
-    private val httpClientProvider = DefaultHttpClientProvider()
-    private val searchApi = HttpClientSearchApi(httpClientProvider)
-    private val searchRemoteDataSource = SearchRemoteDataProvider(searchApi)
-    private val localDataSource = SearchLocalDataProvider(database.searchDao())
-    private val searchRepository = SearchDataRepository(searchRemoteDataSource, localDataSource)
-    private val errorHandler = ErrorHandler { throwable -> DomainError.Unknown(throwable) }
-    private val searchRepoUseCase = SearchRepoExecutor(searchRepository, errorHandler)
 
     // 検索結果
     // TODO: Remove runBlocking and GlobalScope
