@@ -2,6 +2,7 @@ package jp.co.yumemi.android.code_check.presentation.feature.search.top
 
 import jp.co.yumemi.android.code_check.domain.entities.SearchType
 import jp.co.yumemi.android.code_check.presentation.core.contract.Action
+import jp.co.yumemi.android.code_check.presentation.core.contract.ProcessEventAction
 
 sealed class SearchTopAction : Action {
     object LoadRecentSearches : SearchTopAction()
@@ -9,4 +10,5 @@ sealed class SearchTopAction : Action {
     object ClearRecentSearches : SearchTopAction()
     object NavigateBack : SearchTopAction()
     data class NavigateSearch(val type: SearchType) : SearchTopAction()
+    data class ProcessEvent(override val event: SearchTopEvent) : SearchTopAction(), ProcessEventAction<SearchTopEvent>
 }

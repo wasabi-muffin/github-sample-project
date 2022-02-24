@@ -3,6 +3,7 @@ package jp.co.yumemi.android.code_check.presentation.feature.search.top
 import jp.co.yumemi.android.code_check.domain.entities.RecentSearch
 import jp.co.yumemi.android.code_check.domain.entities.SearchType
 import jp.co.yumemi.android.code_check.presentation.core.contract.Intent
+import jp.co.yumemi.android.code_check.presentation.core.contract.ProcessEventIntent
 
 sealed class SearchTopIntent : Intent {
     object OnStart : SearchTopIntent()
@@ -12,4 +13,5 @@ sealed class SearchTopIntent : Intent {
     data class ClickRecentSearchItem(val recentSearch: RecentSearch) : SearchTopIntent()
     data class ClickItem(val type: SearchType) : SearchTopIntent()
     object ClickClearSearchText : SearchTopIntent()
+    data class ProcessEvent(override val event: SearchTopEvent): SearchTopIntent(), ProcessEventIntent<SearchTopEvent>
 }
