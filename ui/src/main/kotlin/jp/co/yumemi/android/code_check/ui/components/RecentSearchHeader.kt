@@ -1,5 +1,6 @@
 package jp.co.yumemi.android.code_check.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -19,9 +20,10 @@ import jp.co.yumemi.android.code_check.ui.primitives.GithubTheme
 
 @Composable
 fun RecentSearchHeader(
+    onClickClear: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Row(modifier = modifier.padding(horizontal = 16.dp)) {
+    Row(modifier = modifier.padding(all = 16.dp)) {
         Text(
             text = stringResource(R.string.search_top_recent_searches),
             style = MaterialTheme.typography.h4,
@@ -31,8 +33,8 @@ fun RecentSearchHeader(
         Text(
             text = stringResource(R.string.common_clear).toUpperCase(Locale.current),
             style = MaterialTheme.typography.h4,
-            fontWeight = FontWeight.Normal,
-            color = Blue.v500
+            color = Blue.v500,
+            modifier = Modifier.clickable { onClickClear() }
         )
     }
 }
@@ -41,8 +43,6 @@ fun RecentSearchHeader(
 @Composable
 fun Preview_RecentSearchHeader() {
     GithubTheme {
-        RecentSearchHeader(
-            Modifier.size(400.dp, 40.dp)
-        )
+        RecentSearchHeader({})
     }
 }

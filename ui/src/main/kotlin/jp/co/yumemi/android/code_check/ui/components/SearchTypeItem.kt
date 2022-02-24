@@ -30,7 +30,7 @@ fun SearchTypeItem(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier.padding(16.dp),
+        modifier = modifier.padding(24.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         val searchTypeIconId = when (searchType) {

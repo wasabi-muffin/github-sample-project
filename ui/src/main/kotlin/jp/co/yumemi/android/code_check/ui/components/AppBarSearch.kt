@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -18,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import jp.co.yumemi.android.code_check.ui.R
@@ -31,12 +34,14 @@ fun AppBarSearch(
     placeholder: String,
     searchText: String,
     onClickBack: () -> Unit,
+    onClickImeSearch: () -> Unit,
     onClickClear: () -> Unit,
     onSearchTextChanged: (String) -> Unit,
 ) {
     TopAppBar(
         modifier = modifier,
-        contentPadding = PaddingValues(start = 16.dp, end = 8.dp),
+        backgroundColor = Github.White,
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
     ) {
         Icon(
             painter = painterResource(id = R.drawable.arrow_left),
@@ -46,35 +51,42 @@ fun AppBarSearch(
                 .clickable { onClickBack() }
                 .size(24.dp)
         )
-        Spacer(modifier = Modifier.width(24.dp))
+        Spacer(modifier = Modifier.width(16.dp))
         TextField(
             value = searchText,
             placeholder = {
                 Text(
                     text = placeholder,
-                    color = Gray.v500
+                    color = Gray.v300
                 )
             },
             onValueChange = onSearchTextChanged,
             singleLine = true,
             trailingIcon = {
-                if (searchText.isEmpty()) {
+                if (searchText.isNotEmpty()) {
                     Icon(
                         painter = painterResource(id = R.drawable.x),
                         contentDescription = "clear text",
-                        tint = Gray.v500,
+                        tint = Gray.v700,
                         modifier = Modifier
+                            .size(24.dp)
                             .offset(x = 10.dp)
                             .clickable(onClick = onClickClear)
                     )
                 }
             },
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Search
+            ),
+            keyboardActions = KeyboardActions(
+                onSearch = { onClickImeSearch() }
+            ),
             colors = TextFieldDefaults.textFieldColors(
                 textColor = Github.Black,
                 backgroundColor = Color.Transparent,
-                focusedIndicatorColor = Gray.v500,
-                disabledIndicatorColor = Gray.v500,
-                unfocusedIndicatorColor = Gray.v500
+                focusedIndicatorColor = Gray.v300,
+                disabledIndicatorColor = Gray.v300,
+                unfocusedIndicatorColor = Gray.v300
             ),
             modifier = Modifier.weight(1F)
         )
@@ -85,6 +97,6 @@ fun AppBarSearch(
 @Composable
 fun Preview_AppBarSearch() {
     GithubTheme {
-        AppBarSearch(Modifier.background(Color.White), "Preview", "Hi", {}, {}, {})
+        AppBarSearch(Modifier.background(Color.White), "Preview", "Hi", {}, {}, {}, {})
     }
 }
