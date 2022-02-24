@@ -1,5 +1,7 @@
 @startuml Search
 state Search {
+    Search : I.ClickBack > A.NavigateBack > E.NavigateBack
+
     state Initial {
         Initial : I.OnStart > A.LoadRecentSearches > R.RecentSearches
         
@@ -8,7 +10,6 @@ state Search {
 
     state Stable {
         Stable : I.InputSearchText > A.UpdateSearchText > R.UpdateSearchText
-        Stable : I.ClickBack > A.NavigateBack > E.NavigateBack
 
         state Stable.EmptySearch {
             Stable.EmptySearch : I.ClickClearRecentSearches > A.ClearRecentSearches > R.ClearRecentSearches
