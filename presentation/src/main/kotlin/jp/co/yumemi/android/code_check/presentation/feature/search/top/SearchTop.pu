@@ -11,10 +11,11 @@ state Search {
         Stable : I.ClickBack > A.NavigateBack > E.NavigateBack
 
         state Stable.EmptySearch {
-            Stable.EmptySearch : I.ClickClearRecentSearches > A.ClearRecentSearches > R.ClearResentSearches
+            Stable.EmptySearch : I.ClickClearRecentSearches > A.ClearRecentSearches > R.ClearRecentSearches
             Stable.EmptySearch : I.ClickRecentSearchItem > A.UpdateSearchText > R.UpdateSearchText
 
             Stable.EmptySearch --> Stable.NonEmptySearch : R.UpdateSearchText
+            Stable.EmptySearch --> Stable.EmptySearch : R.ClearRecentSearches
         }
 
         state Stable.NonEmptySearch {
