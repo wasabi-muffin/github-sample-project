@@ -1,0 +1,12 @@
+package jp.co.yumemi.android.code_check.presentation.feature.search.top
+
+import jp.co.yumemi.android.code_check.domain.entities.SearchType
+import jp.co.yumemi.android.code_check.presentation.core.contract.Action
+
+sealed class SearchTopAction : Action {
+    object LoadRecentSearches : SearchTopAction()
+    data class UpdateSearchText(val text: String) : SearchTopAction()
+    object ClearRecentSearches : SearchTopAction()
+    object NavigateBack : SearchTopAction()
+    data class NavigateSearch(val type: SearchType) : SearchTopAction()
+}

@@ -1,11 +1,12 @@
 package jp.co.yumemi.android.code_check.presentation.core.contract
 
+import android.os.Parcelable
 import java.util.UUID
 
 /**
  * One-time effects for the client (i.e. navigation, snackbars, animation)
  */
-abstract class Event {
+abstract class Event : Parcelable {
     val id: String = UUID.randomUUID().toString()
 }
 
