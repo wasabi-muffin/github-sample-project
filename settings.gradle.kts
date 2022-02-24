@@ -9,6 +9,7 @@ dependencyResolutionManagement {
 }
 
 include(":app")
+include(":ui")
 include(":presentation")
 include(":domain")
 include(":data")

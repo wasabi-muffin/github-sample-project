@@ -10,6 +10,8 @@ setupAndroid()
 
 dependencies {
     // Projects
+    project(Modules.Ui)
+    project(Modules.Presentation)
     project(Modules.Domain)
     project(Modules.Data)
     project(Modules.Remote)
