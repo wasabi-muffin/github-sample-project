@@ -40,6 +40,9 @@ object Versions {
     const val compose = "1.2.0-alpha04"
     const val accompanist = "0.24.2-alpha"
 
+    // Hilt
+    const val hilt = "2.38.1"
+
     // Serialization
     const val serialization = "1.3.2"
 
@@ -72,6 +75,7 @@ object Dependencies {
         const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
         const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
         const val ktlint = "org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktLint}"
+        const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
     }
 
     object Plugin {
@@ -85,6 +89,7 @@ object Dependencies {
         const val kover = "org.jetbrains.kotlinx.kover"
         const val dokka = "org.jetbrains.dokka"
         const val serialization = "kotlinx-serialization"
+        const val hilt = "dagger.hilt.android.plugin"
     }
 
     object Kotlinx {
@@ -121,6 +126,11 @@ object Dependencies {
         const val material = "androidx.compose.material:material:${Versions.compose}"
         const val materialIcons = "androidx.compose.material:material-icons-extended:${Versions.compose}"
         const val accompanistCoil = "com.google.accompanist:accompanist-coil:${Versions.accompanist}"
+    }
+
+    object Hilt {
+        const val android = "com.google.dagger:hilt-android:${Versions.hilt}"
+        const val compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
     }
 
     object Room {

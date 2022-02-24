@@ -4,6 +4,7 @@ plugins {
     id(Dependencies.Plugin.kotlinKapt)
     id(Dependencies.Plugin.parcelize)
     id(Dependencies.Plugin.safeArgs)
+    id(Dependencies.Plugin.hilt)
 }
 
 setupAndroid()
@@ -34,6 +35,10 @@ dependencies {
 
     // Android
     implementation(Dependencies.Android.material)
+
+    // Hilt
+    implementation(Dependencies.Hilt.android)
+    kapt(Dependencies.Hilt.compiler)
 
     // KotlinX
     implementation(Dependencies.Kotlinx.coroutinesAndroid)

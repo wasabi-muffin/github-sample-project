@@ -16,6 +16,7 @@ buildscript {
         classpath(Dependencies.Gradle.safeArgs)
         classpath(Dependencies.Gradle.serialization)
         classpath(Dependencies.Gradle.ktlint)
+        classpath(Dependencies.Gradle.hilt)
     }
 }
 
