@@ -33,7 +33,7 @@ object Versions {
     const val appCompat = "1.3.1"
     const val constraintLayout = "2.1.1"
     const val recyclerView = "1.2.1"
-    const val lifecycleKtx = "2.3.1"
+    const val lifecycleKtx = "2.4.1"
     const val navigation = "2.3.5"
 
     // Jetpack Compose
