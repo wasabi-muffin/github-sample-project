@@ -15,6 +15,8 @@ dependencies {
 
     implementation(Dependencies.Kotlinx.coroutinesCore)
     implementation(Dependencies.Kotlinx.coroutinesAndroid)
+    implementation(Dependencies.AndroidX.lifecycleViewModel)
+    implementation(Dependencies.AndroidX.lifecycleSavedState)
     implementation(Dependencies.Compose.runtime)
     implementation(Dependencies.Compose.material)
     implementation(Dependencies.Compose.ui)

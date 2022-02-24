@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.core
+package jp.co.yumemi.android.code_check.ui.core
 
 import androidx.lifecycle.SavedStateHandle
 import jp.co.yumemi.android.code_check.presentation.core.contract.Event
@@ -23,8 +23,9 @@ fun <VS : ViewState, E : Event> SavedStateHandle.getState(): State<VS, E>? {
     }
 }
 
-fun SavedStateHandle.hasState(): Boolean = contains(StateKey) && contains(EventsKey)
+fun SavedStateHandle.hasSavedState(): Boolean =
+    contains(StateKey) && contains(EventsKey)
 
 fun SavedStateHandle.onInit(block: () -> Unit) {
-    if (!hasState()) block()
+    if (!hasSavedState()) block()
 }
