@@ -22,4 +22,7 @@ class SearchLocalDataProvider(
     override suspend fun getRecentSearches(): List<RecentSearchModel> = searchDao
         .getAll()
         .map(RecentSearchMapper::dbToData)
+
+    override suspend fun deleteAllRecentSearches() = searchDao
+        .deleteAll()
 }

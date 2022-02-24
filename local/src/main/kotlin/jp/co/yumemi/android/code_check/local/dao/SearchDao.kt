@@ -13,4 +13,7 @@ interface SearchDao {
 
     @Query("SELECT * FROM recentsearchdbmodel")
     suspend fun getAll(): List<RecentSearchDbModel>
+
+    @Query("DELETE FROM recentsearchdbmodel")
+    suspend fun deleteAll()
 }
