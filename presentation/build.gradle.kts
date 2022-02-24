@@ -8,6 +8,7 @@ plugins {
 setupAndroid()
 
 dependencies {
+    project(Modules.Domain)
     projectTest(Modules.Test)
 
     implementation(Dependencies.Kotlinx.coroutinesCore)

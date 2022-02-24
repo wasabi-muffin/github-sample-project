@@ -18,3 +18,8 @@
 # UI
 <img width="250" alt="UI" src="">
 -->
+
+<!-- UMLの追加か変更の場合
+# UML
+![UML](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/gmvalentino8/github-sample-project/{BRANCH}/presentation/src/main/kotlin/jp/co/yumemi/android/code_check/presentation/feature/{PATH/NAME}.pu)
+-->

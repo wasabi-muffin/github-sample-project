@@ -1,5 +1,7 @@
 package jp.co.yumemi.android.code_check.presentation.core.contract
 
+import android.os.Parcelable
+
 interface Contract
 
 /**
@@ -20,4 +22,4 @@ interface Result : Contract
 /**
  * Describes the state of the view
  */
-interface ViewState : Contract
+interface ViewState : Contract, Parcelable
