@@ -25,3 +25,9 @@ checkstyle_format.base_path = Dir.pwd
 Dir.glob("**/ktlint/*.xml") do |file|
   checkstyle_format.report file
 end
+
+if status_report[:warnings].empty?
+  markdown("No lint issues were reported")
+else
+  markdown("No error was reported but at least one warning was found.")
+end
