@@ -6,6 +6,7 @@ plugins {
 }
 
 setupAndroid()
+setupJetpackCompose()
 
 dependencies {
     project(Modules.Presentation)
@@ -14,4 +15,13 @@ dependencies {
 
     implementation(Dependencies.Kotlinx.coroutinesCore)
     implementation(Dependencies.Kotlinx.coroutinesAndroid)
+    implementation(Dependencies.Compose.runtime)
+    implementation(Dependencies.Compose.material)
+    implementation(Dependencies.Compose.ui)
+    implementation(Dependencies.Compose.uiGraphics)
+    implementation(Dependencies.Compose.uiTooling)
+    implementation(Dependencies.Compose.uiToolingPreview)
+    implementation(Dependencies.Compose.material)
+    implementation(Dependencies.Compose.foundation)
+    implementation(Dependencies.Compose.foundationLayout)
 }
