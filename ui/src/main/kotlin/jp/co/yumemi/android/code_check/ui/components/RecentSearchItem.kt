@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,22 +21,25 @@ import jp.co.yumemi.android.code_check.ui.primitives.Gray
 
 @Composable
 fun RecentSearchItem(
-    modifier: Modifier,
+    searchText: String,
+    modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier.padding(horizontal = 16.dp),
+        modifier = modifier.padding(horizontal = 16.dp, vertical = 20.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = stringResource(R.string.search_top_recent_searches),
+            text = searchText,
             style = MaterialTheme.typography.h4,
             fontWeight = FontWeight.Normal,
-            modifier = Modifier.weight(1F)
+            modifier = Modifier
+                .weight(1F)
+                .padding(end = 16.dp)
         )
         Icon(
             painter = painterResource(id = R.drawable.arrow_up_left),
             contentDescription = "recent search",
-            tint = Gray.v500,
+            tint = Gray.v400,
             modifier = Modifier.size(24.dp)
         )
     }
@@ -47,6 +49,6 @@ fun RecentSearchItem(
 @Composable
 fun Preview_RecentSearchItem() {
     GithubTheme {
-        RecentSearchItem(Modifier.background(Color.White))
+        RecentSearchItem("Test", Modifier.background(Color.White))
     }
 }
