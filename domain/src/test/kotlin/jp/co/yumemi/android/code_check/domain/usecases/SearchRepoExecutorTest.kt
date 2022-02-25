@@ -9,7 +9,7 @@ import io.mockk.mockk
 import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
-import jp.co.yumemi.android.code_check.domain.entities.GithubRepo
+import jp.co.yumemi.android.code_check.domain.entities.SimpleGithubRepo
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
 import jp.co.yumemi.android.code_check.test.runBlockingTest
@@ -31,29 +31,25 @@ class SearchRepoExecutorTest {
         coEvery {
             searchRepository.searchRepos(any())
         } returns List(5) { index ->
-            GithubRepo(
-                "name$index",
+            SimpleGithubRepo(
+                name = "name$index",
+                ownerName = "ownerName$index",
                 ownerIconUrl = "ownerIconUrl$index",
                 language = "language$index",
                 stargazersCount = index,
-                watchersCount = index,
-                forksCount = index,
-                openIssuesCount = index
             )
         }
 
         coroutineTestRule.runBlockingTest {
             val result = searchRepoUseCase.execute(SearchRepoUseCase.Args(""))
-            result.shouldBeTypeOf<DomainResult.Success<List<GithubRepo>>>()
+            result.shouldBeTypeOf<DomainResult.Success<List<SimpleGithubRepo>>>()
             result.data.size shouldBe 5
             result.data.forEachIndexed { index, repo ->
                 repo.name shouldBe "name$index"
+                repo.ownerName shouldBe "ownerName$index"
                 repo.ownerIconUrl shouldBe "ownerIconUrl$index"
                 repo.language shouldBe "language$index"
                 repo.stargazersCount shouldBe index
-                repo.watchersCount shouldBe index
-                repo.forksCount shouldBe index
-                repo.openIssuesCount shouldBe index
             }
             coVerify { searchRepository.searchRepos("") }
             coVerify(inverse = true) { errorHandler.handleError(any()) }

@@ -43,6 +43,7 @@ class SearchDataRepositoryTest {
         } returns List(5) { index ->
             RepoSearchModel(
                 name = "name$index",
+                ownerName = "ownerName$index",
                 ownerIconUrl = "ownerIconUrl$index",
                 language = "language$index",
                 stargazersCount = index,
@@ -57,12 +58,10 @@ class SearchDataRepositoryTest {
             result.size shouldBe 5
             result.forEachIndexed { index, repo ->
                 repo.name shouldBe "name$index"
+                repo.ownerName shouldBe "ownerName$index"
                 repo.ownerIconUrl shouldBe "ownerIconUrl$index"
                 repo.language shouldBe "language$index"
                 repo.stargazersCount shouldBe index
-                repo.watchersCount shouldBe index
-                repo.forksCount shouldBe index
-                repo.openIssuesCount shouldBe index
             }
             coVerify { searchRemoteDataSource.searchRepos(any(), "") }
             coVerify { searchLocalDataSource.saveRecentSearch("") }
