@@ -1,0 +1,63 @@
+@startuml SearchResults
+state SearchResults {
+    SearchResults: I.ClickBack > A.NavigateBack > E.NavigateBack
+
+    state Initial {
+        Initial : I.OnStart > A.LoadSearch > R.Loading, SE.Search[R.SearchSuccess, R.SearchError]
+
+        Initial -right-> Loading: R.Loading
+    }
+
+    state Loading {
+        Loading --> Stable.Initial: R.SearchSuccess
+        Loading --> Stable.Empty: R.SearchSuccess{Empty List}
+        Loading --> Error: R.SearchError
+    }
+
+    state Stable {
+        Stable : I.ClickItem > A.NavigateDetails > E.NavigateDetails
+
+        state Stable.Empty {
+
+        }
+
+        state Stable.Initial {
+            Stable.Initial : I.PullToRefresh > A.RefreshSearch > R.RefreshLoading, SE.Search[R.SearchSuccess, R.SearchError]
+            Stable.Initial : I.ScrollToBottom > A.PageSearch > R.PageLoading, SE.Search[R.SearchSuccess, R.SearchError]
+
+            Stable.Initial --> Stable.RefreshLoading : R.RefreshLoading
+            Stable.Initial --> Stable.PageLoading : R.RefreshLoading
+        }
+
+        state Stable.RefreshLoading {
+            Stable.RefreshLoading --> Stable.Initial : R.SearchSuccess
+            Stable.RefreshLoading --> Stable.RefreshError : R.SearchError
+        }
+
+        state Stable.RefreshError {
+            Stable.RefreshError : I.ClickErrorOk > A.ResolveError > R.ResolveError
+
+            Stable.RefreshError --> Stable.Initial : R.ResolveError
+        }
+
+        state Stable.PageLoading {
+            Stable.PageLoading --> Stable.Initial : R.SearchSuccess
+            Stable.PageLoading --> Stable.PageError : R.SearchError
+        }
+
+        state Stable.PageError {
+            Stable.PageError : I.ClickErrorRetry > A.PageSearch > R.PageLoading, SE.Search[R.SearchSuccess, R.SearchError]
+            Stable.PageError : I.PullToRefresh > A.RefreshSearch > R.RefreshLoading, SE.Search[R.SearchSuccess, R.SearchError]
+
+            Stable.PageError --> Stable.PageLoading : R.PageLoading
+            Stable.PageError --> Stable.RefreshLoading : R.RefreshLoading
+        }
+    }
+
+    state Error {
+        Error : I.ClickTryAgain > A.StartSearch > R.Loading, [R.SearchSuccess, R.SearchError]
+
+        Error --> Loading : R.Loading
+    }
+}
+@enduml
