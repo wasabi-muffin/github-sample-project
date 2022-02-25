@@ -29,8 +29,8 @@ class OneViewModel @Inject constructor(
         return@runBlocking GlobalScope.async {
             // TODO: Remove Last Search Date
             lastSearchDate = Date()
-            return@async when (val items = searchRepoUseCase.execute(SearchRepoUseCase.Args(inputText))) {
-                is DomainResult.Success -> items.data
+            return@async when (val result = searchRepoUseCase.execute(SearchRepoUseCase.Args(inputText))) {
+                is DomainResult.Success -> result.data.items
                 is DomainResult.Failure -> emptyList()
             }
         }.await()
