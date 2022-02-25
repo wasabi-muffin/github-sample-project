@@ -6,6 +6,7 @@ import jp.co.yumemi.android.code_check.remote.models.RepoMinusSearchMinusResultM
 object SearchMapper {
     fun apiToData(apiModel: RepoMinusSearchMinusResultMinusItemApiModel) = RepoSearchModel(
         name = apiModel.fullName,
+        ownerName = apiModel.owner?.name,
         ownerIconUrl = apiModel.owner?.avatarUrl,
         language = apiModel.language,
         stargazersCount = apiModel.stargazersCount,

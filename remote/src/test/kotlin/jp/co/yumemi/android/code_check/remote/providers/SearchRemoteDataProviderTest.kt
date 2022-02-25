@@ -25,7 +25,7 @@ class SearchRemoteDataProviderTest {
     @Test
     fun `test when search is successful`() {
         coEvery {
-            searchApi.searchRepos(any(), any())
+            searchApi.searchRepos(any(), any(), any(), any(), any(), any())
         } returns InlineResponse20028ApiModel(
             totalCount = 5,
             incompleteResults = false,
@@ -122,28 +122,29 @@ class SearchRemoteDataProviderTest {
         )
 
         coroutineTestRule.runBlockingTest {
-            val result = searchRemoteDataSource.searchRepos("", "")
-            result.size shouldBe 5
-            result.forEachIndexed { index, repo ->
+            val result = searchRemoteDataSource.searchRepos("", "", 0)
+            result.totalCount shouldBe 5
+            result.repos.size shouldBe 5
+            result.repos.forEachIndexed { index, repo ->
                 repo.name shouldBe "name$index"
             }
-            coVerify { searchApi.searchRepos("", "") }
+            coVerify { searchApi.searchRepos(accessToken = "", q = "", page = 0) }
         }
     }
 
     @Test
     fun `test when api throws an error`() {
         coEvery {
-            searchApi.searchRepos(any(), any())
+            searchApi.searchRepos(any(), any(), any(), any(), any(), any())
         } throws testException
 
         coroutineTestRule.runBlockingTest {
             val result = runCatching {
-                searchRemoteDataSource.searchRepos("", "")
+                searchRemoteDataSource.searchRepos("", "", 0)
             }.exceptionOrNull()
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
-            coVerify { searchApi.searchRepos("", "") }
+            coVerify { searchApi.searchRepos(accessToken = "", q = "", page = 0) }
         }
     }
 }
