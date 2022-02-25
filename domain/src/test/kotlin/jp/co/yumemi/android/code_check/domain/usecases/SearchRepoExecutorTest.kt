@@ -9,6 +9,7 @@ import io.mockk.mockk
 import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
+import jp.co.yumemi.android.code_check.domain.core.Pageable
 import jp.co.yumemi.android.code_check.domain.entities.SimpleGithubRepo
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
@@ -30,21 +31,25 @@ class SearchRepoExecutorTest {
     fun `test when execute is successful`() {
         coEvery {
             searchRepository.searchRepos(any())
-        } returns List(5) { index ->
-            SimpleGithubRepo(
-                name = "name$index",
-                ownerName = "ownerName$index",
-                ownerIconUrl = "ownerIconUrl$index",
-                language = "language$index",
-                stargazersCount = index,
-            )
-        }
+        } returns Pageable(
+            items = List(5) { index ->
+                SimpleGithubRepo(
+                    name = "name$index",
+                    ownerName = "ownerName$index",
+                    ownerIconUrl = "ownerIconUrl$index",
+                    language = "language$index",
+                    stargazersCount = index,
+                )
+            },
+            totalCount = 5
+        )
 
         coroutineTestRule.runBlockingTest {
             val result = searchRepoUseCase.execute(SearchRepoUseCase.Args(""))
-            result.shouldBeTypeOf<DomainResult.Success<List<SimpleGithubRepo>>>()
-            result.data.size shouldBe 5
-            result.data.forEachIndexed { index, repo ->
+            result.shouldBeTypeOf<DomainResult.Success<Pageable<SimpleGithubRepo>>>()
+            result.data.totalCount shouldBe 5
+            result.data.items.size shouldBe 5
+            result.data.items.forEachIndexed { index, repo ->
                 repo.name shouldBe "name$index"
                 repo.ownerName shouldBe "ownerName$index"
                 repo.ownerIconUrl shouldBe "ownerIconUrl$index"

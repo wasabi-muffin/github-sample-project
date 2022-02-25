@@ -55,7 +55,7 @@ state SearchResults {
     }
 
     state Error {
-        Error : I.ClickTryAgain > A.StartSearch > R.Loading, [R.SearchSuccess, R.SearchError]
+        Error : I.ClickTryAgain > A.LoadSearch > R.Loading, [R.SearchSuccess, R.SearchError]
 
         Error --> Loading : R.Loading
     }
