@@ -10,6 +10,7 @@ class SearchMapperTest {
         val entity = SearchMapper.modelToEntity(
             RepoSearchModel(
                 name = "",
+                description = "",
                 ownerName = "",
                 ownerIconUrl = null,
                 language = null,
@@ -20,6 +21,7 @@ class SearchMapperTest {
             )
         )
         entity.name shouldBe ""
+        entity.description shouldBe ""
         entity.ownerName shouldBe ""
         entity.ownerIconUrl shouldBe null
         entity.language shouldBe null

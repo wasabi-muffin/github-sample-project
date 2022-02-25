@@ -45,6 +45,7 @@ class SearchDataRepositoryTest {
             repos = List(5) { index ->
                 RepoSearchModel(
                     name = "name$index",
+                    description = "description$index",
                     ownerName = "ownerName$index",
                     ownerIconUrl = "ownerIconUrl$index",
                     language = "language$index",
@@ -63,6 +64,7 @@ class SearchDataRepositoryTest {
             result.items.size shouldBe 5
             result.items.forEachIndexed { index, repo ->
                 repo.name shouldBe "name$index"
+                repo.description shouldBe "description$index"
                 repo.ownerName shouldBe "ownerName$index"
                 repo.ownerIconUrl shouldBe "ownerIconUrl$index"
                 repo.language shouldBe "language$index"
