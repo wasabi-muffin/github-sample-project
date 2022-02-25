@@ -45,7 +45,7 @@ class SearchRepoExecutorTest {
         )
 
         coroutineTestRule.runBlockingTest {
-            val result = searchRepoUseCase.execute(SearchRepoUseCase.Args(""))
+            val result = searchRepoUseCase.execute(SearchRepoUseCase.Args("", 0))
             result.shouldBeTypeOf<DomainResult.Success<Pageable<SimpleGithubRepo>>>()
             result.data.totalCount shouldBe 5
             result.data.items.size shouldBe 5
@@ -70,7 +70,7 @@ class SearchRepoExecutorTest {
         every { errorHandler.handleError(any()) } returns DomainError.Unknown(testException)
 
         coroutineTestRule.runBlockingTest {
-            val result = searchRepoUseCase.execute(SearchRepoUseCase.Args(""))
+            val result = searchRepoUseCase.execute(SearchRepoUseCase.Args("", 0))
             result.shouldBeTypeOf<DomainResult.Failure>()
             result.error.shouldBeTypeOf<DomainError.Unknown>()
             result.error.throwable shouldBe testException

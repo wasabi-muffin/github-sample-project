@@ -9,7 +9,7 @@ import jp.co.yumemi.android.code_check.domain.entities.SimpleGithubRepo
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 
 interface SearchRepoUseCase : UseCase<SearchRepoUseCase.Args, DomainResult<Pageable<SimpleGithubRepo>>> {
-    data class Args(val searchText: String)
+    data class Args(val searchText: String, val pageNumber: Int)
 }
 
 class SearchRepoExecutor(
@@ -19,6 +19,6 @@ class SearchRepoExecutor(
     override suspend fun execute(
         arguments: SearchRepoUseCase.Args
     ): DomainResult<Pageable<SimpleGithubRepo>> = runCatching {
-        searchRepository.searchRepos(arguments.searchText)
+        searchRepository.searchRepos(arguments.searchText, arguments.pageNumber)
     }.toDomainResult(errorHandler)
 }
