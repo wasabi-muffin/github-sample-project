@@ -37,4 +37,3 @@ class TwoFragment : Fragment(R.layout.fragment_two) {
         _binding.openIssuesView.text = "open issues"; // TODO: Fix this
     }
 }
-
