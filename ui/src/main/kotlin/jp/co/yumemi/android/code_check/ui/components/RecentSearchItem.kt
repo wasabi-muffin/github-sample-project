@@ -49,6 +49,6 @@ fun RecentSearchItem(
 @Composable
 fun Preview_RecentSearchItem() {
     GithubTheme {
-        RecentSearchItem("Test", Modifier.background(Color.White))
+        RecentSearchItem(searchText = "Test", modifier = Modifier.background(Color.White))
     }
 }
