@@ -12,7 +12,7 @@ class SearchDataRepository(
     private val searchRemoteDataSource: SearchRemoteDataSource,
     private val searchLocalDataSource: SearchLocalDataSource
 ) : SearchRepository {
-    override suspend fun searchRepos(searchText: String): List<SimpleGithubRepo> {
+    override suspend fun searchRepos(searchText: String, pageNumber: Int): List<SimpleGithubRepo> {
         searchLocalDataSource.saveRecentSearch(searchText)
         return searchRemoteDataSource
             .searchRepos(searchText = searchText)

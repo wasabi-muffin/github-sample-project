@@ -8,11 +8,8 @@ import jp.co.yumemi.android.code_check.remote.mappers.SearchMapper
 class SearchRemoteDataProvider(
     private val searchApi: SearchApi
 ) : SearchRemoteDataSource {
-    override suspend fun searchRepos(
-        token: String?,
-        searchText: String
-    ): List<RepoSearchModel> = searchApi
-        .searchRepos(accessToken = token, q = searchText)
+    override suspend fun searchRepos(token: String?, searchText: String, pageNumber: Int): List<RepoSearchModel> = searchApi
+        .searchRepos(accessToken = token, q = searchText, page = pageNumber)
         .items
         .map(SearchMapper::apiToData)
 }
