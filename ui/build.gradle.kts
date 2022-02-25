@@ -31,6 +31,8 @@ dependencies {
     implementation(Dependencies.Compose.material)
     implementation(Dependencies.Compose.foundation)
     implementation(Dependencies.Compose.foundationLayout)
+    implementation(Dependencies.Accompanist.coil)
+    implementation(Dependencies.Accompanist.swipeRefresh)
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)
 }

@@ -125,7 +125,11 @@ object Dependencies {
         const val foundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
         const val material = "androidx.compose.material:material:${Versions.compose}"
         const val materialIcons = "androidx.compose.material:material-icons-extended:${Versions.compose}"
-        const val accompanistCoil = "com.google.accompanist:accompanist-coil:${Versions.accompanist}"
+    }
+
+    object Accompanist {
+        const val coil = "com.google.accompanist:accompanist-coil:${Versions.accompanist}"
+        const val swipeRefresh = "com.google.accompanist:accompanist-swipe-refresh:${Versions.accompanist}"
     }
 
     object Hilt {
