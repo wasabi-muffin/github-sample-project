@@ -3,7 +3,7 @@ package jp.co.yumemi.android.code_check.ui.features.search.top
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.components.ActivityRetainedComponent
 import jp.co.yumemi.android.code_check.domain.usecases.ClearRecentSearchesUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.GetRecentSearchesUseCase
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
@@ -21,7 +21,7 @@ import kotlinx.coroutines.FlowPreview
 @FlowPreview
 @ExperimentalCoroutinesApi
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(ActivityRetainedComponent::class)
 class SearchTopModule {
     @Provides
     fun provideSearchTopStateMachine(): SearchTopStateMachine = SearchTopStateMachine()

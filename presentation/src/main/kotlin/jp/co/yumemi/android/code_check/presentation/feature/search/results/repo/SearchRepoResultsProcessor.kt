@@ -11,7 +11,9 @@ import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.components.StateMachine
 import jp.co.yumemi.android.code_check.presentation.statemachine.components.StateMachineProcessor
+import kotlinx.coroutines.FlowPreview
 
+@FlowPreview
 class SearchRepoResultsProcessor(
     stateMachine: StateMachine<SearchRepoResultsIntent,
         SearchRepoResultsAction,
@@ -31,11 +33,11 @@ class SearchRepoResultsProcessor(
     override suspend fun process(
         sideEffect: SearchRepoResultsSideEffect,
         state: State<SearchRepoResultsViewState, SearchRepoResultsEvent>
-    ): SearchRepoResultsResult? = when (sideEffect) {
+    ): List<SearchRepoResultsResult?> = when (sideEffect) {
         is SearchRepoResultsSideEffect.Search -> {
             when (val result = searchRepoUseCase.execute(SearchRepoUseCase.Args(sideEffect.searchText, sideEffect.pageNumber))) {
-                is DomainResult.Success -> SearchRepoResultsResult.SearchSuccess(result.data)
-                is DomainResult.Failure -> SearchRepoResultsResult.SearchError(result.error)
+                is DomainResult.Success -> listOf(SearchRepoResultsResult.SearchSuccess(result.data))
+                is DomainResult.Failure -> listOf(SearchRepoResultsResult.SearchError(result.error))
             }
         }
     }

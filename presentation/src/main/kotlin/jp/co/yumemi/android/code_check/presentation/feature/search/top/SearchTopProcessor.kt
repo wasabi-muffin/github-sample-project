@@ -10,21 +10,22 @@ import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.
 import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopSideEffect
 import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.components.StateMachineProcessor
+import kotlinx.coroutines.FlowPreview
 
+@FlowPreview
 class SearchTopProcessor(
     stateMachine: SearchTopStateMachine,
     private val clearRecentSearchesUseCase: ClearRecentSearchesUseCase,
     private val getRecentSearchesUseCase: GetRecentSearchesUseCase,
 ) : StateMachineProcessor<SearchTopIntent, SearchTopAction, SearchTopResult, SearchTopViewState, SearchTopEvent, SearchTopSideEffect>(stateMachine) {
-    override suspend fun process(sideEffect: SearchTopSideEffect, state: State<SearchTopViewState, SearchTopEvent>): SearchTopResult? = when (sideEffect) {
-        SearchTopSideEffect.ClearRecentSearches -> {
-            clearRecentSearchesUseCase.execute(Unit)
-            SearchTopResult.ClearRecentSearches
+    override suspend fun process(sideEffect: SearchTopSideEffect, state: State<SearchTopViewState, SearchTopEvent>): List<SearchTopResult?> =
+        when (sideEffect) {
+            SearchTopSideEffect.ClearRecentSearches -> {
+                clearRecentSearchesUseCase.execute(Unit)
+                listOf(SearchTopResult.ClearRecentSearches)
+            }
+            SearchTopSideEffect.LoadRecentSearches -> {
+                listOf(SearchTopResult.RecentSearches(getRecentSearchesUseCase.execute(Unit)))
+            }
         }
-        SearchTopSideEffect.LoadRecentSearches -> {
-            SearchTopResult.RecentSearches(
-                getRecentSearchesUseCase.execute(Unit)
-            )
-        }
-    }
 }

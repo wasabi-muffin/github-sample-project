@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.ui.components
+package jp.co.yumemi.android.code_check.ui.components.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -23,26 +23,24 @@ import jp.co.yumemi.android.code_check.ui.primitives.Gray
 fun RecentSearchItem(
     searchText: String,
     modifier: Modifier = Modifier,
+) = Row(
+    modifier = modifier.padding(horizontal = 16.dp, vertical = 20.dp),
+    verticalAlignment = Alignment.CenterVertically
 ) {
-    Row(
-        modifier = modifier.padding(horizontal = 16.dp, vertical = 20.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = searchText,
-            style = MaterialTheme.typography.h4,
-            fontWeight = FontWeight.Normal,
-            modifier = Modifier
-                .weight(1F)
-                .padding(end = 16.dp)
-        )
-        Icon(
-            painter = painterResource(id = R.drawable.arrow_up_left),
-            contentDescription = "recent search",
-            tint = Gray.v400,
-            modifier = Modifier.size(24.dp)
-        )
-    }
+    Text(
+        text = searchText,
+        style = MaterialTheme.typography.h4,
+        fontWeight = FontWeight.Normal,
+        modifier = Modifier
+            .weight(1F)
+            .padding(end = 16.dp)
+    )
+    Icon(
+        painter = painterResource(id = R.drawable.arrow_up_left),
+        contentDescription = "recent search",
+        tint = Gray.v400,
+        modifier = Modifier.size(24.dp)
+    )
 }
 
 @Preview

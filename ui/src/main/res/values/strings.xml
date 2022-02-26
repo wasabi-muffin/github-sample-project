@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    // Common
     <string name="common_clear">Clear</string>
+    <string name="common_ok">OK</string>
+    <string name="common_try_again">Try Again</string>
+    <string name="common_empty_content">Nothing to see here</string>
+    <string name="common_retry">Retry</string>
+    <string name="common_cancel">Cancel</string>
     <string name="common_repositories">Repositories</string>
+
+    // Search Top
     <string name="search_top_recent_searches">Recent searches</string>
     <string name="search_top_search_with">%s with %s</string>
+
+    // TODO: Replace placeholders
+    <string name="placeholder_error_title_unknown">Error Title</string>
+    <string name="placeholder_error_description_unknown">Error Description</string>
 </resources>

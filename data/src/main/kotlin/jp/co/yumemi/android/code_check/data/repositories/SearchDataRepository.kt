@@ -16,7 +16,7 @@ class SearchDataRepository(
     override suspend fun searchRepos(searchText: String, pageNumber: Int): Pageable<SimpleGithubRepo> {
         searchLocalDataSource.saveRecentSearch(searchText)
         return searchRemoteDataSource
-            .searchRepos(searchText = searchText)
+            .searchRepos(searchText = searchText, pageNumber = pageNumber)
             .let { results ->
                 Pageable(results.repos.map(SearchMapper::modelToEntity), results.totalCount)
             }
