@@ -10,7 +10,8 @@ import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.core.Pageable
-import jp.co.yumemi.android.code_check.domain.entities.SimpleGithubRepo
+import jp.co.yumemi.android.code_check.domain.entities.Repository
+import jp.co.yumemi.android.code_check.domain.entities.User
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
 import jp.co.yumemi.android.code_check.test.runBlockingTest
@@ -33,13 +34,18 @@ class SearchRepoExecutorTest {
             searchRepository.searchRepos(any())
         } returns Pageable(
             items = List(5) { index ->
-                SimpleGithubRepo(
+                Repository(
+                    id = index,
                     name = "name$index",
                     description = "description$index",
-                    ownerName = "ownerName$index",
-                    ownerIconUrl = "ownerIconUrl$index",
+                    owner = User(id = 0, name = null, username = "", iconUrl = null, description = null),
+                    homepage = "homepage$index",
                     language = "language$index",
                     stargazersCount = index,
+                    watchersCount = index,
+                    forksCount = index,
+                    openIssuesCount = index,
+                    license = "license$index",
                 )
             },
             totalCount = 5
@@ -47,16 +53,20 @@ class SearchRepoExecutorTest {
 
         coroutineTestRule.runBlockingTest {
             val result = searchRepoUseCase.execute(SearchRepoUseCase.Args("", 0))
-            result.shouldBeTypeOf<DomainResult.Success<Pageable<SimpleGithubRepo>>>()
+            result.shouldBeTypeOf<DomainResult.Success<Pageable<Repository>>>()
             result.data.totalCount shouldBe 5
             result.data.items.size shouldBe 5
             result.data.items.forEachIndexed { index, repo ->
+                repo.id shouldBe index
                 repo.name shouldBe "name$index"
                 repo.description shouldBe "description$index"
-                repo.ownerName shouldBe "ownerName$index"
-                repo.ownerIconUrl shouldBe "ownerIconUrl$index"
+                repo.homepage shouldBe "homepage$index"
                 repo.language shouldBe "language$index"
                 repo.stargazersCount shouldBe index
+                repo.watchersCount shouldBe index
+                repo.forksCount shouldBe index
+                repo.openIssuesCount shouldBe index
+                repo.license shouldBe "license$index"
             }
             coVerify { searchRepository.searchRepos("") }
             coVerify(inverse = true) { errorHandler.handleError(any()) }

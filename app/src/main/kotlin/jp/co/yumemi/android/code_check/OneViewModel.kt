@@ -9,7 +9,7 @@ import java.util.Date
 import javax.inject.Inject
 import jp.co.yumemi.android.code_check.TopActivity.Companion.lastSearchDate
 import jp.co.yumemi.android.code_check.domain.core.DomainResult
-import jp.co.yumemi.android.code_check.domain.entities.SimpleGithubRepo
+import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -25,7 +25,7 @@ class OneViewModel @Inject constructor(
 
     // 検索結果
     // TODO: Remove runBlocking and GlobalScope
-    fun searchResults(inputText: String): List<SimpleGithubRepo> = runBlocking {
+    fun searchResults(inputText: String): List<Repository> = runBlocking {
         return@runBlocking GlobalScope.async {
             // TODO: Remove Last Search Date
             lastSearchDate = Date()
