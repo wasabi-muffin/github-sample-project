@@ -35,6 +35,7 @@ class SearchRepoExecutorTest {
             items = List(5) { index ->
                 SimpleGithubRepo(
                     name = "name$index",
+                    description = "description$index",
                     ownerName = "ownerName$index",
                     ownerIconUrl = "ownerIconUrl$index",
                     language = "language$index",
@@ -51,6 +52,7 @@ class SearchRepoExecutorTest {
             result.data.items.size shouldBe 5
             result.data.items.forEachIndexed { index, repo ->
                 repo.name shouldBe "name$index"
+                repo.description shouldBe "description$index"
                 repo.ownerName shouldBe "ownerName$index"
                 repo.ownerIconUrl shouldBe "ownerIconUrl$index"
                 repo.language shouldBe "language$index"
