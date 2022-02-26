@@ -6,14 +6,15 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import jp.co.yumemi.android.code_check.domain.usecases.ClearRecentSearchesUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.GetRecentSearchesUseCase
+import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
-import jp.co.yumemi.android.code_check.presentation.feature.search.top.SearchTopProcessor
-import jp.co.yumemi.android.code_check.presentation.feature.search.top.SearchTopStateMachine
-import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopAction
-import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopEvent
-import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopIntent
-import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopResult
-import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopViewState
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.SearchRepoResultsProcessor
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.SearchRepoResultsStateMachine
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsAction
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsEvent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsIntent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsResult
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.factory.StateMachineStoreFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -24,20 +25,18 @@ import kotlinx.coroutines.FlowPreview
 @InstallIn(ViewModelComponent::class)
 class SearchRepoResultsModule {
     @Provides
-    fun provideSearchTopStateMachine(): SearchTopStateMachine = SearchTopStateMachine()
+    fun provideSearchRepoResultsStateMachine(): SearchRepoResultsStateMachine = SearchRepoResultsStateMachine()
 
     @Provides
-    fun provideSearchTopStoreStateMachineFactory(
-        stateMachine: SearchTopStateMachine,
-        processor: SearchTopProcessor
-    ): StoreFactory<SearchTopIntent, SearchTopAction, SearchTopResult, SearchTopViewState, SearchTopEvent> = StateMachineStoreFactory(
-        stateMachine, processor
-    )
+    fun provideSearchRepoResultsStoreStateMachineFactory(
+        stateMachine: SearchRepoResultsStateMachine,
+        processor: SearchRepoResultsProcessor
+    ): StoreFactory<SearchRepoResultsIntent, SearchRepoResultsAction, SearchRepoResultsResult, SearchRepoResultsViewState, SearchRepoResultsEvent> =
+        StateMachineStoreFactory(stateMachine, processor)
 
     @Provides
-    fun provideSearchTopProcessor(
-        stateMachine: SearchTopStateMachine,
-        clearRecentSearchesUseCase: ClearRecentSearchesUseCase,
-        getRecentSearchesUseCase: GetRecentSearchesUseCase,
-    ): SearchTopProcessor = SearchTopProcessor(stateMachine, clearRecentSearchesUseCase, getRecentSearchesUseCase)
+    fun provideSearchRepoResultsProcessor(
+        stateMachine: SearchRepoResultsStateMachine,
+        searchRepoUseCase: SearchRepoUseCase,
+    ): SearchRepoResultsProcessor = SearchRepoResultsProcessor(stateMachine, searchRepoUseCase)
 }

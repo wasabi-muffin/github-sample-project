@@ -13,10 +13,10 @@ import jp.co.yumemi.android.code_check.domain.entities.SearchType
 import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopEvent
 import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopIntent
 import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopViewState
-import jp.co.yumemi.android.code_check.ui.components.AppBarSearch
-import jp.co.yumemi.android.code_check.ui.components.RecentSearchHeader
-import jp.co.yumemi.android.code_check.ui.components.RecentSearchItem
-import jp.co.yumemi.android.code_check.ui.components.SearchTypeItem
+import jp.co.yumemi.android.code_check.ui.components.appbar.AppBarSearch
+import jp.co.yumemi.android.code_check.ui.components.search.RecentSearchHeader
+import jp.co.yumemi.android.code_check.ui.components.search.RecentSearchItem
+import jp.co.yumemi.android.code_check.ui.components.search.SearchTypeItem
 import jp.co.yumemi.android.code_check.ui.core.Contract
 import jp.co.yumemi.android.code_check.ui.core.handle
 import jp.co.yumemi.android.code_check.ui.primitives.Github
