@@ -3082,7 +3082,7 @@ paths:
         enabledForGitHubApps: true
         category: meta
         subcategory:
-  "/networks/{owner}/{repo}/events":
+  "/networks/{repo_name}/events":
     get:
       summary: List public events for a network of repositories
       description: ''
@@ -9979,7 +9979,7 @@ paths:
         enabledForGitHubApps: true
         category: teams
         subcategory:
-  "/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}":
+  "/orgs/{org}/teams/{team_slug}/repos/{repo_name}":
     get:
       summary: Check team permissions for a repository
       description: |-
@@ -9989,7 +9989,7 @@ paths:
 
         If a team doesn't have permission for the repository, you will receive a `404 Not Found` response status.
 
-        **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
+        **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos/{repo_name}`.
       tags:
       - teams
       operationId: teams/check-permissions-for-repo-in-org
@@ -10027,7 +10027,7 @@ paths:
       description: |-
         To add a repository to a team or update the team's permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. The repository must be owned by the organization, or a direct fork of a repository owned by the organization. You will get a `422 Unprocessable Entity` status if you attempt to add a repository to a team that is not owned by the organization. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
 
-        **Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
+        **Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/repos/{repo_name}`.
 
         For more information about the permission levels, see "[Repository permission levels for an organization](https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
       tags:
@@ -10086,7 +10086,7 @@ paths:
       description: |-
         If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. This does not delete the repository, it just removes it from the team.
 
-        **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
+        **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/repos/{repo_name}`.
       tags:
       - teams
       operationId: teams/remove-repo-in-org
@@ -11108,7 +11108,7 @@ paths:
         enabledForGitHubApps: true
         category: rate-limit
         subcategory:
-  "/repos/{owner}/{repo}":
+  "/repos/{repo_name}":
     get:
       summary: Get a repository
       description: The `parent` and `source` objects are present when the repository
@@ -11204,7 +11204,7 @@ paths:
                     {"advanced_security": {"status": "enabled"}}}`. If you have admin
                     permissions for a private repository covered by an Advanced Security
                     license, you can check which security and analysis features are
-                    currently enabled by using a `GET /repos/{owner}/{repo}` request.'
+                    currently enabled by using a `GET /repos/{repo_name}` request.'
                   nullable: true
                   properties:
                     advanced_security:
@@ -11363,7 +11363,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory:
-  "/repos/{owner}/{repo}/actions/artifacts":
+  "/repos/{repo_name}/actions/artifacts":
     get:
       summary: List artifacts for a repository
       description: Lists all artifacts for a repository. Anyone with read access to
@@ -11409,7 +11409,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: artifacts
-  "/repos/{owner}/{repo}/actions/artifacts/{artifact_id}":
+  "/repos/{repo_name}/actions/artifacts/{artifact_id}":
     get:
       summary: Get an artifact
       description: Gets a specific artifact for a workflow run. Anyone with read access
@@ -11464,7 +11464,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: artifacts
-  "/repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}":
+  "/repos/{repo_name}/actions/artifacts/{artifact_id}/{archive_format}":
     get:
       summary: Download an artifact
       description: |-
@@ -11498,7 +11498,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: artifacts
-  "/repos/{owner}/{repo}/actions/jobs/{job_id}":
+  "/repos/{repo_name}/actions/jobs/{job_id}":
     get:
       summary: Get a job for a workflow run
       description: Gets a specific job in a workflow run. Anyone with read access
@@ -11530,7 +11530,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-jobs
-  "/repos/{owner}/{repo}/actions/jobs/{job_id}/logs":
+  "/repos/{repo_name}/actions/jobs/{job_id}/logs":
     get:
       summary: Download job logs for a workflow run
       description: |-
@@ -11561,7 +11561,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-jobs
-  "/repos/{owner}/{repo}/actions/permissions":
+  "/repos/{repo_name}/actions/permissions":
     get:
       summary: Get GitHub Actions permissions for a repository
       description: |-
@@ -11634,7 +11634,7 @@ paths:
         githubCloudOnly: false
         category: actions
         subcategory: permissions
-  "/repos/{owner}/{repo}/actions/permissions/selected-actions":
+  "/repos/{repo_name}/actions/permissions/selected-actions":
     get:
       summary: Get allowed actions for a repository
       description: |-
@@ -11701,7 +11701,7 @@ paths:
         githubCloudOnly: false
         category: actions
         subcategory: permissions
-  "/repos/{owner}/{repo}/actions/runners":
+  "/repos/{repo_name}/actions/runners":
     get:
       summary: List self-hosted runners for a repository
       description: Lists all self-hosted runners configured in a repository. You must
@@ -11745,7 +11745,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: self-hosted-runners
-  "/repos/{owner}/{repo}/actions/runners/downloads":
+  "/repos/{repo_name}/actions/runners/downloads":
     get:
       summary: List runner applications for a repository
       description: |-
@@ -11778,7 +11778,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: self-hosted-runners
-  "/repos/{owner}/{repo}/actions/runners/registration-token":
+  "/repos/{repo_name}/actions/runners/registration-token":
     post:
       summary: Create a registration token for a repository
       description: "Returns a token that you can pass to the `config` script. The
@@ -11811,7 +11811,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: self-hosted-runners
-  "/repos/{owner}/{repo}/actions/runners/remove-token":
+  "/repos/{repo_name}/actions/runners/remove-token":
     post:
       summary: Create a remove token for a repository
       description: "Returns a token that you can pass to remove a self-hosted runner
@@ -11844,7 +11844,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: self-hosted-runners
-  "/repos/{owner}/{repo}/actions/runners/{runner_id}":
+  "/repos/{repo_name}/actions/runners/{runner_id}":
     get:
       summary: Get a self-hosted runner for a repository
       description: |-
@@ -11902,7 +11902,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: self-hosted-runners
-  "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels":
+  "/repos/{repo_name}/actions/runners/{runner_id}/labels":
     get:
       summary: List labels for a self-hosted runner for a repository
       description: |-
@@ -12058,7 +12058,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: self-hosted-runners
-  "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels/{name}":
+  "/repos/{repo_name}/actions/runners/{runner_id}/labels/{name}":
     delete:
       summary: Remove a custom label from a self-hosted runner for a repository
       description: |-
@@ -12093,7 +12093,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: self-hosted-runners
-  "/repos/{owner}/{repo}/actions/runs":
+  "/repos/{repo_name}/actions/runs":
     get:
       summary: List workflow runs for a repository
       description: |-
@@ -12146,7 +12146,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-runs
-  "/repos/{owner}/{repo}/actions/runs/{run_id}":
+  "/repos/{repo_name}/actions/runs/{run_id}":
     get:
       summary: Get a workflow run
       description: Gets a specific workflow run. Anyone with read access to the repository
@@ -12203,7 +12203,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-runs
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/approvals":
+  "/repos/{repo_name}/actions/runs/{run_id}/approvals":
     get:
       summary: Get the review history for a workflow run
       description: Anyone with read access to the repository can use this endpoint.
@@ -12236,7 +12236,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-runs
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/approve":
+  "/repos/{repo_name}/actions/runs/{run_id}/approve":
     post:
       summary: Approve a workflow run for a fork pull request
       description: |-
@@ -12269,7 +12269,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-runs
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts":
+  "/repos/{repo_name}/actions/runs/{run_id}/artifacts":
     get:
       summary: List workflow run artifacts
       description: Lists artifacts for a workflow run. Anyone with read access to
@@ -12316,7 +12316,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: artifacts
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}":
+  "/repos/{repo_name}/actions/runs/{run_id}/attempts/{attempt_number}":
     get:
       summary: Get a workflow run attempt
       description: |-
@@ -12351,7 +12351,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-runs
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs":
+  "/repos/{repo_name}/actions/runs/{run_id}/attempts/{attempt_number}/jobs":
     get:
       summary: List jobs for a workflow run attempt
       description: Lists jobs for a specific workflow run attempt. Anyone with read
@@ -12403,7 +12403,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-jobs
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/logs":
+  "/repos/{repo_name}/actions/runs/{run_id}/attempts/{attempt_number}/logs":
     get:
       summary: Download workflow run attempt logs
       description: |-
@@ -12435,7 +12435,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-runs
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/cancel":
+  "/repos/{repo_name}/actions/runs/{run_id}/cancel":
     post:
       summary: Cancel a workflow run
       description: Cancels a workflow run using its `id`. You must authenticate using
@@ -12465,7 +12465,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-runs
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/jobs":
+  "/repos/{repo_name}/actions/runs/{run_id}/jobs":
     get:
       summary: List jobs for a workflow run
       description: Lists jobs for a workflow run. Anyone with read access to the repository
@@ -12526,7 +12526,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-jobs
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/logs":
+  "/repos/{repo_name}/actions/runs/{run_id}/logs":
     get:
       summary: Download workflow run logs
       description: |-
@@ -12584,7 +12584,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-runs
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments":
+  "/repos/{repo_name}/actions/runs/{run_id}/pending_deployments":
     get:
       summary: Get pending deployments for a workflow run
       description: |-
@@ -12683,7 +12683,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-runs
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/rerun":
+  "/repos/{repo_name}/actions/runs/{run_id}/rerun":
     post:
       summary: Re-run a workflow
       description: Re-runs your workflow run using its `id`. You must authenticate
@@ -12715,7 +12715,7 @@ paths:
         category: actions
         subcategory: workflow-runs
       deprecated: true
-  "/repos/{owner}/{repo}/actions/runs/{run_id}/timing":
+  "/repos/{repo_name}/actions/runs/{run_id}/timing":
     get:
       summary: Get workflow run usage
       description: |-
@@ -12747,7 +12747,7 @@ paths:
         enabledForGitHubApps: false
         category: actions
         subcategory: workflow-runs
-  "/repos/{owner}/{repo}/actions/secrets":
+  "/repos/{repo_name}/actions/secrets":
     get:
       summary: List repository secrets
       description: Lists all secrets available in a repository without revealing their
@@ -12793,7 +12793,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: secrets
-  "/repos/{owner}/{repo}/actions/secrets/public-key":
+  "/repos/{repo_name}/actions/secrets/public-key":
     get:
       summary: Get a repository public key
       description: Gets your public key, which you need to encrypt secrets. You need
@@ -12825,7 +12825,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: secrets
-  "/repos/{owner}/{repo}/actions/secrets/{secret_name}":
+  "/repos/{repo_name}/actions/secrets/{secret_name}":
     get:
       summary: Get a repository secret
       description: Gets a single repository secret without revealing its encrypted
@@ -13004,7 +13004,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: secrets
-  "/repos/{owner}/{repo}/actions/workflows":
+  "/repos/{repo_name}/actions/workflows":
     get:
       summary: List repository workflows
       description: Lists the workflows in a repository. Anyone with read access to
@@ -13050,7 +13050,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflows
-  "/repos/{owner}/{repo}/actions/workflows/{workflow_id}":
+  "/repos/{repo_name}/actions/workflows/{workflow_id}":
     get:
       summary: Get a workflow
       description: Gets a specific workflow. You can replace `workflow_id` with the
@@ -13083,7 +13083,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflows
-  "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable":
+  "/repos/{repo_name}/actions/workflows/{workflow_id}/disable":
     put:
       summary: Disable a workflow
       description: |-
@@ -13108,7 +13108,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflows
-  "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches":
+  "/repos/{repo_name}/actions/workflows/{workflow_id}/dispatches":
     post:
       summary: Create a workflow dispatch event
       description: |-
@@ -13162,7 +13162,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflows
-  "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable":
+  "/repos/{repo_name}/actions/workflows/{workflow_id}/enable":
     put:
       summary: Enable a workflow
       description: |-
@@ -13187,7 +13187,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflows
-  "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs":
+  "/repos/{repo_name}/actions/workflows/{workflow_id}/runs":
     get:
       summary: List workflow runs
       description: |-
@@ -13241,7 +13241,7 @@ paths:
         enabledForGitHubApps: true
         category: actions
         subcategory: workflow-runs
-  "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing":
+  "/repos/{repo_name}/actions/workflows/{workflow_id}/timing":
     get:
       summary: Get workflow usage
       description: |-
@@ -13273,7 +13273,7 @@ paths:
         enabledForGitHubApps: false
         category: actions
         subcategory: workflows
-  "/repos/{owner}/{repo}/assignees":
+  "/repos/{repo_name}/assignees":
     get:
       summary: List assignees
       description: Lists the [available assignees](https://docs.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/)
@@ -13311,7 +13311,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: assignees
-  "/repos/{owner}/{repo}/assignees/{assignee}":
+  "/repos/{repo_name}/assignees/{assignee}":
     get:
       summary: Check if a user can be assigned
       description: |-
@@ -13349,7 +13349,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: assignees
-  "/repos/{owner}/{repo}/autolinks":
+  "/repos/{repo_name}/autolinks":
     get:
       summary: List all autolinks of a repository
       description: |-
@@ -13437,7 +13437,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: autolinks
-  "/repos/{owner}/{repo}/autolinks/{autolink_id}":
+  "/repos/{repo_name}/autolinks/{autolink_id}":
     get:
       summary: Get an autolink reference of a repository
       description: |-
@@ -13497,7 +13497,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: autolinks
-  "/repos/{owner}/{repo}/automated-security-fixes":
+  "/repos/{repo_name}/automated-security-fixes":
     put:
       summary: Enable automated security fixes
       description: Enables automated security fixes for a repository. The authenticated
@@ -13542,7 +13542,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory:
-  "/repos/{owner}/{repo}/branches":
+  "/repos/{repo_name}/branches":
     get:
       summary: List branches
       description: ''
@@ -13587,7 +13587,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: branches
-  "/repos/{owner}/{repo}/branches/{branch}":
+  "/repos/{repo_name}/branches/{branch}":
     get:
       summary: Get a branch
       description: ''
@@ -13619,7 +13619,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: branches
-  "/repos/{owner}/{repo}/branches/{branch}/protection":
+  "/repos/{repo_name}/branches/{branch}/protection":
     get:
       summary: Get branch protection
       description: Protected branches are available in public repositories with GitHub
@@ -13921,7 +13921,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: branches
-  "/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins":
+  "/repos/{repo_name}/branches/{branch}/protection/enforce_admins":
     get:
       summary: Get admin branch protection
       description: Protected branches are available in public repositories with GitHub
@@ -14011,7 +14011,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: branches
-  "/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews":
+  "/repos/{repo_name}/branches/{branch}/protection/required_pull_request_reviews":
     get:
       summary: Get pull request review protection
       description: Protected branches are available in public repositories with GitHub
@@ -14176,7 +14176,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: branches
-  "/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures":
+  "/repos/{repo_name}/branches/{branch}/protection/required_signatures":
     get:
       summary: Get commit signature protection
       description: |-
@@ -14271,7 +14271,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: branches
-  "/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks":
+  "/repos/{repo_name}/branches/{branch}/protection/required_status_checks":
     get:
       summary: Get status checks protection
       description: Protected branches are available in public repositories with GitHub
@@ -14409,7 +14409,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: branches
-  "/repos/{owner}/{repo}/branches/{branch}/protection/restrictions":
+  "/repos/{repo_name}/branches/{branch}/protection/restrictions":
     get:
       summary: Get access restrictions
       description: |-
@@ -14469,7 +14469,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: branches
-  "/repos/{owner}/{repo}/branches/{branch}/rename":
+  "/repos/{repo_name}/branches/{branch}/rename":
     post:
       summary: Rename a branch
       description: |-
@@ -14533,7 +14533,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: branches
-  "/repos/{owner}/{repo}/check-runs/{check_run_id}/annotations":
+  "/repos/{repo_name}/check-runs/{check_run_id}/annotations":
     get:
       summary: List check run annotations
       description: Lists annotations for a check run using the annotation `id`. GitHub
@@ -14573,7 +14573,7 @@ paths:
         enabledForGitHubApps: true
         category: checks
         subcategory: runs
-  "/repos/{owner}/{repo}/check-runs/{check_run_id}/rerequest":
+  "/repos/{repo_name}/check-runs/{check_run_id}/rerequest":
     post:
       summary: Rerequest a check run
       description: |-
@@ -14619,7 +14619,7 @@ paths:
         enabledForGitHubApps: true
         category: checks
         subcategory: runs
-  "/repos/{owner}/{repo}/check-suites":
+  "/repos/{repo_name}/check-suites":
     post:
       summary: Create a check suite
       description: |-
@@ -14673,7 +14673,7 @@ paths:
         enabledForGitHubApps: true
         category: checks
         subcategory: suites
-  "/repos/{owner}/{repo}/check-suites/preferences":
+  "/repos/{repo_name}/check-suites/preferences":
     patch:
       summary: Update repository preferences for check suites
       description: Changes the default automatic flow when creating check suites.
@@ -14738,7 +14738,7 @@ paths:
         enabledForGitHubApps: true
         category: checks
         subcategory: suites
-  "/repos/{owner}/{repo}/check-suites/{check_suite_id}":
+  "/repos/{repo_name}/check-suites/{check_suite_id}":
     get:
       summary: Get a check suite
       description: |-
@@ -14770,7 +14770,7 @@ paths:
         enabledForGitHubApps: true
         category: checks
         subcategory: suites
-  "/repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs":
+  "/repos/{repo_name}/check-suites/{check_suite_id}/check-runs":
     get:
       summary: List check runs in a check suite
       description: |-
@@ -14830,7 +14830,7 @@ paths:
         enabledForGitHubApps: true
         category: checks
         subcategory: runs
-  "/repos/{owner}/{repo}/check-suites/{check_suite_id}/rerequest":
+  "/repos/{repo_name}/check-suites/{check_suite_id}/rerequest":
     post:
       summary: Rerequest a check suite
       description: |-
@@ -14861,7 +14861,7 @@ paths:
         enabledForGitHubApps: true
         category: checks
         subcategory: suites
-  "/repos/{owner}/{repo}/code-scanning/alerts":
+  "/repos/{repo_name}/code-scanning/alerts":
     get:
       summary: List code scanning alerts for a repository
       description: |-
@@ -14933,7 +14933,7 @@ paths:
         enabledForGitHubApps: true
         category: code-scanning
         subcategory:
-  "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}":
+  "/repos/{repo_name}/code-scanning/alerts/{alert_number}":
     get:
       summary: Get a code scanning alert
       description: |-
@@ -15027,7 +15027,7 @@ paths:
         enabledForGitHubApps: true
         githubCloudOnly: false
         category: code-scanning
-  "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances":
+  "/repos/{repo_name}/code-scanning/alerts/{alert_number}/instances":
     get:
       summary: List instances of a code scanning alert
       description: |-
@@ -15071,7 +15071,7 @@ paths:
         enabledForGitHubApps: true
         category: code-scanning
         subcategory:
-  "/repos/{owner}/{repo}/code-scanning/analyses":
+  "/repos/{repo_name}/code-scanning/analyses":
     get:
       summary: List code scanning analyses for a repository
       description: |-
@@ -15141,7 +15141,7 @@ paths:
         enabledForGitHubApps: true
         githubCloudOnly: false
         category: code-scanning
-  "/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}":
+  "/repos/{repo_name}/code-scanning/analyses/{analysis_id}":
     get:
       summary: Get a code scanning analysis for a repository
       description: |-
@@ -15175,7 +15175,7 @@ paths:
       - "$ref": "#/components/parameters/repo"
       - name: analysis_id
         in: path
-        description: The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses`
+        description: The ID of the analysis, as returned from the `GET /repos/{repo_name}/code-scanning/analyses`
           operation.
         required: true
         schema:
@@ -15283,7 +15283,7 @@ paths:
       - "$ref": "#/components/parameters/repo"
       - name: analysis_id
         in: path
-        description: The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses`
+        description: The ID of the analysis, as returned from the `GET /repos/{repo_name}/code-scanning/analyses`
           operation.
         required: true
         schema:
@@ -15321,7 +15321,7 @@ paths:
         enabledForGitHubApps: true
         githubCloudOnly: false
         category: code-scanning
-  "/repos/{owner}/{repo}/code-scanning/sarifs":
+  "/repos/{repo_name}/code-scanning/sarifs":
     post:
       summary: Upload an analysis as SARIF data
       description: |-
@@ -15382,7 +15382,7 @@ paths:
                     analysis. If this parameter is not used, the tool name defaults
                     to "API". If the uploaded SARIF contains a tool GUID, this will
                     be available for filtering using the `tool_guid` parameter of
-                    operations such as `GET /repos/{owner}/{repo}/code-scanning/alerts`.
+                    operations such as `GET /repos/{repo_name}/code-scanning/alerts`.
                   type: string
               required:
               - commit_sha
@@ -15412,7 +15412,7 @@ paths:
         enabledForGitHubApps: true
         githubCloudOnly: false
         category: code-scanning
-  "/repos/{owner}/{repo}/code-scanning/sarifs/{sarif_id}":
+  "/repos/{repo_name}/code-scanning/sarifs/{sarif_id}":
     get:
       summary: Get information about a SARIF upload
       description: Gets information about a SARIF upload, including the status and
@@ -15458,7 +15458,7 @@ paths:
         enabledForGitHubApps: true
         githubCloudOnly: false
         category: code-scanning
-  "/repos/{owner}/{repo}/codeowners/errors":
+  "/repos/{repo_name}/codeowners/errors":
     get:
       summary: List CODEOWNERS errors
       description: |-
@@ -15502,7 +15502,7 @@ paths:
         previews: []
         category: repos
         subcategory:
-  "/repos/{owner}/{repo}/codespaces":
+  "/repos/{repo_name}/codespaces":
     get:
       summary: List codespaces in a repository for the authenticated user
       description: |-
@@ -15629,7 +15629,7 @@ paths:
         enabledForGitHubApps: false
         category: codespaces
         subcategory:
-  "/repos/{owner}/{repo}/codespaces/machines":
+  "/repos/{repo_name}/codespaces/machines":
     get:
       summary: List available machine types for a repository
       description: |-
@@ -15689,7 +15689,7 @@ paths:
         enabledForGitHubApps: false
         category: codespaces
         subcategory: machines
-  "/repos/{owner}/{repo}/collaborators":
+  "/repos/{repo_name}/collaborators":
     get:
       summary: List repository collaborators
       description: |-
@@ -15748,7 +15748,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: collaborators
-  "/repos/{owner}/{repo}/collaborators/{username}":
+  "/repos/{repo_name}/collaborators/{username}":
     get:
       summary: Check if a user is a repository collaborator
       description: |-
@@ -15880,7 +15880,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: collaborators
-  "/repos/{owner}/{repo}/collaborators/{username}/permission":
+  "/repos/{repo_name}/collaborators/{username}/permission":
     get:
       summary: Get repository permissions for a user
       description: Checks the repository permission of a collaborator. The possible
@@ -15912,7 +15912,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: collaborators
-  "/repos/{owner}/{repo}/comments":
+  "/repos/{repo_name}/comments":
     get:
       summary: List commit comments for a repository
       description: |-
@@ -15950,7 +15950,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: comments
-  "/repos/{owner}/{repo}/comments/{comment_id}":
+  "/repos/{repo_name}/comments/{comment_id}":
     get:
       summary: Get a commit comment
       description: ''
@@ -16048,7 +16048,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: comments
-  "/repos/{owner}/{repo}/comments/{comment_id}/reactions":
+  "/repos/{repo_name}/comments/{comment_id}/reactions":
     get:
       summary: List reactions for a commit comment
       description: List the reactions to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
@@ -16169,7 +16169,7 @@ paths:
         enabledForGitHubApps: true
         category: reactions
         subcategory:
-  "/repos/{owner}/{repo}/comments/{comment_id}/reactions/{reaction_id}":
+  "/repos/{repo_name}/comments/{comment_id}/reactions/{reaction_id}":
     delete:
       summary: Delete a commit comment reaction
       description: |-
@@ -16195,7 +16195,7 @@ paths:
         enabledForGitHubApps: true
         category: reactions
         subcategory:
-  "/repos/{owner}/{repo}/commits":
+  "/repos/{repo_name}/commits":
     get:
       summary: List commits
       description: |-
@@ -16294,7 +16294,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: commits
-  "/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head":
+  "/repos/{repo_name}/commits/{commit_sha}/branches-where-head":
     get:
       summary: List branches for HEAD commit
       description: |-
@@ -16330,7 +16330,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: commits
-  "/repos/{owner}/{repo}/commits/{commit_sha}/comments":
+  "/repos/{repo_name}/commits/{commit_sha}/comments":
     get:
       summary: List commit comments
       description: Use the `:commit_sha` to specify the commit that will have its
@@ -16435,7 +16435,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: comments
-  "/repos/{owner}/{repo}/commits/{commit_sha}/pulls":
+  "/repos/{repo_name}/commits/{commit_sha}/pulls":
     get:
       summary: List pull requests associated with a commit
       description: Lists the merged pull request that introduced the commit to the
@@ -16478,7 +16478,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: commits
-  "/repos/{owner}/{repo}/commits/{ref}":
+  "/repos/{repo_name}/commits/{ref}":
     get:
       summary: Get a commit
       description: |-
@@ -16557,7 +16557,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: commits
-  "/repos/{owner}/{repo}/commits/{ref}/check-runs":
+  "/repos/{repo_name}/commits/{ref}/check-runs":
     get:
       summary: List check runs for a Git reference
       description: |-
@@ -16628,7 +16628,7 @@ paths:
         enabledForGitHubApps: true
         category: checks
         subcategory: runs
-  "/repos/{owner}/{repo}/commits/{ref}/check-suites":
+  "/repos/{repo_name}/commits/{ref}/check-suites":
     get:
       summary: List check suites for a Git reference
       description: |-
@@ -16689,7 +16689,7 @@ paths:
         enabledForGitHubApps: true
         category: checks
         subcategory: suites
-  "/repos/{owner}/{repo}/commits/{ref}/status":
+  "/repos/{repo_name}/commits/{ref}/status":
     get:
       summary: Get the combined status for a specific reference
       description: |-
@@ -16736,7 +16736,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: statuses
-  "/repos/{owner}/{repo}/commits/{ref}/statuses":
+  "/repos/{repo_name}/commits/{ref}/statuses":
     get:
       summary: List commit statuses for a reference
       description: |-
@@ -16783,7 +16783,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: statuses
-  "/repos/{owner}/{repo}/community/profile":
+  "/repos/{repo_name}/community/profile":
     get:
       summary: Get community profile metrics
       description: |-
@@ -16823,7 +16823,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: community
-  "/repos/{owner}/{repo}/compare/{basehead}":
+  "/repos/{repo_name}/compare/{basehead}":
     get:
       summary: Compare two commits
       description: |-
@@ -16904,7 +16904,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: commits
-  "/repos/{owner}/{repo}/contents/{path}":
+  "/repos/{repo_name}/contents/{path}":
     get:
       summary: Get repository content
       description: "Gets the contents of a file or directory in a repository. Specify
@@ -17214,7 +17214,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: contents
-  "/repos/{owner}/{repo}/contributors":
+  "/repos/{repo_name}/contributors":
     get:
       summary: List repository contributors
       description: |-
@@ -17264,7 +17264,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory:
-  "/repos/{owner}/{repo}/dependabot/secrets":
+  "/repos/{repo_name}/dependabot/secrets":
     get:
       summary: List repository secrets
       description: Lists all secrets available in a repository without revealing their
@@ -17310,7 +17310,7 @@ paths:
         enabledForGitHubApps: true
         category: dependabot
         subcategory: secrets
-  "/repos/{owner}/{repo}/dependabot/secrets/public-key":
+  "/repos/{repo_name}/dependabot/secrets/public-key":
     get:
       summary: Get a repository public key
       description: Gets your public key, which you need to encrypt secrets. You need
@@ -17342,7 +17342,7 @@ paths:
         enabledForGitHubApps: true
         category: dependabot
         subcategory: secrets
-  "/repos/{owner}/{repo}/dependabot/secrets/{secret_name}":
+  "/repos/{repo_name}/dependabot/secrets/{secret_name}":
     get:
       summary: Get a repository secret
       description: Gets a single repository secret without revealing its encrypted
@@ -17522,7 +17522,7 @@ paths:
         enabledForGitHubApps: true
         category: dependabot
         subcategory: secrets
-  "/repos/{owner}/{repo}/deployments":
+  "/repos/{repo_name}/deployments":
     get:
       summary: List deployments
       description: 'Simple filtering of deployments is available via query parameters:'
@@ -17749,7 +17749,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: deployments
-  "/repos/{owner}/{repo}/deployments/{deployment_id}":
+  "/repos/{repo_name}/deployments/{deployment_id}":
     get:
       summary: Get a deployment
       description: ''
@@ -17813,7 +17813,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: deployments
-  "/repos/{owner}/{repo}/deployments/{deployment_id}/statuses":
+  "/repos/{repo_name}/deployments/{deployment_id}/statuses":
     get:
       summary: List deployment statuses
       description: 'Users with pull access can view deployment statuses for a deployment:'
@@ -17959,7 +17959,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: deployments
-  "/repos/{owner}/{repo}/deployments/{deployment_id}/statuses/{status_id}":
+  "/repos/{repo_name}/deployments/{deployment_id}/statuses/{status_id}":
     get:
       summary: Get a deployment status
       description: 'Users with pull access can view a deployment status for a deployment:'
@@ -17995,7 +17995,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: deployments
-  "/repos/{owner}/{repo}/environments":
+  "/repos/{repo_name}/environments":
     get:
       summary: Get all environments
       description: |-
@@ -18035,7 +18035,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: environments
-  "/repos/{owner}/{repo}/environments/{environment_name}":
+  "/repos/{repo_name}/environments/{environment_name}":
     get:
       summary: Get an environment
       description: Anyone with read access to the repository can use this endpoint.
@@ -18162,7 +18162,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: environments
-  "/repos/{owner}/{repo}/events":
+  "/repos/{repo_name}/events":
     get:
       summary: List repository events
       description: ''
@@ -18191,7 +18191,7 @@ paths:
         enabledForGitHubApps: true
         category: activity
         subcategory: events
-  "/repos/{owner}/{repo}/forks":
+  "/repos/{repo_name}/forks":
     get:
       summary: List forks
       description: ''
@@ -18290,7 +18290,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: forks
-  "/repos/{owner}/{repo}/git/blobs":
+  "/repos/{repo_name}/git/blobs":
     post:
       summary: Create a blob
       description: ''
@@ -18351,7 +18351,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: blobs
-  "/repos/{owner}/{repo}/git/blobs/{file_sha}":
+  "/repos/{repo_name}/git/blobs/{file_sha}":
     get:
       summary: Get a blob
       description: |-
@@ -18393,7 +18393,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: blobs
-  "/repos/{owner}/{repo}/git/commits":
+  "/repos/{repo_name}/git/commits":
     post:
       summary: Create a commit
       description: |-
@@ -18560,7 +18560,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: commits
-  "/repos/{owner}/{repo}/git/commits/{commit_sha}":
+  "/repos/{repo_name}/git/commits/{commit_sha}":
     get:
       summary: Get a commit
       description: |-
@@ -18621,7 +18621,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: commits
-  "/repos/{owner}/{repo}/git/matching-refs/{ref}":
+  "/repos/{repo_name}/git/matching-refs/{ref}":
     get:
       summary: List matching references
       description: |-
@@ -18670,7 +18670,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: refs
-  "/repos/{owner}/{repo}/git/ref/{ref}":
+  "/repos/{repo_name}/git/ref/{ref}":
     get:
       summary: Get a reference
       description: |-
@@ -18710,7 +18710,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: refs
-  "/repos/{owner}/{repo}/git/refs":
+  "/repos/{repo_name}/git/refs":
     post:
       summary: Create a reference
       description: Creates a reference for your repository. You are unable to create
@@ -18771,7 +18771,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: refs
-  "/repos/{owner}/{repo}/git/refs/{ref}":
+  "/repos/{repo_name}/git/refs/{ref}":
     patch:
       summary: Update a reference
       description: ''
@@ -18858,7 +18858,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: refs
-  "/repos/{owner}/{repo}/git/tags":
+  "/repos/{repo_name}/git/tags":
     post:
       summary: Create a tag object
       description: |-
@@ -18982,7 +18982,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: tags
-  "/repos/{owner}/{repo}/git/tags/{tag_sha}":
+  "/repos/{repo_name}/git/tags/{tag_sha}":
     get:
       summary: Get a tag
       description: |-
@@ -19045,7 +19045,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: tags
-  "/repos/{owner}/{repo}/git/trees":
+  "/repos/{repo_name}/git/trees":
     post:
       summary: Create a tree
       description: |-
@@ -19152,7 +19152,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: trees
-  "/repos/{owner}/{repo}/git/trees/{tree_sha}":
+  "/repos/{repo_name}/git/trees/{tree_sha}":
     get:
       summary: Get a tree
       description: |-
@@ -19205,7 +19205,7 @@ paths:
         enabledForGitHubApps: true
         category: git
         subcategory: trees
-  "/repos/{owner}/{repo}/hooks":
+  "/repos/{repo_name}/hooks":
     get:
       summary: List repository webhooks
       description: ''
@@ -19337,7 +19337,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: webhooks
-  "/repos/{owner}/{repo}/hooks/{hook_id}":
+  "/repos/{repo_name}/hooks/{hook_id}":
     get:
       summary: Get a repository webhook
       description: Returns a webhook configured in a repository. To get only the webhook
@@ -19484,7 +19484,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: webhooks
-  "/repos/{owner}/{repo}/hooks/{hook_id}/config":
+  "/repos/{repo_name}/hooks/{hook_id}/config":
     get:
       summary: Get a webhook configuration for a repository
       description: |-
@@ -19568,7 +19568,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: webhooks
-  "/repos/{owner}/{repo}/hooks/{hook_id}/deliveries/{delivery_id}/attempts":
+  "/repos/{repo_name}/hooks/{hook_id}/deliveries/{delivery_id}/attempts":
     post:
       summary: Redeliver a delivery for a repository webhook
       description: Redeliver a webhook delivery for a webhook configured in a repository.
@@ -19595,7 +19595,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: webhooks
-  "/repos/{owner}/{repo}/hooks/{hook_id}/pings":
+  "/repos/{repo_name}/hooks/{hook_id}/pings":
     post:
       summary: Ping a repository webhook
       description: This will trigger a [ping event](https://docs.github.com/webhooks/#ping-event)
@@ -19620,7 +19620,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: webhooks
-  "/repos/{owner}/{repo}/hooks/{hook_id}/tests":
+  "/repos/{repo_name}/hooks/{hook_id}/tests":
     post:
       summary: Test the push repository webhook
       description: |-
@@ -19647,7 +19647,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: webhooks
-  "/repos/{owner}/{repo}/import":
+  "/repos/{repo_name}/import":
     get:
       summary: Get an import status
       description: |-
@@ -19867,7 +19867,7 @@ paths:
         enabledForGitHubApps: true
         category: migrations
         subcategory: source-imports
-  "/repos/{owner}/{repo}/import/authors":
+  "/repos/{repo_name}/import/authors":
     get:
       summary: Get commit authors
       description: |-
@@ -19903,7 +19903,7 @@ paths:
         enabledForGitHubApps: true
         category: migrations
         subcategory: source-imports
-  "/repos/{owner}/{repo}/import/authors/{author_id}":
+  "/repos/{repo_name}/import/authors/{author_id}":
     patch:
       summary: Map a commit author
       description: Update an author's identity for the import. Your application can
@@ -19958,7 +19958,7 @@ paths:
         enabledForGitHubApps: true
         category: migrations
         subcategory: source-imports
-  "/repos/{owner}/{repo}/import/large_files":
+  "/repos/{repo_name}/import/large_files":
     get:
       summary: Get large files
       description: List files larger than 100MB found during the import
@@ -19988,7 +19988,7 @@ paths:
         enabledForGitHubApps: true
         category: migrations
         subcategory: source-imports
-  "/repos/{owner}/{repo}/import/lfs":
+  "/repos/{repo_name}/import/lfs":
     patch:
       summary: Update Git LFS preference
       description: You can import repositories from Subversion, Mercurial, and TFS
@@ -20040,7 +20040,7 @@ paths:
         enabledForGitHubApps: true
         category: migrations
         subcategory: source-imports
-  "/repos/{owner}/{repo}/installation":
+  "/repos/{repo_name}/installation":
     get:
       summary: Get a repository installation for the authenticated app
       description: |-
@@ -20075,7 +20075,7 @@ paths:
         enabledForGitHubApps: false
         category: apps
         subcategory:
-  "/repos/{owner}/{repo}/invitations":
+  "/repos/{repo_name}/invitations":
     get:
       summary: List repository invitations
       description: When authenticating as a user with admin rights to a repository,
@@ -20111,7 +20111,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: invitations
-  "/repos/{owner}/{repo}/invitations/{invitation_id}":
+  "/repos/{repo_name}/invitations/{invitation_id}":
     patch:
       summary: Update a repository invitation
       description: ''
@@ -20179,7 +20179,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: invitations
-  "/repos/{owner}/{repo}/issues":
+  "/repos/{repo_name}/issues":
     get:
       summary: List repository issues
       description: |-
@@ -20388,7 +20388,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory:
-  "/repos/{owner}/{repo}/issues/comments":
+  "/repos/{repo_name}/issues/comments":
     get:
       summary: List issue comments for a repository
       description: By default, Issue Comments are ordered by ascending ID.
@@ -20438,7 +20438,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: comments
-  "/repos/{owner}/{repo}/issues/comments/{comment_id}":
+  "/repos/{repo_name}/issues/comments/{comment_id}":
     get:
       summary: Get an issue comment
       description: ''
@@ -20534,7 +20534,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: comments
-  "/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions":
+  "/repos/{repo_name}/issues/comments/{comment_id}/reactions":
     get:
       summary: List reactions for an issue comment
       description: List the reactions to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
@@ -20653,7 +20653,7 @@ paths:
         enabledForGitHubApps: true
         category: reactions
         subcategory:
-  "/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}":
+  "/repos/{repo_name}/issues/comments/{comment_id}/reactions/{reaction_id}":
     delete:
       summary: Delete an issue comment reaction
       description: |-
@@ -20679,7 +20679,7 @@ paths:
         enabledForGitHubApps: true
         category: reactions
         subcategory:
-  "/repos/{owner}/{repo}/issues/events":
+  "/repos/{repo_name}/issues/events":
     get:
       summary: List issue events for a repository
       description: ''
@@ -20716,7 +20716,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: events
-  "/repos/{owner}/{repo}/issues/events/{event_id}":
+  "/repos/{repo_name}/issues/events/{event_id}":
     get:
       summary: Get an issue event
       description: ''
@@ -20755,7 +20755,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: events
-  "/repos/{owner}/{repo}/issues/{issue_number}":
+  "/repos/{repo_name}/issues/{issue_number}":
     get:
       summary: Get an issue
       description: |-
@@ -20914,7 +20914,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory:
-  "/repos/{owner}/{repo}/issues/{issue_number}/assignees":
+  "/repos/{repo_name}/issues/{issue_number}/assignees":
     post:
       summary: Add assignees to an issue
       description: Adds up to 10 assignees to an issue. Users already assigned to
@@ -21007,7 +21007,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: assignees
-  "/repos/{owner}/{repo}/issues/{issue_number}/comments":
+  "/repos/{repo_name}/issues/{issue_number}/comments":
     get:
       summary: List issue comments
       description: Issue Comments are ordered by ascending ID.
@@ -21108,7 +21108,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: comments
-  "/repos/{owner}/{repo}/issues/{issue_number}/events":
+  "/repos/{repo_name}/issues/{issue_number}/events":
     get:
       summary: List issue events
       description: ''
@@ -21146,7 +21146,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: events
-  "/repos/{owner}/{repo}/issues/{issue_number}/labels/{name}":
+  "/repos/{repo_name}/issues/{issue_number}/labels/{name}":
     delete:
       summary: Remove a label from an issue
       description: Removes the specified label from the issue, and returns the remaining
@@ -21188,7 +21188,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: labels
-  "/repos/{owner}/{repo}/issues/{issue_number}/lock":
+  "/repos/{repo_name}/issues/{issue_number}/lock":
     put:
       summary: Lock an issue
       description: |-
@@ -21264,7 +21264,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory:
-  "/repos/{owner}/{repo}/issues/{issue_number}/reactions":
+  "/repos/{repo_name}/issues/{issue_number}/reactions":
     get:
       summary: List reactions for an issue
       description: List the reactions to an [issue](https://docs.github.com/rest/reference/issues).
@@ -21385,7 +21385,7 @@ paths:
         enabledForGitHubApps: false
         category: reactions
         subcategory:
-  "/repos/{owner}/{repo}/issues/{issue_number}/reactions/{reaction_id}":
+  "/repos/{repo_name}/issues/{issue_number}/reactions/{reaction_id}":
     delete:
       summary: Delete an issue reaction
       description: |-
@@ -21411,7 +21411,7 @@ paths:
         enabledForGitHubApps: true
         category: reactions
         subcategory:
-  "/repos/{owner}/{repo}/keys":
+  "/repos/{repo_name}/keys":
     get:
       summary: List deploy keys
       description: ''
@@ -21508,7 +21508,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: keys
-  "/repos/{owner}/{repo}/keys/{key_id}":
+  "/repos/{repo_name}/keys/{key_id}":
     get:
       summary: Get a deploy key
       description: ''
@@ -21561,7 +21561,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: keys
-  "/repos/{owner}/{repo}/labels":
+  "/repos/{repo_name}/labels":
     get:
       summary: List labels for a repository
       description: ''
@@ -21662,7 +21662,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: labels
-  "/repos/{owner}/{repo}/labels/{name}":
+  "/repos/{repo_name}/labels/{name}":
     get:
       summary: Get a label
       description: ''
@@ -21780,7 +21780,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: labels
-  "/repos/{owner}/{repo}/languages":
+  "/repos/{repo_name}/languages":
     get:
       summary: List repository languages
       description: Lists languages for the specified repository. The value shown for
@@ -21809,7 +21809,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory:
-  "/repos/{owner}/{repo}/lfs":
+  "/repos/{repo_name}/lfs":
     put:
       summary: Enable Git LFS for a repository
       description: ''
@@ -21857,7 +21857,7 @@ paths:
         enabledForGitHubApps: false
         category: repos
         subcategory: lfs
-  "/repos/{owner}/{repo}/license":
+  "/repos/{repo_name}/license":
     get:
       summary: Get the license for a repository
       description: |-
@@ -21888,7 +21888,7 @@ paths:
         enabledForGitHubApps: true
         category: licenses
         subcategory:
-  "/repos/{owner}/{repo}/merge-upstream":
+  "/repos/{repo_name}/merge-upstream":
     post:
       summary: Sync a fork branch with the upstream repository
       description: Sync a branch of a forked repository to keep it up-to-date with
@@ -21936,7 +21936,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: branches
-  "/repos/{owner}/{repo}/merges":
+  "/repos/{repo_name}/merges":
     post:
       summary: Merge a branch
       description: ''
@@ -22000,7 +22000,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: merging
-  "/repos/{owner}/{repo}/milestones":
+  "/repos/{repo_name}/milestones":
     get:
       summary: List milestones
       description: ''
@@ -22136,7 +22136,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: milestones
-  "/repos/{owner}/{repo}/milestones/{milestone_number}":
+  "/repos/{repo_name}/milestones/{milestone_number}":
     get:
       summary: Get a milestone
       description: ''
@@ -22248,7 +22248,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: milestones
-  "/repos/{owner}/{repo}/milestones/{milestone_number}/labels":
+  "/repos/{repo_name}/milestones/{milestone_number}/labels":
     get:
       summary: List labels for issues in a milestone
       description: ''
@@ -22284,7 +22284,7 @@ paths:
         enabledForGitHubApps: true
         category: issues
         subcategory: labels
-  "/repos/{owner}/{repo}/notifications":
+  "/repos/{repo_name}/notifications":
     get:
       summary: List repository notifications for the authenticated user
       description: List all notifications for the current user.
@@ -22376,7 +22376,7 @@ paths:
         enabledForGitHubApps: false
         category: activity
         subcategory: notifications
-  "/repos/{owner}/{repo}/pages/builds":
+  "/repos/{repo_name}/pages/builds":
     get:
       summary: List GitHub Pages builds
       description: ''
@@ -22441,7 +22441,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: pages
-  "/repos/{owner}/{repo}/pages/builds/latest":
+  "/repos/{repo_name}/pages/builds/latest":
     get:
       summary: Get latest Pages build
       description: ''
@@ -22469,7 +22469,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: pages
-  "/repos/{owner}/{repo}/pages/builds/{build_id}":
+  "/repos/{repo_name}/pages/builds/{build_id}":
     get:
       summary: Get GitHub Pages build
       description: ''
@@ -22502,7 +22502,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: pages
-  "/repos/{owner}/{repo}/pages/health":
+  "/repos/{repo_name}/pages/health":
     get:
       summary: Get a DNS health check for GitHub Pages
       description: |-
@@ -22547,7 +22547,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: pages
-  "/repos/{owner}/{repo}/projects":
+  "/repos/{repo_name}/projects":
     get:
       summary: List repository projects
       description: Lists the projects in a repository. Returns a `404 Not Found` status
@@ -22665,7 +22665,7 @@ paths:
         enabledForGitHubApps: true
         category: projects
         subcategory:
-  "/repos/{owner}/{repo}/pulls":
+  "/repos/{repo_name}/pulls":
     get:
       summary: List pull requests
       description: Draft pull requests are available in public repositories with GitHub
@@ -22845,7 +22845,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory:
-  "/repos/{owner}/{repo}/pulls/comments":
+  "/repos/{repo_name}/pulls/comments":
     get:
       summary: List review comments in a repository
       description: Lists review comments for all pull requests in a repository. By
@@ -22900,7 +22900,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory: comments
-  "/repos/{owner}/{repo}/pulls/comments/{comment_id}":
+  "/repos/{repo_name}/pulls/comments/{comment_id}":
     get:
       summary: Get a review comment for a pull request
       description: Provides details for a review comment.
@@ -22996,7 +22996,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory: comments
-  "/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions":
+  "/repos/{repo_name}/pulls/comments/{comment_id}/reactions":
     get:
       summary: List reactions for a pull request review comment
       description: List the reactions to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
@@ -23115,7 +23115,7 @@ paths:
         enabledForGitHubApps: true
         category: reactions
         subcategory:
-  "/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions/{reaction_id}":
+  "/repos/{repo_name}/pulls/comments/{comment_id}/reactions/{reaction_id}":
     delete:
       summary: Delete a pull request comment reaction
       description: |-
@@ -23141,7 +23141,7 @@ paths:
         enabledForGitHubApps: true
         category: reactions
         subcategory:
-  "/repos/{owner}/{repo}/pulls/{pull_number}":
+  "/repos/{repo_name}/pulls/{pull_number}":
     get:
       summary: Get a pull request
       description: |-
@@ -23261,7 +23261,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory:
-  "/repos/{owner}/{repo}/pulls/{pull_number}/codespaces":
+  "/repos/{repo_name}/pulls/{pull_number}/codespaces":
     post:
       summary: Create a codespace from a pull request
       description: |-
@@ -23336,7 +23336,7 @@ paths:
         enabledForGitHubApps: false
         category: codespaces
         subcategory:
-  "/repos/{owner}/{repo}/pulls/{pull_number}/comments":
+  "/repos/{repo_name}/pulls/{pull_number}/comments":
     get:
       summary: List review comments on a pull request
       description: Lists all review comments for a pull request. By default, review
@@ -23526,7 +23526,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory: comments
-  "/repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies":
+  "/repos/{repo_name}/pulls/{pull_number}/comments/{comment_id}/replies":
     post:
       summary: Create a reply for a review comment
       description: |-
@@ -23581,7 +23581,7 @@ paths:
         enabledForGitHubApps: false
         category: pulls
         subcategory: comments
-  "/repos/{owner}/{repo}/pulls/{pull_number}/commits":
+  "/repos/{repo_name}/pulls/{pull_number}/commits":
     get:
       summary: List commits on a pull request
       description: Lists a maximum of 250 commits for a pull request. To receive a
@@ -23620,7 +23620,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory:
-  "/repos/{owner}/{repo}/pulls/{pull_number}/files":
+  "/repos/{repo_name}/pulls/{pull_number}/files":
     get:
       summary: List pull requests files
       description: "**Note:** Responses include a maximum of 3000 files. The paginated
@@ -23661,7 +23661,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory:
-  "/repos/{owner}/{repo}/pulls/{pull_number}/merge":
+  "/repos/{repo_name}/pulls/{pull_number}/merge":
     get:
       summary: Check if a pull request has been merged
       description: ''
@@ -23780,7 +23780,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory:
-  "/repos/{owner}/{repo}/pulls/{pull_number}/reviews":
+  "/repos/{repo_name}/pulls/{pull_number}/reviews":
     get:
       summary: List reviews for a pull request
       description: The list of reviews returns in chronological order.
@@ -23929,7 +23929,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory: reviews
-  "/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}":
+  "/repos/{repo_name}/pulls/{pull_number}/reviews/{review_id}":
     get:
       summary: Get a review for a pull request
       description: ''
@@ -24040,7 +24040,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory: reviews
-  "/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments":
+  "/repos/{repo_name}/pulls/{pull_number}/reviews/{review_id}/comments":
     get:
       summary: List comments for a pull request review
       description: List comments for a specific pull request review.
@@ -24079,7 +24079,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory: reviews
-  "/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals":
+  "/repos/{repo_name}/pulls/{pull_number}/reviews/{review_id}/dismissals":
     put:
       summary: Dismiss a review for a pull request
       description: "**Note:** To dismiss a pull request review on a [protected branch](https://docs.github.com/rest/reference/repos#branches),
@@ -24130,7 +24130,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory: reviews
-  "/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events":
+  "/repos/{repo_name}/pulls/{pull_number}/reviews/{review_id}/events":
     post:
       summary: Submit a review for a pull request
       description: ''
@@ -24190,7 +24190,7 @@ paths:
         enabledForGitHubApps: true
         category: pulls
         subcategory: reviews
-  "/repos/{owner}/{repo}/pulls/{pull_number}/update-branch":
+  "/repos/{repo_name}/pulls/{pull_number}/update-branch":
     put:
       summary: Update a pull request branch
       description: Updates the pull request branch with the latest upstream changes
@@ -24248,7 +24248,7 @@ paths:
         enabledForGitHubApps: false
         category: pulls
         subcategory:
-  "/repos/{owner}/{repo}/readme":
+  "/repos/{repo_name}/readme":
     get:
       summary: Get a repository README
       description: |-
@@ -24290,7 +24290,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: contents
-  "/repos/{owner}/{repo}/readme/{dir}":
+  "/repos/{repo_name}/readme/{dir}":
     get:
       summary: Get a repository README for a directory
       description: |-
@@ -24339,7 +24339,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: contents
-  "/repos/{owner}/{repo}/releases":
+  "/repos/{repo_name}/releases":
     get:
       summary: List releases
       description: |-
@@ -24479,7 +24479,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: releases
-  "/repos/{owner}/{repo}/releases/assets/{asset_id}":
+  "/repos/{repo_name}/releases/assets/{asset_id}":
     get:
       summary: Get a release asset
       description: To download the asset's binary content, set the `Accept` header
@@ -24590,7 +24590,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: releases
-  "/repos/{owner}/{repo}/releases/generate-notes":
+  "/repos/{repo_name}/releases/generate-notes":
     post:
       summary: Generate release notes content for a release
       description: Generate a name and body describing a [release](https://docs.github.com/rest/reference/repos#releases).
@@ -24660,7 +24660,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: releases
-  "/repos/{owner}/{repo}/releases/latest":
+  "/repos/{repo_name}/releases/latest":
     get:
       summary: Get the latest release
       description: |-
@@ -24691,7 +24691,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: releases
-  "/repos/{owner}/{repo}/releases/tags/{tag}":
+  "/repos/{repo_name}/releases/tags/{tag}":
     get:
       summary: Get a release by tag name
       description: Get a published release with the specified tag.
@@ -24728,7 +24728,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: releases
-  "/repos/{owner}/{repo}/releases/{release_id}":
+  "/repos/{repo_name}/releases/{release_id}":
     get:
       summary: Get a release
       description: "**Note:** This returns an `upload_url` key corresponding to the
@@ -24860,7 +24860,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: releases
-  "/repos/{owner}/{repo}/releases/{release_id}/assets":
+  "/repos/{repo_name}/releases/{release_id}/assets":
     get:
       summary: List release assets
       description: ''
@@ -24972,7 +24972,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: releases
-  "/repos/{owner}/{repo}/releases/{release_id}/reactions":
+  "/repos/{repo_name}/releases/{release_id}/reactions":
     post:
       summary: Create reaction for a release
       description: 'Create a reaction to a [release](https://docs.github.com/rest/reference/repos#releases).
@@ -25036,7 +25036,7 @@ paths:
         enabledForGitHubApps: true
         category: reactions
         subcategory:
-  "/repos/{owner}/{repo}/secret-scanning/alerts":
+  "/repos/{repo_name}/secret-scanning/alerts":
     get:
       summary: List secret scanning alerts for a repository
       description: |-
@@ -25079,7 +25079,7 @@ paths:
         enabledForGitHubApps: true
         category: secret-scanning
         subcategory:
-  "/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}":
+  "/repos/{repo_name}/secret-scanning/alerts/{alert_number}":
     get:
       summary: Get a secret scanning alert
       description: |-
@@ -25171,7 +25171,7 @@ paths:
         enabledForGitHubApps: true
         githubCloudOnly: false
         category: secret-scanning
-  "/repos/{owner}/{repo}/stats/commit_activity":
+  "/repos/{repo_name}/stats/commit_activity":
     get:
       summary: Get the last year of commit activity
       description: Returns the last year of commit activity grouped by week. The `days`
@@ -25206,7 +25206,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: statistics
-  "/repos/{owner}/{repo}/stats/contributors":
+  "/repos/{repo_name}/stats/contributors":
     get:
       summary: Get all contributor commit activity
       description: |2-
@@ -25251,7 +25251,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: statistics
-  "/repos/{owner}/{repo}/stats/participation":
+  "/repos/{repo_name}/stats/participation":
     get:
       summary: Get the weekly commit count
       description: |-
@@ -25284,7 +25284,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: statistics
-  "/repos/{owner}/{repo}/stats/punch_card":
+  "/repos/{repo_name}/stats/punch_card":
     get:
       summary: Get the hourly commit count for each day
       description: |-
@@ -25325,7 +25325,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: statistics
-  "/repos/{owner}/{repo}/statuses/{sha}":
+  "/repos/{repo_name}/statuses/{sha}":
     post:
       summary: Create a commit status
       description: |-
@@ -25406,7 +25406,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: statuses
-  "/repos/{owner}/{repo}/subscribers":
+  "/repos/{repo_name}/subscribers":
     get:
       summary: List watchers
       description: Lists the people watching the specified repository.
@@ -25441,7 +25441,7 @@ paths:
         enabledForGitHubApps: true
         category: activity
         subcategory: watching
-  "/repos/{owner}/{repo}/subscription":
+  "/repos/{repo_name}/subscription":
     get:
       summary: Get a repository subscription
       description: ''
@@ -25541,7 +25541,7 @@ paths:
         enabledForGitHubApps: false
         category: activity
         subcategory: watching
-  "/repos/{owner}/{repo}/tags":
+  "/repos/{repo_name}/tags":
     get:
       summary: List repository tags
       description: ''
@@ -25576,7 +25576,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory:
-  "/repos/{owner}/{repo}/tarball/{ref}":
+  "/repos/{repo_name}/tarball/{ref}":
     get:
       summary: Download a repository archive (tar)
       description: |-
@@ -25611,7 +25611,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: contents
-  "/repos/{owner}/{repo}/teams":
+  "/repos/{repo_name}/teams":
     get:
       summary: List repository teams
       description: ''
@@ -25646,7 +25646,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory:
-  "/repos/{owner}/{repo}/topics":
+  "/repos/{repo_name}/topics":
     get:
       summary: Get all repository topics
       description: ''
@@ -25732,7 +25732,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory:
-  "/repos/{owner}/{repo}/traffic/clones":
+  "/repos/{repo_name}/traffic/clones":
     get:
       summary: Get repository clones
       description: Get the total number of clones and breakdown per day or week for
@@ -25765,7 +25765,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: traffic
-  "/repos/{owner}/{repo}/traffic/popular/paths":
+  "/repos/{repo_name}/traffic/popular/paths":
     get:
       summary: Get top referral paths
       description: Get the top 10 popular contents over the last 14 days.
@@ -25797,7 +25797,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: traffic
-  "/repos/{owner}/{repo}/traffic/popular/referrers":
+  "/repos/{repo_name}/traffic/popular/referrers":
     get:
       summary: Get top referral sources
       description: Get the top 10 referrers over the last 14 days.
@@ -25829,7 +25829,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: traffic
-  "/repos/{owner}/{repo}/traffic/views":
+  "/repos/{repo_name}/traffic/views":
     get:
       summary: Get page views
       description: Get the total number of views and breakdown per day or week for
@@ -25862,7 +25862,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory: traffic
-  "/repos/{owner}/{repo}/transfer":
+  "/repos/{repo_name}/transfer":
     post:
       summary: Transfer a repository
       description: A transfer request will need to be accepted by the new owner when
@@ -25918,7 +25918,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory:
-  "/repos/{owner}/{repo}/vulnerability-alerts":
+  "/repos/{repo_name}/vulnerability-alerts":
     get:
       summary: Check if vulnerability alerts are enabled for a repository
       description: Shows whether dependency alerts are enabled or disabled for a repository.
@@ -25987,7 +25987,7 @@ paths:
         enabledForGitHubApps: true
         category: repos
         subcategory:
-  "/repos/{owner}/{repo}/zipball/{ref}":
+  "/repos/{repo_name}/zipball/{ref}":
     get:
       summary: Download a repository archive (zip)
       description: |-
@@ -29489,7 +29489,7 @@ paths:
         category: teams
         subcategory:
       deprecated: true
-  "/teams/{team_id}/repos/{owner}/{repo}":
+  "/teams/{team_id}/repos/{repo_name}":
     get:
       summary: Check team permissions for a repository (Legacy)
       description: |-
@@ -32860,7 +32860,7 @@ paths:
         enabledForGitHubApps: false
         category: activity
         subcategory: starring
-  "/user/starred/{owner}/{repo}":
+  "/user/starred/{repo_name}":
     get:
       summary: Check if a repository is starred by the authenticated user
       description: ''
@@ -72823,7 +72823,7 @@ components:
       in: path
       description: The number that identifies an alert. You can find this at the end
         of the URL for a code scanning alert within GitHub, and in the `number` field
-        in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts`
+        in the response from the `GET /repos/{repo_name}/code-scanning/alerts`
         operation.
       required: true
       schema:

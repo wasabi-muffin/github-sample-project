@@ -20,8 +20,8 @@
 
 package jp.co.yumemi.android.code_check.remote.models
 
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoBranchesBranchProtectionRequiredPullRequestReviewsBypassPullRequestAllowancesApiModel
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoBranchesBranchProtectionRequiredPullRequestReviewsDismissalRestrictionsApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameBranchesBranchProtectionRequiredPullRequestReviewsBypassPullRequestAllowancesApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameBranchesBranchProtectionRequiredPullRequestReviewsDismissalRestrictionsApiModel
 
 import kotlinx.serialization.*
 
@@ -34,9 +34,9 @@ import kotlinx.serialization.*
  * @param bypassPullRequestAllowances 
  */
 @Serializable
-data class ReposOwnerRepoBranchesBranchProtectionRequiredPullRequestReviewsApiModel(
+data class ReposRepoNameBranchesBranchProtectionRequiredPullRequestReviewsApiModel(
     @SerialName(value = "dismissal_restrictions")
-    val dismissalRestrictions: ReposOwnerRepoBranchesBranchProtectionRequiredPullRequestReviewsDismissalRestrictionsApiModel? = null,
+    val dismissalRestrictions: ReposRepoNameBranchesBranchProtectionRequiredPullRequestReviewsDismissalRestrictionsApiModel? = null,
     /* Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. */
     @SerialName(value = "dismiss_stale_reviews")
     val dismissStaleReviews: kotlin.Boolean? = null,
@@ -47,7 +47,7 @@ data class ReposOwnerRepoBranchesBranchProtectionRequiredPullRequestReviewsApiMo
     @SerialName(value = "required_approving_review_count")
     val requiredApprovingReviewCount: kotlin.Int? = null,
     @SerialName(value = "bypass_pull_request_allowances")
-    val bypassPullRequestAllowances: ReposOwnerRepoBranchesBranchProtectionRequiredPullRequestReviewsBypassPullRequestAllowancesApiModel? = null
+    val bypassPullRequestAllowances: ReposRepoNameBranchesBranchProtectionRequiredPullRequestReviewsBypassPullRequestAllowancesApiModel? = null
 ) {
 
 }

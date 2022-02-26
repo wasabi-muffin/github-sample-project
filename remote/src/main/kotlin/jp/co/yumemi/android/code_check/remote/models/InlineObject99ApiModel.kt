@@ -20,7 +20,7 @@
 
 package jp.co.yumemi.android.code_check.remote.models
 
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoIssuesLabelsApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameIssuesLabelsApiModel
 
 import kotlinx.serialization.*
 
@@ -49,7 +49,7 @@ data class InlineObject99ApiModel(
     val milestone: kotlin.String? = null,
     /* Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._ */
     @SerialName(value = "labels")
-    val labels: kotlin.collections.List<ReposOwnerRepoIssuesLabelsApiModel>? = null,
+    val labels: kotlin.collections.List<ReposRepoNameIssuesLabelsApiModel>? = null,
     /* Logins for Users to assign to this issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._ */
     @SerialName(value = "assignees")
     val assignees: kotlin.collections.List<kotlin.String>? = null

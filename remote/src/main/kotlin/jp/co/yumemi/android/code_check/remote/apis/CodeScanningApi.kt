@@ -125,7 +125,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
     internal val httpClient = httpClientProvider.provide()
 
     override suspend fun codeScanningDeleteAnalysis(accessToken: String?, owner: kotlin.String, repo: kotlin.String, analysisId: kotlin.Int, confirmDelete: kotlin.String?): CodeMinusScanningMinusAnalysisMinusDeletionApiModel {
-        val path = "/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"analysis_id"+"}", "$analysisId")
+        val path = "/repos/{repo_name}/code-scanning/analyses/{analysis_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"analysis_id"+"}", "$analysisId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -135,7 +135,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
     }
 
     override suspend fun codeScanningGetAlert(accessToken: String?, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int): CodeMinusScanningMinusAlertApiModel {
-        val path = "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
+        val path = "/repos/{repo_name}/code-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -144,7 +144,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
     }
 
     override suspend fun codeScanningGetAnalysis(accessToken: String?, owner: kotlin.String, repo: kotlin.String, analysisId: kotlin.Int): kotlin.String {
-        val path = "/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"analysis_id"+"}", "$analysisId")
+        val path = "/repos/{repo_name}/code-scanning/analyses/{analysis_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"analysis_id"+"}", "$analysisId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -153,7 +153,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
     }
 
     override suspend fun codeScanningGetSarif(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sarifId: kotlin.String): CodeMinusScanningMinusSarifsMinusStatusApiModel {
-        val path = "/repos/{owner}/{repo}/code-scanning/sarifs/{sarif_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"sarif_id"+"}", "$sarifId")
+        val path = "/repos/{repo_name}/code-scanning/sarifs/{sarif_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"sarif_id"+"}", "$sarifId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -162,7 +162,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
     }
 
     override suspend fun codeScanningListAlertInstances(accessToken: String?, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int, page: kotlin.Int?, perPage: kotlin.Int?, ref: kotlin.String?): kotlin.collections.List<CodeMinusScanningMinusAlertMinusInstanceApiModel> {
-        val path = "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
+        val path = "/repos/{repo_name}/code-scanning/alerts/{alert_number}/instances".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -190,7 +190,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
     }
 
     override suspend fun codeScanningListAlertsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, toolName: kotlin.String?, toolGuid: kotlin.String?, page: kotlin.Int?, perPage: kotlin.Int?, ref: kotlin.String?, direction: kotlin.String?, sort: kotlin.String?, state: CodeMinusScanningMinusAlertMinusStateApiModel?): kotlin.collections.List<CodeMinusScanningMinusAlertMinusItemsApiModel> {
-        val path = "/repos/{owner}/{repo}/code-scanning/alerts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/code-scanning/alerts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -207,7 +207,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
     }
 
     override suspend fun codeScanningListRecentAnalyses(accessToken: String?, owner: kotlin.String, repo: kotlin.String, toolName: kotlin.String?, toolGuid: kotlin.String?, page: kotlin.Int?, perPage: kotlin.Int?, ref: kotlin.String?, sarifId: kotlin.String?): kotlin.collections.List<CodeMinusScanningMinusAnalysisApiModel> {
-        val path = "/repos/{owner}/{repo}/code-scanning/analyses".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/code-scanning/analyses".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -222,7 +222,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
     }
 
     override suspend fun codeScanningUpdateAlert(accessToken: String?, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int, request: InlineObject71ApiModel): CodeMinusScanningMinusAlertApiModel {
-        val path = "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
+        val path = "/repos/{repo_name}/code-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -232,7 +232,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
     }
 
     override suspend fun codeScanningUploadSarif(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject72ApiModel): CodeMinusScanningMinusSarifsMinusReceiptApiModel {
-        val path = "/repos/{owner}/{repo}/code-scanning/sarifs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/code-scanning/sarifs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }

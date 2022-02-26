@@ -81,7 +81,7 @@ class HttpClientLicensesApi(private val httpClientProvider: HttpClientProvider) 
     }
 
     override suspend fun licensesGetForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): LicenseMinusContentApiModel {
-        val path = "/repos/{owner}/{repo}/license".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/license".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }

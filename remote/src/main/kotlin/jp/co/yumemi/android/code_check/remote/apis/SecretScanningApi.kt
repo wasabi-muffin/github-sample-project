@@ -70,7 +70,7 @@ class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProv
     internal val httpClient = httpClientProvider.provide()
 
     override suspend fun secretScanningGetAlert(accessToken: String?, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int): SecretMinusScanningMinusAlertApiModel {
-        val path = "/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
+        val path = "/repos/{repo_name}/secret-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -93,7 +93,7 @@ class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProv
     }
 
     override suspend fun secretScanningListAlertsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, secretType: kotlin.String?, resolution: kotlin.String?, page: kotlin.Int?, perPage: kotlin.Int?): kotlin.collections.List<SecretMinusScanningMinusAlertApiModel> {
-        val path = "/repos/{owner}/{repo}/secret-scanning/alerts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/secret-scanning/alerts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -107,7 +107,7 @@ class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProv
     }
 
     override suspend fun secretScanningUpdateAlert(accessToken: String?, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int, request: InlineObject135ApiModel): SecretMinusScanningMinusAlertApiModel {
-        val path = "/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
+        val path = "/repos/{repo_name}/secret-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
 
         return httpClient.request {
             url { encodedPath = path }

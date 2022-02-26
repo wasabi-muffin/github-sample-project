@@ -24,12 +24,12 @@ package jp.co.yumemi.android.code_check.remote.models
 import kotlinx.serialization.*
 
 /**
- * object containing information about the committer.
+ * object containing information about the author.
  * @param name The name of the author (or committer) of the commit
  * @param email The email of the author (or committer) of the commit
  */
 @Serializable
-data class ReposOwnerRepoContentsPathCommitter1ApiModel(
+data class ReposRepoNameContentsPathAuthor1ApiModel(
     /* The name of the author (or committer) of the commit */
     @SerialName(value = "name")
     val name: kotlin.String? = null,

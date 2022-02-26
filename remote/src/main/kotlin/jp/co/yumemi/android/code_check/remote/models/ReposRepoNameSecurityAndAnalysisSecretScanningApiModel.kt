@@ -28,7 +28,7 @@ import kotlinx.serialization.*
  * @param status Can be `enabled` or `disabled`.
  */
 @Serializable
-data class ReposOwnerRepoSecurityAndAnalysisSecretScanningApiModel(
+data class ReposRepoNameSecurityAndAnalysisSecretScanningApiModel(
     /* Can be `enabled` or `disabled`. */
     @SerialName(value = "status")
     val status: kotlin.String? = null

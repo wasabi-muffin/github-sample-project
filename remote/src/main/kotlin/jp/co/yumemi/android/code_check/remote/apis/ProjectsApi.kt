@@ -290,7 +290,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
     }
 
     override suspend fun projectsCreateForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject116ApiModel): ProjectApiModel {
-        val path = "/repos/{owner}/{repo}/projects".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/projects".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -398,7 +398,7 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
     }
 
     override suspend fun projectsListForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ProjectApiModel> {
-        val path = "/repos/{owner}/{repo}/projects".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/projects".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }

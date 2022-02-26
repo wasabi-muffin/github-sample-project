@@ -30,7 +30,7 @@ import kotlinx.serialization.*
  * @param apps The list of app `slug`s with push access
  */
 @Serializable
-data class ReposOwnerRepoBranchesBranchProtectionRestrictionsApiModel(
+data class ReposRepoNameBranchesBranchProtectionRestrictionsApiModel(
     /* The list of user `login`s with push access */
     @SerialName(value = "users")
     val users: kotlin.collections.List<kotlin.String>,

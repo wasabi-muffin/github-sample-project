@@ -20,7 +20,7 @@
 
 package jp.co.yumemi.android.code_check.remote.models
 
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoBranchesBranchProtectionRequiredStatusChecksChecksApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameBranchesBranchProtectionRequiredStatusChecksChecksApiModel
 
 import kotlinx.serialization.*
 
@@ -41,7 +41,7 @@ data class InlineObject67ApiModel(
     val contexts: kotlin.collections.List<kotlin.String>? = null,
     /* The list of status checks to require in order to merge into this branch. */
     @SerialName(value = "checks")
-    val checks: kotlin.collections.List<ReposOwnerRepoBranchesBranchProtectionRequiredStatusChecksChecksApiModel>? = null
+    val checks: kotlin.collections.List<ReposRepoNameBranchesBranchProtectionRequiredStatusChecksChecksApiModel>? = null
 ) {
 
 }

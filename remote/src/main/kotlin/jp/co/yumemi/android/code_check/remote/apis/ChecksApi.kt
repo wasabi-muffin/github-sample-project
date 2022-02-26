@@ -116,7 +116,7 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
     internal val httpClient = httpClientProvider.provide()
 
     override suspend fun checksCreateSuite(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject69ApiModel): CheckMinusSuiteApiModel {
-        val path = "/repos/{owner}/{repo}/check-suites".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/check-suites".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -126,7 +126,7 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun checksGetSuite(accessToken: String?, owner: kotlin.String, repo: kotlin.String, checkSuiteId: kotlin.Int): CheckMinusSuiteApiModel {
-        val path = "/repos/{owner}/{repo}/check-suites/{check_suite_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"check_suite_id"+"}", "$checkSuiteId")
+        val path = "/repos/{repo_name}/check-suites/{check_suite_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"check_suite_id"+"}", "$checkSuiteId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -135,7 +135,7 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun checksListAnnotations(accessToken: String?, owner: kotlin.String, repo: kotlin.String, checkRunId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CheckMinusAnnotationApiModel> {
-        val path = "/repos/{owner}/{repo}/check-runs/{check_run_id}/annotations".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"check_run_id"+"}", "$checkRunId")
+        val path = "/repos/{repo_name}/check-runs/{check_run_id}/annotations".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"check_run_id"+"}", "$checkRunId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -146,7 +146,7 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun checksListForRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, checkName: kotlin.String?, status: kotlin.String?, filter: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?, appId: kotlin.Int?): InlineResponse20018ApiModel {
-        val path = "/repos/{owner}/{repo}/commits/{ref}/check-runs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
+        val path = "/repos/{repo_name}/commits/{ref}/check-runs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -161,7 +161,7 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun checksListForSuite(accessToken: String?, owner: kotlin.String, repo: kotlin.String, checkSuiteId: kotlin.Int, checkName: kotlin.String?, status: kotlin.String?, filter: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20018ApiModel {
-        val path = "/repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"check_suite_id"+"}", "$checkSuiteId")
+        val path = "/repos/{repo_name}/check-suites/{check_suite_id}/check-runs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"check_suite_id"+"}", "$checkSuiteId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -175,7 +175,7 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun checksListSuitesForRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, appId: kotlin.Int?, checkName: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20021ApiModel {
-        val path = "/repos/{owner}/{repo}/commits/{ref}/check-suites".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
+        val path = "/repos/{repo_name}/commits/{ref}/check-suites".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -188,7 +188,7 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun checksRerequestRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, checkRunId: kotlin.Int): kotlin.Any {
-        val path = "/repos/{owner}/{repo}/check-runs/{check_run_id}/rerequest".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"check_run_id"+"}", "$checkRunId")
+        val path = "/repos/{repo_name}/check-runs/{check_run_id}/rerequest".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"check_run_id"+"}", "$checkRunId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -197,7 +197,7 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun checksRerequestSuite(accessToken: String?, owner: kotlin.String, repo: kotlin.String, checkSuiteId: kotlin.Int): kotlin.Any {
-        val path = "/repos/{owner}/{repo}/check-suites/{check_suite_id}/rerequest".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"check_suite_id"+"}", "$checkSuiteId")
+        val path = "/repos/{repo_name}/check-suites/{check_suite_id}/rerequest".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"check_suite_id"+"}", "$checkSuiteId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -206,7 +206,7 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun checksSetSuitesPreferences(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject70ApiModel): CheckMinusSuiteMinusPreferenceApiModel {
-        val path = "/repos/{owner}/{repo}/check-suites/preferences".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/check-suites/preferences".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }

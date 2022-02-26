@@ -945,7 +945,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsAddCustomLabelsToSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, request: InlineObject60ApiModel): InlineResponse2008ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
+        val path = "/repos/{repo_name}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -982,7 +982,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsApproveWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.Any {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/approve".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/approve".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -991,7 +991,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsCancelWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.Any {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/cancel".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/cancel".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1020,7 +1020,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsCreateOrUpdateRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String, request: InlineObject62ApiModel): kotlin.Any {
-        val path = "/repos/{owner}/{repo}/actions/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
+        val path = "/repos/{repo_name}/actions/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1039,7 +1039,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsCreateRegistrationTokenForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): AuthenticationMinusTokenApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runners/registration-token".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/runners/registration-token".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1057,7 +1057,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsCreateRemoveTokenForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): AuthenticationMinusTokenApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runners/remove-token".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/runners/remove-token".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1076,7 +1076,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsCreateWorkflowDispatch(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int, request: InlineObject63ApiModel) {
-        val path = "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
+        val path = "/repos/{repo_name}/actions/workflows/{workflow_id}/dispatches".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1086,7 +1086,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsDeleteArtifact(accessToken: String?, owner: kotlin.String, repo: kotlin.String, artifactId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/actions/artifacts/{artifact_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"artifact_id"+"}", "$artifactId")
+        val path = "/repos/{repo_name}/actions/artifacts/{artifact_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"artifact_id"+"}", "$artifactId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1113,7 +1113,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsDeleteRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String) {
-        val path = "/repos/{owner}/{repo}/actions/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
+        val path = "/repos/{repo_name}/actions/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1131,7 +1131,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsDeleteSelfHostedRunnerFromRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
+        val path = "/repos/{repo_name}/actions/runners/{runner_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1149,7 +1149,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsDeleteWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1158,7 +1158,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsDeleteWorkflowRunLogs(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/logs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/logs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1176,7 +1176,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsDisableWorkflow(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
+        val path = "/repos/{repo_name}/actions/workflows/{workflow_id}/disable".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1185,7 +1185,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsDownloadArtifact(accessToken: String?, owner: kotlin.String, repo: kotlin.String, artifactId: kotlin.Int, archiveFormat: kotlin.String) {
-        val path = "/repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"artifact_id"+"}", "$artifactId").replace("{"+"archive_format"+"}", "$archiveFormat")
+        val path = "/repos/{repo_name}/actions/artifacts/{artifact_id}/{archive_format}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"artifact_id"+"}", "$artifactId").replace("{"+"archive_format"+"}", "$archiveFormat")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1194,7 +1194,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsDownloadJobLogsForWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, jobId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/actions/jobs/{job_id}/logs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"job_id"+"}", "$jobId")
+        val path = "/repos/{repo_name}/actions/jobs/{job_id}/logs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"job_id"+"}", "$jobId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1203,7 +1203,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsDownloadWorkflowRunAttemptLogs(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, attemptNumber: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/logs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId").replace("{"+"attempt_number"+"}", "$attemptNumber")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/attempts/{attempt_number}/logs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId").replace("{"+"attempt_number"+"}", "$attemptNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1212,7 +1212,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsDownloadWorkflowRunLogs(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/logs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/logs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1230,7 +1230,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsEnableWorkflow(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/enable".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
+        val path = "/repos/{repo_name}/actions/workflows/{workflow_id}/enable".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1248,7 +1248,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetAllowedActionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String): SelectedMinusActionsApiModel {
-        val path = "/repos/{owner}/{repo}/actions/permissions/selected-actions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/permissions/selected-actions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1257,7 +1257,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetArtifact(accessToken: String?, owner: kotlin.String, repo: kotlin.String, artifactId: kotlin.Int): ArtifactApiModel {
-        val path = "/repos/{owner}/{repo}/actions/artifacts/{artifact_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"artifact_id"+"}", "$artifactId")
+        val path = "/repos/{repo_name}/actions/artifacts/{artifact_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"artifact_id"+"}", "$artifactId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1302,7 +1302,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetGithubActionsPermissionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ActionsMinusRepositoryMinusPermissionsApiModel {
-        val path = "/repos/{owner}/{repo}/actions/permissions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/permissions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1311,7 +1311,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetJobForWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, jobId: kotlin.Int): JobApiModel {
-        val path = "/repos/{owner}/{repo}/actions/jobs/{job_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"job_id"+"}", "$jobId")
+        val path = "/repos/{repo_name}/actions/jobs/{job_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"job_id"+"}", "$jobId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1338,7 +1338,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetPendingDeploymentsForRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.collections.List<PendingMinusDeploymentApiModel> {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/pending_deployments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1347,7 +1347,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetRepoPublicKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ActionsMinusPublicMinusKeyApiModel {
-        val path = "/repos/{owner}/{repo}/actions/secrets/public-key".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/secrets/public-key".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1356,7 +1356,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String): ActionsMinusSecretApiModel {
-        val path = "/repos/{owner}/{repo}/actions/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
+        val path = "/repos/{repo_name}/actions/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1365,7 +1365,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetReviewsForRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.collections.List<EnvironmentMinusApprovalsApiModel> {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/approvals".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/approvals".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1383,7 +1383,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): RunnerApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
+        val path = "/repos/{repo_name}/actions/runners/{runner_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1401,7 +1401,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetWorkflow(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int): WorkflowApiModel {
-        val path = "/repos/{owner}/{repo}/actions/workflows/{workflow_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
+        val path = "/repos/{repo_name}/actions/workflows/{workflow_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1410,7 +1410,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, excludePullRequests: kotlin.Boolean?): WorkflowMinusRunApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1420,7 +1420,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetWorkflowRunAttempt(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, attemptNumber: kotlin.Int, excludePullRequests: kotlin.Boolean?): WorkflowMinusRunApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId").replace("{"+"attempt_number"+"}", "$attemptNumber")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/attempts/{attempt_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId").replace("{"+"attempt_number"+"}", "$attemptNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1430,7 +1430,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetWorkflowRunUsage(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): WorkflowMinusRunMinusUsageApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/timing".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/timing".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1439,7 +1439,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsGetWorkflowUsage(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int): WorkflowMinusUsageApiModel {
-        val path = "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/timing".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
+        val path = "/repos/{repo_name}/actions/workflows/{workflow_id}/timing".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1448,7 +1448,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsListArtifactsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20013ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/artifacts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/artifacts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1470,7 +1470,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsListJobsForWorkflowRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, filter: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20015ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/jobs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/jobs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1482,7 +1482,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsListJobsForWorkflowRunAttempt(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, attemptNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20015ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId").replace("{"+"attempt_number"+"}", "$attemptNumber")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/attempts/{attempt_number}/jobs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId").replace("{"+"attempt_number"+"}", "$attemptNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1502,7 +1502,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsListLabelsForSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): InlineResponse2008ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
+        val path = "/repos/{repo_name}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1533,7 +1533,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsListRepoSecrets(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20016ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/secrets".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/secrets".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1544,7 +1544,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsListRepoWorkflows(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20017ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/workflows".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/workflows".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1564,7 +1564,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsListRunnerApplicationsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<RunnerMinusApplicationApiModel> {
-        val path = "/repos/{owner}/{repo}/actions/runners/downloads".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/runners/downloads".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1617,7 +1617,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsListSelfHostedRunnersForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse2007ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runners".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/runners".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1639,7 +1639,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsListWorkflowRunArtifacts(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20013ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/artifacts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1650,7 +1650,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsListWorkflowRuns(accessToken: String?, owner: kotlin.String, repo: kotlin.String, workflowId: kotlin.Int, actor: kotlin.String?, branch: kotlin.String?, event: kotlin.String?, status: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?, created: kotlin.String?, excludePullRequests: kotlin.Boolean?, checkSuiteId: kotlin.Int?): InlineResponse20014ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
+        val path = "/repos/{repo_name}/actions/workflows/{workflow_id}/runs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"workflow_id"+"}", "$workflowId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1668,7 +1668,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsListWorkflowRunsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, actor: kotlin.String?, branch: kotlin.String?, event: kotlin.String?, status: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?, created: kotlin.String?, excludePullRequests: kotlin.Boolean?, checkSuiteId: kotlin.Int?): InlineResponse20014ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/runs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1686,7 +1686,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsReRunWorkflow(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int): kotlin.Any {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/rerun".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/rerun".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1704,7 +1704,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsRemoveAllCustomLabelsFromSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int): InlineResponse2008ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
+        val path = "/repos/{repo_name}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1722,7 +1722,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsRemoveCustomLabelFromSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, name: kotlin.String): InlineResponse2008ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId").replace("{"+"name"+"}", "$name")
+        val path = "/repos/{repo_name}/actions/runners/{runner_id}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1758,7 +1758,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsReviewPendingDeploymentsForRun(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runId: kotlin.Int, request: InlineObject61ApiModel): kotlin.collections.List<DeploymentApiModel> {
-        val path = "/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
+        val path = "/repos/{repo_name}/actions/runs/{run_id}/pending_deployments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"run_id"+"}", "$runId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1778,7 +1778,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsSetAllowedActionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: SelectedMinusActionsApiModel) {
-        val path = "/repos/{owner}/{repo}/actions/permissions/selected-actions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/permissions/selected-actions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1798,7 +1798,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsSetCustomLabelsForSelfHostedRunnerForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, runnerId: kotlin.Int, request: InlineObject59ApiModel): InlineResponse2008ApiModel {
-        val path = "/repos/{owner}/{repo}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
+        val path = "/repos/{repo_name}/actions/runners/{runner_id}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"runner_id"+"}", "$runnerId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1828,7 +1828,7 @@ class HttpClientActionsApi(private val httpClientProvider: HttpClientProvider) :
     }
 
     override suspend fun actionsSetGithubActionsPermissionsRepository(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject58ApiModel) {
-        val path = "/repos/{owner}/{repo}/actions/permissions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/actions/permissions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }

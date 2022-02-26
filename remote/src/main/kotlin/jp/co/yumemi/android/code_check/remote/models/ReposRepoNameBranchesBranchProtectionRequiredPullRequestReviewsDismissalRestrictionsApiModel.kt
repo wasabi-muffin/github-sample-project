@@ -29,7 +29,7 @@ import kotlinx.serialization.*
  * @param teams The list of team `slug`s with dismissal access
  */
 @Serializable
-data class ReposOwnerRepoBranchesBranchProtectionRequiredPullRequestReviewsDismissalRestrictionsApiModel(
+data class ReposRepoNameBranchesBranchProtectionRequiredPullRequestReviewsDismissalRestrictionsApiModel(
     /* The list of user `login`s with dismissal access */
     @SerialName(value = "users")
     val users: kotlin.collections.List<kotlin.String>? = null,

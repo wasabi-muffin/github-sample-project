@@ -34,7 +34,7 @@ import kotlinx.serialization.*
  * @param startSide 
  */
 @Serializable
-data class ReposOwnerRepoPullsPullNumberReviewsCommentsApiModel(
+data class ReposRepoNamePullsPullNumberReviewsCommentsApiModel(
     /* The relative path to the file that necessitates a review comment. */
     @SerialName(value = "path")
     val path: kotlin.String,

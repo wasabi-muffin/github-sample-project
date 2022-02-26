@@ -181,7 +181,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun dependabotCreateOrUpdateRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String, request: InlineObject80ApiModel): kotlin.Any {
-        val path = "/repos/{owner}/{repo}/dependabot/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
+        val path = "/repos/{repo_name}/dependabot/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -200,7 +200,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun dependabotDeleteRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String) {
-        val path = "/repos/{owner}/{repo}/dependabot/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
+        val path = "/repos/{repo_name}/dependabot/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -227,7 +227,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun dependabotGetRepoPublicKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String): DependabotMinusPublicMinusKeyApiModel {
-        val path = "/repos/{owner}/{repo}/dependabot/secrets/public-key".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/dependabot/secrets/public-key".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -236,7 +236,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun dependabotGetRepoSecret(accessToken: String?, owner: kotlin.String, repo: kotlin.String, secretName: kotlin.String): DependabotMinusSecretApiModel {
-        val path = "/repos/{owner}/{repo}/dependabot/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
+        val path = "/repos/{repo_name}/dependabot/secrets/{secret_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"secret_name"+"}", "$secretName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -256,7 +256,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun dependabotListRepoSecrets(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20022ApiModel {
-        val path = "/repos/{owner}/{repo}/dependabot/secrets".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/dependabot/secrets".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }

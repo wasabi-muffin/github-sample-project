@@ -249,7 +249,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     internal val httpClient = httpClientProvider.provide()
 
     override suspend fun reactionsCreateForCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject76ApiModel): ReactionApiModel {
-        val path = "/repos/{owner}/{repo}/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+        val path = "/repos/{repo_name}/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -259,7 +259,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsCreateForIssue(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject107ApiModel): ReactionApiModel {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+        val path = "/repos/{repo_name}/issues/{issue_number}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -269,7 +269,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsCreateForIssueComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject101ApiModel): ReactionApiModel {
-        val path = "/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -279,7 +279,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsCreateForPullRequestReviewComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject119ApiModel): ReactionApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+        val path = "/repos/{repo_name}/pulls/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -289,7 +289,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsCreateForRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, request: InlineObject134ApiModel): ReactionApiModel {
-        val path = "/repos/{owner}/{repo}/releases/{release_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
+        val path = "/repos/{repo_name}/releases/{release_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -339,7 +339,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsDeleteForCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
+        val path = "/repos/{repo_name}/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -348,7 +348,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsDeleteForIssue(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, reactionId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber").replace("{"+"reaction_id"+"}", "$reactionId")
+        val path = "/repos/{repo_name}/issues/{issue_number}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber").replace("{"+"reaction_id"+"}", "$reactionId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -357,7 +357,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsDeleteForIssueComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -366,7 +366,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsDeleteForPullRequestComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
+        val path = "/repos/{repo_name}/pulls/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -393,7 +393,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsListForCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
-        val path = "/repos/{owner}/{repo}/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+        val path = "/repos/{repo_name}/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -405,7 +405,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsListForIssue(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+        val path = "/repos/{repo_name}/issues/{issue_number}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -417,7 +417,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsListForIssueComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
-        val path = "/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -429,7 +429,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
     }
 
     override suspend fun reactionsListForPullRequestReviewComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
-        val path = "/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+        val path = "/repos/{repo_name}/pulls/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }

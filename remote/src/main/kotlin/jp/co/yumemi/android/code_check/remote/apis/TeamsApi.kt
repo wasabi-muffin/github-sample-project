@@ -79,7 +79,7 @@ interface TeamsApi {
     /**
     * Add or update team repository permissions
     *
-    * To add a repository to a team or update the team&#39;s permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. The repository must be owned by the organization, or a direct fork of a repository owned by the organization. You will get a &#x60;422 Unprocessable Entity&#x60; status if you attempt to add a repository to a team that is not owned by the organization. Note that, if you choose not to pass any parameters, you&#39;ll need to set &#x60;Content-Length&#x60; to zero when calling out to this endpoint. For more information, see \&quot;[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs).\&quot;  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;PUT /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}&#x60;.  For more information about the permission levels, see \&quot;[Repository permission levels for an organization](https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)\&quot;.
+    * To add a repository to a team or update the team&#39;s permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. The repository must be owned by the organization, or a direct fork of a repository owned by the organization. You will get a &#x60;422 Unprocessable Entity&#x60; status if you attempt to add a repository to a team that is not owned by the organization. Note that, if you choose not to pass any parameters, you&#39;ll need to set &#x60;Content-Length&#x60; to zero when calling out to this endpoint. For more information, see \&quot;[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs).\&quot;  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;PUT /organizations/{org_id}/team/{team_id}/repos/{repo_name}&#x60;.  For more information about the permission levels, see \&quot;[Repository permission levels for an organization](https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)\&quot;.
     *
     * @param request  (optional)
     * @return void
@@ -117,7 +117,7 @@ interface TeamsApi {
     /**
     * Check team permissions for a repository
     *
-    * Checks whether a team has &#x60;admin&#x60;, &#x60;push&#x60;, &#x60;maintain&#x60;, &#x60;triage&#x60;, or &#x60;pull&#x60; permission for a repository. Repositories inherited through a parent team will also be checked.  You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the &#x60;application/vnd.github.v3.repository+json&#x60; accept header.  If a team doesn&#39;t have permission for the repository, you will receive a &#x60;404 Not Found&#x60; response status.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}&#x60;.
+    * Checks whether a team has &#x60;admin&#x60;, &#x60;push&#x60;, &#x60;maintain&#x60;, &#x60;triage&#x60;, or &#x60;pull&#x60; permission for a repository. Repositories inherited through a parent team will also be checked.  You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the &#x60;application/vnd.github.v3.repository+json&#x60; accept header.  If a team doesn&#39;t have permission for the repository, you will receive a &#x60;404 Not Found&#x60; response status.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;GET /organizations/{org_id}/team/{team_id}/repos/{repo_name}&#x60;.
     *
     * @return TeamMinusRepositoryApiModel
     */
@@ -593,7 +593,7 @@ interface TeamsApi {
     /**
     * Remove a repository from a team
     *
-    * If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. This does not delete the repository, it just removes it from the team.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;DELETE /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}&#x60;.
+    * If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. This does not delete the repository, it just removes it from the team.  **Note:** You can also specify a team by &#x60;org_id&#x60; and &#x60;team_id&#x60; using the route &#x60;DELETE /organizations/{org_id}/team/{team_id}/repos/{repo_name}&#x60;.
     *
     * @return void
     */
@@ -732,7 +732,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
     }
 
     override suspend fun teamsAddOrUpdateRepoPermissionsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String, request: InlineObject48ApiModel) {
-        val path = "/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/orgs/{org}/teams/{team_slug}/repos/{repo_name}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -742,7 +742,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
     }
 
     override suspend fun teamsAddOrUpdateRepoPermissionsLegacy(accessToken: String?, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String, request: InlineObject160ApiModel) {
-        val path = "/teams/{team_id}/repos/{owner}/{repo}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/teams/{team_id}/repos/{repo_name}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -770,7 +770,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
     }
 
     override suspend fun teamsCheckPermissionsForRepoInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryApiModel {
-        val path = "/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/orgs/{org}/teams/{team_slug}/repos/{repo_name}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -779,7 +779,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
     }
 
     override suspend fun teamsCheckPermissionsForRepoLegacy(accessToken: String?, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryApiModel {
-        val path = "/teams/{team_id}/repos/{owner}/{repo}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/teams/{team_id}/repos/{repo_name}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1290,7 +1290,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
     }
 
     override suspend fun teamsRemoveRepoInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/orgs/{org}/teams/{team_slug}/repos/{repo_name}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1299,7 +1299,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
     }
 
     override suspend fun teamsRemoveRepoLegacy(accessToken: String?, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/teams/{team_id}/repos/{owner}/{repo}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/teams/{team_id}/repos/{repo_name}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }

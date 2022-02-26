@@ -237,7 +237,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
     internal val httpClient = httpClientProvider.provide()
 
     override suspend fun migrationsCancelImport(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/repos/{owner}/{repo}/import".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/import".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -282,7 +282,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun migrationsGetCommitAuthors(accessToken: String?, owner: kotlin.String, repo: kotlin.String, since: kotlin.Int?): kotlin.collections.List<PorterMinusAuthorApiModel> {
-        val path = "/repos/{owner}/{repo}/import/authors".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/import/authors".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -292,7 +292,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun migrationsGetImportStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ImportApiModel {
-        val path = "/repos/{owner}/{repo}/import".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/import".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -301,7 +301,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun migrationsGetLargeFiles(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<PorterMinusLargeMinusFileApiModel> {
-        val path = "/repos/{owner}/{repo}/import/large_files".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/import/large_files".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -375,7 +375,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun migrationsMapCommitAuthor(accessToken: String?, owner: kotlin.String, repo: kotlin.String, authorId: kotlin.Int, request: InlineObject96ApiModel): PorterMinusAuthorApiModel {
-        val path = "/repos/{owner}/{repo}/import/authors/{author_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"author_id"+"}", "$authorId")
+        val path = "/repos/{repo_name}/import/authors/{author_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"author_id"+"}", "$authorId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -385,7 +385,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun migrationsSetLfsPreference(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject97ApiModel): ImportApiModel {
-        val path = "/repos/{owner}/{repo}/import/lfs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/import/lfs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -415,7 +415,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun migrationsStartImport(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject94ApiModel): ImportApiModel {
-        val path = "/repos/{owner}/{repo}/import".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/import".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -443,7 +443,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
     }
 
     override suspend fun migrationsUpdateImport(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject95ApiModel): ImportApiModel {
-        val path = "/repos/{owner}/{repo}/import".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/import".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }

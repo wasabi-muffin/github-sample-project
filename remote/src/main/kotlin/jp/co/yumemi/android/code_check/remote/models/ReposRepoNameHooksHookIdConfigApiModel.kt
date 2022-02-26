@@ -29,14 +29,14 @@ import kotlinx.serialization.*
  * @param contentType The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
  * @param secret If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value for [delivery signature headers](https://docs.github.com/webhooks/event-payloads/#delivery-headers).
  * @param insecureSsl Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.**
- * @param token 
- * @param digest 
+ * @param address 
+ * @param room 
  */
 @Serializable
-data class ReposOwnerRepoHooksConfigApiModel(
+data class ReposRepoNameHooksHookIdConfigApiModel(
     /* The URL to which the payloads will be delivered. */
     @SerialName(value = "url")
-    val url: kotlin.String? = null,
+    val url: kotlin.String,
     /* The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. */
     @SerialName(value = "content_type")
     val contentType: kotlin.String? = null,
@@ -46,10 +46,10 @@ data class ReposOwnerRepoHooksConfigApiModel(
     /* Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** */
     @SerialName(value = "insecure_ssl")
     val insecureSsl: kotlin.String? = null,
-    @SerialName(value = "token")
-    val token: kotlin.String? = null,
-    @SerialName(value = "digest")
-    val digest: kotlin.String? = null
+    @SerialName(value = "address")
+    val address: kotlin.String? = null,
+    @SerialName(value = "room")
+    val room: kotlin.String? = null
 ) {
 
 }

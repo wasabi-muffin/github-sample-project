@@ -20,7 +20,7 @@
 
 package jp.co.yumemi.android.code_check.remote.models
 
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoGitTagsTaggerApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameGitTagsTaggerApiModel
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -52,7 +52,7 @@ data class InlineObject89ApiModel(
     @SerialName(value = "type")
     val type: InlineObject89ApiModel.Type,
     @SerialName(value = "tagger")
-    val tagger: ReposOwnerRepoGitTagsTaggerApiModel? = null
+    val tagger: ReposRepoNameGitTagsTaggerApiModel? = null
 ) {
 
     /**

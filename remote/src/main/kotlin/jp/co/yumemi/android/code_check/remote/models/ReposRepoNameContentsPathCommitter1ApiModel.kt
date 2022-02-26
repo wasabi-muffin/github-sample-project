@@ -24,22 +24,18 @@ package jp.co.yumemi.android.code_check.remote.models
 import kotlinx.serialization.*
 
 /**
- * Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
+ * object containing information about the committer.
  * @param name The name of the author (or committer) of the commit
  * @param email The email of the author (or committer) of the commit
- * @param date Indicates when this commit was authored (or committed). This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
  */
 @Serializable
-data class ReposOwnerRepoGitCommitsCommitterApiModel(
+data class ReposRepoNameContentsPathCommitter1ApiModel(
     /* The name of the author (or committer) of the commit */
     @SerialName(value = "name")
     val name: kotlin.String? = null,
     /* The email of the author (or committer) of the commit */
     @SerialName(value = "email")
-    val email: kotlin.String? = null,
-    /* Indicates when this commit was authored (or committed). This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. */
-    @SerialName(value = "date")
-    val date: kotlin.String? = null
+    val email: kotlin.String? = null
 ) {
 
 }

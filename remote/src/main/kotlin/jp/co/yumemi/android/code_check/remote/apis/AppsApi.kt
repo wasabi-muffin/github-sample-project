@@ -451,7 +451,7 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
     }
 
     override suspend fun appsGetRepoInstallation(accessToken: String?, owner: kotlin.String, repo: kotlin.String): InstallationApiModel {
-        val path = "/repos/{owner}/{repo}/installation".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/installation".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }

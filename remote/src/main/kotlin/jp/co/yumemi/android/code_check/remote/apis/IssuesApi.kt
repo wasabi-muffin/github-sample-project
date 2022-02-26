@@ -350,7 +350,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     internal val httpClient = httpClientProvider.provide()
 
     override suspend fun issuesAddAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject103ApiModel): IssueApiModel {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+        val path = "/repos/{repo_name}/issues/{issue_number}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -360,7 +360,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesCheckUserCanBeAssigned(accessToken: String?, owner: kotlin.String, repo: kotlin.String, assignee: kotlin.String) {
-        val path = "/repos/{owner}/{repo}/assignees/{assignee}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"assignee"+"}", "$assignee")
+        val path = "/repos/{repo_name}/assignees/{assignee}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"assignee"+"}", "$assignee")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -369,7 +369,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesCreate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject99ApiModel): IssueApiModel {
-        val path = "/repos/{owner}/{repo}/issues".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/issues".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -379,7 +379,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesCreateComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject105ApiModel): IssueMinusCommentApiModel {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+        val path = "/repos/{repo_name}/issues/{issue_number}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -389,7 +389,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesCreateLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject109ApiModel): LabelApiModel {
-        val path = "/repos/{owner}/{repo}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -399,7 +399,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesCreateMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject113ApiModel): MilestoneApiModel {
-        val path = "/repos/{owner}/{repo}/milestones".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/milestones".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -409,7 +409,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesDeleteComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/issues/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -418,7 +418,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesDeleteLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, name: kotlin.String) {
-        val path = "/repos/{owner}/{repo}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"name"+"}", "$name")
+        val path = "/repos/{repo_name}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -427,7 +427,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesDeleteMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/milestones/{milestone_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
+        val path = "/repos/{repo_name}/milestones/{milestone_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -436,7 +436,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesGet(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int): IssueApiModel {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+        val path = "/repos/{repo_name}/issues/{issue_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -445,7 +445,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesGetComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): IssueMinusCommentApiModel {
-        val path = "/repos/{owner}/{repo}/issues/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -454,7 +454,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesGetEvent(accessToken: String?, owner: kotlin.String, repo: kotlin.String, eventId: kotlin.Int): IssueMinusEventApiModel {
-        val path = "/repos/{owner}/{repo}/issues/events/{event_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"event_id"+"}", "$eventId")
+        val path = "/repos/{repo_name}/issues/events/{event_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"event_id"+"}", "$eventId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -463,7 +463,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesGetLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, name: kotlin.String): LabelApiModel {
-        val path = "/repos/{owner}/{repo}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"name"+"}", "$name")
+        val path = "/repos/{repo_name}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -472,7 +472,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesGetMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int): MilestoneApiModel {
-        val path = "/repos/{owner}/{repo}/milestones/{milestone_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
+        val path = "/repos/{repo_name}/milestones/{milestone_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -502,7 +502,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesListAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
-        val path = "/repos/{owner}/{repo}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -513,7 +513,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesListComments(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusCommentApiModel> {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+        val path = "/repos/{repo_name}/issues/{issue_number}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -525,7 +525,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesListCommentsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusCommentApiModel> {
-        val path = "/repos/{owner}/{repo}/issues/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/issues/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -539,7 +539,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesListEvents(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabeledMinusIssueMinusEventApiModel> {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/events".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+        val path = "/repos/{repo_name}/issues/{issue_number}/events".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -550,7 +550,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesListEventsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusEventApiModel> {
-        val path = "/repos/{owner}/{repo}/issues/events".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/issues/events".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -595,7 +595,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesListForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestone: kotlin.String?, state: kotlin.String?, assignee: kotlin.String?, creator: kotlin.String?, mentioned: kotlin.String?, labels: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueApiModel> {
-        val path = "/repos/{owner}/{repo}/issues".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/issues".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -615,7 +615,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesListLabelsForMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabelApiModel> {
-        val path = "/repos/{owner}/{repo}/milestones/{milestone_number}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
+        val path = "/repos/{repo_name}/milestones/{milestone_number}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -626,7 +626,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesListLabelsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabelApiModel> {
-        val path = "/repos/{owner}/{repo}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -637,7 +637,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesListMilestones(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MilestoneApiModel> {
-        val path = "/repos/{owner}/{repo}/milestones".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+        val path = "/repos/{repo_name}/milestones".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -651,7 +651,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesLock(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject106ApiModel) {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/lock".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+        val path = "/repos/{repo_name}/issues/{issue_number}/lock".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -661,7 +661,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesRemoveAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject104ApiModel): IssueApiModel {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+        val path = "/repos/{repo_name}/issues/{issue_number}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -671,7 +671,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesRemoveLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, name: kotlin.String): kotlin.collections.List<LabelApiModel> {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber").replace("{"+"name"+"}", "$name")
+        val path = "/repos/{repo_name}/issues/{issue_number}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -680,7 +680,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesUnlock(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/lock".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+        val path = "/repos/{repo_name}/issues/{issue_number}/lock".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -689,7 +689,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesUpdate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject102ApiModel): IssueApiModel {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+        val path = "/repos/{repo_name}/issues/{issue_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -699,7 +699,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesUpdateComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject100ApiModel): IssueMinusCommentApiModel {
-        val path = "/repos/{owner}/{repo}/issues/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -709,7 +709,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesUpdateLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, name: kotlin.String, request: InlineObject110ApiModel): LabelApiModel {
-        val path = "/repos/{owner}/{repo}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"name"+"}", "$name")
+        val path = "/repos/{repo_name}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -719,7 +719,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
     }
 
     override suspend fun issuesUpdateMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, request: InlineObject114ApiModel): MilestoneApiModel {
-        val path = "/repos/{owner}/{repo}/milestones/{milestone_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
+        val path = "/repos/{repo_name}/milestones/{milestone_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
 
         return httpClient.request {
             url { encodedPath = path }
