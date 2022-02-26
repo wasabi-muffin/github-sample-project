@@ -2,6 +2,7 @@ package jp.co.yumemi.android.code_check.presentation.feature.details.repo.contra
 
 import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.entities.RepositoryDetails
+import jp.co.yumemi.android.code_check.presentation.core.contract.ProcessEventResult
 import jp.co.yumemi.android.code_check.presentation.core.contract.Result
 
 sealed class RepoDetailsResult : Result {
@@ -10,4 +11,6 @@ sealed class RepoDetailsResult : Result {
     data class LoadDetailsError(val error: DomainError) : RepoDetailsResult()
     object RefreshLoading : RepoDetailsResult()
     object ResolveError : RepoDetailsResult()
+    data class ProcessEvent(override val event: RepoDetailsEvent) : RepoDetailsResult(), ProcessEventResult<RepoDetailsEvent>
+    data class SendEvent(override val event: RepoDetailsEvent) : RepoDetailsResult(), ProcessEventResult<RepoDetailsEvent>
 }
