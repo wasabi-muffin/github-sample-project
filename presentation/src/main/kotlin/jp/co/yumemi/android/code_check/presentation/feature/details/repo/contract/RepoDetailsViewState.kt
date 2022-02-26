@@ -26,10 +26,6 @@ sealed class RepoDetailsViewState : ViewState {
     sealed class Stable : RepoDetailsViewState() {
         abstract val details: RepositoryDetails
 
-        @Parcelize data class Empty(override val repo: Repository) : Stable() {
-            @IgnoredOnParcel override val details: RepositoryDetails = RepositoryDetails(repo, emptyList(), emptyList())
-        }
-
         @Parcelize data class Initial(
             override val repo: Repository,
             override val details: RepositoryDetails
