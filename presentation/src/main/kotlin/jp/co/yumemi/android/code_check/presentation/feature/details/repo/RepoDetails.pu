@@ -10,17 +10,11 @@ state RepoDetails {
 
     state Loading {
         Loading --> Stable.Initial: R.LoadSuccess
-        Loading --> Stable.Empty: R.LoadSuccess{Empty List}
         Loading --> Error: R.LoadError
     }
 
     state Stable {
-        Stable : I.ClickItem > A.NavigateDetails > E.NavigateDetails
-        Stable.Initial : I.PullToRefresh > A.RefreshDetails > R.RefreshLoading, SE.Search[R.LoadDetailsSuccess, R.LoadDetailsError]
-
-        state Stable.Empty {
-            Stable.Empty --> Stable.RefreshLoading : R.RefreshLoading
-        }
+        Stable : I.PullToRefresh > A.RefreshDetails > R.RefreshLoading, SE.Search[R.LoadDetailsSuccess, R.LoadDetailsError]
 
         state Stable.Initial {
             Stable.Initial --> Stable.RefreshLoading : R.RefreshLoading
@@ -28,7 +22,6 @@ state RepoDetails {
 
         state Stable.RefreshLoading {
             Stable.RefreshLoading --> Stable.Initial : R.LoadDetailsSuccess
-            Stable.RefreshLoading --> Stable.Empty : R.LoadSuccess{Empty List}
             Stable.RefreshLoading --> Stable.RefreshError : R.LoadDetailsError
         }
 
