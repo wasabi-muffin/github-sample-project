@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import jp.co.yumemi.android.code_check.data.sources.RepositoriesRemoteDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
+import jp.co.yumemi.android.code_check.remote.apis.PullsApi
 import jp.co.yumemi.android.code_check.remote.apis.ReposApi
 import jp.co.yumemi.android.code_check.remote.apis.SearchApi
 import jp.co.yumemi.android.code_check.remote.providers.RepositoriesRemoteDataProvider
@@ -21,6 +22,7 @@ class RemoteModule {
 
     @Provides
     fun provideRepositoriesRemoteDataSource(
-        reposApi: ReposApi
-    ): RepositoriesRemoteDataSource = RepositoriesRemoteDataProvider(reposApi)
+        reposApi: ReposApi,
+        pullsApi: PullsApi,
+    ): RepositoriesRemoteDataSource = RepositoriesRemoteDataProvider(reposApi, pullsApi)
 }
