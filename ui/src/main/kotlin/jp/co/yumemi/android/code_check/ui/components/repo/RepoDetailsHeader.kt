@@ -30,6 +30,7 @@ import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.primitives.Github
 import jp.co.yumemi.android.code_check.ui.primitives.GithubTheme
 import jp.co.yumemi.android.code_check.ui.primitives.Gray
+import jp.co.yumemi.android.code_check.ui.utils.toShortedString
 
 @Composable
 fun RepoDetailsHeader(
@@ -98,7 +99,7 @@ fun RepoDetailsHeader(
             tint = Gray.v700
         )
         Text(
-            text = stargazersCount.toString(),
+            text = stargazersCount.toShortedString(),
             style = MaterialTheme.typography.h3,
             fontWeight = FontWeight.Bold,
             color = Gray.v700,
@@ -121,7 +122,7 @@ fun RepoDetailsHeader(
             color = Gray.v700,
         )
         Text(
-            text = forksCount.toString(),
+            text = forksCount.toShortedString(),
             style = MaterialTheme.typography.h3,
             fontWeight = FontWeight.Bold,
             color = Gray.v700,
