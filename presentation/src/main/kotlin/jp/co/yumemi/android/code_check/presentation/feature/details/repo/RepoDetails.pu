@@ -15,8 +15,7 @@ state RepoDetails {
     }
 
     state Stable {
-        Stable : I.ClickItem > A.NavigateDetails > E.NavigateDetails
-        Stable.Initial : I.PullToRefresh > A.RefreshDetails > R.RefreshLoading, SE.Search[R.LoadDetailsSuccess, R.LoadDetailsError]
+        Stable : I.PullToRefresh > A.RefreshDetails > R.RefreshLoading, SE.Search[R.LoadDetailsSuccess, R.LoadDetailsError]
 
         state Stable.Empty {
             Stable.Empty --> Stable.RefreshLoading : R.RefreshLoading
