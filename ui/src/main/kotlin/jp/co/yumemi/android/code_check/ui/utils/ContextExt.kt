@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.ui.core
+package jp.co.yumemi.android.code_check.ui.utils
 
 import android.content.Context
 import androidx.compose.runtime.Composable

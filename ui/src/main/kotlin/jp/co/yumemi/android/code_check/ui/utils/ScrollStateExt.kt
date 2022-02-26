@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.ui.core
+package jp.co.yumemi.android.code_check.ui.utils
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.ui.unit.dp

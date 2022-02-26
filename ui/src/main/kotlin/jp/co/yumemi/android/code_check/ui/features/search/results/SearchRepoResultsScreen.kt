@@ -30,9 +30,9 @@ import jp.co.yumemi.android.code_check.ui.components.error.title
 import jp.co.yumemi.android.code_check.ui.components.paging.PagingColumn
 import jp.co.yumemi.android.code_check.ui.components.search.SearchRepoResultItem
 import jp.co.yumemi.android.code_check.ui.core.Contract
-import jp.co.yumemi.android.code_check.ui.core.elevation
+import jp.co.yumemi.android.code_check.ui.utils.elevation
 import jp.co.yumemi.android.code_check.ui.core.handle
-import jp.co.yumemi.android.code_check.ui.core.onScrolledToBottom
+import jp.co.yumemi.android.code_check.ui.utils.onScrolledToBottom
 import jp.co.yumemi.android.code_check.ui.core.render
 import jp.co.yumemi.android.code_check.ui.primitives.Gray
 

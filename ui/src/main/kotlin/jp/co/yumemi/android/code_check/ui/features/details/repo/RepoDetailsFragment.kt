@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import jp.co.yumemi.android.code_check.domain.entities.Repository
-import jp.co.yumemi.android.code_check.ui.core.compose
+import jp.co.yumemi.android.code_check.ui.utils.compose
 import jp.co.yumemi.android.code_check.ui.core.contract
 
 @AndroidEntryPoint
