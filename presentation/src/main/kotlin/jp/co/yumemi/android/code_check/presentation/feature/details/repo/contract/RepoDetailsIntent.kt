@@ -10,6 +10,6 @@ sealed class RepoDetailsIntent : Intent {
     object ClickBack : RepoDetailsIntent()
     object ClickTryAgain : RepoDetailsIntent()
     object PullToRefresh : RepoDetailsIntent()
-    object ClickErrorOK : RepoDetailsIntent()
+    object ClickErrorOk : RepoDetailsIntent()
     data class ProcessEvent(override val event: RepoDetailsEvent) : RepoDetailsIntent(), ProcessEventIntent<RepoDetailsEvent>
 }

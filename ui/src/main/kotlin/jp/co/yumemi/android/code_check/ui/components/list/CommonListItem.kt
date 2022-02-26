@@ -35,7 +35,7 @@ fun CommonListItem(
     iconBackground: Color = Github.White,
     note: String? = null,
 ) = Row(
-    modifier = modifier.padding(24.dp),
+    modifier = modifier.padding(12.dp),
     verticalAlignment = Alignment.CenterVertically
 ) {
     Box(
