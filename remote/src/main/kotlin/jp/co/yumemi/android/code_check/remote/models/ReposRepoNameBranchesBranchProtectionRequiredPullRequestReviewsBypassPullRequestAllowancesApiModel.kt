@@ -29,7 +29,7 @@ import kotlinx.serialization.*
  * @param teams The list of team `slug`s allowed to bypass pull request requirements.
  */
 @Serializable
-data class ReposOwnerRepoBranchesBranchProtectionRequiredPullRequestReviewsBypassPullRequestAllowancesApiModel(
+data class ReposRepoNameBranchesBranchProtectionRequiredPullRequestReviewsBypassPullRequestAllowancesApiModel(
     /* The list of user `login`s allowed to bypass pull request requirements. */
     @SerialName(value = "users")
     val users: kotlin.collections.List<kotlin.String>? = null,

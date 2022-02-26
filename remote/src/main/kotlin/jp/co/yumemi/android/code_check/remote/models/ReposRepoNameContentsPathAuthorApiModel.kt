@@ -30,7 +30,7 @@ import kotlinx.serialization.*
  * @param date 
  */
 @Serializable
-data class ReposOwnerRepoContentsPathAuthorApiModel(
+data class ReposRepoNameContentsPathAuthorApiModel(
     /* The name of the author or committer of the commit. You'll receive a `422` status code if `name` is omitted. */
     @SerialName(value = "name")
     val name: kotlin.String,

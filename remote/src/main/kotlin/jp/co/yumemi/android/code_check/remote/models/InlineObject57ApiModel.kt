@@ -20,7 +20,7 @@
 
 package jp.co.yumemi.android.code_check.remote.models
 
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoSecurityAndAnalysisApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameSecurityAndAnalysisApiModel
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -68,7 +68,7 @@ data class InlineObject57ApiModel(
     @SerialName(value = "visibility")
     val visibility: InlineObject57ApiModel.Visibility? = null,
     @SerialName(value = "security_and_analysis")
-    val securityAndAnalysis: ReposOwnerRepoSecurityAndAnalysisApiModel? = null,
+    val securityAndAnalysis: ReposRepoNameSecurityAndAnalysisApiModel? = null,
     /* Either `true` to enable issues for this repository or `false` to disable them. */
     @SerialName(value = "has_issues")
     val hasIssues: kotlin.Boolean? = true,

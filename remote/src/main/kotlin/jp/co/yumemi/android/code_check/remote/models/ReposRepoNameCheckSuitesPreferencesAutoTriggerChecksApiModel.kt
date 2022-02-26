@@ -29,7 +29,7 @@ import kotlinx.serialization.*
  * @param setting Set to `true` to enable automatic creation of CheckSuite events upon pushes to the repository, or `false` to disable them.
  */
 @Serializable
-data class ReposOwnerRepoCheckSuitesPreferencesAutoTriggerChecksApiModel(
+data class ReposRepoNameCheckSuitesPreferencesAutoTriggerChecksApiModel(
     /* The `id` of the GitHub App. */
     @SerialName(value = "app_id")
     val appId: kotlin.Int,

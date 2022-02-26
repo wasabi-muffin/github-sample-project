@@ -20,7 +20,7 @@
 
 package jp.co.yumemi.android.code_check.remote.models
 
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoHooksHookIdConfigApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameHooksHookIdConfigApiModel
 
 import kotlinx.serialization.*
 
@@ -35,7 +35,7 @@ import kotlinx.serialization.*
 @Serializable
 data class InlineObject92ApiModel(
     @SerialName(value = "config")
-    val config: ReposOwnerRepoHooksHookIdConfigApiModel? = null,
+    val config: ReposRepoNameHooksHookIdConfigApiModel? = null,
     /* Determines what [events](https://docs.github.com/webhooks/event-payloads) the hook is triggered for. This replaces the entire array of events. */
     @SerialName(value = "events")
     val events: kotlin.collections.List<kotlin.String>? = arrayListOf("push"),

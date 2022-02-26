@@ -24,14 +24,22 @@ package jp.co.yumemi.android.code_check.remote.models
 import kotlinx.serialization.*
 
 /**
- * Use the `status` property to enable or disable GitHub Advanced Security for this repository. For more information, see \"[About GitHub Advanced Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security).\"
- * @param status Can be `enabled` or `disabled`.
+ * 
+ * @param id 
+ * @param name 
+ * @param description 
+ * @param color 
  */
 @Serializable
-data class ReposOwnerRepoSecurityAndAnalysisAdvancedSecurityApiModel(
-    /* Can be `enabled` or `disabled`. */
-    @SerialName(value = "status")
-    val status: kotlin.String? = null
+data class ReposRepoNameIssuesLabelsApiModel(
+    @SerialName(value = "id")
+    val id: kotlin.Int? = null,
+    @SerialName(value = "name")
+    val name: kotlin.String? = null,
+    @SerialName(value = "description")
+    val description: kotlin.String? = null,
+    @SerialName(value = "color")
+    val color: kotlin.String? = null
 ) {
 
 }

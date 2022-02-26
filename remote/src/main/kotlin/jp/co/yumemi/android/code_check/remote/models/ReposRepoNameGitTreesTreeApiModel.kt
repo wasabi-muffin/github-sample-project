@@ -37,16 +37,16 @@ import kotlinx.serialization.encoding.Encoder
  * @param content The content you want this file to have. GitHub will write this blob out and use that SHA for this entry. Use either this, or `tree.sha`.      **Note:** Use either `tree.sha` or `content` to specify the contents of the entry. Using both `tree.sha` and `content` will return an error.
  */
 @Serializable
-data class ReposOwnerRepoGitTreesTreeApiModel(
+data class ReposRepoNameGitTreesTreeApiModel(
     /* The file referenced in the tree. */
     @SerialName(value = "path")
     val path: kotlin.String? = null,
     /* The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink. */
     @SerialName(value = "mode")
-    val mode: ReposOwnerRepoGitTreesTreeApiModel.Mode? = null,
+    val mode: ReposRepoNameGitTreesTreeApiModel.Mode? = null,
     /* Either `blob`, `tree`, or `commit`. */
     @SerialName(value = "type")
-    val type: ReposOwnerRepoGitTreesTreeApiModel.Type? = null,
+    val type: ReposRepoNameGitTreesTreeApiModel.Type? = null,
     /* The SHA1 checksum ID of the object in the tree. Also called `tree.sha`. If the value is `null` then the file will be deleted.      **Note:** Use either `tree.sha` or `content` to specify the contents of the entry. Using both `tree.sha` and `content` will return an error. */
     @SerialName(value = "sha")
     val sha: kotlin.String? = null,
@@ -76,7 +76,7 @@ data class ReposOwnerRepoGitTreesTreeApiModel(
 
             override val descriptor: SerialDescriptor
                 get() = PrimitiveSerialDescriptor(
-                    "ReposOwnerRepoGitTreesTreeApiModel.Mode.Serializer",
+                    "ReposRepoNameGitTreesTreeApiModel.Mode.Serializer",
                     PrimitiveKind.STRING
                 )
 
@@ -104,7 +104,7 @@ data class ReposOwnerRepoGitTreesTreeApiModel(
 
             override val descriptor: SerialDescriptor
                 get() = PrimitiveSerialDescriptor(
-                    "ReposOwnerRepoGitTreesTreeApiModel.Type.Serializer",
+                    "ReposRepoNameGitTreesTreeApiModel.Type.Serializer",
                     PrimitiveKind.STRING
                 )
 

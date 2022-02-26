@@ -21,7 +21,7 @@
 package jp.co.yumemi.android.code_check.remote.models
 
 import jp.co.yumemi.android.code_check.remote.models.DeploymentBranchPolicyApiModel
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoEnvironmentsEnvironmentNameReviewersApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameEnvironmentsEnvironmentNameReviewersApiModel
 
 import kotlinx.serialization.*
 
@@ -38,7 +38,7 @@ data class InlineObject83ApiModel(
     val waitTimer: kotlin.Int? = null,
     /* The people or teams that may review jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed. */
     @SerialName(value = "reviewers")
-    val reviewers: kotlin.collections.List<ReposOwnerRepoEnvironmentsEnvironmentNameReviewersApiModel>? = null,
+    val reviewers: kotlin.collections.List<ReposRepoNameEnvironmentsEnvironmentNameReviewersApiModel>? = null,
     @SerialName(value = "deployment_branch_policy")
     val deploymentBranchPolicy: DeploymentBranchPolicyApiModel? = null
 ) {

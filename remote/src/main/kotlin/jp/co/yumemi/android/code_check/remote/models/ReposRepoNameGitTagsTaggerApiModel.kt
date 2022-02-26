@@ -30,7 +30,7 @@ import kotlinx.serialization.*
  * @param date When this object was tagged. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
  */
 @Serializable
-data class ReposOwnerRepoGitTagsTaggerApiModel(
+data class ReposRepoNameGitTagsTaggerApiModel(
     /* The name of the author of the tag */
     @SerialName(value = "name")
     val name: kotlin.String,

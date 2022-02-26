@@ -30,7 +30,7 @@ import kotlinx.serialization.*
  * @param id The id of the user or team who can review the deployment
  */
 @Serializable
-data class ReposOwnerRepoEnvironmentsEnvironmentNameReviewersApiModel(
+data class ReposRepoNameEnvironmentsEnvironmentNameReviewersApiModel(
     @Contextual @SerialName(value = "type")
     val type: DeploymentMinusReviewerMinusTypeApiModel? = null,
     /* The id of the user or team who can review the deployment */

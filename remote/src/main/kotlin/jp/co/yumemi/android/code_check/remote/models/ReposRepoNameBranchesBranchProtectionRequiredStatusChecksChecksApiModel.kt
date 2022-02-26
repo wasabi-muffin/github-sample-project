@@ -29,7 +29,7 @@ import kotlinx.serialization.*
  * @param appId The ID of the GitHub App that must provide this check. Omit this field to automatically select the GitHub App that has recently provided this check, or any app if it was not set by a GitHub App. Pass -1 to explicitly allow any app to set the status.
  */
 @Serializable
-data class ReposOwnerRepoBranchesBranchProtectionRequiredStatusChecksChecksApiModel(
+data class ReposRepoNameBranchesBranchProtectionRequiredStatusChecksChecksApiModel(
     /* The name of the required check */
     @SerialName(value = "context")
     val context: kotlin.String,

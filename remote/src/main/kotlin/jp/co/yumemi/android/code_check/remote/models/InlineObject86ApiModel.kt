@@ -20,8 +20,8 @@
 
 package jp.co.yumemi.android.code_check.remote.models
 
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoGitCommitsAuthorApiModel
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoGitCommitsCommitterApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameGitCommitsAuthorApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameGitCommitsCommitterApiModel
 
 import kotlinx.serialization.*
 
@@ -46,9 +46,9 @@ data class InlineObject86ApiModel(
     @SerialName(value = "parents")
     val parents: kotlin.collections.List<kotlin.String>? = null,
     @SerialName(value = "author")
-    val author: ReposOwnerRepoGitCommitsAuthorApiModel? = null,
+    val author: ReposRepoNameGitCommitsAuthorApiModel? = null,
     @SerialName(value = "committer")
-    val committer: ReposOwnerRepoGitCommitsCommitterApiModel? = null,
+    val committer: ReposRepoNameGitCommitsCommitterApiModel? = null,
     /* The [PGP signature](https://en.wikipedia.org/wiki/Pretty_Good_Privacy) of the commit. GitHub adds the signature to the `gpgsig` header of the created commit. For a commit signature to be verifiable by Git or GitHub, it must be an ASCII-armored detached PGP signature over the string commit as it would be written to the object database. To pass a `signature` parameter, you need to first manually create a valid PGP signature, which can be complicated. You may find it easier to [use the command line](https://git-scm.com/book/id/v2/Git-Tools-Signing-Your-Work) to create signed commits. */
     @SerialName(value = "signature")
     val signature: kotlin.String? = null
