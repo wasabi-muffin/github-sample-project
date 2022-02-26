@@ -34,6 +34,7 @@ class SearchRepoExecutorTest {
         } returns Pageable(
             items = List(5) { index ->
                 SimpleGithubRepo(
+                    id = index,
                     name = "name$index",
                     description = "description$index",
                     ownerName = "ownerName$index",
@@ -51,6 +52,7 @@ class SearchRepoExecutorTest {
             result.data.totalCount shouldBe 5
             result.data.items.size shouldBe 5
             result.data.items.forEachIndexed { index, repo ->
+                repo.id shouldBe index
                 repo.name shouldBe "name$index"
                 repo.description shouldBe "description$index"
                 repo.ownerName shouldBe "ownerName$index"

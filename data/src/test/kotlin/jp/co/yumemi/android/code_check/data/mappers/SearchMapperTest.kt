@@ -9,6 +9,7 @@ class SearchMapperTest {
     fun `test for mapping github repo model to entity`() {
         val entity = SearchMapper.modelToEntity(
             RepoSearchModel(
+                id = 1,
                 name = "",
                 description = "",
                 ownerName = "",
@@ -20,6 +21,7 @@ class SearchMapperTest {
                 openIssuesCount = 0
             )
         )
+        entity.id shouldBe 1
         entity.name shouldBe ""
         entity.description shouldBe ""
         entity.ownerName shouldBe ""

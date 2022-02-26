@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class SimpleGithubRepo(
+    val id: Int,
     val name: String,
     val description: String?,
     val ownerName: String?,

@@ -5,6 +5,7 @@ import jp.co.yumemi.android.code_check.remote.models.RepoMinusSearchMinusResultM
 
 object SearchMapper {
     fun apiToData(apiModel: RepoMinusSearchMinusResultMinusItemApiModel) = RepoSearchModel(
+        id = apiModel.id,
         name = apiModel.fullName,
         description = apiModel.description,
         ownerName = apiModel.owner?.login,

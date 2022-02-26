@@ -139,6 +139,7 @@ fun Preview_SearchRepoResultItem() {
     GithubTheme {
         SearchRepoResultItem(
             repo = SimpleGithubRepo(
+                id = 1,
                 name = "name",
                 description = "description",
                 ownerName = "ownerName",

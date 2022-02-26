@@ -1,6 +1,7 @@
 package jp.co.yumemi.android.code_check.data.models
 
 data class RepoSearchModel(
+    val id: Int,
     val name: String,
     val description: String?,
     val ownerName: String?,
