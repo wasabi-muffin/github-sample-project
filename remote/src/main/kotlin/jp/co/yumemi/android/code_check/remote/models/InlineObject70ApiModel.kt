@@ -20,7 +20,7 @@
 
 package jp.co.yumemi.android.code_check.remote.models
 
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoCheckSuitesPreferencesAutoTriggerChecksApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameCheckSuitesPreferencesAutoTriggerChecksApiModel
 
 import kotlinx.serialization.*
 
@@ -32,7 +32,7 @@ import kotlinx.serialization.*
 data class InlineObject70ApiModel(
     /* Enables or disables automatic creation of CheckSuite events upon pushes to the repository. Enabled by default. See the [`auto_trigger_checks` object](https://docs.github.com/rest/reference/checks#auto_trigger_checks-object) description for details. */
     @SerialName(value = "auto_trigger_checks")
-    val autoTriggerChecks: kotlin.collections.List<ReposOwnerRepoCheckSuitesPreferencesAutoTriggerChecksApiModel>? = null
+    val autoTriggerChecks: kotlin.collections.List<ReposRepoNameCheckSuitesPreferencesAutoTriggerChecksApiModel>? = null
 ) {
 
 }

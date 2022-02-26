@@ -28,7 +28,7 @@ class TwoFragment : Fragment(R.layout.fragment_two) {
 
         var item = args.item
 
-        _binding.ownerIconView.load(item.ownerIconUrl);
+        _binding.ownerIconView.load(item.owner?.iconUrl);
         _binding.nameView.text = item.name;
         _binding.languageView.text = resources.getString(R.string.written_language, item.language)
         _binding.starsView.text = "${item.stargazersCount} stars";

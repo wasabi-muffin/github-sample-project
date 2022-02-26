@@ -35,7 +35,7 @@ interface ReactionsApi {
     * @param request 
     * @return ReactionApiModel
     */
-    suspend fun reactionsCreateForCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject76ApiModel): ReactionApiModel
+    suspend fun reactionsCreateForCommitComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject76ApiModel): ReactionApiModel
 
     /**
     * Create reaction for an issue
@@ -45,7 +45,7 @@ interface ReactionsApi {
     * @param request 
     * @return ReactionApiModel
     */
-    suspend fun reactionsCreateForIssue(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject107ApiModel): ReactionApiModel
+    suspend fun reactionsCreateForIssue(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject107ApiModel): ReactionApiModel
 
     /**
     * Create reaction for an issue comment
@@ -55,7 +55,7 @@ interface ReactionsApi {
     * @param request 
     * @return ReactionApiModel
     */
-    suspend fun reactionsCreateForIssueComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject101ApiModel): ReactionApiModel
+    suspend fun reactionsCreateForIssueComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject101ApiModel): ReactionApiModel
 
     /**
     * Create reaction for a pull request review comment
@@ -65,7 +65,7 @@ interface ReactionsApi {
     * @param request 
     * @return ReactionApiModel
     */
-    suspend fun reactionsCreateForPullRequestReviewComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject119ApiModel): ReactionApiModel
+    suspend fun reactionsCreateForPullRequestReviewComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject119ApiModel): ReactionApiModel
 
     /**
     * Create reaction for a release
@@ -75,7 +75,7 @@ interface ReactionsApi {
     * @param request 
     * @return ReactionApiModel
     */
-    suspend fun reactionsCreateForRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, request: InlineObject134ApiModel): ReactionApiModel
+    suspend fun reactionsCreateForRelease(accessToken: String? = null, repoName: kotlin.String, releaseId: kotlin.Int, request: InlineObject134ApiModel): ReactionApiModel
 
     /**
     * Create reaction for a team discussion comment
@@ -124,7 +124,7 @@ interface ReactionsApi {
     *
     * @return void
     */
-    suspend fun reactionsDeleteForCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int)
+    suspend fun reactionsDeleteForCommitComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int)
 
     /**
     * Delete an issue reaction
@@ -133,7 +133,7 @@ interface ReactionsApi {
     *
     * @return void
     */
-    suspend fun reactionsDeleteForIssue(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, reactionId: kotlin.Int)
+    suspend fun reactionsDeleteForIssue(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int, reactionId: kotlin.Int)
 
     /**
     * Delete an issue comment reaction
@@ -142,7 +142,7 @@ interface ReactionsApi {
     *
     * @return void
     */
-    suspend fun reactionsDeleteForIssueComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int)
+    suspend fun reactionsDeleteForIssueComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int)
 
     /**
     * Delete a pull request comment reaction
@@ -151,7 +151,7 @@ interface ReactionsApi {
     *
     * @return void
     */
-    suspend fun reactionsDeleteForPullRequestComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int)
+    suspend fun reactionsDeleteForPullRequestComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int)
 
     /**
     * Delete team discussion reaction
@@ -178,7 +178,7 @@ interface ReactionsApi {
     *
     * @return kotlin.collections.List<ReactionApiModel>
     */
-    suspend fun reactionsListForCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, content: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReactionApiModel>
+    suspend fun reactionsListForCommitComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, content: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReactionApiModel>
 
     /**
     * List reactions for an issue
@@ -187,7 +187,7 @@ interface ReactionsApi {
     *
     * @return kotlin.collections.List<ReactionApiModel>
     */
-    suspend fun reactionsListForIssue(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, content: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReactionApiModel>
+    suspend fun reactionsListForIssue(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int, content: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReactionApiModel>
 
     /**
     * List reactions for an issue comment
@@ -196,7 +196,7 @@ interface ReactionsApi {
     *
     * @return kotlin.collections.List<ReactionApiModel>
     */
-    suspend fun reactionsListForIssueComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, content: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReactionApiModel>
+    suspend fun reactionsListForIssueComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, content: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReactionApiModel>
 
     /**
     * List reactions for a pull request review comment
@@ -205,7 +205,7 @@ interface ReactionsApi {
     *
     * @return kotlin.collections.List<ReactionApiModel>
     */
-    suspend fun reactionsListForPullRequestReviewComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, content: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReactionApiModel>
+    suspend fun reactionsListForPullRequestReviewComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, content: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReactionApiModel>
 
     /**
     * List reactions for a team discussion comment
@@ -248,8 +248,8 @@ interface ReactionsApi {
 class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider) : ReactionsApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun reactionsCreateForCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject76ApiModel): ReactionApiModel {
-        val path = "/repos/{owner}/{repo}/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun reactionsCreateForCommitComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject76ApiModel): ReactionApiModel {
+        val path = "/repos/{repo_name}/comments/{comment_id}/reactions".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -258,8 +258,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsCreateForIssue(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject107ApiModel): ReactionApiModel {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+    override suspend fun reactionsCreateForIssue(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject107ApiModel): ReactionApiModel {
+        val path = "/repos/{repo_name}/issues/{issue_number}/reactions".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -268,8 +268,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsCreateForIssueComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject101ApiModel): ReactionApiModel {
-        val path = "/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun reactionsCreateForIssueComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject101ApiModel): ReactionApiModel {
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}/reactions".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -278,8 +278,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsCreateForPullRequestReviewComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject119ApiModel): ReactionApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun reactionsCreateForPullRequestReviewComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject119ApiModel): ReactionApiModel {
+        val path = "/repos/{repo_name}/pulls/comments/{comment_id}/reactions".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -288,8 +288,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsCreateForRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, request: InlineObject134ApiModel): ReactionApiModel {
-        val path = "/repos/{owner}/{repo}/releases/{release_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
+    override suspend fun reactionsCreateForRelease(accessToken: String?, repoName: kotlin.String, releaseId: kotlin.Int, request: InlineObject134ApiModel): ReactionApiModel {
+        val path = "/repos/{repo_name}/releases/{release_id}/reactions".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"release_id"+"}", "$releaseId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -338,8 +338,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsDeleteForCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
+    override suspend fun reactionsDeleteForCommitComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int) {
+        val path = "/repos/{repo_name}/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -347,8 +347,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsDeleteForIssue(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, reactionId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber").replace("{"+"reaction_id"+"}", "$reactionId")
+    override suspend fun reactionsDeleteForIssue(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int, reactionId: kotlin.Int) {
+        val path = "/repos/{repo_name}/issues/{issue_number}/reactions/{reaction_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber").replace("{"+"reaction_id"+"}", "$reactionId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -356,8 +356,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsDeleteForIssueComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
+    override suspend fun reactionsDeleteForIssueComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int) {
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -365,8 +365,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsDeleteForPullRequestComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
+    override suspend fun reactionsDeleteForPullRequestComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, reactionId: kotlin.Int) {
+        val path = "/repos/{repo_name}/pulls/comments/{comment_id}/reactions/{reaction_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId").replace("{"+"reaction_id"+"}", "$reactionId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -392,8 +392,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsListForCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
-        val path = "/repos/{owner}/{repo}/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun reactionsListForCommitComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
+        val path = "/repos/{repo_name}/comments/{comment_id}/reactions".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -404,8 +404,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsListForIssue(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
-        val path = "/repos/{owner}/{repo}/issues/{issue_number}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+    override suspend fun reactionsListForIssue(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
+        val path = "/repos/{repo_name}/issues/{issue_number}/reactions".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -416,8 +416,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsListForIssueComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
-        val path = "/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun reactionsListForIssueComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}/reactions".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -428,8 +428,8 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
         }
     }
 
-    override suspend fun reactionsListForPullRequestReviewComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
-        val path = "/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun reactionsListForPullRequestReviewComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, content: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReactionApiModel> {
+        val path = "/repos/{repo_name}/pulls/comments/{comment_id}/reactions".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }

@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import jp.co.yumemi.android.code_check.domain.entities.SimpleGithubRepo
+import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsEvent
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsIntent
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsViewState
@@ -30,9 +30,9 @@ import jp.co.yumemi.android.code_check.ui.components.error.title
 import jp.co.yumemi.android.code_check.ui.components.paging.PagingColumn
 import jp.co.yumemi.android.code_check.ui.components.search.SearchRepoResultItem
 import jp.co.yumemi.android.code_check.ui.core.Contract
-import jp.co.yumemi.android.code_check.ui.core.elevation
+import jp.co.yumemi.android.code_check.ui.utils.elevation
 import jp.co.yumemi.android.code_check.ui.core.handle
-import jp.co.yumemi.android.code_check.ui.core.onScrolledToBottom
+import jp.co.yumemi.android.code_check.ui.utils.onScrolledToBottom
 import jp.co.yumemi.android.code_check.ui.core.render
 import jp.co.yumemi.android.code_check.ui.primitives.Gray
 
@@ -89,14 +89,14 @@ fun SearchRepoResultsScreen(
                         state = rememberSwipeRefreshState(isRefreshing = state is SearchRepoResultsViewState.Stable.RefreshLoading),
                         onRefresh = { dispatch(SearchRepoResultsIntent.PullToRefresh) },
                     ) {
-                        PagingColumn<SimpleGithubRepo, SearchRepoResultsViewState.Stable.PageLoading, SearchRepoResultsViewState.Stable.PageError>(
+                        PagingColumn<Repository, SearchRepoResultsViewState.Stable.PageLoading, SearchRepoResultsViewState.Stable.PageError>(
                             items = state.results,
                             viewState = state,
                             state = scrollState,
                             onClickRetry = { dispatch(SearchRepoResultsIntent.ClickErrorRetry) },
                         ) { index, item ->
                             SearchRepoResultItem(
-                                repo = item,
+                                repository = item,
                                 modifier = Modifier.clickable { dispatch(SearchRepoResultsIntent.ClickItem(item = item)) }
                             )
                             if (index != state.results.lastIndex) {

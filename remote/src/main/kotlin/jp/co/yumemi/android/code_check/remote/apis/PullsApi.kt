@@ -34,7 +34,7 @@ interface PullsApi {
     *
     * @return void
     */
-    suspend fun pullsCheckIfMerged(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int)
+    suspend fun pullsCheckIfMerged(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int)
 
     /**
     * Create a pull request
@@ -44,7 +44,7 @@ interface PullsApi {
     * @param request 
     * @return PullMinusRequestApiModel
     */
-    suspend fun pullsCreate(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject117ApiModel): PullMinusRequestApiModel
+    suspend fun pullsCreate(accessToken: String? = null, repoName: kotlin.String, request: InlineObject117ApiModel): PullMinusRequestApiModel
 
     /**
     * Create a reply for a review comment
@@ -54,7 +54,7 @@ interface PullsApi {
     * @param request 
     * @return PullMinusRequestMinusReviewMinusCommentApiModel
     */
-    suspend fun pullsCreateReplyForReviewComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, commentId: kotlin.Int, request: InlineObject123ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel
+    suspend fun pullsCreateReplyForReviewComment(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, commentId: kotlin.Int, request: InlineObject123ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel
 
     /**
     * Create a review for a pull request
@@ -64,7 +64,7 @@ interface PullsApi {
     * @param request  (optional)
     * @return PullMinusRequestMinusReviewApiModel
     */
-    suspend fun pullsCreateReview(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject125ApiModel): PullMinusRequestMinusReviewApiModel
+    suspend fun pullsCreateReview(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject125ApiModel): PullMinusRequestMinusReviewApiModel
 
     /**
     * Create a review comment for a pull request
@@ -74,7 +74,7 @@ interface PullsApi {
     * @param request 
     * @return PullMinusRequestMinusReviewMinusCommentApiModel
     */
-    suspend fun pullsCreateReviewComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject122ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel
+    suspend fun pullsCreateReviewComment(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject122ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel
 
     /**
     * Delete a pending review for a pull request
@@ -83,7 +83,7 @@ interface PullsApi {
     *
     * @return PullMinusRequestMinusReviewApiModel
     */
-    suspend fun pullsDeletePendingReview(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int): PullMinusRequestMinusReviewApiModel
+    suspend fun pullsDeletePendingReview(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int): PullMinusRequestMinusReviewApiModel
 
     /**
     * Delete a review comment for a pull request
@@ -92,7 +92,7 @@ interface PullsApi {
     *
     * @return void
     */
-    suspend fun pullsDeleteReviewComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int)
+    suspend fun pullsDeleteReviewComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int)
 
     /**
     * Dismiss a review for a pull request
@@ -102,7 +102,7 @@ interface PullsApi {
     * @param request 
     * @return PullMinusRequestMinusReviewApiModel
     */
-    suspend fun pullsDismissReview(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject127ApiModel): PullMinusRequestMinusReviewApiModel
+    suspend fun pullsDismissReview(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject127ApiModel): PullMinusRequestMinusReviewApiModel
 
     /**
     * Get a pull request
@@ -111,7 +111,7 @@ interface PullsApi {
     *
     * @return PullMinusRequestApiModel
     */
-    suspend fun pullsGet(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int): PullMinusRequestApiModel
+    suspend fun pullsGet(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int): PullMinusRequestApiModel
 
     /**
     * Get a review for a pull request
@@ -120,7 +120,7 @@ interface PullsApi {
     *
     * @return PullMinusRequestMinusReviewApiModel
     */
-    suspend fun pullsGetReview(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int): PullMinusRequestMinusReviewApiModel
+    suspend fun pullsGetReview(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int): PullMinusRequestMinusReviewApiModel
 
     /**
     * Get a review comment for a pull request
@@ -129,7 +129,7 @@ interface PullsApi {
     *
     * @return PullMinusRequestMinusReviewMinusCommentApiModel
     */
-    suspend fun pullsGetReviewComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): PullMinusRequestMinusReviewMinusCommentApiModel
+    suspend fun pullsGetReviewComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int): PullMinusRequestMinusReviewMinusCommentApiModel
 
     /**
     * List pull requests
@@ -138,7 +138,7 @@ interface PullsApi {
     *
     * @return kotlin.collections.List<PullMinusRequestMinusSimpleApiModel>
     */
-    suspend fun pullsList(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, state: kotlin.String? = null, head: kotlin.String? = null, base: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusSimpleApiModel>
+    suspend fun pullsList(accessToken: String? = null, repoName: kotlin.String, state: kotlin.String? = null, head: kotlin.String? = null, base: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusSimpleApiModel>
 
     /**
     * List comments for a pull request review
@@ -147,7 +147,7 @@ interface PullsApi {
     *
     * @return kotlin.collections.List<ReviewMinusCommentApiModel>
     */
-    suspend fun pullsListCommentsForReview(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReviewMinusCommentApiModel>
+    suspend fun pullsListCommentsForReview(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReviewMinusCommentApiModel>
 
     /**
     * List commits on a pull request
@@ -156,7 +156,7 @@ interface PullsApi {
     *
     * @return kotlin.collections.List<CommitApiModel>
     */
-    suspend fun pullsListCommits(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitApiModel>
+    suspend fun pullsListCommits(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitApiModel>
 
     /**
     * List pull requests files
@@ -165,7 +165,7 @@ interface PullsApi {
     *
     * @return kotlin.collections.List<DiffMinusEntryApiModel>
     */
-    suspend fun pullsListFiles(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DiffMinusEntryApiModel>
+    suspend fun pullsListFiles(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DiffMinusEntryApiModel>
 
     /**
     * List review comments on a pull request
@@ -174,7 +174,7 @@ interface PullsApi {
     *
     * @return kotlin.collections.List<PullMinusRequestMinusReviewMinusCommentApiModel>
     */
-    suspend fun pullsListReviewComments(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusReviewMinusCommentApiModel>
+    suspend fun pullsListReviewComments(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusReviewMinusCommentApiModel>
 
     /**
     * List review comments in a repository
@@ -183,7 +183,7 @@ interface PullsApi {
     *
     * @return kotlin.collections.List<PullMinusRequestMinusReviewMinusCommentApiModel>
     */
-    suspend fun pullsListReviewCommentsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusReviewMinusCommentApiModel>
+    suspend fun pullsListReviewCommentsForRepo(accessToken: String? = null, repoName: kotlin.String, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusReviewMinusCommentApiModel>
 
     /**
     * List reviews for a pull request
@@ -192,7 +192,7 @@ interface PullsApi {
     *
     * @return kotlin.collections.List<PullMinusRequestMinusReviewApiModel>
     */
-    suspend fun pullsListReviews(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusReviewApiModel>
+    suspend fun pullsListReviews(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusReviewApiModel>
 
     /**
     * Merge a pull request
@@ -202,7 +202,7 @@ interface PullsApi {
     * @param request  (optional)
     * @return PullMinusRequestMinusMergeMinusResultApiModel
     */
-    suspend fun pullsMerge(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject124ApiModel): PullMinusRequestMinusMergeMinusResultApiModel
+    suspend fun pullsMerge(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject124ApiModel): PullMinusRequestMinusMergeMinusResultApiModel
 
     /**
     * Submit a review for a pull request
@@ -212,7 +212,7 @@ interface PullsApi {
     * @param request 
     * @return PullMinusRequestMinusReviewApiModel
     */
-    suspend fun pullsSubmitReview(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject128ApiModel): PullMinusRequestMinusReviewApiModel
+    suspend fun pullsSubmitReview(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject128ApiModel): PullMinusRequestMinusReviewApiModel
 
     /**
     * Update a pull request
@@ -222,7 +222,7 @@ interface PullsApi {
     * @param request  (optional)
     * @return PullMinusRequestApiModel
     */
-    suspend fun pullsUpdate(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject120ApiModel): PullMinusRequestApiModel
+    suspend fun pullsUpdate(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject120ApiModel): PullMinusRequestApiModel
 
     /**
     * Update a pull request branch
@@ -232,7 +232,7 @@ interface PullsApi {
     * @param request  (optional)
     * @return InlineResponse2021ApiModel
     */
-    suspend fun pullsUpdateBranch(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject129ApiModel): InlineResponse2021ApiModel
+    suspend fun pullsUpdateBranch(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject129ApiModel): InlineResponse2021ApiModel
 
     /**
     * Update a review for a pull request
@@ -242,7 +242,7 @@ interface PullsApi {
     * @param request 
     * @return PullMinusRequestMinusReviewApiModel
     */
-    suspend fun pullsUpdateReview(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject126ApiModel): PullMinusRequestMinusReviewApiModel
+    suspend fun pullsUpdateReview(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject126ApiModel): PullMinusRequestMinusReviewApiModel
 
     /**
     * Update a review comment for a pull request
@@ -252,15 +252,15 @@ interface PullsApi {
     * @param request 
     * @return PullMinusRequestMinusReviewMinusCommentApiModel
     */
-    suspend fun pullsUpdateReviewComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject118ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel
+    suspend fun pullsUpdateReviewComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject118ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel
 
 }
 
 class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : PullsApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun pullsCheckIfMerged(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/merge".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
+    override suspend fun pullsCheckIfMerged(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int) {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/merge".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -268,8 +268,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsCreate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject117ApiModel): PullMinusRequestApiModel {
-        val path = "/repos/{owner}/{repo}/pulls".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun pullsCreate(accessToken: String?, repoName: kotlin.String, request: InlineObject117ApiModel): PullMinusRequestApiModel {
+        val path = "/repos/{repo_name}/pulls".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -278,8 +278,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsCreateReplyForReviewComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, commentId: kotlin.Int, request: InlineObject123ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun pullsCreateReplyForReviewComment(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, commentId: kotlin.Int, request: InlineObject123ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/comments/{comment_id}/replies".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -288,8 +288,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsCreateReview(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject125ApiModel): PullMinusRequestMinusReviewApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/reviews".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
+    override suspend fun pullsCreateReview(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject125ApiModel): PullMinusRequestMinusReviewApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/reviews".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -298,8 +298,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsCreateReviewComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject122ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
+    override suspend fun pullsCreateReviewComment(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject122ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/comments".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -308,8 +308,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsDeletePendingReview(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int): PullMinusRequestMinusReviewApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
+    override suspend fun pullsDeletePendingReview(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int): PullMinusRequestMinusReviewApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/reviews/{review_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -317,8 +317,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsDeleteReviewComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int) {
-        val path = "/repos/{owner}/{repo}/pulls/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun pullsDeleteReviewComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int) {
+        val path = "/repos/{repo_name}/pulls/comments/{comment_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -326,8 +326,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsDismissReview(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject127ApiModel): PullMinusRequestMinusReviewApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
+    override suspend fun pullsDismissReview(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject127ApiModel): PullMinusRequestMinusReviewApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/reviews/{review_id}/dismissals".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -336,8 +336,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsGet(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int): PullMinusRequestApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
+    override suspend fun pullsGet(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int): PullMinusRequestApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -345,8 +345,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsGetReview(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int): PullMinusRequestMinusReviewApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
+    override suspend fun pullsGetReview(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int): PullMinusRequestMinusReviewApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/reviews/{review_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -354,8 +354,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsGetReviewComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): PullMinusRequestMinusReviewMinusCommentApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun pullsGetReviewComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int): PullMinusRequestMinusReviewMinusCommentApiModel {
+        val path = "/repos/{repo_name}/pulls/comments/{comment_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -363,8 +363,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsList(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, head: kotlin.String?, base: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusSimpleApiModel> {
-        val path = "/repos/{owner}/{repo}/pulls".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun pullsList(accessToken: String?, repoName: kotlin.String, state: kotlin.String?, head: kotlin.String?, base: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusSimpleApiModel> {
+        val path = "/repos/{repo_name}/pulls".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -379,8 +379,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsListCommentsForReview(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReviewMinusCommentApiModel> {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
+    override suspend fun pullsListCommentsForReview(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReviewMinusCommentApiModel> {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/reviews/{review_id}/comments".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -390,8 +390,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsListCommits(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitApiModel> {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/commits".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
+    override suspend fun pullsListCommits(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitApiModel> {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/commits".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -401,8 +401,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsListFiles(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DiffMinusEntryApiModel> {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/files".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
+    override suspend fun pullsListFiles(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DiffMinusEntryApiModel> {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/files".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -412,22 +412,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsListReviewComments(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusReviewMinusCommentApiModel> {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-            parameter("sort", sort)
-            parameter("direction", direction)
-            parameter("since", since)
-            parameter("perPage", perPage)
-            parameter("page", page)
-        }
-    }
-
-    override suspend fun pullsListReviewCommentsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusReviewMinusCommentApiModel> {
-        val path = "/repos/{owner}/{repo}/pulls/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun pullsListReviewComments(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusReviewMinusCommentApiModel> {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/comments".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -440,8 +426,22 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsListReviews(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusReviewApiModel> {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/reviews".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
+    override suspend fun pullsListReviewCommentsForRepo(accessToken: String?, repoName: kotlin.String, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusReviewMinusCommentApiModel> {
+        val path = "/repos/{repo_name}/pulls/comments".replace("{"+"repo_name"+"}", "$repoName")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+            parameter("sort", sort)
+            parameter("direction", direction)
+            parameter("since", since)
+            parameter("perPage", perPage)
+            parameter("page", page)
+        }
+    }
+
+    override suspend fun pullsListReviews(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusReviewApiModel> {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/reviews".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -451,8 +451,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsMerge(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject124ApiModel): PullMinusRequestMinusMergeMinusResultApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/merge".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
+    override suspend fun pullsMerge(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject124ApiModel): PullMinusRequestMinusMergeMinusResultApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/merge".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -461,8 +461,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsSubmitReview(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject128ApiModel): PullMinusRequestMinusReviewApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
+    override suspend fun pullsSubmitReview(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject128ApiModel): PullMinusRequestMinusReviewApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/reviews/{review_id}/events".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -471,8 +471,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsUpdate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject120ApiModel): PullMinusRequestApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
+    override suspend fun pullsUpdate(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject120ApiModel): PullMinusRequestApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -481,8 +481,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsUpdateBranch(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject129ApiModel): InlineResponse2021ApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/update-branch".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
+    override suspend fun pullsUpdateBranch(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject129ApiModel): InlineResponse2021ApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/update-branch".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -491,8 +491,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsUpdateReview(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject126ApiModel): PullMinusRequestMinusReviewApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
+    override suspend fun pullsUpdateReview(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, reviewId: kotlin.Int, request: InlineObject126ApiModel): PullMinusRequestMinusReviewApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/reviews/{review_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber").replace("{"+"review_id"+"}", "$reviewId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -501,8 +501,8 @@ class HttpClientPullsApi(private val httpClientProvider: HttpClientProvider) : P
         }
     }
 
-    override suspend fun pullsUpdateReviewComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject118ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun pullsUpdateReviewComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject118ApiModel): PullMinusRequestMinusReviewMinusCommentApiModel {
+        val path = "/repos/{repo_name}/pulls/comments/{comment_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }

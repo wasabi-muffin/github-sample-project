@@ -31,12 +31,12 @@ abstract class StateMachineProcessor<I : Intent, A : Action, R : Result, VS : Vi
         ?.flatMapMerge { node ->
             when (node) {
                 is StateMachine.ActionNode.ResultNode<A, *, VS> -> flowOf(node.value(state.viewState, action) as? R)
-                is StateMachine.ActionNode.SideEffectNode<A, *, VS> -> (node.value(state.viewState, action) as? SE)?.let { process(it, state) }?.asFlow()
+                is StateMachine.ActionNode.SideEffectNode<A, *, VS> -> (node.value(state.viewState, action) as? SE)?.let { process(it, state) }
                     ?: flowOf()
             }
         }
         ?.filterNotNull()
         ?: flowOf()
 
-    abstract suspend fun process(sideEffect: SE, state: State<VS, E>): List<R?>
+    abstract suspend fun process(sideEffect: SE, state: State<VS, E>): Flow<R?>
 }

@@ -11,6 +11,8 @@ import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.
 import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.components.StateMachineProcessor
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 @FlowPreview
 class SearchTopProcessor(
@@ -18,14 +20,14 @@ class SearchTopProcessor(
     private val clearRecentSearchesUseCase: ClearRecentSearchesUseCase,
     private val getRecentSearchesUseCase: GetRecentSearchesUseCase,
 ) : StateMachineProcessor<SearchTopIntent, SearchTopAction, SearchTopResult, SearchTopViewState, SearchTopEvent, SearchTopSideEffect>(stateMachine) {
-    override suspend fun process(sideEffect: SearchTopSideEffect, state: State<SearchTopViewState, SearchTopEvent>): List<SearchTopResult?> =
+    override suspend fun process(sideEffect: SearchTopSideEffect, state: State<SearchTopViewState, SearchTopEvent>): Flow<SearchTopResult?> =
         when (sideEffect) {
             SearchTopSideEffect.ClearRecentSearches -> {
                 clearRecentSearchesUseCase.execute(Unit)
-                listOf(SearchTopResult.ClearRecentSearches)
+                flowOf(SearchTopResult.ClearRecentSearches)
             }
             SearchTopSideEffect.LoadRecentSearches -> {
-                listOf(SearchTopResult.RecentSearches(getRecentSearchesUseCase.execute(Unit)))
+                flowOf(SearchTopResult.RecentSearches(getRecentSearchesUseCase.execute(Unit)))
             }
         }
 }

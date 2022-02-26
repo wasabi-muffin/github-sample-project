@@ -63,7 +63,7 @@ interface CodespacesApi {
     * @param request 
     * @return CodespaceApiModel
     */
-    suspend fun codespacesCreateWithPrForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject121ApiModel): CodespaceApiModel
+    suspend fun codespacesCreateWithPrForAuthenticatedUser(accessToken: String? = null, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject121ApiModel): CodespaceApiModel
 
     /**
     * Create a codespace in a repository
@@ -73,7 +73,7 @@ interface CodespacesApi {
     * @param request 
     * @return CodespaceApiModel
     */
-    suspend fun codespacesCreateWithRepoForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject73ApiModel): CodespaceApiModel
+    suspend fun codespacesCreateWithRepoForAuthenticatedUser(accessToken: String? = null, repoName: kotlin.String, request: InlineObject73ApiModel): CodespaceApiModel
 
     /**
     * Delete a codespace for the authenticated user
@@ -145,7 +145,7 @@ interface CodespacesApi {
     *
     * @return InlineResponse20019ApiModel
     */
-    suspend fun codespacesListInRepositoryForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20019ApiModel
+    suspend fun codespacesListInRepositoryForAuthenticatedUser(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20019ApiModel
 
     /**
     * List selected repositories for a user secret
@@ -181,7 +181,7 @@ interface CodespacesApi {
     *
     * @return InlineResponse20020ApiModel
     */
-    suspend fun codespacesRepoMachinesForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, location: kotlin.String? = null): InlineResponse20020ApiModel
+    suspend fun codespacesRepoMachinesForAuthenticatedUser(accessToken: String? = null, repoName: kotlin.String, location: kotlin.String? = null): InlineResponse20020ApiModel
 
     /**
     * Set selected repositories for a user secret
@@ -254,8 +254,8 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesCreateWithPrForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, pullNumber: kotlin.Int, request: InlineObject121ApiModel): CodespaceApiModel {
-        val path = "/repos/{owner}/{repo}/pulls/{pull_number}/codespaces".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"pull_number"+"}", "$pullNumber")
+    override suspend fun codespacesCreateWithPrForAuthenticatedUser(accessToken: String?, repoName: kotlin.String, pullNumber: kotlin.Int, request: InlineObject121ApiModel): CodespaceApiModel {
+        val path = "/repos/{repo_name}/pulls/{pull_number}/codespaces".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"pull_number"+"}", "$pullNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -264,8 +264,8 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesCreateWithRepoForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject73ApiModel): CodespaceApiModel {
-        val path = "/repos/{owner}/{repo}/codespaces".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun codespacesCreateWithRepoForAuthenticatedUser(accessToken: String?, repoName: kotlin.String, request: InlineObject73ApiModel): CodespaceApiModel {
+        val path = "/repos/{repo_name}/codespaces".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -337,8 +337,8 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesListInRepositoryForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20019ApiModel {
-        val path = "/repos/{owner}/{repo}/codespaces".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun codespacesListInRepositoryForAuthenticatedUser(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20019ApiModel {
+        val path = "/repos/{repo_name}/codespaces".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -377,8 +377,8 @@ class HttpClientCodespacesApi(private val httpClientProvider: HttpClientProvider
         }
     }
 
-    override suspend fun codespacesRepoMachinesForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, location: kotlin.String?): InlineResponse20020ApiModel {
-        val path = "/repos/{owner}/{repo}/codespaces/machines".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun codespacesRepoMachinesForAuthenticatedUser(accessToken: String?, repoName: kotlin.String, location: kotlin.String?): InlineResponse20020ApiModel {
+        val path = "/repos/{repo_name}/codespaces/machines".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }

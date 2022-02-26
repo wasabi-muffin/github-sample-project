@@ -34,7 +34,7 @@ interface ActivityApi {
     *
     * @return void
     */
-    suspend fun activityCheckRepoIsStarredByAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String)
+    suspend fun activityCheckRepoIsStarredByAuthenticatedUser(accessToken: String? = null, repoName: kotlin.String)
 
     /**
     * Delete a repository subscription
@@ -43,7 +43,7 @@ interface ActivityApi {
     *
     * @return void
     */
-    suspend fun activityDeleteRepoSubscription(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String)
+    suspend fun activityDeleteRepoSubscription(accessToken: String? = null, repoName: kotlin.String)
 
     /**
     * Delete a thread subscription
@@ -70,7 +70,7 @@ interface ActivityApi {
     *
     * @return RepositoryMinusSubscriptionApiModel
     */
-    suspend fun activityGetRepoSubscription(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): RepositoryMinusSubscriptionApiModel
+    suspend fun activityGetRepoSubscription(accessToken: String? = null, repoName: kotlin.String): RepositoryMinusSubscriptionApiModel
 
     /**
     * Get a thread
@@ -133,7 +133,7 @@ interface ActivityApi {
     *
     * @return kotlin.collections.List<EventApiModel>
     */
-    suspend fun activityListPublicEventsForRepoNetwork(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<EventApiModel>
+    suspend fun activityListPublicEventsForRepoNetwork(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<EventApiModel>
 
     /**
     * List public events for a user
@@ -178,7 +178,7 @@ interface ActivityApi {
     *
     * @return kotlin.collections.List<EventApiModel>
     */
-    suspend fun activityListRepoEvents(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<EventApiModel>
+    suspend fun activityListRepoEvents(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<EventApiModel>
 
     /**
     * List repository notifications for the authenticated user
@@ -187,7 +187,7 @@ interface ActivityApi {
     *
     * @return kotlin.collections.List<ThreadApiModel>
     */
-    suspend fun activityListRepoNotificationsForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, all: kotlin.Boolean? = null, participating: kotlin.Boolean? = null, since: kotlin.String? = null, before: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ThreadApiModel>
+    suspend fun activityListRepoNotificationsForAuthenticatedUser(accessToken: String? = null, repoName: kotlin.String, all: kotlin.Boolean? = null, participating: kotlin.Boolean? = null, since: kotlin.String? = null, before: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ThreadApiModel>
 
     /**
     * List repositories starred by the authenticated user
@@ -223,7 +223,7 @@ interface ActivityApi {
     *
     * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun activityListWatchersForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
+    suspend fun activityListWatchersForRepo(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * Mark notifications as read
@@ -243,7 +243,7 @@ interface ActivityApi {
     * @param request  (optional)
     * @return InlineResponse2021ApiModel
     */
-    suspend fun activityMarkRepoNotificationsAsRead(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject115ApiModel): InlineResponse2021ApiModel
+    suspend fun activityMarkRepoNotificationsAsRead(accessToken: String? = null, repoName: kotlin.String, request: InlineObject115ApiModel): InlineResponse2021ApiModel
 
     /**
     * Mark a thread as read
@@ -262,7 +262,7 @@ interface ActivityApi {
     * @param request  (optional)
     * @return RepositoryMinusSubscriptionApiModel
     */
-    suspend fun activitySetRepoSubscription(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject137ApiModel): RepositoryMinusSubscriptionApiModel
+    suspend fun activitySetRepoSubscription(accessToken: String? = null, repoName: kotlin.String, request: InlineObject137ApiModel): RepositoryMinusSubscriptionApiModel
 
     /**
     * Set a thread subscription
@@ -281,7 +281,7 @@ interface ActivityApi {
     *
     * @return void
     */
-    suspend fun activityStarRepoForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String)
+    suspend fun activityStarRepoForAuthenticatedUser(accessToken: String? = null, repoName: kotlin.String)
 
     /**
     * Unstar a repository for the authenticated user
@@ -290,15 +290,15 @@ interface ActivityApi {
     *
     * @return void
     */
-    suspend fun activityUnstarRepoForAuthenticatedUser(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String)
+    suspend fun activityUnstarRepoForAuthenticatedUser(accessToken: String? = null, repoName: kotlin.String)
 
 }
 
 class HttpClientActivityApi(private val httpClientProvider: HttpClientProvider) : ActivityApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun activityCheckRepoIsStarredByAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/user/starred/{owner}/{repo}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun activityCheckRepoIsStarredByAuthenticatedUser(accessToken: String?, repoName: kotlin.String) {
+        val path = "/user/starred/{repo_name}".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -306,8 +306,8 @@ class HttpClientActivityApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun activityDeleteRepoSubscription(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/repos/{owner}/{repo}/subscription".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun activityDeleteRepoSubscription(accessToken: String?, repoName: kotlin.String) {
+        val path = "/repos/{repo_name}/subscription".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -333,8 +333,8 @@ class HttpClientActivityApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun activityGetRepoSubscription(accessToken: String?, owner: kotlin.String, repo: kotlin.String): RepositoryMinusSubscriptionApiModel {
-        val path = "/repos/{owner}/{repo}/subscription".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun activityGetRepoSubscription(accessToken: String?, repoName: kotlin.String): RepositoryMinusSubscriptionApiModel {
+        val path = "/repos/{repo_name}/subscription".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -408,8 +408,8 @@ class HttpClientActivityApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun activityListPublicEventsForRepoNetwork(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<EventApiModel> {
-        val path = "/networks/{owner}/{repo}/events".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun activityListPublicEventsForRepoNetwork(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<EventApiModel> {
+        val path = "/networks/{repo_name}/events".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -463,8 +463,8 @@ class HttpClientActivityApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun activityListRepoEvents(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<EventApiModel> {
-        val path = "/repos/{owner}/{repo}/events".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun activityListRepoEvents(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<EventApiModel> {
+        val path = "/repos/{repo_name}/events".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -474,8 +474,8 @@ class HttpClientActivityApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun activityListRepoNotificationsForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String, all: kotlin.Boolean?, participating: kotlin.Boolean?, since: kotlin.String?, before: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ThreadApiModel> {
-        val path = "/repos/{owner}/{repo}/notifications".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun activityListRepoNotificationsForAuthenticatedUser(accessToken: String?, repoName: kotlin.String, all: kotlin.Boolean?, participating: kotlin.Boolean?, since: kotlin.String?, before: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ThreadApiModel> {
+        val path = "/repos/{repo_name}/notifications".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -524,8 +524,8 @@ class HttpClientActivityApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun activityListWatchersForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
-        val path = "/repos/{owner}/{repo}/subscribers".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun activityListWatchersForRepo(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
+        val path = "/repos/{repo_name}/subscribers".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -545,8 +545,8 @@ class HttpClientActivityApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun activityMarkRepoNotificationsAsRead(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject115ApiModel): InlineResponse2021ApiModel {
-        val path = "/repos/{owner}/{repo}/notifications".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun activityMarkRepoNotificationsAsRead(accessToken: String?, repoName: kotlin.String, request: InlineObject115ApiModel): InlineResponse2021ApiModel {
+        val path = "/repos/{repo_name}/notifications".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -564,8 +564,8 @@ class HttpClientActivityApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun activitySetRepoSubscription(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject137ApiModel): RepositoryMinusSubscriptionApiModel {
-        val path = "/repos/{owner}/{repo}/subscription".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun activitySetRepoSubscription(accessToken: String?, repoName: kotlin.String, request: InlineObject137ApiModel): RepositoryMinusSubscriptionApiModel {
+        val path = "/repos/{repo_name}/subscription".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -584,8 +584,8 @@ class HttpClientActivityApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun activityStarRepoForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/user/starred/{owner}/{repo}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun activityStarRepoForAuthenticatedUser(accessToken: String?, repoName: kotlin.String) {
+        val path = "/user/starred/{repo_name}".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -593,8 +593,8 @@ class HttpClientActivityApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun activityUnstarRepoForAuthenticatedUser(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/user/starred/{owner}/{repo}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun activityUnstarRepoForAuthenticatedUser(accessToken: String?, repoName: kotlin.String) {
+        val path = "/user/starred/{repo_name}".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }

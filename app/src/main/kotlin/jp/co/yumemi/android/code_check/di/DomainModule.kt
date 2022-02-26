@@ -5,11 +5,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
+import jp.co.yumemi.android.code_check.domain.repositories.RepositoriesRepository
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 import jp.co.yumemi.android.code_check.domain.usecases.ClearRecentSearchesExecutor
 import jp.co.yumemi.android.code_check.domain.usecases.ClearRecentSearchesUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.GetRecentSearchesExecutor
 import jp.co.yumemi.android.code_check.domain.usecases.GetRecentSearchesUseCase
+import jp.co.yumemi.android.code_check.domain.usecases.GetRepositoryDetailsExecutor
+import jp.co.yumemi.android.code_check.domain.usecases.GetRepositoryDetailsUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoExecutor
 import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
 
@@ -31,4 +34,10 @@ class DomainModule {
     fun provideGetRecentSearchesUseCase(
         searchRepository: SearchRepository
     ): GetRecentSearchesUseCase = GetRecentSearchesExecutor(searchRepository)
+
+    @Provides
+    fun provideGetRepositoryDetailsUseCase(
+        repositoriesRepository: RepositoriesRepository,
+        errorHandler: ErrorHandler
+    ): GetRepositoryDetailsUseCase = GetRepositoryDetailsExecutor(repositoriesRepository, errorHandler)
 }

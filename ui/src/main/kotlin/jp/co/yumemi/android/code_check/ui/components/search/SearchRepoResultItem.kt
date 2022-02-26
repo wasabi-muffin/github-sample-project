@@ -23,7 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
-import jp.co.yumemi.android.code_check.domain.entities.SimpleGithubRepo
+import jp.co.yumemi.android.code_check.domain.entities.Repository
+import jp.co.yumemi.android.code_check.domain.entities.User
 import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.primitives.Github
 import jp.co.yumemi.android.code_check.ui.primitives.GithubTheme
@@ -121,15 +122,15 @@ fun SearchRepoResultItem(
 
 @Composable
 fun SearchRepoResultItem(
-    repo: SimpleGithubRepo,
+    repository: Repository,
     modifier: Modifier = Modifier
 ) = SearchRepoResultItem(
-    ownerIconUrl = repo.ownerIconUrl,
-    ownerName = repo.ownerName,
-    repoName = repo.name,
-    repoDescription = repo.description,
-    stargazersCount = repo.stargazersCount,
-    language = repo.language,
+    ownerIconUrl = repository.owner?.iconUrl,
+    ownerName = repository.owner?.name,
+    repoName = repository.name,
+    repoDescription = repository.description,
+    stargazersCount = repository.stargazersCount,
+    language = repository.language,
     modifier = modifier,
 )
 
@@ -138,13 +139,18 @@ fun SearchRepoResultItem(
 fun Preview_SearchRepoResultItem() {
     GithubTheme {
         SearchRepoResultItem(
-            repo = SimpleGithubRepo(
+            repository = Repository(
+                id = 1,
                 name = "name",
                 description = "description",
-                ownerName = "ownerName",
-                ownerIconUrl = null,
+                owner = User(id = 0, name = "name", username = "", iconUrl = null, description = null),
+                homepage = null,
                 language = "Kotlin",
-                stargazersCount = 1
+                stargazersCount = 1,
+                watchersCount = 1,
+                forksCount = 1,
+                openIssuesCount = 1,
+                license = null
             ),
             modifier = Modifier
                 .background(Color.White)

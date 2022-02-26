@@ -20,7 +20,7 @@
 
 package jp.co.yumemi.android.code_check.remote.models
 
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoPullsPullNumberReviewsCommentsApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNamePullsPullNumberReviewsCommentsApiModel
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -49,7 +49,7 @@ data class InlineObject125ApiModel(
     val event: InlineObject125ApiModel.Event? = null,
     /* Use the following table to specify the location, destination, and contents of the draft review comment. */
     @SerialName(value = "comments")
-    val comments: kotlin.collections.List<ReposOwnerRepoPullsPullNumberReviewsCommentsApiModel>? = null
+    val comments: kotlin.collections.List<ReposRepoNamePullsPullNumberReviewsCommentsApiModel>? = null
 ) {
 
     /**

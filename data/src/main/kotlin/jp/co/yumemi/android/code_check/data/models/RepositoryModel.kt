@@ -1,0 +1,15 @@
+package jp.co.yumemi.android.code_check.data.models
+
+data class RepositoryModel(
+    val id: Int,
+    val name: String,
+    val description: String?,
+    val owner: UserModel?,
+    val homepage: String?,
+    val language: String?,
+    val stargazersCount: Int,
+    val watchersCount: Int,
+    val forksCount: Int,
+    val openIssuesCount: Int,
+    val license: String?,
+)

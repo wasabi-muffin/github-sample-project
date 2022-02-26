@@ -20,8 +20,8 @@
 
 package jp.co.yumemi.android.code_check.remote.models
 
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoContentsPathAuthor1ApiModel
-import jp.co.yumemi.android.code_check.remote.models.ReposOwnerRepoContentsPathCommitter1ApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameContentsPathAuthor1ApiModel
+import jp.co.yumemi.android.code_check.remote.models.ReposRepoNameContentsPathCommitter1ApiModel
 
 import kotlinx.serialization.*
 
@@ -45,9 +45,9 @@ data class InlineObject79ApiModel(
     @SerialName(value = "branch")
     val branch: kotlin.String? = null,
     @SerialName(value = "committer")
-    val committer: ReposOwnerRepoContentsPathCommitter1ApiModel? = null,
+    val committer: ReposRepoNameContentsPathCommitter1ApiModel? = null,
     @SerialName(value = "author")
-    val author: ReposOwnerRepoContentsPathAuthor1ApiModel? = null
+    val author: ReposRepoNameContentsPathAuthor1ApiModel? = null
 ) {
 
 }
