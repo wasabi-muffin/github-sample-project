@@ -11,4 +11,3 @@ data class ReleaseModel(
     val createdAt: String,
     val publishedAt: String?,
 )
-
