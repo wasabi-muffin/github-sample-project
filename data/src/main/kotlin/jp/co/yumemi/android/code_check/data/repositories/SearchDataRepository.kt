@@ -5,8 +5,8 @@ import jp.co.yumemi.android.code_check.data.mappers.RepositoryDataMapper
 import jp.co.yumemi.android.code_check.data.sources.SearchLocalDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
 import jp.co.yumemi.android.code_check.domain.core.Pageable
-import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.entities.RecentSearch
+import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 
 class SearchDataRepository(

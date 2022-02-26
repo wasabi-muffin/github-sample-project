@@ -11,7 +11,6 @@ import jp.co.yumemi.android.code_check.data.models.RepoSearchResultModel
 import jp.co.yumemi.android.code_check.data.models.UserModel
 import jp.co.yumemi.android.code_check.data.sources.SearchLocalDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
-import jp.co.yumemi.android.code_check.domain.entities.User
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
 import jp.co.yumemi.android.code_check.test.runBlockingTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
