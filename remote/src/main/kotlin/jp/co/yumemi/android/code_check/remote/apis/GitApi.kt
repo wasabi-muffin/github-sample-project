@@ -35,7 +35,7 @@ interface GitApi {
     * @param request 
     * @return ShortMinusBlobApiModel
     */
-    suspend fun gitCreateBlob(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject85ApiModel): ShortMinusBlobApiModel
+    suspend fun gitCreateBlob(accessToken: String? = null, repoName: kotlin.String, request: InlineObject85ApiModel): ShortMinusBlobApiModel
 
     /**
     * Create a commit
@@ -45,7 +45,7 @@ interface GitApi {
     * @param request 
     * @return GitMinusCommitApiModel
     */
-    suspend fun gitCreateCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject86ApiModel): GitMinusCommitApiModel
+    suspend fun gitCreateCommit(accessToken: String? = null, repoName: kotlin.String, request: InlineObject86ApiModel): GitMinusCommitApiModel
 
     /**
     * Create a reference
@@ -55,7 +55,7 @@ interface GitApi {
     * @param request 
     * @return GitMinusRefApiModel
     */
-    suspend fun gitCreateRef(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject87ApiModel): GitMinusRefApiModel
+    suspend fun gitCreateRef(accessToken: String? = null, repoName: kotlin.String, request: InlineObject87ApiModel): GitMinusRefApiModel
 
     /**
     * Create a tag object
@@ -65,7 +65,7 @@ interface GitApi {
     * @param request 
     * @return GitMinusTagApiModel
     */
-    suspend fun gitCreateTag(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject89ApiModel): GitMinusTagApiModel
+    suspend fun gitCreateTag(accessToken: String? = null, repoName: kotlin.String, request: InlineObject89ApiModel): GitMinusTagApiModel
 
     /**
     * Create a tree
@@ -75,7 +75,7 @@ interface GitApi {
     * @param request 
     * @return GitMinusTreeApiModel
     */
-    suspend fun gitCreateTree(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject90ApiModel): GitMinusTreeApiModel
+    suspend fun gitCreateTree(accessToken: String? = null, repoName: kotlin.String, request: InlineObject90ApiModel): GitMinusTreeApiModel
 
     /**
     * Delete a reference
@@ -84,7 +84,7 @@ interface GitApi {
     *
     * @return void
     */
-    suspend fun gitDeleteRef(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String)
+    suspend fun gitDeleteRef(accessToken: String? = null, repoName: kotlin.String, ref: kotlin.String)
 
     /**
     * Get a blob
@@ -93,7 +93,7 @@ interface GitApi {
     *
     * @return BlobApiModel
     */
-    suspend fun gitGetBlob(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, fileSha: kotlin.String): BlobApiModel
+    suspend fun gitGetBlob(accessToken: String? = null, repoName: kotlin.String, fileSha: kotlin.String): BlobApiModel
 
     /**
     * Get a commit
@@ -102,7 +102,7 @@ interface GitApi {
     *
     * @return GitMinusCommitApiModel
     */
-    suspend fun gitGetCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String): GitMinusCommitApiModel
+    suspend fun gitGetCommit(accessToken: String? = null, repoName: kotlin.String, commitSha: kotlin.String): GitMinusCommitApiModel
 
     /**
     * Get a reference
@@ -111,7 +111,7 @@ interface GitApi {
     *
     * @return GitMinusRefApiModel
     */
-    suspend fun gitGetRef(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String): GitMinusRefApiModel
+    suspend fun gitGetRef(accessToken: String? = null, repoName: kotlin.String, ref: kotlin.String): GitMinusRefApiModel
 
     /**
     * Get a tag
@@ -120,7 +120,7 @@ interface GitApi {
     *
     * @return GitMinusTagApiModel
     */
-    suspend fun gitGetTag(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, tagSha: kotlin.String): GitMinusTagApiModel
+    suspend fun gitGetTag(accessToken: String? = null, repoName: kotlin.String, tagSha: kotlin.String): GitMinusTagApiModel
 
     /**
     * Get a tree
@@ -129,7 +129,7 @@ interface GitApi {
     *
     * @return GitMinusTreeApiModel
     */
-    suspend fun gitGetTree(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, treeSha: kotlin.String, recursive: kotlin.String? = null): GitMinusTreeApiModel
+    suspend fun gitGetTree(accessToken: String? = null, repoName: kotlin.String, treeSha: kotlin.String, recursive: kotlin.String? = null): GitMinusTreeApiModel
 
     /**
     * List matching references
@@ -138,7 +138,7 @@ interface GitApi {
     *
     * @return kotlin.collections.List<GitMinusRefApiModel>
     */
-    suspend fun gitListMatchingRefs(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GitMinusRefApiModel>
+    suspend fun gitListMatchingRefs(accessToken: String? = null, repoName: kotlin.String, ref: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<GitMinusRefApiModel>
 
     /**
     * Update a reference
@@ -148,15 +148,15 @@ interface GitApi {
     * @param request 
     * @return GitMinusRefApiModel
     */
-    suspend fun gitUpdateRef(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, request: InlineObject88ApiModel): GitMinusRefApiModel
+    suspend fun gitUpdateRef(accessToken: String? = null, repoName: kotlin.String, ref: kotlin.String, request: InlineObject88ApiModel): GitMinusRefApiModel
 
 }
 
 class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : GitApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun gitCreateBlob(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject85ApiModel): ShortMinusBlobApiModel {
-        val path = "/repos/{repo_name}/git/blobs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun gitCreateBlob(accessToken: String?, repoName: kotlin.String, request: InlineObject85ApiModel): ShortMinusBlobApiModel {
+        val path = "/repos/{repo_name}/git/blobs".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -165,8 +165,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitCreateCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject86ApiModel): GitMinusCommitApiModel {
-        val path = "/repos/{repo_name}/git/commits".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun gitCreateCommit(accessToken: String?, repoName: kotlin.String, request: InlineObject86ApiModel): GitMinusCommitApiModel {
+        val path = "/repos/{repo_name}/git/commits".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -175,8 +175,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitCreateRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject87ApiModel): GitMinusRefApiModel {
-        val path = "/repos/{repo_name}/git/refs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun gitCreateRef(accessToken: String?, repoName: kotlin.String, request: InlineObject87ApiModel): GitMinusRefApiModel {
+        val path = "/repos/{repo_name}/git/refs".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -185,8 +185,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitCreateTag(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject89ApiModel): GitMinusTagApiModel {
-        val path = "/repos/{repo_name}/git/tags".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun gitCreateTag(accessToken: String?, repoName: kotlin.String, request: InlineObject89ApiModel): GitMinusTagApiModel {
+        val path = "/repos/{repo_name}/git/tags".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -195,8 +195,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitCreateTree(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject90ApiModel): GitMinusTreeApiModel {
-        val path = "/repos/{repo_name}/git/trees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun gitCreateTree(accessToken: String?, repoName: kotlin.String, request: InlineObject90ApiModel): GitMinusTreeApiModel {
+        val path = "/repos/{repo_name}/git/trees".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -205,8 +205,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitDeleteRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String) {
-        val path = "/repos/{repo_name}/git/refs/{ref}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
+    override suspend fun gitDeleteRef(accessToken: String?, repoName: kotlin.String, ref: kotlin.String) {
+        val path = "/repos/{repo_name}/git/refs/{ref}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -214,8 +214,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitGetBlob(accessToken: String?, owner: kotlin.String, repo: kotlin.String, fileSha: kotlin.String): BlobApiModel {
-        val path = "/repos/{repo_name}/git/blobs/{file_sha}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"file_sha"+"}", "$fileSha")
+    override suspend fun gitGetBlob(accessToken: String?, repoName: kotlin.String, fileSha: kotlin.String): BlobApiModel {
+        val path = "/repos/{repo_name}/git/blobs/{file_sha}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"file_sha"+"}", "$fileSha")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -223,8 +223,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitGetCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String): GitMinusCommitApiModel {
-        val path = "/repos/{repo_name}/git/commits/{commit_sha}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"commit_sha"+"}", "$commitSha")
+    override suspend fun gitGetCommit(accessToken: String?, repoName: kotlin.String, commitSha: kotlin.String): GitMinusCommitApiModel {
+        val path = "/repos/{repo_name}/git/commits/{commit_sha}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"commit_sha"+"}", "$commitSha")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -232,8 +232,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitGetRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String): GitMinusRefApiModel {
-        val path = "/repos/{repo_name}/git/ref/{ref}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
+    override suspend fun gitGetRef(accessToken: String?, repoName: kotlin.String, ref: kotlin.String): GitMinusRefApiModel {
+        val path = "/repos/{repo_name}/git/ref/{ref}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -241,8 +241,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitGetTag(accessToken: String?, owner: kotlin.String, repo: kotlin.String, tagSha: kotlin.String): GitMinusTagApiModel {
-        val path = "/repos/{repo_name}/git/tags/{tag_sha}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"tag_sha"+"}", "$tagSha")
+    override suspend fun gitGetTag(accessToken: String?, repoName: kotlin.String, tagSha: kotlin.String): GitMinusTagApiModel {
+        val path = "/repos/{repo_name}/git/tags/{tag_sha}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"tag_sha"+"}", "$tagSha")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -250,8 +250,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitGetTree(accessToken: String?, owner: kotlin.String, repo: kotlin.String, treeSha: kotlin.String, recursive: kotlin.String?): GitMinusTreeApiModel {
-        val path = "/repos/{repo_name}/git/trees/{tree_sha}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"tree_sha"+"}", "$treeSha")
+    override suspend fun gitGetTree(accessToken: String?, repoName: kotlin.String, treeSha: kotlin.String, recursive: kotlin.String?): GitMinusTreeApiModel {
+        val path = "/repos/{repo_name}/git/trees/{tree_sha}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"tree_sha"+"}", "$treeSha")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -260,8 +260,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitListMatchingRefs(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GitMinusRefApiModel> {
-        val path = "/repos/{repo_name}/git/matching-refs/{ref}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
+    override suspend fun gitListMatchingRefs(accessToken: String?, repoName: kotlin.String, ref: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<GitMinusRefApiModel> {
+        val path = "/repos/{repo_name}/git/matching-refs/{ref}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -271,8 +271,8 @@ class HttpClientGitApi(private val httpClientProvider: HttpClientProvider) : Git
         }
     }
 
-    override suspend fun gitUpdateRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, request: InlineObject88ApiModel): GitMinusRefApiModel {
-        val path = "/repos/{repo_name}/git/refs/{ref}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
+    override suspend fun gitUpdateRef(accessToken: String?, repoName: kotlin.String, ref: kotlin.String, request: InlineObject88ApiModel): GitMinusRefApiModel {
+        val path = "/repos/{repo_name}/git/refs/{ref}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
             url { encodedPath = path }

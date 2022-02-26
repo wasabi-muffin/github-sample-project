@@ -34,7 +34,7 @@ interface SecretScanningApi {
     *
     * @return SecretMinusScanningMinusAlertApiModel
     */
-    suspend fun secretScanningGetAlert(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int): SecretMinusScanningMinusAlertApiModel
+    suspend fun secretScanningGetAlert(accessToken: String? = null, repoName: kotlin.String, alertNumber: kotlin.Int): SecretMinusScanningMinusAlertApiModel
 
     /**
     * List secret scanning alerts for an organization
@@ -52,7 +52,7 @@ interface SecretScanningApi {
     *
     * @return kotlin.collections.List<SecretMinusScanningMinusAlertApiModel>
     */
-    suspend fun secretScanningListAlertsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, state: kotlin.String? = null, secretType: kotlin.String? = null, resolution: kotlin.String? = null, page: kotlin.Int? = null, perPage: kotlin.Int? = null): kotlin.collections.List<SecretMinusScanningMinusAlertApiModel>
+    suspend fun secretScanningListAlertsForRepo(accessToken: String? = null, repoName: kotlin.String, state: kotlin.String? = null, secretType: kotlin.String? = null, resolution: kotlin.String? = null, page: kotlin.Int? = null, perPage: kotlin.Int? = null): kotlin.collections.List<SecretMinusScanningMinusAlertApiModel>
 
     /**
     * Update a secret scanning alert
@@ -62,15 +62,15 @@ interface SecretScanningApi {
     * @param request 
     * @return SecretMinusScanningMinusAlertApiModel
     */
-    suspend fun secretScanningUpdateAlert(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int, request: InlineObject135ApiModel): SecretMinusScanningMinusAlertApiModel
+    suspend fun secretScanningUpdateAlert(accessToken: String? = null, repoName: kotlin.String, alertNumber: kotlin.Int, request: InlineObject135ApiModel): SecretMinusScanningMinusAlertApiModel
 
 }
 
 class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProvider) : SecretScanningApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun secretScanningGetAlert(accessToken: String?, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int): SecretMinusScanningMinusAlertApiModel {
-        val path = "/repos/{repo_name}/secret-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
+    override suspend fun secretScanningGetAlert(accessToken: String?, repoName: kotlin.String, alertNumber: kotlin.Int): SecretMinusScanningMinusAlertApiModel {
+        val path = "/repos/{repo_name}/secret-scanning/alerts/{alert_number}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"alert_number"+"}", "$alertNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -92,8 +92,8 @@ class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProv
         }
     }
 
-    override suspend fun secretScanningListAlertsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, secretType: kotlin.String?, resolution: kotlin.String?, page: kotlin.Int?, perPage: kotlin.Int?): kotlin.collections.List<SecretMinusScanningMinusAlertApiModel> {
-        val path = "/repos/{repo_name}/secret-scanning/alerts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun secretScanningListAlertsForRepo(accessToken: String?, repoName: kotlin.String, state: kotlin.String?, secretType: kotlin.String?, resolution: kotlin.String?, page: kotlin.Int?, perPage: kotlin.Int?): kotlin.collections.List<SecretMinusScanningMinusAlertApiModel> {
+        val path = "/repos/{repo_name}/secret-scanning/alerts".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -106,8 +106,8 @@ class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProv
         }
     }
 
-    override suspend fun secretScanningUpdateAlert(accessToken: String?, owner: kotlin.String, repo: kotlin.String, alertNumber: kotlin.Int, request: InlineObject135ApiModel): SecretMinusScanningMinusAlertApiModel {
-        val path = "/repos/{repo_name}/secret-scanning/alerts/{alert_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"alert_number"+"}", "$alertNumber")
+    override suspend fun secretScanningUpdateAlert(accessToken: String?, repoName: kotlin.String, alertNumber: kotlin.Int, request: InlineObject135ApiModel): SecretMinusScanningMinusAlertApiModel {
+        val path = "/repos/{repo_name}/secret-scanning/alerts/{alert_number}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"alert_number"+"}", "$alertNumber")
 
         return httpClient.request {
             url { encodedPath = path }

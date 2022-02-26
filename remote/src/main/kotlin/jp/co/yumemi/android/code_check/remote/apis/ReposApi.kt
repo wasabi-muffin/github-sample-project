@@ -44,7 +44,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return RepositoryMinusInvitationApiModel
     */
-    suspend fun reposAddCollaborator(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, username: kotlin.String, request: InlineObject74ApiModel): RepositoryMinusInvitationApiModel
+    suspend fun reposAddCollaborator(accessToken: String? = null, repoName: kotlin.String, username: kotlin.String, request: InlineObject74ApiModel): RepositoryMinusInvitationApiModel
 
     /**
     * Check if a user is a repository collaborator
@@ -53,7 +53,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposCheckCollaborator(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, username: kotlin.String)
+    suspend fun reposCheckCollaborator(accessToken: String? = null, repoName: kotlin.String, username: kotlin.String)
 
     /**
     * Check if vulnerability alerts are enabled for a repository
@@ -62,7 +62,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposCheckVulnerabilityAlerts(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String)
+    suspend fun reposCheckVulnerabilityAlerts(accessToken: String? = null, repoName: kotlin.String)
 
     /**
     * List CODEOWNERS errors
@@ -71,7 +71,7 @@ interface ReposApi {
     *
     * @return CodeownersMinusErrorsApiModel
     */
-    suspend fun reposCodeownersErrors(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String? = null): CodeownersMinusErrorsApiModel
+    suspend fun reposCodeownersErrors(accessToken: String? = null, repoName: kotlin.String, ref: kotlin.String? = null): CodeownersMinusErrorsApiModel
 
     /**
     * Compare two commits
@@ -80,7 +80,7 @@ interface ReposApi {
     *
     * @return CommitMinusComparisonApiModel
     */
-    suspend fun reposCompareCommits(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, basehead: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): CommitMinusComparisonApiModel
+    suspend fun reposCompareCommits(accessToken: String? = null, repoName: kotlin.String, basehead: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): CommitMinusComparisonApiModel
 
     /**
     * Create an autolink reference for a repository
@@ -90,7 +90,7 @@ interface ReposApi {
     * @param request 
     * @return AutolinkApiModel
     */
-    suspend fun reposCreateAutolink(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject64ApiModel): AutolinkApiModel
+    suspend fun reposCreateAutolink(accessToken: String? = null, repoName: kotlin.String, request: InlineObject64ApiModel): AutolinkApiModel
 
     /**
     * Create a commit comment
@@ -100,7 +100,7 @@ interface ReposApi {
     * @param request 
     * @return CommitMinusCommentApiModel
     */
-    suspend fun reposCreateCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, request: InlineObject77ApiModel): CommitMinusCommentApiModel
+    suspend fun reposCreateCommitComment(accessToken: String? = null, repoName: kotlin.String, commitSha: kotlin.String, request: InlineObject77ApiModel): CommitMinusCommentApiModel
 
     /**
     * Create commit signature protection
@@ -109,7 +109,7 @@ interface ReposApi {
     *
     * @return ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
     */
-    suspend fun reposCreateCommitSignatureProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
+    suspend fun reposCreateCommitSignatureProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
 
     /**
     * Create a commit status
@@ -119,7 +119,7 @@ interface ReposApi {
     * @param request 
     * @return StatusApiModel
     */
-    suspend fun reposCreateCommitStatus(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String, request: InlineObject136ApiModel): StatusApiModel
+    suspend fun reposCreateCommitStatus(accessToken: String? = null, repoName: kotlin.String, sha: kotlin.String, request: InlineObject136ApiModel): StatusApiModel
 
     /**
     * Create a deploy key
@@ -129,7 +129,7 @@ interface ReposApi {
     * @param request 
     * @return DeployMinusKeyApiModel
     */
-    suspend fun reposCreateDeployKey(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject108ApiModel): DeployMinusKeyApiModel
+    suspend fun reposCreateDeployKey(accessToken: String? = null, repoName: kotlin.String, request: InlineObject108ApiModel): DeployMinusKeyApiModel
 
     /**
     * Create a deployment
@@ -139,7 +139,7 @@ interface ReposApi {
     * @param request 
     * @return DeploymentApiModel
     */
-    suspend fun reposCreateDeployment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject81ApiModel): DeploymentApiModel
+    suspend fun reposCreateDeployment(accessToken: String? = null, repoName: kotlin.String, request: InlineObject81ApiModel): DeploymentApiModel
 
     /**
     * Create a deployment status
@@ -149,7 +149,7 @@ interface ReposApi {
     * @param request 
     * @return DeploymentMinusStatusApiModel
     */
-    suspend fun reposCreateDeploymentStatus(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, request: InlineObject82ApiModel): DeploymentMinusStatusApiModel
+    suspend fun reposCreateDeploymentStatus(accessToken: String? = null, repoName: kotlin.String, deploymentId: kotlin.Int, request: InlineObject82ApiModel): DeploymentMinusStatusApiModel
 
     /**
     * Create a repository for the authenticated user
@@ -169,7 +169,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return FullMinusRepositoryApiModel
     */
-    suspend fun reposCreateFork(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject84ApiModel): FullMinusRepositoryApiModel
+    suspend fun reposCreateFork(accessToken: String? = null, repoName: kotlin.String, request: InlineObject84ApiModel): FullMinusRepositoryApiModel
 
     /**
     * Create an organization repository
@@ -189,7 +189,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return EnvironmentApiModel
     */
-    suspend fun reposCreateOrUpdateEnvironment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String, request: InlineObject83ApiModel): EnvironmentApiModel
+    suspend fun reposCreateOrUpdateEnvironment(accessToken: String? = null, repoName: kotlin.String, environmentName: kotlin.String, request: InlineObject83ApiModel): EnvironmentApiModel
 
     /**
     * Create or update file contents
@@ -199,7 +199,7 @@ interface ReposApi {
     * @param request 
     * @return FileMinusCommitApiModel
     */
-    suspend fun reposCreateOrUpdateFileContents(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject78ApiModel): FileMinusCommitApiModel
+    suspend fun reposCreateOrUpdateFileContents(accessToken: String? = null, repoName: kotlin.String, path: kotlin.String, request: InlineObject78ApiModel): FileMinusCommitApiModel
 
     /**
     * Create a release
@@ -209,7 +209,7 @@ interface ReposApi {
     * @param request 
     * @return ReleaseApiModel
     */
-    suspend fun reposCreateRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject130ApiModel): ReleaseApiModel
+    suspend fun reposCreateRelease(accessToken: String? = null, repoName: kotlin.String, request: InlineObject130ApiModel): ReleaseApiModel
 
     /**
     * Create a repository using a template
@@ -229,7 +229,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return HookApiModel
     */
-    suspend fun reposCreateWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject91ApiModel): HookApiModel
+    suspend fun reposCreateWebhook(accessToken: String? = null, repoName: kotlin.String, request: InlineObject91ApiModel): HookApiModel
 
     /**
     * Decline a repository invitation
@@ -247,7 +247,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDelete(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String)
+    suspend fun reposDelete(accessToken: String? = null, repoName: kotlin.String)
 
     /**
     * Delete access restrictions
@@ -256,7 +256,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteAccessRestrictions(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String)
+    suspend fun reposDeleteAccessRestrictions(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String)
 
     /**
     * Delete admin branch protection
@@ -265,7 +265,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteAdminBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String)
+    suspend fun reposDeleteAdminBranchProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String)
 
     /**
     * Delete an environment
@@ -274,7 +274,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteAnEnvironment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String)
+    suspend fun reposDeleteAnEnvironment(accessToken: String? = null, repoName: kotlin.String, environmentName: kotlin.String)
 
     /**
     * Delete an autolink reference from a repository
@@ -283,7 +283,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteAutolink(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, autolinkId: kotlin.Int)
+    suspend fun reposDeleteAutolink(accessToken: String? = null, repoName: kotlin.String, autolinkId: kotlin.Int)
 
     /**
     * Delete branch protection
@@ -292,7 +292,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String)
+    suspend fun reposDeleteBranchProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String)
 
     /**
     * Delete a commit comment
@@ -301,7 +301,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int)
+    suspend fun reposDeleteCommitComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int)
 
     /**
     * Delete commit signature protection
@@ -310,7 +310,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteCommitSignatureProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String)
+    suspend fun reposDeleteCommitSignatureProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String)
 
     /**
     * Delete a deploy key
@@ -319,7 +319,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteDeployKey(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, keyId: kotlin.Int)
+    suspend fun reposDeleteDeployKey(accessToken: String? = null, repoName: kotlin.String, keyId: kotlin.Int)
 
     /**
     * Delete a deployment
@@ -328,7 +328,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteDeployment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int)
+    suspend fun reposDeleteDeployment(accessToken: String? = null, repoName: kotlin.String, deploymentId: kotlin.Int)
 
     /**
     * Delete a file
@@ -338,7 +338,7 @@ interface ReposApi {
     * @param request 
     * @return FileMinusCommitApiModel
     */
-    suspend fun reposDeleteFile(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject79ApiModel): FileMinusCommitApiModel
+    suspend fun reposDeleteFile(accessToken: String? = null, repoName: kotlin.String, path: kotlin.String, request: InlineObject79ApiModel): FileMinusCommitApiModel
 
     /**
     * Delete a repository invitation
@@ -347,7 +347,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteInvitation(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, invitationId: kotlin.Int)
+    suspend fun reposDeleteInvitation(accessToken: String? = null, repoName: kotlin.String, invitationId: kotlin.Int)
 
     /**
     * Delete pull request review protection
@@ -356,7 +356,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeletePullRequestReviewProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String)
+    suspend fun reposDeletePullRequestReviewProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String)
 
     /**
     * Delete a release
@@ -365,7 +365,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int)
+    suspend fun reposDeleteRelease(accessToken: String? = null, repoName: kotlin.String, releaseId: kotlin.Int)
 
     /**
     * Delete a release asset
@@ -374,7 +374,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteReleaseAsset(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int)
+    suspend fun reposDeleteReleaseAsset(accessToken: String? = null, repoName: kotlin.String, assetId: kotlin.Int)
 
     /**
     * Delete a repository webhook
@@ -383,7 +383,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDeleteWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int)
+    suspend fun reposDeleteWebhook(accessToken: String? = null, repoName: kotlin.String, hookId: kotlin.Int)
 
     /**
     * Disable automated security fixes
@@ -392,7 +392,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDisableAutomatedSecurityFixes(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String)
+    suspend fun reposDisableAutomatedSecurityFixes(accessToken: String? = null, repoName: kotlin.String)
 
     /**
     * Disable Git LFS for a repository
@@ -401,7 +401,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDisableLfsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String)
+    suspend fun reposDisableLfsForRepo(accessToken: String? = null, repoName: kotlin.String)
 
     /**
     * Disable vulnerability alerts
@@ -410,7 +410,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDisableVulnerabilityAlerts(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String)
+    suspend fun reposDisableVulnerabilityAlerts(accessToken: String? = null, repoName: kotlin.String)
 
     /**
     * Download a repository archive (tar)
@@ -419,7 +419,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDownloadTarballArchive(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String)
+    suspend fun reposDownloadTarballArchive(accessToken: String? = null, repoName: kotlin.String, ref: kotlin.String)
 
     /**
     * Download a repository archive (zip)
@@ -428,7 +428,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposDownloadZipballArchive(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String)
+    suspend fun reposDownloadZipballArchive(accessToken: String? = null, repoName: kotlin.String, ref: kotlin.String)
 
     /**
     * Enable automated security fixes
@@ -437,7 +437,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposEnableAutomatedSecurityFixes(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String)
+    suspend fun reposEnableAutomatedSecurityFixes(accessToken: String? = null, repoName: kotlin.String)
 
     /**
     * Enable Git LFS for a repository
@@ -446,7 +446,7 @@ interface ReposApi {
     *
     * @return kotlin.Any
     */
-    suspend fun reposEnableLfsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.Any
+    suspend fun reposEnableLfsForRepo(accessToken: String? = null, repoName: kotlin.String): kotlin.Any
 
     /**
     * Enable vulnerability alerts
@@ -455,7 +455,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposEnableVulnerabilityAlerts(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String)
+    suspend fun reposEnableVulnerabilityAlerts(accessToken: String? = null, repoName: kotlin.String)
 
     /**
     * Generate release notes content for a release
@@ -465,7 +465,7 @@ interface ReposApi {
     * @param request 
     * @return ReleaseMinusNotesMinusContentApiModel
     */
-    suspend fun reposGenerateReleaseNotes(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject132ApiModel): ReleaseMinusNotesMinusContentApiModel
+    suspend fun reposGenerateReleaseNotes(accessToken: String? = null, repoName: kotlin.String, request: InlineObject132ApiModel): ReleaseMinusNotesMinusContentApiModel
 
     /**
     * Get a repository
@@ -474,7 +474,7 @@ interface ReposApi {
     *
     * @return FullMinusRepositoryApiModel
     */
-    suspend fun reposGet(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): FullMinusRepositoryApiModel
+    suspend fun reposGet(accessToken: String? = null, repoName: kotlin.String): FullMinusRepositoryApiModel
 
     /**
     * Get access restrictions
@@ -483,7 +483,7 @@ interface ReposApi {
     *
     * @return BranchMinusRestrictionMinusPolicyApiModel
     */
-    suspend fun reposGetAccessRestrictions(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusRestrictionMinusPolicyApiModel
+    suspend fun reposGetAccessRestrictions(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String): BranchMinusRestrictionMinusPolicyApiModel
 
     /**
     * Get admin branch protection
@@ -492,7 +492,7 @@ interface ReposApi {
     *
     * @return ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
     */
-    suspend fun reposGetAdminBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
+    suspend fun reposGetAdminBranchProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
 
     /**
     * Get all environments
@@ -501,7 +501,7 @@ interface ReposApi {
     *
     * @return InlineResponse20023ApiModel
     */
-    suspend fun reposGetAllEnvironments(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): InlineResponse20023ApiModel
+    suspend fun reposGetAllEnvironments(accessToken: String? = null, repoName: kotlin.String): InlineResponse20023ApiModel
 
     /**
     * Get all repository topics
@@ -510,7 +510,7 @@ interface ReposApi {
     *
     * @return TopicApiModel
     */
-    suspend fun reposGetAllTopics(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): TopicApiModel
+    suspend fun reposGetAllTopics(accessToken: String? = null, repoName: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): TopicApiModel
 
     /**
     * Get an autolink reference of a repository
@@ -519,7 +519,7 @@ interface ReposApi {
     *
     * @return AutolinkApiModel
     */
-    suspend fun reposGetAutolink(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, autolinkId: kotlin.Int): AutolinkApiModel
+    suspend fun reposGetAutolink(accessToken: String? = null, repoName: kotlin.String, autolinkId: kotlin.Int): AutolinkApiModel
 
     /**
     * Get a branch
@@ -528,7 +528,7 @@ interface ReposApi {
     *
     * @return BranchMinusWithMinusProtectionApiModel
     */
-    suspend fun reposGetBranch(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusWithMinusProtectionApiModel
+    suspend fun reposGetBranch(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String): BranchMinusWithMinusProtectionApiModel
 
     /**
     * Get branch protection
@@ -537,7 +537,7 @@ interface ReposApi {
     *
     * @return BranchMinusProtectionApiModel
     */
-    suspend fun reposGetBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusProtectionApiModel
+    suspend fun reposGetBranchProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String): BranchMinusProtectionApiModel
 
     /**
     * Get repository clones
@@ -546,7 +546,7 @@ interface ReposApi {
     *
     * @return CloneMinusTrafficApiModel
     */
-    suspend fun reposGetClones(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, per: kotlin.String? = null): CloneMinusTrafficApiModel
+    suspend fun reposGetClones(accessToken: String? = null, repoName: kotlin.String, per: kotlin.String? = null): CloneMinusTrafficApiModel
 
     /**
     * Get repository permissions for a user
@@ -555,7 +555,7 @@ interface ReposApi {
     *
     * @return RepositoryMinusCollaboratorMinusPermissionApiModel
     */
-    suspend fun reposGetCollaboratorPermissionLevel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, username: kotlin.String): RepositoryMinusCollaboratorMinusPermissionApiModel
+    suspend fun reposGetCollaboratorPermissionLevel(accessToken: String? = null, repoName: kotlin.String, username: kotlin.String): RepositoryMinusCollaboratorMinusPermissionApiModel
 
     /**
     * Get the combined status for a specific reference
@@ -564,7 +564,7 @@ interface ReposApi {
     *
     * @return CombinedMinusCommitMinusStatusApiModel
     */
-    suspend fun reposGetCombinedStatusForRef(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): CombinedMinusCommitMinusStatusApiModel
+    suspend fun reposGetCombinedStatusForRef(accessToken: String? = null, repoName: kotlin.String, ref: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): CombinedMinusCommitMinusStatusApiModel
 
     /**
     * Get a commit
@@ -573,7 +573,7 @@ interface ReposApi {
     *
     * @return CommitApiModel
     */
-    suspend fun reposGetCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): CommitApiModel
+    suspend fun reposGetCommit(accessToken: String? = null, repoName: kotlin.String, ref: kotlin.String, page: kotlin.Int? = null, perPage: kotlin.Int? = null): CommitApiModel
 
     /**
     * Get the last year of commit activity
@@ -582,7 +582,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<CommitMinusActivityApiModel>
     */
-    suspend fun reposGetCommitActivityStats(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<CommitMinusActivityApiModel>
+    suspend fun reposGetCommitActivityStats(accessToken: String? = null, repoName: kotlin.String): kotlin.collections.List<CommitMinusActivityApiModel>
 
     /**
     * Get a commit comment
@@ -591,7 +591,7 @@ interface ReposApi {
     *
     * @return CommitMinusCommentApiModel
     */
-    suspend fun reposGetCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): CommitMinusCommentApiModel
+    suspend fun reposGetCommitComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int): CommitMinusCommentApiModel
 
     /**
     * Get commit signature protection
@@ -600,7 +600,7 @@ interface ReposApi {
     *
     * @return ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
     */
-    suspend fun reposGetCommitSignatureProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
+    suspend fun reposGetCommitSignatureProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
 
     /**
     * Get community profile metrics
@@ -609,7 +609,7 @@ interface ReposApi {
     *
     * @return CommunityMinusProfileApiModel
     */
-    suspend fun reposGetCommunityProfileMetrics(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): CommunityMinusProfileApiModel
+    suspend fun reposGetCommunityProfileMetrics(accessToken: String? = null, repoName: kotlin.String): CommunityMinusProfileApiModel
 
     /**
     * Get repository content
@@ -618,7 +618,7 @@ interface ReposApi {
     *
     * @return ContentMinusTreeApiModel
     */
-    suspend fun reposGetContent(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, ref: kotlin.String? = null): ContentMinusTreeApiModel
+    suspend fun reposGetContent(accessToken: String? = null, repoName: kotlin.String, path: kotlin.String, ref: kotlin.String? = null): ContentMinusTreeApiModel
 
     /**
     * Get all contributor commit activity
@@ -627,7 +627,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<ContributorMinusActivityApiModel>
     */
-    suspend fun reposGetContributorsStats(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContributorMinusActivityApiModel>
+    suspend fun reposGetContributorsStats(accessToken: String? = null, repoName: kotlin.String): kotlin.collections.List<ContributorMinusActivityApiModel>
 
     /**
     * Get a deploy key
@@ -636,7 +636,7 @@ interface ReposApi {
     *
     * @return DeployMinusKeyApiModel
     */
-    suspend fun reposGetDeployKey(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, keyId: kotlin.Int): DeployMinusKeyApiModel
+    suspend fun reposGetDeployKey(accessToken: String? = null, repoName: kotlin.String, keyId: kotlin.Int): DeployMinusKeyApiModel
 
     /**
     * Get a deployment
@@ -645,7 +645,7 @@ interface ReposApi {
     *
     * @return DeploymentApiModel
     */
-    suspend fun reposGetDeployment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int): DeploymentApiModel
+    suspend fun reposGetDeployment(accessToken: String? = null, repoName: kotlin.String, deploymentId: kotlin.Int): DeploymentApiModel
 
     /**
     * Get a deployment status
@@ -654,7 +654,7 @@ interface ReposApi {
     *
     * @return DeploymentMinusStatusApiModel
     */
-    suspend fun reposGetDeploymentStatus(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, statusId: kotlin.Int): DeploymentMinusStatusApiModel
+    suspend fun reposGetDeploymentStatus(accessToken: String? = null, repoName: kotlin.String, deploymentId: kotlin.Int, statusId: kotlin.Int): DeploymentMinusStatusApiModel
 
     /**
     * Get an environment
@@ -663,7 +663,7 @@ interface ReposApi {
     *
     * @return EnvironmentApiModel
     */
-    suspend fun reposGetEnvironment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String): EnvironmentApiModel
+    suspend fun reposGetEnvironment(accessToken: String? = null, repoName: kotlin.String, environmentName: kotlin.String): EnvironmentApiModel
 
     /**
     * Get latest Pages build
@@ -672,7 +672,7 @@ interface ReposApi {
     *
     * @return PageMinusBuildApiModel
     */
-    suspend fun reposGetLatestPagesBuild(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): PageMinusBuildApiModel
+    suspend fun reposGetLatestPagesBuild(accessToken: String? = null, repoName: kotlin.String): PageMinusBuildApiModel
 
     /**
     * Get the latest release
@@ -681,7 +681,7 @@ interface ReposApi {
     *
     * @return ReleaseApiModel
     */
-    suspend fun reposGetLatestRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ReleaseApiModel
+    suspend fun reposGetLatestRelease(accessToken: String? = null, repoName: kotlin.String): ReleaseApiModel
 
     /**
     * Get GitHub Pages build
@@ -690,7 +690,7 @@ interface ReposApi {
     *
     * @return PageMinusBuildApiModel
     */
-    suspend fun reposGetPagesBuild(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, buildId: kotlin.Int): PageMinusBuildApiModel
+    suspend fun reposGetPagesBuild(accessToken: String? = null, repoName: kotlin.String, buildId: kotlin.Int): PageMinusBuildApiModel
 
     /**
     * Get a DNS health check for GitHub Pages
@@ -699,7 +699,7 @@ interface ReposApi {
     *
     * @return PagesMinusHealthMinusCheckApiModel
     */
-    suspend fun reposGetPagesHealthCheck(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): PagesMinusHealthMinusCheckApiModel
+    suspend fun reposGetPagesHealthCheck(accessToken: String? = null, repoName: kotlin.String): PagesMinusHealthMinusCheckApiModel
 
     /**
     * Get the weekly commit count
@@ -708,7 +708,7 @@ interface ReposApi {
     *
     * @return ParticipationMinusStatsApiModel
     */
-    suspend fun reposGetParticipationStats(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): ParticipationMinusStatsApiModel
+    suspend fun reposGetParticipationStats(accessToken: String? = null, repoName: kotlin.String): ParticipationMinusStatsApiModel
 
     /**
     * Get pull request review protection
@@ -717,7 +717,7 @@ interface ReposApi {
     *
     * @return ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel
     */
-    suspend fun reposGetPullRequestReviewProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel
+    suspend fun reposGetPullRequestReviewProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel
 
     /**
     * Get the hourly commit count for each day
@@ -726,7 +726,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<kotlin.collections.List<kotlin.Int>>
     */
-    suspend fun reposGetPunchCardStats(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<kotlin.collections.List<kotlin.Int>>
+    suspend fun reposGetPunchCardStats(accessToken: String? = null, repoName: kotlin.String): kotlin.collections.List<kotlin.collections.List<kotlin.Int>>
 
     /**
     * Get a repository README
@@ -735,7 +735,7 @@ interface ReposApi {
     *
     * @return ContentMinusFileApiModel
     */
-    suspend fun reposGetReadme(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String? = null): ContentMinusFileApiModel
+    suspend fun reposGetReadme(accessToken: String? = null, repoName: kotlin.String, ref: kotlin.String? = null): ContentMinusFileApiModel
 
     /**
     * Get a repository README for a directory
@@ -744,7 +744,7 @@ interface ReposApi {
     *
     * @return ContentMinusFileApiModel
     */
-    suspend fun reposGetReadmeInDirectory(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, dir: kotlin.String, ref: kotlin.String? = null): ContentMinusFileApiModel
+    suspend fun reposGetReadmeInDirectory(accessToken: String? = null, repoName: kotlin.String, dir: kotlin.String, ref: kotlin.String? = null): ContentMinusFileApiModel
 
     /**
     * Get a release
@@ -753,7 +753,7 @@ interface ReposApi {
     *
     * @return ReleaseApiModel
     */
-    suspend fun reposGetRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int): ReleaseApiModel
+    suspend fun reposGetRelease(accessToken: String? = null, repoName: kotlin.String, releaseId: kotlin.Int): ReleaseApiModel
 
     /**
     * Get a release asset
@@ -762,7 +762,7 @@ interface ReposApi {
     *
     * @return ReleaseMinusAssetApiModel
     */
-    suspend fun reposGetReleaseAsset(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int): ReleaseMinusAssetApiModel
+    suspend fun reposGetReleaseAsset(accessToken: String? = null, repoName: kotlin.String, assetId: kotlin.Int): ReleaseMinusAssetApiModel
 
     /**
     * Get a release by tag name
@@ -771,7 +771,7 @@ interface ReposApi {
     *
     * @return ReleaseApiModel
     */
-    suspend fun reposGetReleaseByTag(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, tag: kotlin.String): ReleaseApiModel
+    suspend fun reposGetReleaseByTag(accessToken: String? = null, repoName: kotlin.String, tag: kotlin.String): ReleaseApiModel
 
     /**
     * Get status checks protection
@@ -780,7 +780,7 @@ interface ReposApi {
     *
     * @return StatusMinusCheckMinusPolicyApiModel
     */
-    suspend fun reposGetStatusChecksProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): StatusMinusCheckMinusPolicyApiModel
+    suspend fun reposGetStatusChecksProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String): StatusMinusCheckMinusPolicyApiModel
 
     /**
     * Get top referral paths
@@ -789,7 +789,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<ContentMinusTrafficApiModel>
     */
-    suspend fun reposGetTopPaths(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContentMinusTrafficApiModel>
+    suspend fun reposGetTopPaths(accessToken: String? = null, repoName: kotlin.String): kotlin.collections.List<ContentMinusTrafficApiModel>
 
     /**
     * Get top referral sources
@@ -798,7 +798,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<ReferrerMinusTrafficApiModel>
     */
-    suspend fun reposGetTopReferrers(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ReferrerMinusTrafficApiModel>
+    suspend fun reposGetTopReferrers(accessToken: String? = null, repoName: kotlin.String): kotlin.collections.List<ReferrerMinusTrafficApiModel>
 
     /**
     * Get page views
@@ -807,7 +807,7 @@ interface ReposApi {
     *
     * @return ViewMinusTrafficApiModel
     */
-    suspend fun reposGetViews(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, per: kotlin.String? = null): ViewMinusTrafficApiModel
+    suspend fun reposGetViews(accessToken: String? = null, repoName: kotlin.String, per: kotlin.String? = null): ViewMinusTrafficApiModel
 
     /**
     * Get a repository webhook
@@ -816,7 +816,7 @@ interface ReposApi {
     *
     * @return HookApiModel
     */
-    suspend fun reposGetWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): HookApiModel
+    suspend fun reposGetWebhook(accessToken: String? = null, repoName: kotlin.String, hookId: kotlin.Int): HookApiModel
 
     /**
     * Get a webhook configuration for a repository
@@ -825,7 +825,7 @@ interface ReposApi {
     *
     * @return WebhookMinusConfigApiModel
     */
-    suspend fun reposGetWebhookConfigForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigApiModel
+    suspend fun reposGetWebhookConfigForRepo(accessToken: String? = null, repoName: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigApiModel
 
     /**
     * List all autolinks of a repository
@@ -834,7 +834,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<AutolinkApiModel>
     */
-    suspend fun reposListAutolinks(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int? = null): kotlin.collections.List<AutolinkApiModel>
+    suspend fun reposListAutolinks(accessToken: String? = null, repoName: kotlin.String, page: kotlin.Int? = null): kotlin.collections.List<AutolinkApiModel>
 
     /**
     * List branches
@@ -843,7 +843,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<ShortMinusBranchApiModel>
     */
-    suspend fun reposListBranches(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, isProtected: kotlin.Boolean? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ShortMinusBranchApiModel>
+    suspend fun reposListBranches(accessToken: String? = null, repoName: kotlin.String, isProtected: kotlin.Boolean? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ShortMinusBranchApiModel>
 
     /**
     * List branches for HEAD commit
@@ -852,7 +852,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<BranchMinusShortApiModel>
     */
-    suspend fun reposListBranchesForHeadCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String): kotlin.collections.List<BranchMinusShortApiModel>
+    suspend fun reposListBranchesForHeadCommit(accessToken: String? = null, repoName: kotlin.String, commitSha: kotlin.String): kotlin.collections.List<BranchMinusShortApiModel>
 
     /**
     * List repository collaborators
@@ -861,7 +861,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<CollaboratorApiModel>
     */
-    suspend fun reposListCollaborators(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, affiliation: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CollaboratorApiModel>
+    suspend fun reposListCollaborators(accessToken: String? = null, repoName: kotlin.String, affiliation: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CollaboratorApiModel>
 
     /**
     * List commit comments
@@ -870,7 +870,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<CommitMinusCommentApiModel>
     */
-    suspend fun reposListCommentsForCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitMinusCommentApiModel>
+    suspend fun reposListCommentsForCommit(accessToken: String? = null, repoName: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitMinusCommentApiModel>
 
     /**
     * List commit comments for a repository
@@ -879,7 +879,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<CommitMinusCommentApiModel>
     */
-    suspend fun reposListCommitCommentsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitMinusCommentApiModel>
+    suspend fun reposListCommitCommentsForRepo(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitMinusCommentApiModel>
 
     /**
     * List commit statuses for a reference
@@ -888,7 +888,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<StatusApiModel>
     */
-    suspend fun reposListCommitStatusesForRef(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<StatusApiModel>
+    suspend fun reposListCommitStatusesForRef(accessToken: String? = null, repoName: kotlin.String, ref: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<StatusApiModel>
 
     /**
     * List commits
@@ -897,7 +897,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<CommitApiModel>
     */
-    suspend fun reposListCommits(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String? = null, path: kotlin.String? = null, author: kotlin.String? = null, since: kotlin.String? = null, until: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitApiModel>
+    suspend fun reposListCommits(accessToken: String? = null, repoName: kotlin.String, sha: kotlin.String? = null, path: kotlin.String? = null, author: kotlin.String? = null, since: kotlin.String? = null, until: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<CommitApiModel>
 
     /**
     * List repository contributors
@@ -906,7 +906,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<ContributorApiModel>
     */
-    suspend fun reposListContributors(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, anon: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ContributorApiModel>
+    suspend fun reposListContributors(accessToken: String? = null, repoName: kotlin.String, anon: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ContributorApiModel>
 
     /**
     * List deploy keys
@@ -915,7 +915,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<DeployMinusKeyApiModel>
     */
-    suspend fun reposListDeployKeys(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeployMinusKeyApiModel>
+    suspend fun reposListDeployKeys(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeployMinusKeyApiModel>
 
     /**
     * List deployment statuses
@@ -924,7 +924,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<DeploymentMinusStatusApiModel>
     */
-    suspend fun reposListDeploymentStatuses(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeploymentMinusStatusApiModel>
+    suspend fun reposListDeploymentStatuses(accessToken: String? = null, repoName: kotlin.String, deploymentId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeploymentMinusStatusApiModel>
 
     /**
     * List deployments
@@ -933,7 +933,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<DeploymentApiModel>
     */
-    suspend fun reposListDeployments(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String? = null, ref: kotlin.String? = null, task: kotlin.String? = null, environment: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeploymentApiModel>
+    suspend fun reposListDeployments(accessToken: String? = null, repoName: kotlin.String, sha: kotlin.String? = null, ref: kotlin.String? = null, task: kotlin.String? = null, environment: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<DeploymentApiModel>
 
     /**
     * List repositories for the authenticated user
@@ -969,7 +969,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<MinimalMinusRepositoryApiModel>
     */
-    suspend fun reposListForks(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryApiModel>
+    suspend fun reposListForks(accessToken: String? = null, repoName: kotlin.String, sort: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MinimalMinusRepositoryApiModel>
 
     /**
     * List repository invitations
@@ -978,7 +978,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<RepositoryMinusInvitationApiModel>
     */
-    suspend fun reposListInvitations(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<RepositoryMinusInvitationApiModel>
+    suspend fun reposListInvitations(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<RepositoryMinusInvitationApiModel>
 
     /**
     * List repository invitations for the authenticated user
@@ -996,7 +996,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.Map<kotlin.String, kotlin.Int>
     */
-    suspend fun reposListLanguages(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): kotlin.collections.Map<kotlin.String, kotlin.Int>
+    suspend fun reposListLanguages(accessToken: String? = null, repoName: kotlin.String): kotlin.collections.Map<kotlin.String, kotlin.Int>
 
     /**
     * List GitHub Pages builds
@@ -1005,7 +1005,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<PageMinusBuildApiModel>
     */
-    suspend fun reposListPagesBuilds(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PageMinusBuildApiModel>
+    suspend fun reposListPagesBuilds(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PageMinusBuildApiModel>
 
     /**
     * List public repositories
@@ -1023,7 +1023,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<PullMinusRequestMinusSimpleApiModel>
     */
-    suspend fun reposListPullRequestsAssociatedWithCommit(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusSimpleApiModel>
+    suspend fun reposListPullRequestsAssociatedWithCommit(accessToken: String? = null, repoName: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<PullMinusRequestMinusSimpleApiModel>
 
     /**
     * List release assets
@@ -1032,7 +1032,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<ReleaseMinusAssetApiModel>
     */
-    suspend fun reposListReleaseAssets(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReleaseMinusAssetApiModel>
+    suspend fun reposListReleaseAssets(accessToken: String? = null, repoName: kotlin.String, releaseId: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReleaseMinusAssetApiModel>
 
     /**
     * List releases
@@ -1041,7 +1041,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<ReleaseApiModel>
     */
-    suspend fun reposListReleases(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReleaseApiModel>
+    suspend fun reposListReleases(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ReleaseApiModel>
 
     /**
     * List repository tags
@@ -1050,7 +1050,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<TagApiModel>
     */
-    suspend fun reposListTags(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TagApiModel>
+    suspend fun reposListTags(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TagApiModel>
 
     /**
     * List repository teams
@@ -1059,7 +1059,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<TeamApiModel>
     */
-    suspend fun reposListTeams(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamApiModel>
+    suspend fun reposListTeams(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<TeamApiModel>
 
     /**
     * List repository webhooks
@@ -1068,7 +1068,7 @@ interface ReposApi {
     *
     * @return kotlin.collections.List<HookApiModel>
     */
-    suspend fun reposListWebhooks(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<HookApiModel>
+    suspend fun reposListWebhooks(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<HookApiModel>
 
     /**
     * Merge a branch
@@ -1078,7 +1078,7 @@ interface ReposApi {
     * @param request 
     * @return CommitApiModel
     */
-    suspend fun reposMerge(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject112ApiModel): CommitApiModel
+    suspend fun reposMerge(accessToken: String? = null, repoName: kotlin.String, request: InlineObject112ApiModel): CommitApiModel
 
     /**
     * Sync a fork branch with the upstream repository
@@ -1088,7 +1088,7 @@ interface ReposApi {
     * @param request 
     * @return MergedMinusUpstreamApiModel
     */
-    suspend fun reposMergeUpstream(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject111ApiModel): MergedMinusUpstreamApiModel
+    suspend fun reposMergeUpstream(accessToken: String? = null, repoName: kotlin.String, request: InlineObject111ApiModel): MergedMinusUpstreamApiModel
 
     /**
     * Ping a repository webhook
@@ -1097,7 +1097,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposPingWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int)
+    suspend fun reposPingWebhook(accessToken: String? = null, repoName: kotlin.String, hookId: kotlin.Int)
 
     /**
     * Redeliver a delivery for a repository webhook
@@ -1106,7 +1106,7 @@ interface ReposApi {
     *
     * @return kotlin.Any
     */
-    suspend fun reposRedeliverWebhookDelivery(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, deliveryId: kotlin.Int): kotlin.Any
+    suspend fun reposRedeliverWebhookDelivery(accessToken: String? = null, repoName: kotlin.String, hookId: kotlin.Int, deliveryId: kotlin.Int): kotlin.Any
 
     /**
     * Remove a repository collaborator
@@ -1115,7 +1115,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposRemoveCollaborator(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, username: kotlin.String)
+    suspend fun reposRemoveCollaborator(accessToken: String? = null, repoName: kotlin.String, username: kotlin.String)
 
     /**
     * Remove status check protection
@@ -1124,7 +1124,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposRemoveStatusCheckProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String)
+    suspend fun reposRemoveStatusCheckProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String)
 
     /**
     * Rename a branch
@@ -1134,7 +1134,7 @@ interface ReposApi {
     * @param request 
     * @return BranchMinusWithMinusProtectionApiModel
     */
-    suspend fun reposRenameBranch(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject68ApiModel): BranchMinusWithMinusProtectionApiModel
+    suspend fun reposRenameBranch(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String, request: InlineObject68ApiModel): BranchMinusWithMinusProtectionApiModel
 
     /**
     * Replace all repository topics
@@ -1144,7 +1144,7 @@ interface ReposApi {
     * @param request 
     * @return TopicApiModel
     */
-    suspend fun reposReplaceAllTopics(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject138ApiModel): TopicApiModel
+    suspend fun reposReplaceAllTopics(accessToken: String? = null, repoName: kotlin.String, request: InlineObject138ApiModel): TopicApiModel
 
     /**
     * Request a GitHub Pages build
@@ -1153,7 +1153,7 @@ interface ReposApi {
     *
     * @return PageMinusBuildMinusStatusApiModel
     */
-    suspend fun reposRequestPagesBuild(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): PageMinusBuildMinusStatusApiModel
+    suspend fun reposRequestPagesBuild(accessToken: String? = null, repoName: kotlin.String): PageMinusBuildMinusStatusApiModel
 
     /**
     * Set admin branch protection
@@ -1162,7 +1162,7 @@ interface ReposApi {
     *
     * @return ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
     */
-    suspend fun reposSetAdminBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
+    suspend fun reposSetAdminBranchProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel
 
     /**
     * Test the push repository webhook
@@ -1171,7 +1171,7 @@ interface ReposApi {
     *
     * @return void
     */
-    suspend fun reposTestPushWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int)
+    suspend fun reposTestPushWebhook(accessToken: String? = null, repoName: kotlin.String, hookId: kotlin.Int)
 
     /**
     * Transfer a repository
@@ -1181,7 +1181,7 @@ interface ReposApi {
     * @param request 
     * @return MinimalMinusRepositoryApiModel
     */
-    suspend fun reposTransfer(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject139ApiModel): MinimalMinusRepositoryApiModel
+    suspend fun reposTransfer(accessToken: String? = null, repoName: kotlin.String, request: InlineObject139ApiModel): MinimalMinusRepositoryApiModel
 
     /**
     * Update a repository
@@ -1191,7 +1191,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return FullMinusRepositoryApiModel
     */
-    suspend fun reposUpdate(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject57ApiModel): FullMinusRepositoryApiModel
+    suspend fun reposUpdate(accessToken: String? = null, repoName: kotlin.String, request: InlineObject57ApiModel): FullMinusRepositoryApiModel
 
     /**
     * Update branch protection
@@ -1201,7 +1201,7 @@ interface ReposApi {
     * @param request 
     * @return ProtectedMinusBranchApiModel
     */
-    suspend fun reposUpdateBranchProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject65ApiModel): ProtectedMinusBranchApiModel
+    suspend fun reposUpdateBranchProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String, request: InlineObject65ApiModel): ProtectedMinusBranchApiModel
 
     /**
     * Update a commit comment
@@ -1211,7 +1211,7 @@ interface ReposApi {
     * @param request 
     * @return CommitMinusCommentApiModel
     */
-    suspend fun reposUpdateCommitComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject75ApiModel): CommitMinusCommentApiModel
+    suspend fun reposUpdateCommitComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject75ApiModel): CommitMinusCommentApiModel
 
     /**
     * Update a repository invitation
@@ -1221,7 +1221,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return RepositoryMinusInvitationApiModel
     */
-    suspend fun reposUpdateInvitation(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, invitationId: kotlin.Int, request: InlineObject98ApiModel): RepositoryMinusInvitationApiModel
+    suspend fun reposUpdateInvitation(accessToken: String? = null, repoName: kotlin.String, invitationId: kotlin.Int, request: InlineObject98ApiModel): RepositoryMinusInvitationApiModel
 
     /**
     * Update pull request review protection
@@ -1231,7 +1231,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel
     */
-    suspend fun reposUpdatePullRequestReviewProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject66ApiModel): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel
+    suspend fun reposUpdatePullRequestReviewProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String, request: InlineObject66ApiModel): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel
 
     /**
     * Update a release
@@ -1241,7 +1241,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return ReleaseApiModel
     */
-    suspend fun reposUpdateRelease(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, request: InlineObject133ApiModel): ReleaseApiModel
+    suspend fun reposUpdateRelease(accessToken: String? = null, repoName: kotlin.String, releaseId: kotlin.Int, request: InlineObject133ApiModel): ReleaseApiModel
 
     /**
     * Update a release asset
@@ -1251,7 +1251,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return ReleaseMinusAssetApiModel
     */
-    suspend fun reposUpdateReleaseAsset(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int, request: InlineObject131ApiModel): ReleaseMinusAssetApiModel
+    suspend fun reposUpdateReleaseAsset(accessToken: String? = null, repoName: kotlin.String, assetId: kotlin.Int, request: InlineObject131ApiModel): ReleaseMinusAssetApiModel
 
     /**
     * Update status check protection
@@ -1261,7 +1261,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return StatusMinusCheckMinusPolicyApiModel
     */
-    suspend fun reposUpdateStatusCheckProtection(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject67ApiModel): StatusMinusCheckMinusPolicyApiModel
+    suspend fun reposUpdateStatusCheckProtection(accessToken: String? = null, repoName: kotlin.String, branch: kotlin.String, request: InlineObject67ApiModel): StatusMinusCheckMinusPolicyApiModel
 
     /**
     * Update a repository webhook
@@ -1271,7 +1271,7 @@ interface ReposApi {
     * @param request 
     * @return HookApiModel
     */
-    suspend fun reposUpdateWebhook(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject92ApiModel): HookApiModel
+    suspend fun reposUpdateWebhook(accessToken: String? = null, repoName: kotlin.String, hookId: kotlin.Int, request: InlineObject92ApiModel): HookApiModel
 
     /**
     * Update a webhook configuration for a repository
@@ -1281,7 +1281,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return WebhookMinusConfigApiModel
     */
-    suspend fun reposUpdateWebhookConfigForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject93ApiModel): WebhookMinusConfigApiModel
+    suspend fun reposUpdateWebhookConfigForRepo(accessToken: String? = null, repoName: kotlin.String, hookId: kotlin.Int, request: InlineObject93ApiModel): WebhookMinusConfigApiModel
 
     /**
     * Upload a release asset
@@ -1291,7 +1291,7 @@ interface ReposApi {
     * @param request  (optional)
     * @return ReleaseMinusAssetApiModel
     */
-    suspend fun reposUploadReleaseAsset(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, name: kotlin.String? = null, label: kotlin.String? = null, request: kotlin.String): ReleaseMinusAssetApiModel
+    suspend fun reposUploadReleaseAsset(accessToken: String? = null, repoName: kotlin.String, releaseId: kotlin.Int, name: kotlin.String? = null, label: kotlin.String? = null, request: kotlin.String): ReleaseMinusAssetApiModel
 
 }
 
@@ -1307,8 +1307,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposAddCollaborator(accessToken: String?, owner: kotlin.String, repo: kotlin.String, username: kotlin.String, request: InlineObject74ApiModel): RepositoryMinusInvitationApiModel {
-        val path = "/repos/{repo_name}/collaborators/{username}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"username"+"}", "$username")
+    override suspend fun reposAddCollaborator(accessToken: String?, repoName: kotlin.String, username: kotlin.String, request: InlineObject74ApiModel): RepositoryMinusInvitationApiModel {
+        val path = "/repos/{repo_name}/collaborators/{username}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1317,8 +1317,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCheckCollaborator(accessToken: String?, owner: kotlin.String, repo: kotlin.String, username: kotlin.String) {
-        val path = "/repos/{repo_name}/collaborators/{username}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"username"+"}", "$username")
+    override suspend fun reposCheckCollaborator(accessToken: String?, repoName: kotlin.String, username: kotlin.String) {
+        val path = "/repos/{repo_name}/collaborators/{username}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1326,8 +1326,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCheckVulnerabilityAlerts(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/repos/{repo_name}/vulnerability-alerts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposCheckVulnerabilityAlerts(accessToken: String?, repoName: kotlin.String) {
+        val path = "/repos/{repo_name}/vulnerability-alerts".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1335,8 +1335,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCodeownersErrors(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String?): CodeownersMinusErrorsApiModel {
-        val path = "/repos/{repo_name}/codeowners/errors".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposCodeownersErrors(accessToken: String?, repoName: kotlin.String, ref: kotlin.String?): CodeownersMinusErrorsApiModel {
+        val path = "/repos/{repo_name}/codeowners/errors".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1345,8 +1345,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCompareCommits(accessToken: String?, owner: kotlin.String, repo: kotlin.String, basehead: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): CommitMinusComparisonApiModel {
-        val path = "/repos/{repo_name}/compare/{basehead}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"basehead"+"}", "$basehead")
+    override suspend fun reposCompareCommits(accessToken: String?, repoName: kotlin.String, basehead: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): CommitMinusComparisonApiModel {
+        val path = "/repos/{repo_name}/compare/{basehead}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"basehead"+"}", "$basehead")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1356,8 +1356,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateAutolink(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject64ApiModel): AutolinkApiModel {
-        val path = "/repos/{repo_name}/autolinks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposCreateAutolink(accessToken: String?, repoName: kotlin.String, request: InlineObject64ApiModel): AutolinkApiModel {
+        val path = "/repos/{repo_name}/autolinks".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1366,8 +1366,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, request: InlineObject77ApiModel): CommitMinusCommentApiModel {
-        val path = "/repos/{repo_name}/commits/{commit_sha}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"commit_sha"+"}", "$commitSha")
+    override suspend fun reposCreateCommitComment(accessToken: String?, repoName: kotlin.String, commitSha: kotlin.String, request: InlineObject77ApiModel): CommitMinusCommentApiModel {
+        val path = "/repos/{repo_name}/commits/{commit_sha}/comments".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"commit_sha"+"}", "$commitSha")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1376,8 +1376,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateCommitSignatureProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/required_signatures".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposCreateCommitSignatureProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/required_signatures".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1385,18 +1385,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateCommitStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String, request: InlineObject136ApiModel): StatusApiModel {
-        val path = "/repos/{repo_name}/statuses/{sha}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"sha"+"}", "$sha")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Post
-            body = request
-        }
-    }
-
-    override suspend fun reposCreateDeployKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject108ApiModel): DeployMinusKeyApiModel {
-        val path = "/repos/{repo_name}/keys".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposCreateCommitStatus(accessToken: String?, repoName: kotlin.String, sha: kotlin.String, request: InlineObject136ApiModel): StatusApiModel {
+        val path = "/repos/{repo_name}/statuses/{sha}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"sha"+"}", "$sha")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1405,8 +1395,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateDeployment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject81ApiModel): DeploymentApiModel {
-        val path = "/repos/{repo_name}/deployments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposCreateDeployKey(accessToken: String?, repoName: kotlin.String, request: InlineObject108ApiModel): DeployMinusKeyApiModel {
+        val path = "/repos/{repo_name}/keys".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1415,8 +1405,18 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateDeploymentStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, request: InlineObject82ApiModel): DeploymentMinusStatusApiModel {
-        val path = "/repos/{repo_name}/deployments/{deployment_id}/statuses".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"deployment_id"+"}", "$deploymentId")
+    override suspend fun reposCreateDeployment(accessToken: String?, repoName: kotlin.String, request: InlineObject81ApiModel): DeploymentApiModel {
+        val path = "/repos/{repo_name}/deployments".replace("{"+"repo_name"+"}", "$repoName")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Post
+            body = request
+        }
+    }
+
+    override suspend fun reposCreateDeploymentStatus(accessToken: String?, repoName: kotlin.String, deploymentId: kotlin.Int, request: InlineObject82ApiModel): DeploymentMinusStatusApiModel {
+        val path = "/repos/{repo_name}/deployments/{deployment_id}/statuses".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"deployment_id"+"}", "$deploymentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1435,8 +1435,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateFork(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject84ApiModel): FullMinusRepositoryApiModel {
-        val path = "/repos/{repo_name}/forks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposCreateFork(accessToken: String?, repoName: kotlin.String, request: InlineObject84ApiModel): FullMinusRepositoryApiModel {
+        val path = "/repos/{repo_name}/forks".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1455,8 +1455,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateOrUpdateEnvironment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String, request: InlineObject83ApiModel): EnvironmentApiModel {
-        val path = "/repos/{repo_name}/environments/{environment_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"environment_name"+"}", "$environmentName")
+    override suspend fun reposCreateOrUpdateEnvironment(accessToken: String?, repoName: kotlin.String, environmentName: kotlin.String, request: InlineObject83ApiModel): EnvironmentApiModel {
+        val path = "/repos/{repo_name}/environments/{environment_name}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"environment_name"+"}", "$environmentName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1465,8 +1465,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateOrUpdateFileContents(accessToken: String?, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject78ApiModel): FileMinusCommitApiModel {
-        val path = "/repos/{repo_name}/contents/{path}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"path"+"}", "$path")
+    override suspend fun reposCreateOrUpdateFileContents(accessToken: String?, repoName: kotlin.String, path: kotlin.String, request: InlineObject78ApiModel): FileMinusCommitApiModel {
+        val path = "/repos/{repo_name}/contents/{path}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"path"+"}", "$path")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1475,8 +1475,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject130ApiModel): ReleaseApiModel {
-        val path = "/repos/{repo_name}/releases".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposCreateRelease(accessToken: String?, repoName: kotlin.String, request: InlineObject130ApiModel): ReleaseApiModel {
+        val path = "/repos/{repo_name}/releases".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1495,8 +1495,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposCreateWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject91ApiModel): HookApiModel {
-        val path = "/repos/{repo_name}/hooks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposCreateWebhook(accessToken: String?, repoName: kotlin.String, request: InlineObject91ApiModel): HookApiModel {
+        val path = "/repos/{repo_name}/hooks".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1514,8 +1514,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDelete(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/repos/{repo_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposDelete(accessToken: String?, repoName: kotlin.String) {
+        val path = "/repos/{repo_name}".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1523,8 +1523,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteAccessRestrictions(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String) {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/restrictions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposDeleteAccessRestrictions(accessToken: String?, repoName: kotlin.String, branch: kotlin.String) {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/restrictions".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1532,8 +1532,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteAdminBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String) {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/enforce_admins".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposDeleteAdminBranchProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String) {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/enforce_admins".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1541,8 +1541,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteAnEnvironment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String) {
-        val path = "/repos/{repo_name}/environments/{environment_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"environment_name"+"}", "$environmentName")
+    override suspend fun reposDeleteAnEnvironment(accessToken: String?, repoName: kotlin.String, environmentName: kotlin.String) {
+        val path = "/repos/{repo_name}/environments/{environment_name}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"environment_name"+"}", "$environmentName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1550,8 +1550,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteAutolink(accessToken: String?, owner: kotlin.String, repo: kotlin.String, autolinkId: kotlin.Int) {
-        val path = "/repos/{repo_name}/autolinks/{autolink_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"autolink_id"+"}", "$autolinkId")
+    override suspend fun reposDeleteAutolink(accessToken: String?, repoName: kotlin.String, autolinkId: kotlin.Int) {
+        val path = "/repos/{repo_name}/autolinks/{autolink_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"autolink_id"+"}", "$autolinkId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1559,8 +1559,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String) {
-        val path = "/repos/{repo_name}/branches/{branch}/protection".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposDeleteBranchProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String) {
+        val path = "/repos/{repo_name}/branches/{branch}/protection".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1568,8 +1568,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int) {
-        val path = "/repos/{repo_name}/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun reposDeleteCommitComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int) {
+        val path = "/repos/{repo_name}/comments/{comment_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1577,8 +1577,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteCommitSignatureProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String) {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/required_signatures".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposDeleteCommitSignatureProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String) {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/required_signatures".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1586,8 +1586,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteDeployKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String, keyId: kotlin.Int) {
-        val path = "/repos/{repo_name}/keys/{key_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"key_id"+"}", "$keyId")
+    override suspend fun reposDeleteDeployKey(accessToken: String?, repoName: kotlin.String, keyId: kotlin.Int) {
+        val path = "/repos/{repo_name}/keys/{key_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"key_id"+"}", "$keyId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1595,8 +1595,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteDeployment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int) {
-        val path = "/repos/{repo_name}/deployments/{deployment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"deployment_id"+"}", "$deploymentId")
+    override suspend fun reposDeleteDeployment(accessToken: String?, repoName: kotlin.String, deploymentId: kotlin.Int) {
+        val path = "/repos/{repo_name}/deployments/{deployment_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"deployment_id"+"}", "$deploymentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1604,8 +1604,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteFile(accessToken: String?, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, request: InlineObject79ApiModel): FileMinusCommitApiModel {
-        val path = "/repos/{repo_name}/contents/{path}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"path"+"}", "$path")
+    override suspend fun reposDeleteFile(accessToken: String?, repoName: kotlin.String, path: kotlin.String, request: InlineObject79ApiModel): FileMinusCommitApiModel {
+        val path = "/repos/{repo_name}/contents/{path}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"path"+"}", "$path")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1614,8 +1614,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteInvitation(accessToken: String?, owner: kotlin.String, repo: kotlin.String, invitationId: kotlin.Int) {
-        val path = "/repos/{repo_name}/invitations/{invitation_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"invitation_id"+"}", "$invitationId")
+    override suspend fun reposDeleteInvitation(accessToken: String?, repoName: kotlin.String, invitationId: kotlin.Int) {
+        val path = "/repos/{repo_name}/invitations/{invitation_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"invitation_id"+"}", "$invitationId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1623,8 +1623,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeletePullRequestReviewProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String) {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/required_pull_request_reviews".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposDeletePullRequestReviewProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String) {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/required_pull_request_reviews".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1632,8 +1632,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int) {
-        val path = "/repos/{repo_name}/releases/{release_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
+    override suspend fun reposDeleteRelease(accessToken: String?, repoName: kotlin.String, releaseId: kotlin.Int) {
+        val path = "/repos/{repo_name}/releases/{release_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"release_id"+"}", "$releaseId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1641,8 +1641,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteReleaseAsset(accessToken: String?, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int) {
-        val path = "/repos/{repo_name}/releases/assets/{asset_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"asset_id"+"}", "$assetId")
+    override suspend fun reposDeleteReleaseAsset(accessToken: String?, repoName: kotlin.String, assetId: kotlin.Int) {
+        val path = "/repos/{repo_name}/releases/assets/{asset_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"asset_id"+"}", "$assetId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1650,8 +1650,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDeleteWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int) {
-        val path = "/repos/{repo_name}/hooks/{hook_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId")
+    override suspend fun reposDeleteWebhook(accessToken: String?, repoName: kotlin.String, hookId: kotlin.Int) {
+        val path = "/repos/{repo_name}/hooks/{hook_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1659,8 +1659,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDisableAutomatedSecurityFixes(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/repos/{repo_name}/automated-security-fixes".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposDisableAutomatedSecurityFixes(accessToken: String?, repoName: kotlin.String) {
+        val path = "/repos/{repo_name}/automated-security-fixes".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1668,8 +1668,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDisableLfsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/repos/{repo_name}/lfs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposDisableLfsForRepo(accessToken: String?, repoName: kotlin.String) {
+        val path = "/repos/{repo_name}/lfs".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1677,8 +1677,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDisableVulnerabilityAlerts(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/repos/{repo_name}/vulnerability-alerts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposDisableVulnerabilityAlerts(accessToken: String?, repoName: kotlin.String) {
+        val path = "/repos/{repo_name}/vulnerability-alerts".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1686,8 +1686,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDownloadTarballArchive(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String) {
-        val path = "/repos/{repo_name}/tarball/{ref}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
+    override suspend fun reposDownloadTarballArchive(accessToken: String?, repoName: kotlin.String, ref: kotlin.String) {
+        val path = "/repos/{repo_name}/tarball/{ref}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1695,8 +1695,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposDownloadZipballArchive(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String) {
-        val path = "/repos/{repo_name}/zipball/{ref}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
+    override suspend fun reposDownloadZipballArchive(accessToken: String?, repoName: kotlin.String, ref: kotlin.String) {
+        val path = "/repos/{repo_name}/zipball/{ref}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1704,8 +1704,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposEnableAutomatedSecurityFixes(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/repos/{repo_name}/automated-security-fixes".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposEnableAutomatedSecurityFixes(accessToken: String?, repoName: kotlin.String) {
+        val path = "/repos/{repo_name}/automated-security-fixes".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1713,8 +1713,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposEnableLfsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.Any {
-        val path = "/repos/{repo_name}/lfs".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposEnableLfsForRepo(accessToken: String?, repoName: kotlin.String): kotlin.Any {
+        val path = "/repos/{repo_name}/lfs".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1722,8 +1722,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposEnableVulnerabilityAlerts(accessToken: String?, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/repos/{repo_name}/vulnerability-alerts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposEnableVulnerabilityAlerts(accessToken: String?, repoName: kotlin.String) {
+        val path = "/repos/{repo_name}/vulnerability-alerts".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1731,8 +1731,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGenerateReleaseNotes(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject132ApiModel): ReleaseMinusNotesMinusContentApiModel {
-        val path = "/repos/{repo_name}/releases/generate-notes".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposGenerateReleaseNotes(accessToken: String?, repoName: kotlin.String, request: InlineObject132ApiModel): ReleaseMinusNotesMinusContentApiModel {
+        val path = "/repos/{repo_name}/releases/generate-notes".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1741,8 +1741,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGet(accessToken: String?, owner: kotlin.String, repo: kotlin.String): FullMinusRepositoryApiModel {
-        val path = "/repos/{repo_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposGet(accessToken: String?, repoName: kotlin.String): FullMinusRepositoryApiModel {
+        val path = "/repos/{repo_name}".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1750,8 +1750,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetAccessRestrictions(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusRestrictionMinusPolicyApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/restrictions".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposGetAccessRestrictions(accessToken: String?, repoName: kotlin.String, branch: kotlin.String): BranchMinusRestrictionMinusPolicyApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/restrictions".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1759,8 +1759,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetAdminBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/enforce_admins".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposGetAdminBranchProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/enforce_admins".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1768,8 +1768,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetAllEnvironments(accessToken: String?, owner: kotlin.String, repo: kotlin.String): InlineResponse20023ApiModel {
-        val path = "/repos/{repo_name}/environments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposGetAllEnvironments(accessToken: String?, repoName: kotlin.String): InlineResponse20023ApiModel {
+        val path = "/repos/{repo_name}/environments".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1777,8 +1777,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetAllTopics(accessToken: String?, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): TopicApiModel {
-        val path = "/repos/{repo_name}/topics".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposGetAllTopics(accessToken: String?, repoName: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): TopicApiModel {
+        val path = "/repos/{repo_name}/topics".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1788,8 +1788,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetAutolink(accessToken: String?, owner: kotlin.String, repo: kotlin.String, autolinkId: kotlin.Int): AutolinkApiModel {
-        val path = "/repos/{repo_name}/autolinks/{autolink_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"autolink_id"+"}", "$autolinkId")
+    override suspend fun reposGetAutolink(accessToken: String?, repoName: kotlin.String, autolinkId: kotlin.Int): AutolinkApiModel {
+        val path = "/repos/{repo_name}/autolinks/{autolink_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"autolink_id"+"}", "$autolinkId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1797,8 +1797,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetBranch(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusWithMinusProtectionApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposGetBranch(accessToken: String?, repoName: kotlin.String, branch: kotlin.String): BranchMinusWithMinusProtectionApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1806,8 +1806,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): BranchMinusProtectionApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/protection".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposGetBranchProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String): BranchMinusProtectionApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/protection".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1815,8 +1815,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetClones(accessToken: String?, owner: kotlin.String, repo: kotlin.String, per: kotlin.String?): CloneMinusTrafficApiModel {
-        val path = "/repos/{repo_name}/traffic/clones".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposGetClones(accessToken: String?, repoName: kotlin.String, per: kotlin.String?): CloneMinusTrafficApiModel {
+        val path = "/repos/{repo_name}/traffic/clones".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1825,8 +1825,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCollaboratorPermissionLevel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, username: kotlin.String): RepositoryMinusCollaboratorMinusPermissionApiModel {
-        val path = "/repos/{repo_name}/collaborators/{username}/permission".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"username"+"}", "$username")
+    override suspend fun reposGetCollaboratorPermissionLevel(accessToken: String?, repoName: kotlin.String, username: kotlin.String): RepositoryMinusCollaboratorMinusPermissionApiModel {
+        val path = "/repos/{repo_name}/collaborators/{username}/permission".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1834,8 +1834,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCombinedStatusForRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): CombinedMinusCommitMinusStatusApiModel {
-        val path = "/repos/{repo_name}/commits/{ref}/status".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
+    override suspend fun reposGetCombinedStatusForRef(accessToken: String?, repoName: kotlin.String, ref: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): CombinedMinusCommitMinusStatusApiModel {
+        val path = "/repos/{repo_name}/commits/{ref}/status".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1845,8 +1845,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): CommitApiModel {
-        val path = "/repos/{repo_name}/commits/{ref}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
+    override suspend fun reposGetCommit(accessToken: String?, repoName: kotlin.String, ref: kotlin.String, page: kotlin.Int?, perPage: kotlin.Int?): CommitApiModel {
+        val path = "/repos/{repo_name}/commits/{ref}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1856,8 +1856,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCommitActivityStats(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<CommitMinusActivityApiModel> {
-        val path = "/repos/{repo_name}/stats/commit_activity".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposGetCommitActivityStats(accessToken: String?, repoName: kotlin.String): kotlin.collections.List<CommitMinusActivityApiModel> {
+        val path = "/repos/{repo_name}/stats/commit_activity".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1865,8 +1865,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): CommitMinusCommentApiModel {
-        val path = "/repos/{repo_name}/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun reposGetCommitComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int): CommitMinusCommentApiModel {
+        val path = "/repos/{repo_name}/comments/{comment_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1874,8 +1874,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCommitSignatureProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/required_signatures".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposGetCommitSignatureProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/required_signatures".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1883,8 +1883,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetCommunityProfileMetrics(accessToken: String?, owner: kotlin.String, repo: kotlin.String): CommunityMinusProfileApiModel {
-        val path = "/repos/{repo_name}/community/profile".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposGetCommunityProfileMetrics(accessToken: String?, repoName: kotlin.String): CommunityMinusProfileApiModel {
+        val path = "/repos/{repo_name}/community/profile".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1892,126 +1892,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetContent(accessToken: String?, owner: kotlin.String, repo: kotlin.String, path: kotlin.String, ref: kotlin.String?): ContentMinusTreeApiModel {
-        val path = "/repos/{repo_name}/contents/{path}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"path"+"}", "$path")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-            parameter("ref", ref)
-        }
-    }
-
-    override suspend fun reposGetContributorsStats(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContributorMinusActivityApiModel> {
-        val path = "/repos/{repo_name}/stats/contributors".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetDeployKey(accessToken: String?, owner: kotlin.String, repo: kotlin.String, keyId: kotlin.Int): DeployMinusKeyApiModel {
-        val path = "/repos/{repo_name}/keys/{key_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"key_id"+"}", "$keyId")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetDeployment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int): DeploymentApiModel {
-        val path = "/repos/{repo_name}/deployments/{deployment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"deployment_id"+"}", "$deploymentId")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetDeploymentStatus(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, statusId: kotlin.Int): DeploymentMinusStatusApiModel {
-        val path = "/repos/{repo_name}/deployments/{deployment_id}/statuses/{status_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"deployment_id"+"}", "$deploymentId").replace("{"+"status_id"+"}", "$statusId")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetEnvironment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, environmentName: kotlin.String): EnvironmentApiModel {
-        val path = "/repos/{repo_name}/environments/{environment_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"environment_name"+"}", "$environmentName")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetLatestPagesBuild(accessToken: String?, owner: kotlin.String, repo: kotlin.String): PageMinusBuildApiModel {
-        val path = "/repos/{repo_name}/pages/builds/latest".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetLatestRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ReleaseApiModel {
-        val path = "/repos/{repo_name}/releases/latest".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetPagesBuild(accessToken: String?, owner: kotlin.String, repo: kotlin.String, buildId: kotlin.Int): PageMinusBuildApiModel {
-        val path = "/repos/{repo_name}/pages/builds/{build_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"build_id"+"}", "$buildId")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetPagesHealthCheck(accessToken: String?, owner: kotlin.String, repo: kotlin.String): PagesMinusHealthMinusCheckApiModel {
-        val path = "/repos/{repo_name}/pages/health".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetParticipationStats(accessToken: String?, owner: kotlin.String, repo: kotlin.String): ParticipationMinusStatsApiModel {
-        val path = "/repos/{repo_name}/stats/participation".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetPullRequestReviewProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/required_pull_request_reviews".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetPunchCardStats(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<kotlin.collections.List<kotlin.Int>> {
-        val path = "/repos/{repo_name}/stats/punch_card".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
-
-        return httpClient.request {
-            url { encodedPath = path }
-            method = HttpMethod.Get
-        }
-    }
-
-    override suspend fun reposGetReadme(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String?): ContentMinusFileApiModel {
-        val path = "/repos/{repo_name}/readme".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposGetContent(accessToken: String?, repoName: kotlin.String, path: kotlin.String, ref: kotlin.String?): ContentMinusTreeApiModel {
+        val path = "/repos/{repo_name}/contents/{path}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"path"+"}", "$path")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2020,8 +1902,116 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetReadmeInDirectory(accessToken: String?, owner: kotlin.String, repo: kotlin.String, dir: kotlin.String, ref: kotlin.String?): ContentMinusFileApiModel {
-        val path = "/repos/{repo_name}/readme/{dir}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"dir"+"}", "$dir")
+    override suspend fun reposGetContributorsStats(accessToken: String?, repoName: kotlin.String): kotlin.collections.List<ContributorMinusActivityApiModel> {
+        val path = "/repos/{repo_name}/stats/contributors".replace("{"+"repo_name"+"}", "$repoName")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetDeployKey(accessToken: String?, repoName: kotlin.String, keyId: kotlin.Int): DeployMinusKeyApiModel {
+        val path = "/repos/{repo_name}/keys/{key_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"key_id"+"}", "$keyId")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetDeployment(accessToken: String?, repoName: kotlin.String, deploymentId: kotlin.Int): DeploymentApiModel {
+        val path = "/repos/{repo_name}/deployments/{deployment_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"deployment_id"+"}", "$deploymentId")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetDeploymentStatus(accessToken: String?, repoName: kotlin.String, deploymentId: kotlin.Int, statusId: kotlin.Int): DeploymentMinusStatusApiModel {
+        val path = "/repos/{repo_name}/deployments/{deployment_id}/statuses/{status_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"deployment_id"+"}", "$deploymentId").replace("{"+"status_id"+"}", "$statusId")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetEnvironment(accessToken: String?, repoName: kotlin.String, environmentName: kotlin.String): EnvironmentApiModel {
+        val path = "/repos/{repo_name}/environments/{environment_name}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"environment_name"+"}", "$environmentName")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetLatestPagesBuild(accessToken: String?, repoName: kotlin.String): PageMinusBuildApiModel {
+        val path = "/repos/{repo_name}/pages/builds/latest".replace("{"+"repo_name"+"}", "$repoName")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetLatestRelease(accessToken: String?, repoName: kotlin.String): ReleaseApiModel {
+        val path = "/repos/{repo_name}/releases/latest".replace("{"+"repo_name"+"}", "$repoName")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetPagesBuild(accessToken: String?, repoName: kotlin.String, buildId: kotlin.Int): PageMinusBuildApiModel {
+        val path = "/repos/{repo_name}/pages/builds/{build_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"build_id"+"}", "$buildId")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetPagesHealthCheck(accessToken: String?, repoName: kotlin.String): PagesMinusHealthMinusCheckApiModel {
+        val path = "/repos/{repo_name}/pages/health".replace("{"+"repo_name"+"}", "$repoName")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetParticipationStats(accessToken: String?, repoName: kotlin.String): ParticipationMinusStatsApiModel {
+        val path = "/repos/{repo_name}/stats/participation".replace("{"+"repo_name"+"}", "$repoName")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetPullRequestReviewProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/required_pull_request_reviews".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetPunchCardStats(accessToken: String?, repoName: kotlin.String): kotlin.collections.List<kotlin.collections.List<kotlin.Int>> {
+        val path = "/repos/{repo_name}/stats/punch_card".replace("{"+"repo_name"+"}", "$repoName")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+        }
+    }
+
+    override suspend fun reposGetReadme(accessToken: String?, repoName: kotlin.String, ref: kotlin.String?): ContentMinusFileApiModel {
+        val path = "/repos/{repo_name}/readme".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2030,8 +2020,18 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int): ReleaseApiModel {
-        val path = "/repos/{repo_name}/releases/{release_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
+    override suspend fun reposGetReadmeInDirectory(accessToken: String?, repoName: kotlin.String, dir: kotlin.String, ref: kotlin.String?): ContentMinusFileApiModel {
+        val path = "/repos/{repo_name}/readme/{dir}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"dir"+"}", "$dir")
+
+        return httpClient.request {
+            url { encodedPath = path }
+            method = HttpMethod.Get
+            parameter("ref", ref)
+        }
+    }
+
+    override suspend fun reposGetRelease(accessToken: String?, repoName: kotlin.String, releaseId: kotlin.Int): ReleaseApiModel {
+        val path = "/repos/{repo_name}/releases/{release_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"release_id"+"}", "$releaseId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2039,8 +2039,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetReleaseAsset(accessToken: String?, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int): ReleaseMinusAssetApiModel {
-        val path = "/repos/{repo_name}/releases/assets/{asset_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"asset_id"+"}", "$assetId")
+    override suspend fun reposGetReleaseAsset(accessToken: String?, repoName: kotlin.String, assetId: kotlin.Int): ReleaseMinusAssetApiModel {
+        val path = "/repos/{repo_name}/releases/assets/{asset_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"asset_id"+"}", "$assetId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2048,8 +2048,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetReleaseByTag(accessToken: String?, owner: kotlin.String, repo: kotlin.String, tag: kotlin.String): ReleaseApiModel {
-        val path = "/repos/{repo_name}/releases/tags/{tag}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"tag"+"}", "$tag")
+    override suspend fun reposGetReleaseByTag(accessToken: String?, repoName: kotlin.String, tag: kotlin.String): ReleaseApiModel {
+        val path = "/repos/{repo_name}/releases/tags/{tag}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"tag"+"}", "$tag")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2057,8 +2057,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetStatusChecksProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): StatusMinusCheckMinusPolicyApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/required_status_checks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposGetStatusChecksProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String): StatusMinusCheckMinusPolicyApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/required_status_checks".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2066,8 +2066,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetTopPaths(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ContentMinusTrafficApiModel> {
-        val path = "/repos/{repo_name}/traffic/popular/paths".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposGetTopPaths(accessToken: String?, repoName: kotlin.String): kotlin.collections.List<ContentMinusTrafficApiModel> {
+        val path = "/repos/{repo_name}/traffic/popular/paths".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2075,8 +2075,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetTopReferrers(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.List<ReferrerMinusTrafficApiModel> {
-        val path = "/repos/{repo_name}/traffic/popular/referrers".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposGetTopReferrers(accessToken: String?, repoName: kotlin.String): kotlin.collections.List<ReferrerMinusTrafficApiModel> {
+        val path = "/repos/{repo_name}/traffic/popular/referrers".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2084,8 +2084,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetViews(accessToken: String?, owner: kotlin.String, repo: kotlin.String, per: kotlin.String?): ViewMinusTrafficApiModel {
-        val path = "/repos/{repo_name}/traffic/views".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposGetViews(accessToken: String?, repoName: kotlin.String, per: kotlin.String?): ViewMinusTrafficApiModel {
+        val path = "/repos/{repo_name}/traffic/views".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2094,8 +2094,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): HookApiModel {
-        val path = "/repos/{repo_name}/hooks/{hook_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId")
+    override suspend fun reposGetWebhook(accessToken: String?, repoName: kotlin.String, hookId: kotlin.Int): HookApiModel {
+        val path = "/repos/{repo_name}/hooks/{hook_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2103,8 +2103,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposGetWebhookConfigForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigApiModel {
-        val path = "/repos/{repo_name}/hooks/{hook_id}/config".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId")
+    override suspend fun reposGetWebhookConfigForRepo(accessToken: String?, repoName: kotlin.String, hookId: kotlin.Int): WebhookMinusConfigApiModel {
+        val path = "/repos/{repo_name}/hooks/{hook_id}/config".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2112,8 +2112,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListAutolinks(accessToken: String?, owner: kotlin.String, repo: kotlin.String, page: kotlin.Int?): kotlin.collections.List<AutolinkApiModel> {
-        val path = "/repos/{repo_name}/autolinks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListAutolinks(accessToken: String?, repoName: kotlin.String, page: kotlin.Int?): kotlin.collections.List<AutolinkApiModel> {
+        val path = "/repos/{repo_name}/autolinks".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2122,8 +2122,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListBranches(accessToken: String?, owner: kotlin.String, repo: kotlin.String, isProtected: kotlin.Boolean?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ShortMinusBranchApiModel> {
-        val path = "/repos/{repo_name}/branches".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListBranches(accessToken: String?, repoName: kotlin.String, isProtected: kotlin.Boolean?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ShortMinusBranchApiModel> {
+        val path = "/repos/{repo_name}/branches".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2134,8 +2134,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListBranchesForHeadCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String): kotlin.collections.List<BranchMinusShortApiModel> {
-        val path = "/repos/{repo_name}/commits/{commit_sha}/branches-where-head".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"commit_sha"+"}", "$commitSha")
+    override suspend fun reposListBranchesForHeadCommit(accessToken: String?, repoName: kotlin.String, commitSha: kotlin.String): kotlin.collections.List<BranchMinusShortApiModel> {
+        val path = "/repos/{repo_name}/commits/{commit_sha}/branches-where-head".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"commit_sha"+"}", "$commitSha")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2143,8 +2143,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListCollaborators(accessToken: String?, owner: kotlin.String, repo: kotlin.String, affiliation: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CollaboratorApiModel> {
-        val path = "/repos/{repo_name}/collaborators".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListCollaborators(accessToken: String?, repoName: kotlin.String, affiliation: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CollaboratorApiModel> {
+        val path = "/repos/{repo_name}/collaborators".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2155,8 +2155,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListCommentsForCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitMinusCommentApiModel> {
-        val path = "/repos/{repo_name}/commits/{commit_sha}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"commit_sha"+"}", "$commitSha")
+    override suspend fun reposListCommentsForCommit(accessToken: String?, repoName: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitMinusCommentApiModel> {
+        val path = "/repos/{repo_name}/commits/{commit_sha}/comments".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"commit_sha"+"}", "$commitSha")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2166,8 +2166,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListCommitCommentsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitMinusCommentApiModel> {
-        val path = "/repos/{repo_name}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListCommitCommentsForRepo(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitMinusCommentApiModel> {
+        val path = "/repos/{repo_name}/comments".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2177,8 +2177,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListCommitStatusesForRef(accessToken: String?, owner: kotlin.String, repo: kotlin.String, ref: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<StatusApiModel> {
-        val path = "/repos/{repo_name}/commits/{ref}/statuses".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"ref"+"}", "$ref")
+    override suspend fun reposListCommitStatusesForRef(accessToken: String?, repoName: kotlin.String, ref: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<StatusApiModel> {
+        val path = "/repos/{repo_name}/commits/{ref}/statuses".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"ref"+"}", "$ref")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2188,8 +2188,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListCommits(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String?, path: kotlin.String?, author: kotlin.String?, since: kotlin.String?, until: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitApiModel> {
-        val path = "/repos/{repo_name}/commits".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListCommits(accessToken: String?, repoName: kotlin.String, sha: kotlin.String?, path: kotlin.String?, author: kotlin.String?, since: kotlin.String?, until: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<CommitApiModel> {
+        val path = "/repos/{repo_name}/commits".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2204,8 +2204,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListContributors(accessToken: String?, owner: kotlin.String, repo: kotlin.String, anon: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ContributorApiModel> {
-        val path = "/repos/{repo_name}/contributors".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListContributors(accessToken: String?, repoName: kotlin.String, anon: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ContributorApiModel> {
+        val path = "/repos/{repo_name}/contributors".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2216,8 +2216,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListDeployKeys(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeployMinusKeyApiModel> {
-        val path = "/repos/{repo_name}/keys".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListDeployKeys(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeployMinusKeyApiModel> {
+        val path = "/repos/{repo_name}/keys".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2227,8 +2227,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListDeploymentStatuses(accessToken: String?, owner: kotlin.String, repo: kotlin.String, deploymentId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeploymentMinusStatusApiModel> {
-        val path = "/repos/{repo_name}/deployments/{deployment_id}/statuses".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"deployment_id"+"}", "$deploymentId")
+    override suspend fun reposListDeploymentStatuses(accessToken: String?, repoName: kotlin.String, deploymentId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeploymentMinusStatusApiModel> {
+        val path = "/repos/{repo_name}/deployments/{deployment_id}/statuses".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"deployment_id"+"}", "$deploymentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2238,8 +2238,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListDeployments(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sha: kotlin.String?, ref: kotlin.String?, task: kotlin.String?, environment: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeploymentApiModel> {
-        val path = "/repos/{repo_name}/deployments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListDeployments(accessToken: String?, repoName: kotlin.String, sha: kotlin.String?, ref: kotlin.String?, task: kotlin.String?, environment: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<DeploymentApiModel> {
+        val path = "/repos/{repo_name}/deployments".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2299,8 +2299,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListForks(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryApiModel> {
-        val path = "/repos/{repo_name}/forks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListForks(accessToken: String?, repoName: kotlin.String, sort: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MinimalMinusRepositoryApiModel> {
+        val path = "/repos/{repo_name}/forks".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2311,8 +2311,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListInvitations(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<RepositoryMinusInvitationApiModel> {
-        val path = "/repos/{repo_name}/invitations".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListInvitations(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<RepositoryMinusInvitationApiModel> {
+        val path = "/repos/{repo_name}/invitations".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2333,8 +2333,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListLanguages(accessToken: String?, owner: kotlin.String, repo: kotlin.String): kotlin.collections.Map<kotlin.String, kotlin.Int> {
-        val path = "/repos/{repo_name}/languages".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListLanguages(accessToken: String?, repoName: kotlin.String): kotlin.collections.Map<kotlin.String, kotlin.Int> {
+        val path = "/repos/{repo_name}/languages".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2342,8 +2342,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListPagesBuilds(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PageMinusBuildApiModel> {
-        val path = "/repos/{repo_name}/pages/builds".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListPagesBuilds(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PageMinusBuildApiModel> {
+        val path = "/repos/{repo_name}/pages/builds".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2363,8 +2363,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListPullRequestsAssociatedWithCommit(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusSimpleApiModel> {
-        val path = "/repos/{repo_name}/commits/{commit_sha}/pulls".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"commit_sha"+"}", "$commitSha")
+    override suspend fun reposListPullRequestsAssociatedWithCommit(accessToken: String?, repoName: kotlin.String, commitSha: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<PullMinusRequestMinusSimpleApiModel> {
+        val path = "/repos/{repo_name}/commits/{commit_sha}/pulls".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"commit_sha"+"}", "$commitSha")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2374,8 +2374,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListReleaseAssets(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReleaseMinusAssetApiModel> {
-        val path = "/repos/{repo_name}/releases/{release_id}/assets".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
+    override suspend fun reposListReleaseAssets(accessToken: String?, repoName: kotlin.String, releaseId: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReleaseMinusAssetApiModel> {
+        val path = "/repos/{repo_name}/releases/{release_id}/assets".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"release_id"+"}", "$releaseId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2385,8 +2385,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListReleases(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReleaseApiModel> {
-        val path = "/repos/{repo_name}/releases".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListReleases(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ReleaseApiModel> {
+        val path = "/repos/{repo_name}/releases".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2396,8 +2396,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListTags(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TagApiModel> {
-        val path = "/repos/{repo_name}/tags".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListTags(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TagApiModel> {
+        val path = "/repos/{repo_name}/tags".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2407,8 +2407,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListTeams(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamApiModel> {
-        val path = "/repos/{repo_name}/teams".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListTeams(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<TeamApiModel> {
+        val path = "/repos/{repo_name}/teams".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2418,8 +2418,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposListWebhooks(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<HookApiModel> {
-        val path = "/repos/{repo_name}/hooks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposListWebhooks(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<HookApiModel> {
+        val path = "/repos/{repo_name}/hooks".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2429,8 +2429,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposMerge(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject112ApiModel): CommitApiModel {
-        val path = "/repos/{repo_name}/merges".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposMerge(accessToken: String?, repoName: kotlin.String, request: InlineObject112ApiModel): CommitApiModel {
+        val path = "/repos/{repo_name}/merges".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2439,8 +2439,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposMergeUpstream(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject111ApiModel): MergedMinusUpstreamApiModel {
-        val path = "/repos/{repo_name}/merge-upstream".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposMergeUpstream(accessToken: String?, repoName: kotlin.String, request: InlineObject111ApiModel): MergedMinusUpstreamApiModel {
+        val path = "/repos/{repo_name}/merge-upstream".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2449,8 +2449,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposPingWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int) {
-        val path = "/repos/{repo_name}/hooks/{hook_id}/pings".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId")
+    override suspend fun reposPingWebhook(accessToken: String?, repoName: kotlin.String, hookId: kotlin.Int) {
+        val path = "/repos/{repo_name}/hooks/{hook_id}/pings".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2458,8 +2458,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposRedeliverWebhookDelivery(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, deliveryId: kotlin.Int): kotlin.Any {
-        val path = "/repos/{repo_name}/hooks/{hook_id}/deliveries/{delivery_id}/attempts".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId").replace("{"+"delivery_id"+"}", "$deliveryId")
+    override suspend fun reposRedeliverWebhookDelivery(accessToken: String?, repoName: kotlin.String, hookId: kotlin.Int, deliveryId: kotlin.Int): kotlin.Any {
+        val path = "/repos/{repo_name}/hooks/{hook_id}/deliveries/{delivery_id}/attempts".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"hook_id"+"}", "$hookId").replace("{"+"delivery_id"+"}", "$deliveryId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2467,8 +2467,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposRemoveCollaborator(accessToken: String?, owner: kotlin.String, repo: kotlin.String, username: kotlin.String) {
-        val path = "/repos/{repo_name}/collaborators/{username}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"username"+"}", "$username")
+    override suspend fun reposRemoveCollaborator(accessToken: String?, repoName: kotlin.String, username: kotlin.String) {
+        val path = "/repos/{repo_name}/collaborators/{username}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"username"+"}", "$username")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2476,8 +2476,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposRemoveStatusCheckProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String) {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/required_status_checks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposRemoveStatusCheckProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String) {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/required_status_checks".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2485,8 +2485,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposRenameBranch(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject68ApiModel): BranchMinusWithMinusProtectionApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/rename".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposRenameBranch(accessToken: String?, repoName: kotlin.String, branch: kotlin.String, request: InlineObject68ApiModel): BranchMinusWithMinusProtectionApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/rename".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2495,8 +2495,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposReplaceAllTopics(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject138ApiModel): TopicApiModel {
-        val path = "/repos/{repo_name}/topics".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposReplaceAllTopics(accessToken: String?, repoName: kotlin.String, request: InlineObject138ApiModel): TopicApiModel {
+        val path = "/repos/{repo_name}/topics".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2505,8 +2505,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposRequestPagesBuild(accessToken: String?, owner: kotlin.String, repo: kotlin.String): PageMinusBuildMinusStatusApiModel {
-        val path = "/repos/{repo_name}/pages/builds".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposRequestPagesBuild(accessToken: String?, repoName: kotlin.String): PageMinusBuildMinusStatusApiModel {
+        val path = "/repos/{repo_name}/pages/builds".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2514,8 +2514,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposSetAdminBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/enforce_admins".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposSetAdminBranchProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String): ProtectedMinusBranchMinusAdminMinusEnforcedApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/enforce_admins".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2523,8 +2523,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposTestPushWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int) {
-        val path = "/repos/{repo_name}/hooks/{hook_id}/tests".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId")
+    override suspend fun reposTestPushWebhook(accessToken: String?, repoName: kotlin.String, hookId: kotlin.Int) {
+        val path = "/repos/{repo_name}/hooks/{hook_id}/tests".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2532,8 +2532,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposTransfer(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject139ApiModel): MinimalMinusRepositoryApiModel {
-        val path = "/repos/{repo_name}/transfer".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposTransfer(accessToken: String?, repoName: kotlin.String, request: InlineObject139ApiModel): MinimalMinusRepositoryApiModel {
+        val path = "/repos/{repo_name}/transfer".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2542,8 +2542,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject57ApiModel): FullMinusRepositoryApiModel {
-        val path = "/repos/{repo_name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun reposUpdate(accessToken: String?, repoName: kotlin.String, request: InlineObject57ApiModel): FullMinusRepositoryApiModel {
+        val path = "/repos/{repo_name}".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2552,8 +2552,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateBranchProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject65ApiModel): ProtectedMinusBranchApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/protection".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposUpdateBranchProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String, request: InlineObject65ApiModel): ProtectedMinusBranchApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/protection".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2562,8 +2562,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateCommitComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject75ApiModel): CommitMinusCommentApiModel {
-        val path = "/repos/{repo_name}/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun reposUpdateCommitComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject75ApiModel): CommitMinusCommentApiModel {
+        val path = "/repos/{repo_name}/comments/{comment_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2572,8 +2572,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateInvitation(accessToken: String?, owner: kotlin.String, repo: kotlin.String, invitationId: kotlin.Int, request: InlineObject98ApiModel): RepositoryMinusInvitationApiModel {
-        val path = "/repos/{repo_name}/invitations/{invitation_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"invitation_id"+"}", "$invitationId")
+    override suspend fun reposUpdateInvitation(accessToken: String?, repoName: kotlin.String, invitationId: kotlin.Int, request: InlineObject98ApiModel): RepositoryMinusInvitationApiModel {
+        val path = "/repos/{repo_name}/invitations/{invitation_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"invitation_id"+"}", "$invitationId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2582,8 +2582,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdatePullRequestReviewProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject66ApiModel): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/required_pull_request_reviews".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposUpdatePullRequestReviewProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String, request: InlineObject66ApiModel): ProtectedMinusBranchMinusPullMinusRequestMinusReviewApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/required_pull_request_reviews".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2592,8 +2592,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateRelease(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, request: InlineObject133ApiModel): ReleaseApiModel {
-        val path = "/repos/{repo_name}/releases/{release_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
+    override suspend fun reposUpdateRelease(accessToken: String?, repoName: kotlin.String, releaseId: kotlin.Int, request: InlineObject133ApiModel): ReleaseApiModel {
+        val path = "/repos/{repo_name}/releases/{release_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"release_id"+"}", "$releaseId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2602,8 +2602,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateReleaseAsset(accessToken: String?, owner: kotlin.String, repo: kotlin.String, assetId: kotlin.Int, request: InlineObject131ApiModel): ReleaseMinusAssetApiModel {
-        val path = "/repos/{repo_name}/releases/assets/{asset_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"asset_id"+"}", "$assetId")
+    override suspend fun reposUpdateReleaseAsset(accessToken: String?, repoName: kotlin.String, assetId: kotlin.Int, request: InlineObject131ApiModel): ReleaseMinusAssetApiModel {
+        val path = "/repos/{repo_name}/releases/assets/{asset_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"asset_id"+"}", "$assetId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2612,8 +2612,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateStatusCheckProtection(accessToken: String?, owner: kotlin.String, repo: kotlin.String, branch: kotlin.String, request: InlineObject67ApiModel): StatusMinusCheckMinusPolicyApiModel {
-        val path = "/repos/{repo_name}/branches/{branch}/protection/required_status_checks".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"branch"+"}", "$branch")
+    override suspend fun reposUpdateStatusCheckProtection(accessToken: String?, repoName: kotlin.String, branch: kotlin.String, request: InlineObject67ApiModel): StatusMinusCheckMinusPolicyApiModel {
+        val path = "/repos/{repo_name}/branches/{branch}/protection/required_status_checks".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"branch"+"}", "$branch")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2622,8 +2622,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateWebhook(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject92ApiModel): HookApiModel {
-        val path = "/repos/{repo_name}/hooks/{hook_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId")
+    override suspend fun reposUpdateWebhook(accessToken: String?, repoName: kotlin.String, hookId: kotlin.Int, request: InlineObject92ApiModel): HookApiModel {
+        val path = "/repos/{repo_name}/hooks/{hook_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2632,8 +2632,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUpdateWebhookConfigForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, hookId: kotlin.Int, request: InlineObject93ApiModel): WebhookMinusConfigApiModel {
-        val path = "/repos/{repo_name}/hooks/{hook_id}/config".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"hook_id"+"}", "$hookId")
+    override suspend fun reposUpdateWebhookConfigForRepo(accessToken: String?, repoName: kotlin.String, hookId: kotlin.Int, request: InlineObject93ApiModel): WebhookMinusConfigApiModel {
+        val path = "/repos/{repo_name}/hooks/{hook_id}/config".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"hook_id"+"}", "$hookId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -2642,8 +2642,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         }
     }
 
-    override suspend fun reposUploadReleaseAsset(accessToken: String?, owner: kotlin.String, repo: kotlin.String, releaseId: kotlin.Int, name: kotlin.String?, label: kotlin.String?, request: kotlin.String): ReleaseMinusAssetApiModel {
-        val path = "/repos/{repo_name}/releases/{release_id}/assets".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"release_id"+"}", "$releaseId")
+    override suspend fun reposUploadReleaseAsset(accessToken: String?, repoName: kotlin.String, releaseId: kotlin.Int, name: kotlin.String?, label: kotlin.String?, request: kotlin.String): ReleaseMinusAssetApiModel {
+        val path = "/repos/{repo_name}/releases/{release_id}/assets".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"release_id"+"}", "$releaseId")
 
         return httpClient.request {
             url { encodedPath = path }

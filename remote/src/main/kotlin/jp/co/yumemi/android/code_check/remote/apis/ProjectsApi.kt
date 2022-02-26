@@ -75,7 +75,7 @@ interface ProjectsApi {
     * @param request 
     * @return ProjectApiModel
     */
-    suspend fun projectsCreateForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject116ApiModel): ProjectApiModel
+    suspend fun projectsCreateForRepo(accessToken: String? = null, repoName: kotlin.String, request: InlineObject116ApiModel): ProjectApiModel
 
     /**
     * Delete a project
@@ -174,7 +174,7 @@ interface ProjectsApi {
     *
     * @return kotlin.collections.List<ProjectApiModel>
     */
-    suspend fun projectsListForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, state: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ProjectApiModel>
+    suspend fun projectsListForRepo(accessToken: String? = null, repoName: kotlin.String, state: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<ProjectApiModel>
 
     /**
     * List user projects
@@ -289,8 +289,8 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsCreateForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject116ApiModel): ProjectApiModel {
-        val path = "/repos/{repo_name}/projects".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun projectsCreateForRepo(accessToken: String?, repoName: kotlin.String, request: InlineObject116ApiModel): ProjectApiModel {
+        val path = "/repos/{repo_name}/projects".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -397,8 +397,8 @@ class HttpClientProjectsApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun projectsListForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ProjectApiModel> {
-        val path = "/repos/{repo_name}/projects".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun projectsListForRepo(accessToken: String?, repoName: kotlin.String, state: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<ProjectApiModel> {
+        val path = "/repos/{repo_name}/projects".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }

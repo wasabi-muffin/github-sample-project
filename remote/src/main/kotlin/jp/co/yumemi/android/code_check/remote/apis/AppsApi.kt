@@ -138,7 +138,7 @@ interface AppsApi {
     *
     * @return InstallationApiModel
     */
-    suspend fun appsGetRepoInstallation(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): InstallationApiModel
+    suspend fun appsGetRepoInstallation(accessToken: String? = null, repoName: kotlin.String): InstallationApiModel
 
     /**
     * Get a subscription plan for an account
@@ -450,8 +450,8 @@ class HttpClientAppsApi(private val httpClientProvider: HttpClientProvider) : Ap
         }
     }
 
-    override suspend fun appsGetRepoInstallation(accessToken: String?, owner: kotlin.String, repo: kotlin.String): InstallationApiModel {
-        val path = "/repos/{repo_name}/installation".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun appsGetRepoInstallation(accessToken: String?, repoName: kotlin.String): InstallationApiModel {
+        val path = "/repos/{repo_name}/installation".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }

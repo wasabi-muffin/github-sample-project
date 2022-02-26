@@ -84,7 +84,7 @@ interface TeamsApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun teamsAddOrUpdateRepoPermissionsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String, request: InlineObject48ApiModel)
+    suspend fun teamsAddOrUpdateRepoPermissionsInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, repoName: kotlin.String, request: InlineObject48ApiModel)
 
     /**
     * Add or update team repository permissions (Legacy)
@@ -94,7 +94,7 @@ interface TeamsApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun teamsAddOrUpdateRepoPermissionsLegacy(accessToken: String? = null, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String, request: InlineObject160ApiModel)
+    suspend fun teamsAddOrUpdateRepoPermissionsLegacy(accessToken: String? = null, teamId: kotlin.Int, repoName: kotlin.String, request: InlineObject160ApiModel)
 
     /**
     * Check team permissions for a project
@@ -121,7 +121,7 @@ interface TeamsApi {
     *
     * @return TeamMinusRepositoryApiModel
     */
-    suspend fun teamsCheckPermissionsForRepoInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryApiModel
+    suspend fun teamsCheckPermissionsForRepoInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, repoName: kotlin.String): TeamMinusRepositoryApiModel
 
     /**
     * Check team permissions for a repository (Legacy)
@@ -130,7 +130,7 @@ interface TeamsApi {
     *
     * @return TeamMinusRepositoryApiModel
     */
-    suspend fun teamsCheckPermissionsForRepoLegacy(accessToken: String? = null, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryApiModel
+    suspend fun teamsCheckPermissionsForRepoLegacy(accessToken: String? = null, teamId: kotlin.Int, repoName: kotlin.String): TeamMinusRepositoryApiModel
 
     /**
     * Create a team
@@ -597,7 +597,7 @@ interface TeamsApi {
     *
     * @return void
     */
-    suspend fun teamsRemoveRepoInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String)
+    suspend fun teamsRemoveRepoInOrg(accessToken: String? = null, org: kotlin.String, teamSlug: kotlin.String, repoName: kotlin.String)
 
     /**
     * Remove a repository from a team (Legacy)
@@ -606,7 +606,7 @@ interface TeamsApi {
     *
     * @return void
     */
-    suspend fun teamsRemoveRepoLegacy(accessToken: String? = null, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String)
+    suspend fun teamsRemoveRepoLegacy(accessToken: String? = null, teamId: kotlin.Int, repoName: kotlin.String)
 
     /**
     * Remove the connection between an external group and a team
@@ -731,8 +731,8 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsAddOrUpdateRepoPermissionsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String, request: InlineObject48ApiModel) {
-        val path = "/orgs/{org}/teams/{team_slug}/repos/{repo_name}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun teamsAddOrUpdateRepoPermissionsInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, repoName: kotlin.String, request: InlineObject48ApiModel) {
+        val path = "/orgs/{org}/teams/{team_slug}/repos/{repo_name}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -741,8 +741,8 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsAddOrUpdateRepoPermissionsLegacy(accessToken: String?, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String, request: InlineObject160ApiModel) {
-        val path = "/teams/{team_id}/repos/{repo_name}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun teamsAddOrUpdateRepoPermissionsLegacy(accessToken: String?, teamId: kotlin.Int, repoName: kotlin.String, request: InlineObject160ApiModel) {
+        val path = "/teams/{team_id}/repos/{repo_name}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -769,8 +769,8 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCheckPermissionsForRepoInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryApiModel {
-        val path = "/orgs/{org}/teams/{team_slug}/repos/{repo_name}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun teamsCheckPermissionsForRepoInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, repoName: kotlin.String): TeamMinusRepositoryApiModel {
+        val path = "/orgs/{org}/teams/{team_slug}/repos/{repo_name}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -778,8 +778,8 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsCheckPermissionsForRepoLegacy(accessToken: String?, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String): TeamMinusRepositoryApiModel {
-        val path = "/teams/{team_id}/repos/{repo_name}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun teamsCheckPermissionsForRepoLegacy(accessToken: String?, teamId: kotlin.Int, repoName: kotlin.String): TeamMinusRepositoryApiModel {
+        val path = "/teams/{team_id}/repos/{repo_name}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1289,8 +1289,8 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsRemoveRepoInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/orgs/{org}/teams/{team_slug}/repos/{repo_name}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun teamsRemoveRepoInOrg(accessToken: String?, org: kotlin.String, teamSlug: kotlin.String, repoName: kotlin.String) {
+        val path = "/orgs/{org}/teams/{team_slug}/repos/{repo_name}".replace("{"+"org"+"}", "$org").replace("{"+"team_slug"+"}", "$teamSlug").replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -1298,8 +1298,8 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         }
     }
 
-    override suspend fun teamsRemoveRepoLegacy(accessToken: String?, teamId: kotlin.Int, owner: kotlin.String, repo: kotlin.String) {
-        val path = "/teams/{team_id}/repos/{repo_name}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun teamsRemoveRepoLegacy(accessToken: String?, teamId: kotlin.Int, repoName: kotlin.String) {
+        val path = "/teams/{team_id}/repos/{repo_name}".replace("{"+"team_id"+"}", "$teamId").replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }

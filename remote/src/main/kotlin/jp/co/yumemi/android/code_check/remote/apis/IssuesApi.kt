@@ -35,7 +35,7 @@ interface IssuesApi {
     * @param request  (optional)
     * @return IssueApiModel
     */
-    suspend fun issuesAddAssignees(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject103ApiModel): IssueApiModel
+    suspend fun issuesAddAssignees(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject103ApiModel): IssueApiModel
 
     /**
     * Check if a user can be assigned
@@ -44,7 +44,7 @@ interface IssuesApi {
     *
     * @return void
     */
-    suspend fun issuesCheckUserCanBeAssigned(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, assignee: kotlin.String)
+    suspend fun issuesCheckUserCanBeAssigned(accessToken: String? = null, repoName: kotlin.String, assignee: kotlin.String)
 
     /**
     * Create an issue
@@ -54,7 +54,7 @@ interface IssuesApi {
     * @param request 
     * @return IssueApiModel
     */
-    suspend fun issuesCreate(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject99ApiModel): IssueApiModel
+    suspend fun issuesCreate(accessToken: String? = null, repoName: kotlin.String, request: InlineObject99ApiModel): IssueApiModel
 
     /**
     * Create an issue comment
@@ -64,7 +64,7 @@ interface IssuesApi {
     * @param request 
     * @return IssueMinusCommentApiModel
     */
-    suspend fun issuesCreateComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject105ApiModel): IssueMinusCommentApiModel
+    suspend fun issuesCreateComment(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject105ApiModel): IssueMinusCommentApiModel
 
     /**
     * Create a label
@@ -74,7 +74,7 @@ interface IssuesApi {
     * @param request 
     * @return LabelApiModel
     */
-    suspend fun issuesCreateLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject109ApiModel): LabelApiModel
+    suspend fun issuesCreateLabel(accessToken: String? = null, repoName: kotlin.String, request: InlineObject109ApiModel): LabelApiModel
 
     /**
     * Create a milestone
@@ -84,7 +84,7 @@ interface IssuesApi {
     * @param request 
     * @return MilestoneApiModel
     */
-    suspend fun issuesCreateMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, request: InlineObject113ApiModel): MilestoneApiModel
+    suspend fun issuesCreateMilestone(accessToken: String? = null, repoName: kotlin.String, request: InlineObject113ApiModel): MilestoneApiModel
 
     /**
     * Delete an issue comment
@@ -93,7 +93,7 @@ interface IssuesApi {
     *
     * @return void
     */
-    suspend fun issuesDeleteComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int)
+    suspend fun issuesDeleteComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int)
 
     /**
     * Delete a label
@@ -102,7 +102,7 @@ interface IssuesApi {
     *
     * @return void
     */
-    suspend fun issuesDeleteLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, name: kotlin.String)
+    suspend fun issuesDeleteLabel(accessToken: String? = null, repoName: kotlin.String, name: kotlin.String)
 
     /**
     * Delete a milestone
@@ -111,7 +111,7 @@ interface IssuesApi {
     *
     * @return void
     */
-    suspend fun issuesDeleteMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int)
+    suspend fun issuesDeleteMilestone(accessToken: String? = null, repoName: kotlin.String, milestoneNumber: kotlin.Int)
 
     /**
     * Get an issue
@@ -120,7 +120,7 @@ interface IssuesApi {
     *
     * @return IssueApiModel
     */
-    suspend fun issuesGet(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int): IssueApiModel
+    suspend fun issuesGet(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int): IssueApiModel
 
     /**
     * Get an issue comment
@@ -129,7 +129,7 @@ interface IssuesApi {
     *
     * @return IssueMinusCommentApiModel
     */
-    suspend fun issuesGetComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): IssueMinusCommentApiModel
+    suspend fun issuesGetComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int): IssueMinusCommentApiModel
 
     /**
     * Get an issue event
@@ -138,7 +138,7 @@ interface IssuesApi {
     *
     * @return IssueMinusEventApiModel
     */
-    suspend fun issuesGetEvent(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, eventId: kotlin.Int): IssueMinusEventApiModel
+    suspend fun issuesGetEvent(accessToken: String? = null, repoName: kotlin.String, eventId: kotlin.Int): IssueMinusEventApiModel
 
     /**
     * Get a label
@@ -147,7 +147,7 @@ interface IssuesApi {
     *
     * @return LabelApiModel
     */
-    suspend fun issuesGetLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, name: kotlin.String): LabelApiModel
+    suspend fun issuesGetLabel(accessToken: String? = null, repoName: kotlin.String, name: kotlin.String): LabelApiModel
 
     /**
     * Get a milestone
@@ -156,7 +156,7 @@ interface IssuesApi {
     *
     * @return MilestoneApiModel
     */
-    suspend fun issuesGetMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int): MilestoneApiModel
+    suspend fun issuesGetMilestone(accessToken: String? = null, repoName: kotlin.String, milestoneNumber: kotlin.Int): MilestoneApiModel
 
     /**
     * List issues assigned to the authenticated user
@@ -174,7 +174,7 @@ interface IssuesApi {
     *
     * @return kotlin.collections.List<SimpleMinusUserApiModel>
     */
-    suspend fun issuesListAssignees(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
+    suspend fun issuesListAssignees(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<SimpleMinusUserApiModel>
 
     /**
     * List issue comments
@@ -183,7 +183,7 @@ interface IssuesApi {
     *
     * @return kotlin.collections.List<IssueMinusCommentApiModel>
     */
-    suspend fun issuesListComments(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusCommentApiModel>
+    suspend fun issuesListComments(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusCommentApiModel>
 
     /**
     * List issue comments for a repository
@@ -192,7 +192,7 @@ interface IssuesApi {
     *
     * @return kotlin.collections.List<IssueMinusCommentApiModel>
     */
-    suspend fun issuesListCommentsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusCommentApiModel>
+    suspend fun issuesListCommentsForRepo(accessToken: String? = null, repoName: kotlin.String, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusCommentApiModel>
 
     /**
     * List issue events
@@ -201,7 +201,7 @@ interface IssuesApi {
     *
     * @return kotlin.collections.List<LabeledMinusIssueMinusEventApiModel>
     */
-    suspend fun issuesListEvents(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabeledMinusIssueMinusEventApiModel>
+    suspend fun issuesListEvents(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabeledMinusIssueMinusEventApiModel>
 
     /**
     * List issue events for a repository
@@ -210,7 +210,7 @@ interface IssuesApi {
     *
     * @return kotlin.collections.List<IssueMinusEventApiModel>
     */
-    suspend fun issuesListEventsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusEventApiModel>
+    suspend fun issuesListEventsForRepo(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueMinusEventApiModel>
 
     /**
     * List user account issues assigned to the authenticated user
@@ -237,7 +237,7 @@ interface IssuesApi {
     *
     * @return kotlin.collections.List<IssueApiModel>
     */
-    suspend fun issuesListForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestone: kotlin.String? = null, state: kotlin.String? = null, assignee: kotlin.String? = null, creator: kotlin.String? = null, mentioned: kotlin.String? = null, labels: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueApiModel>
+    suspend fun issuesListForRepo(accessToken: String? = null, repoName: kotlin.String, milestone: kotlin.String? = null, state: kotlin.String? = null, assignee: kotlin.String? = null, creator: kotlin.String? = null, mentioned: kotlin.String? = null, labels: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, since: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<IssueApiModel>
 
     /**
     * List labels for issues in a milestone
@@ -246,7 +246,7 @@ interface IssuesApi {
     *
     * @return kotlin.collections.List<LabelApiModel>
     */
-    suspend fun issuesListLabelsForMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabelApiModel>
+    suspend fun issuesListLabelsForMilestone(accessToken: String? = null, repoName: kotlin.String, milestoneNumber: kotlin.Int, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabelApiModel>
 
     /**
     * List labels for a repository
@@ -255,7 +255,7 @@ interface IssuesApi {
     *
     * @return kotlin.collections.List<LabelApiModel>
     */
-    suspend fun issuesListLabelsForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabelApiModel>
+    suspend fun issuesListLabelsForRepo(accessToken: String? = null, repoName: kotlin.String, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<LabelApiModel>
 
     /**
     * List milestones
@@ -264,7 +264,7 @@ interface IssuesApi {
     *
     * @return kotlin.collections.List<MilestoneApiModel>
     */
-    suspend fun issuesListMilestones(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, state: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MilestoneApiModel>
+    suspend fun issuesListMilestones(accessToken: String? = null, repoName: kotlin.String, state: kotlin.String? = null, sort: kotlin.String? = null, direction: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): kotlin.collections.List<MilestoneApiModel>
 
     /**
     * Lock an issue
@@ -274,7 +274,7 @@ interface IssuesApi {
     * @param request  (optional)
     * @return void
     */
-    suspend fun issuesLock(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject106ApiModel)
+    suspend fun issuesLock(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject106ApiModel)
 
     /**
     * Remove assignees from an issue
@@ -284,7 +284,7 @@ interface IssuesApi {
     * @param request  (optional)
     * @return IssueApiModel
     */
-    suspend fun issuesRemoveAssignees(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject104ApiModel): IssueApiModel
+    suspend fun issuesRemoveAssignees(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject104ApiModel): IssueApiModel
 
     /**
     * Remove a label from an issue
@@ -293,7 +293,7 @@ interface IssuesApi {
     *
     * @return kotlin.collections.List<LabelApiModel>
     */
-    suspend fun issuesRemoveLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, name: kotlin.String): kotlin.collections.List<LabelApiModel>
+    suspend fun issuesRemoveLabel(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int, name: kotlin.String): kotlin.collections.List<LabelApiModel>
 
     /**
     * Unlock an issue
@@ -302,7 +302,7 @@ interface IssuesApi {
     *
     * @return void
     */
-    suspend fun issuesUnlock(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int)
+    suspend fun issuesUnlock(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int)
 
     /**
     * Update an issue
@@ -312,7 +312,7 @@ interface IssuesApi {
     * @param request  (optional)
     * @return IssueApiModel
     */
-    suspend fun issuesUpdate(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject102ApiModel): IssueApiModel
+    suspend fun issuesUpdate(accessToken: String? = null, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject102ApiModel): IssueApiModel
 
     /**
     * Update an issue comment
@@ -322,7 +322,7 @@ interface IssuesApi {
     * @param request 
     * @return IssueMinusCommentApiModel
     */
-    suspend fun issuesUpdateComment(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject100ApiModel): IssueMinusCommentApiModel
+    suspend fun issuesUpdateComment(accessToken: String? = null, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject100ApiModel): IssueMinusCommentApiModel
 
     /**
     * Update a label
@@ -332,7 +332,7 @@ interface IssuesApi {
     * @param request  (optional)
     * @return LabelApiModel
     */
-    suspend fun issuesUpdateLabel(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, name: kotlin.String, request: InlineObject110ApiModel): LabelApiModel
+    suspend fun issuesUpdateLabel(accessToken: String? = null, repoName: kotlin.String, name: kotlin.String, request: InlineObject110ApiModel): LabelApiModel
 
     /**
     * Update a milestone
@@ -342,15 +342,15 @@ interface IssuesApi {
     * @param request  (optional)
     * @return MilestoneApiModel
     */
-    suspend fun issuesUpdateMilestone(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, request: InlineObject114ApiModel): MilestoneApiModel
+    suspend fun issuesUpdateMilestone(accessToken: String? = null, repoName: kotlin.String, milestoneNumber: kotlin.Int, request: InlineObject114ApiModel): MilestoneApiModel
 
 }
 
 class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : IssuesApi {
     internal val httpClient = httpClientProvider.provide()
 
-    override suspend fun issuesAddAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject103ApiModel): IssueApiModel {
-        val path = "/repos/{repo_name}/issues/{issue_number}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+    override suspend fun issuesAddAssignees(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject103ApiModel): IssueApiModel {
+        val path = "/repos/{repo_name}/issues/{issue_number}/assignees".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -359,8 +359,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesCheckUserCanBeAssigned(accessToken: String?, owner: kotlin.String, repo: kotlin.String, assignee: kotlin.String) {
-        val path = "/repos/{repo_name}/assignees/{assignee}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"assignee"+"}", "$assignee")
+    override suspend fun issuesCheckUserCanBeAssigned(accessToken: String?, repoName: kotlin.String, assignee: kotlin.String) {
+        val path = "/repos/{repo_name}/assignees/{assignee}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"assignee"+"}", "$assignee")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -368,8 +368,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesCreate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject99ApiModel): IssueApiModel {
-        val path = "/repos/{repo_name}/issues".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun issuesCreate(accessToken: String?, repoName: kotlin.String, request: InlineObject99ApiModel): IssueApiModel {
+        val path = "/repos/{repo_name}/issues".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -378,8 +378,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesCreateComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject105ApiModel): IssueMinusCommentApiModel {
-        val path = "/repos/{repo_name}/issues/{issue_number}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+    override suspend fun issuesCreateComment(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject105ApiModel): IssueMinusCommentApiModel {
+        val path = "/repos/{repo_name}/issues/{issue_number}/comments".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -388,8 +388,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesCreateLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject109ApiModel): LabelApiModel {
-        val path = "/repos/{repo_name}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun issuesCreateLabel(accessToken: String?, repoName: kotlin.String, request: InlineObject109ApiModel): LabelApiModel {
+        val path = "/repos/{repo_name}/labels".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -398,8 +398,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesCreateMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, request: InlineObject113ApiModel): MilestoneApiModel {
-        val path = "/repos/{repo_name}/milestones".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun issuesCreateMilestone(accessToken: String?, repoName: kotlin.String, request: InlineObject113ApiModel): MilestoneApiModel {
+        val path = "/repos/{repo_name}/milestones".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -408,8 +408,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesDeleteComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int) {
-        val path = "/repos/{repo_name}/issues/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun issuesDeleteComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int) {
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -417,8 +417,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesDeleteLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, name: kotlin.String) {
-        val path = "/repos/{repo_name}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"name"+"}", "$name")
+    override suspend fun issuesDeleteLabel(accessToken: String?, repoName: kotlin.String, name: kotlin.String) {
+        val path = "/repos/{repo_name}/labels/{name}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -426,8 +426,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesDeleteMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int) {
-        val path = "/repos/{repo_name}/milestones/{milestone_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
+    override suspend fun issuesDeleteMilestone(accessToken: String?, repoName: kotlin.String, milestoneNumber: kotlin.Int) {
+        val path = "/repos/{repo_name}/milestones/{milestone_number}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"milestone_number"+"}", "$milestoneNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -435,8 +435,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesGet(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int): IssueApiModel {
-        val path = "/repos/{repo_name}/issues/{issue_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+    override suspend fun issuesGet(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int): IssueApiModel {
+        val path = "/repos/{repo_name}/issues/{issue_number}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -444,8 +444,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesGetComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int): IssueMinusCommentApiModel {
-        val path = "/repos/{repo_name}/issues/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun issuesGetComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int): IssueMinusCommentApiModel {
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -453,8 +453,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesGetEvent(accessToken: String?, owner: kotlin.String, repo: kotlin.String, eventId: kotlin.Int): IssueMinusEventApiModel {
-        val path = "/repos/{repo_name}/issues/events/{event_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"event_id"+"}", "$eventId")
+    override suspend fun issuesGetEvent(accessToken: String?, repoName: kotlin.String, eventId: kotlin.Int): IssueMinusEventApiModel {
+        val path = "/repos/{repo_name}/issues/events/{event_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"event_id"+"}", "$eventId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -462,8 +462,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesGetLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, name: kotlin.String): LabelApiModel {
-        val path = "/repos/{repo_name}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"name"+"}", "$name")
+    override suspend fun issuesGetLabel(accessToken: String?, repoName: kotlin.String, name: kotlin.String): LabelApiModel {
+        val path = "/repos/{repo_name}/labels/{name}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -471,8 +471,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesGetMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int): MilestoneApiModel {
-        val path = "/repos/{repo_name}/milestones/{milestone_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
+    override suspend fun issuesGetMilestone(accessToken: String?, repoName: kotlin.String, milestoneNumber: kotlin.Int): MilestoneApiModel {
+        val path = "/repos/{repo_name}/milestones/{milestone_number}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"milestone_number"+"}", "$milestoneNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -501,8 +501,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
-        val path = "/repos/{repo_name}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun issuesListAssignees(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<SimpleMinusUserApiModel> {
+        val path = "/repos/{repo_name}/assignees".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -512,8 +512,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListComments(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusCommentApiModel> {
-        val path = "/repos/{repo_name}/issues/{issue_number}/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+    override suspend fun issuesListComments(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusCommentApiModel> {
+        val path = "/repos/{repo_name}/issues/{issue_number}/comments".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -524,8 +524,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListCommentsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusCommentApiModel> {
-        val path = "/repos/{repo_name}/issues/comments".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun issuesListCommentsForRepo(accessToken: String?, repoName: kotlin.String, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusCommentApiModel> {
+        val path = "/repos/{repo_name}/issues/comments".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -538,8 +538,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListEvents(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabeledMinusIssueMinusEventApiModel> {
-        val path = "/repos/{repo_name}/issues/{issue_number}/events".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+    override suspend fun issuesListEvents(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabeledMinusIssueMinusEventApiModel> {
+        val path = "/repos/{repo_name}/issues/{issue_number}/events".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -549,8 +549,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListEventsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusEventApiModel> {
-        val path = "/repos/{repo_name}/issues/events".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun issuesListEventsForRepo(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueMinusEventApiModel> {
+        val path = "/repos/{repo_name}/issues/events".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -594,8 +594,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestone: kotlin.String?, state: kotlin.String?, assignee: kotlin.String?, creator: kotlin.String?, mentioned: kotlin.String?, labels: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueApiModel> {
-        val path = "/repos/{repo_name}/issues".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun issuesListForRepo(accessToken: String?, repoName: kotlin.String, milestone: kotlin.String?, state: kotlin.String?, assignee: kotlin.String?, creator: kotlin.String?, mentioned: kotlin.String?, labels: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, since: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<IssueApiModel> {
+        val path = "/repos/{repo_name}/issues".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -614,8 +614,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListLabelsForMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabelApiModel> {
-        val path = "/repos/{repo_name}/milestones/{milestone_number}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
+    override suspend fun issuesListLabelsForMilestone(accessToken: String?, repoName: kotlin.String, milestoneNumber: kotlin.Int, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabelApiModel> {
+        val path = "/repos/{repo_name}/milestones/{milestone_number}/labels".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"milestone_number"+"}", "$milestoneNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -625,8 +625,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListLabelsForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabelApiModel> {
-        val path = "/repos/{repo_name}/labels".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun issuesListLabelsForRepo(accessToken: String?, repoName: kotlin.String, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<LabelApiModel> {
+        val path = "/repos/{repo_name}/labels".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -636,8 +636,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesListMilestones(accessToken: String?, owner: kotlin.String, repo: kotlin.String, state: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MilestoneApiModel> {
-        val path = "/repos/{repo_name}/milestones".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun issuesListMilestones(accessToken: String?, repoName: kotlin.String, state: kotlin.String?, sort: kotlin.String?, direction: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): kotlin.collections.List<MilestoneApiModel> {
+        val path = "/repos/{repo_name}/milestones".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -650,8 +650,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesLock(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject106ApiModel) {
-        val path = "/repos/{repo_name}/issues/{issue_number}/lock".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+    override suspend fun issuesLock(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject106ApiModel) {
+        val path = "/repos/{repo_name}/issues/{issue_number}/lock".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -660,8 +660,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesRemoveAssignees(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject104ApiModel): IssueApiModel {
-        val path = "/repos/{repo_name}/issues/{issue_number}/assignees".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+    override suspend fun issuesRemoveAssignees(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject104ApiModel): IssueApiModel {
+        val path = "/repos/{repo_name}/issues/{issue_number}/assignees".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -670,8 +670,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesRemoveLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, name: kotlin.String): kotlin.collections.List<LabelApiModel> {
-        val path = "/repos/{repo_name}/issues/{issue_number}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber").replace("{"+"name"+"}", "$name")
+    override suspend fun issuesRemoveLabel(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int, name: kotlin.String): kotlin.collections.List<LabelApiModel> {
+        val path = "/repos/{repo_name}/issues/{issue_number}/labels/{name}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -679,8 +679,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesUnlock(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int) {
-        val path = "/repos/{repo_name}/issues/{issue_number}/lock".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+    override suspend fun issuesUnlock(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int) {
+        val path = "/repos/{repo_name}/issues/{issue_number}/lock".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -688,8 +688,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesUpdate(accessToken: String?, owner: kotlin.String, repo: kotlin.String, issueNumber: kotlin.Int, request: InlineObject102ApiModel): IssueApiModel {
-        val path = "/repos/{repo_name}/issues/{issue_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"issue_number"+"}", "$issueNumber")
+    override suspend fun issuesUpdate(accessToken: String?, repoName: kotlin.String, issueNumber: kotlin.Int, request: InlineObject102ApiModel): IssueApiModel {
+        val path = "/repos/{repo_name}/issues/{issue_number}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"issue_number"+"}", "$issueNumber")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -698,8 +698,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesUpdateComment(accessToken: String?, owner: kotlin.String, repo: kotlin.String, commentId: kotlin.Int, request: InlineObject100ApiModel): IssueMinusCommentApiModel {
-        val path = "/repos/{repo_name}/issues/comments/{comment_id}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"comment_id"+"}", "$commentId")
+    override suspend fun issuesUpdateComment(accessToken: String?, repoName: kotlin.String, commentId: kotlin.Int, request: InlineObject100ApiModel): IssueMinusCommentApiModel {
+        val path = "/repos/{repo_name}/issues/comments/{comment_id}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"comment_id"+"}", "$commentId")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -708,8 +708,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesUpdateLabel(accessToken: String?, owner: kotlin.String, repo: kotlin.String, name: kotlin.String, request: InlineObject110ApiModel): LabelApiModel {
-        val path = "/repos/{repo_name}/labels/{name}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"name"+"}", "$name")
+    override suspend fun issuesUpdateLabel(accessToken: String?, repoName: kotlin.String, name: kotlin.String, request: InlineObject110ApiModel): LabelApiModel {
+        val path = "/repos/{repo_name}/labels/{name}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"name"+"}", "$name")
 
         return httpClient.request {
             url { encodedPath = path }
@@ -718,8 +718,8 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun issuesUpdateMilestone(accessToken: String?, owner: kotlin.String, repo: kotlin.String, milestoneNumber: kotlin.Int, request: InlineObject114ApiModel): MilestoneApiModel {
-        val path = "/repos/{repo_name}/milestones/{milestone_number}".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo").replace("{"+"milestone_number"+"}", "$milestoneNumber")
+    override suspend fun issuesUpdateMilestone(accessToken: String?, repoName: kotlin.String, milestoneNumber: kotlin.Int, request: InlineObject114ApiModel): MilestoneApiModel {
+        val path = "/repos/{repo_name}/milestones/{milestone_number}".replace("{"+"repo_name"+"}", "$repoName").replace("{"+"milestone_number"+"}", "$milestoneNumber")
 
         return httpClient.request {
             url { encodedPath = path }

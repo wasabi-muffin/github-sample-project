@@ -52,7 +52,7 @@ interface LicensesApi {
     *
     * @return LicenseMinusContentApiModel
     */
-    suspend fun licensesGetForRepo(accessToken: String? = null, owner: kotlin.String, repo: kotlin.String): LicenseMinusContentApiModel
+    suspend fun licensesGetForRepo(accessToken: String? = null, repoName: kotlin.String): LicenseMinusContentApiModel
 
 }
 
@@ -80,8 +80,8 @@ class HttpClientLicensesApi(private val httpClientProvider: HttpClientProvider) 
         }
     }
 
-    override suspend fun licensesGetForRepo(accessToken: String?, owner: kotlin.String, repo: kotlin.String): LicenseMinusContentApiModel {
-        val path = "/repos/{repo_name}/license".replace("{"+"owner"+"}", "$owner").replace("{"+"repo"+"}", "$repo")
+    override suspend fun licensesGetForRepo(accessToken: String?, repoName: kotlin.String): LicenseMinusContentApiModel {
+        val path = "/repos/{repo_name}/license".replace("{"+"repo_name"+"}", "$repoName")
 
         return httpClient.request {
             url { encodedPath = path }
