@@ -8,7 +8,9 @@
     <string name="common_retry">Retry</string>
     <string name="common_cancel">Cancel</string>
     <string name="common_repositories">Repositories</string>
-
+    <string name="common_stars">stars</string>
+    <string name="common_forks">forks</string>
+    
     // Search Top
     <string name="search_top_recent_searches">Recent searches</string>
     <string name="search_top_search_with">%s with %s</string>
