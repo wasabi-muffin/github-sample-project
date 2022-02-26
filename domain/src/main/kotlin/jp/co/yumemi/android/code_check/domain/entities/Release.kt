@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Release(
     val id: Int,
-    val name: String,
+    val name: String?,
     val tag: String,
     val description: String?,
     val authorUsername: String?,

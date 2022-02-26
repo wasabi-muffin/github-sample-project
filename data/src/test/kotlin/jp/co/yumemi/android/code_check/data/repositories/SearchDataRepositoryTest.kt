@@ -6,8 +6,8 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import jp.co.yumemi.android.code_check.data.models.RecentSearchModel
-import jp.co.yumemi.android.code_check.data.models.RepoSearchModel
-import jp.co.yumemi.android.code_check.data.models.RepoSearchResultModel
+import jp.co.yumemi.android.code_check.data.models.RepositoryModel
+import jp.co.yumemi.android.code_check.data.models.SearchResultModel
 import jp.co.yumemi.android.code_check.data.models.UserModel
 import jp.co.yumemi.android.code_check.data.sources.SearchLocalDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
@@ -42,9 +42,9 @@ class SearchDataRepositoryTest {
     fun `test when search is successful`() {
         coEvery {
             searchRemoteDataSource.searchRepos(any(), any())
-        } returns RepoSearchResultModel(
+        } returns SearchResultModel(
             repos = List(5) { index ->
-                RepoSearchModel(
+                RepositoryModel(
                     id = index,
                     name = "name$index",
                     description = "description$index",
