@@ -1,0 +1,48 @@
+@startuml RepoDetails
+state RepoDetails {
+    RepoDetails: I.ClickBack > A.NavigateBack > E.NavigateBack
+
+    state Initial {
+        Initial : I.OnStart > A.LoadDetails > R.Loading, SE.LoadDetails[R.LoadDetailsSuccess, R.LoadDetailsError]
+
+        Initial --> Loading: R.Loading
+    }
+
+    state Loading {
+        Loading --> Stable.Initial: R.LoadSuccess
+        Loading --> Stable.Empty: R.LoadSuccess{Empty List}
+        Loading --> Error: R.LoadError
+    }
+
+    state Stable {
+        Stable : I.ClickItem > A.NavigateDetails > E.NavigateDetails
+        Stable.Initial : I.PullToRefresh > A.RefreshDetails > R.RefreshLoading, SE.Search[R.LoadDetailsSuccess, R.LoadDetailsError]
+
+        state Stable.Empty {
+            Stable.Empty --> Stable.RefreshLoading : R.RefreshLoading
+        }
+
+        state Stable.Initial {
+            Stable.Initial --> Stable.RefreshLoading : R.RefreshLoading
+        }
+
+        state Stable.RefreshLoading {
+            Stable.RefreshLoading --> Stable.Initial : R.LoadDetailsSuccess
+            Stable.RefreshLoading --> Stable.Empty : R.LoadSuccess{Empty List}
+            Stable.RefreshLoading --> Stable.RefreshError : R.LoadDetailsError
+        }
+
+        state Stable.RefreshError {
+            Stable.RefreshError : I.ClickErrorOk > A.ResolveError > R.ResolveError
+
+            Stable.RefreshError --> Stable.Initial : R.ResolveError
+        }
+    }
+
+    state Error {
+        Error : I.ClickTryAgain > A.LoadDetails > R.Loading, SE.LoadDetails[R.LoadDetailsSuccess, R.LoadDetailsError]
+
+        Error --> Loading : R.Loading
+    }
+}
+@enduml
