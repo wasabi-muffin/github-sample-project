@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +33,7 @@ import jp.co.yumemi.android.code_check.ui.core.Contract
 import jp.co.yumemi.android.code_check.ui.core.handle
 import jp.co.yumemi.android.code_check.ui.core.render
 import jp.co.yumemi.android.code_check.ui.primitives.Gray
+import jp.co.yumemi.android.code_check.ui.utils.elevation
 
 @Composable
 fun RepoDetailsScreen(
@@ -81,8 +83,13 @@ fun RepoDetailsScreen(
                         state = rememberSwipeRefreshState(isRefreshing = state is RepoDetailsViewState.Stable.RefreshLoading),
                         onRefresh = { dispatch(RepoDetailsIntent.PullToRefresh) },
                     ) {
-                        Column(modifier = Modifier.verticalScroll(scrollState)) {
+                        Column(
+                            modifier = Modifier
+                                .verticalScroll(scrollState)
+                                .fillMaxSize()
+                        ) {
                             RepoDetailsHeader(repository = state.details.repository)
+                            Divider()
                             RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Issues)
                             // RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.PullRequests) // TODO: Add pull requests
                             RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Releases)
