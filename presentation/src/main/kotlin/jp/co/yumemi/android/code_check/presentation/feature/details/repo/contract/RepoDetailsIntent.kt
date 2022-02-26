@@ -1,6 +1,8 @@
 package jp.co.yumemi.android.code_check.presentation.feature.details.repo.contract
 
-sealed class RepoDetailsIntent {
+import jp.co.yumemi.android.code_check.presentation.core.contract.Intent
+
+sealed class RepoDetailsIntent : Intent {
     object OnStart : RepoDetailsIntent()
     object ClickBack : RepoDetailsIntent()
     object ClickTryAgain : RepoDetailsIntent()
