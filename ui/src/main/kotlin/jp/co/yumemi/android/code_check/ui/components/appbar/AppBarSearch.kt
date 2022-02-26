@@ -44,6 +44,7 @@ fun Preview_AppBarSearch() {
             onClickBack = {},
             onClickImeSearch = {},
             onClickClear = {},
-            onSearchTextChanged = {})
+            onSearchTextChanged = {}
+        )
     }
 }
