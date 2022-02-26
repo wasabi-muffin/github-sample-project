@@ -9,7 +9,7 @@ import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.contract.ViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.contract.SideEffect
 
-open class StateMachineInterpreter<I : Intent, A : Action, R : Result, VS: ViewState, E: Event, SE : SideEffect>(
+open class StateMachineInterpreter<I : Intent, A : Action, R : Result, VS : ViewState, E : Event, SE : SideEffect>(
     private val stateMachine: StateMachine<I, A, R, VS, E, SE>
 ) : Interpreter<I, A, VS, E> {
     override suspend fun interpret(intent: I, state: State<VS, E>): A? = stateMachine.graph

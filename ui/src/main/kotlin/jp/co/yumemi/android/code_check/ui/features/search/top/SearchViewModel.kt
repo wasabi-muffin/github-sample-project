@@ -23,12 +23,16 @@ class SearchViewModel @Inject constructor(
     stateHandle: SavedStateHandle,
 ) : StoreViewModel<SearchTopIntent, SearchTopAction, SearchTopResult, SearchTopViewState, SearchTopEvent>(storeFactory) {
     override val store: Store<SearchTopIntent, SearchTopViewState, SearchTopEvent> = storeFactory.create(
-        stateHandle.getState() ?: State(SearchTopViewState.Stable.EmptySearch(recentSearches = listOf(
-            RecentSearch("1", 0L),
-            RecentSearch("abcdefghijklmnopqrstuvwxyzabcdefghijklmnoprstuvwxyzabcdefghjijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz", 5L),
-            RecentSearch("asdf", 2L),
-            RecentSearch("asdfff", 4L),
-        ))),
+        stateHandle.getState() ?: State(
+            SearchTopViewState.Stable.EmptySearch(
+                recentSearches = listOf(
+                    RecentSearch("1", 0L),
+                    RecentSearch("abcdefghijklmnopqrstuvwxyzabcdefghijklmnoprstuvwxyzabcdefghjijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz", 5L),
+                    RecentSearch("asdf", 2L),
+                    RecentSearch("asdfff", 4L),
+                )
+            )
+        ),
         middlewares = listOf(
             StateSaverMiddleware<SearchTopViewState, SearchTopEvent> { stateHandle.saveState(it) }
         )
