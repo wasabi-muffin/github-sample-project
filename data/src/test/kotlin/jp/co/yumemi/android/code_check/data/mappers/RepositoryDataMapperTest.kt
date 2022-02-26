@@ -1,16 +1,15 @@
 package jp.co.yumemi.android.code_check.data.mappers
 
 import io.kotest.matchers.shouldBe
-import jp.co.yumemi.android.code_check.data.models.RepoSearchModel
+import jp.co.yumemi.android.code_check.data.models.RepositoryModel
 import jp.co.yumemi.android.code_check.data.models.UserModel
-import jp.co.yumemi.android.code_check.domain.entities.User
 import org.junit.Test
 
 class RepositoryDataMapperTest {
     @Test
     fun `test for mapping github repo model to entity`() {
         val entity = RepositoryDataMapper.toEntity(
-            RepoSearchModel(
+            RepositoryModel(
                 id = 1,
                 name = "",
                 description = "",
