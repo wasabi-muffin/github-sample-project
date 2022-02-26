@@ -3,13 +3,12 @@ package jp.co.yumemi.android.code_check.remote.mappers
 import jp.co.yumemi.android.code_check.data.models.RepoSearchModel
 import jp.co.yumemi.android.code_check.remote.models.RepoMinusSearchMinusResultMinusItemApiModel
 
-object SearchMapper {
-    fun apiToData(apiModel: RepoMinusSearchMinusResultMinusItemApiModel) = RepoSearchModel(
+object SearchRemoteMapper {
+    fun toModel(apiModel: RepoMinusSearchMinusResultMinusItemApiModel) = RepoSearchModel(
         id = apiModel.id,
         name = apiModel.fullName,
         description = apiModel.description,
-        ownerName = apiModel.owner?.login,
-        ownerIconUrl = apiModel.owner?.avatarUrl,
+        owner = apiModel.owner?.let(UserRemoteMapper::toModel),
         homepage = apiModel.homepage,
         language = apiModel.language,
         stargazersCount = apiModel.stargazersCount,

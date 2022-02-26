@@ -11,6 +11,7 @@ import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.core.Pageable
 import jp.co.yumemi.android.code_check.domain.entities.Repository
+import jp.co.yumemi.android.code_check.domain.entities.User
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
 import jp.co.yumemi.android.code_check.test.runBlockingTest
@@ -37,8 +38,7 @@ class SearchRepoExecutorTest {
                     id = index,
                     name = "name$index",
                     description = "description$index",
-                    ownerName = "ownerName$index",
-                    ownerIconUrl = "ownerIconUrl$index",
+                    owner = User(id = 0, name = null, username = "", iconUrl = null, description = null),
                     homepage = "homepage$index",
                     language = "language$index",
                     stargazersCount = index,
@@ -60,8 +60,6 @@ class SearchRepoExecutorTest {
                 repo.id shouldBe index
                 repo.name shouldBe "name$index"
                 repo.description shouldBe "description$index"
-                repo.ownerName shouldBe "ownerName$index"
-                repo.ownerIconUrl shouldBe "ownerIconUrl$index"
                 repo.homepage shouldBe "homepage$index"
                 repo.language shouldBe "language$index"
                 repo.stargazersCount shouldBe index

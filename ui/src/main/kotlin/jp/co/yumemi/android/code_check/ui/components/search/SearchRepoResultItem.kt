@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 import jp.co.yumemi.android.code_check.domain.entities.Repository
+import jp.co.yumemi.android.code_check.domain.entities.User
 import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.primitives.Github
 import jp.co.yumemi.android.code_check.ui.primitives.GithubTheme
@@ -124,8 +125,8 @@ fun SearchRepoResultItem(
     repository: Repository,
     modifier: Modifier = Modifier
 ) = SearchRepoResultItem(
-    ownerIconUrl = repository.ownerIconUrl,
-    ownerName = repository.ownerName,
+    ownerIconUrl = repository.owner?.iconUrl,
+    ownerName = repository.owner?.name,
     repoName = repository.name,
     repoDescription = repository.description,
     stargazersCount = repository.stargazersCount,
@@ -142,8 +143,7 @@ fun Preview_SearchRepoResultItem() {
                 id = 1,
                 name = "name",
                 description = "description",
-                ownerName = "ownerName",
-                ownerIconUrl = null,
+                owner = User(id = 0, name = "name", username = "", iconUrl = null, description = null),
                 homepage = null,
                 language = "Kotlin",
                 stargazersCount = 1,

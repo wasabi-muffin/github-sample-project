@@ -1,7 +1,7 @@
 package jp.co.yumemi.android.code_check.data.repositories
 
-import jp.co.yumemi.android.code_check.data.mappers.RecentSearchMapper
-import jp.co.yumemi.android.code_check.data.mappers.SearchMapper
+import jp.co.yumemi.android.code_check.data.mappers.RecentSearchDataMapper
+import jp.co.yumemi.android.code_check.data.mappers.RepositoryDataMapper
 import jp.co.yumemi.android.code_check.data.sources.SearchLocalDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
 import jp.co.yumemi.android.code_check.domain.core.Pageable
@@ -18,13 +18,13 @@ class SearchDataRepository(
         return searchRemoteDataSource
             .searchRepos(searchText = searchText, pageNumber = pageNumber)
             .let { results ->
-                Pageable(results.repos.map(SearchMapper::modelToEntity), results.totalCount)
+                Pageable(results.repos.map(RepositoryDataMapper::toEntity), results.totalCount)
             }
     }
 
     override suspend fun getRecentSearches(): List<RecentSearch> = searchLocalDataSource
         .getRecentSearches()
-        .map(RecentSearchMapper::modelToEntity)
+        .map(RecentSearchDataMapper::toEntity)
 
     override suspend fun clearRecentSearches() = searchLocalDataSource.deleteAllRecentSearches()
 }

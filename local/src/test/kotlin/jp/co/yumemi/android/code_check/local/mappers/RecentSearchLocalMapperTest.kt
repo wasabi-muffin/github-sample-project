@@ -5,10 +5,10 @@ import jp.co.yumemi.android.code_check.data.models.RecentSearchModel
 import jp.co.yumemi.android.code_check.local.models.RecentSearchDbModel
 import org.junit.Test
 
-class RecentSearchMapperTest {
+class RecentSearchLocalMapperTest {
     @Test
     fun `test mapping from data model to db model`() {
-        RecentSearchMapper.dataToDb(
+        RecentSearchLocalMapper.dataToDb(
             RecentSearchModel(searchText = "", timestamp = 0L)
         ).run {
             searchText shouldBe ""
@@ -18,7 +18,7 @@ class RecentSearchMapperTest {
 
     @Test
     fun `test mapping from db model to data model`() {
-        RecentSearchMapper.dbToData(
+        RecentSearchLocalMapper.dbToData(
             RecentSearchDbModel(searchText = "", timestamp = 0L)
         ).run {
             searchText shouldBe ""
