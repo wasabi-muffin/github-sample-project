@@ -21,21 +21,19 @@ import jp.co.yumemi.android.code_check.ui.primitives.GithubTheme
 fun RecentSearchHeader(
     onClickClear: () -> Unit,
     modifier: Modifier = Modifier
-) {
-    Row(modifier = modifier.padding(all = 16.dp)) {
-        Text(
-            text = stringResource(R.string.search_top_recent_searches),
-            style = MaterialTheme.typography.h4,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.weight(1F)
-        )
-        Text(
-            text = stringResource(R.string.common_clear).toUpperCase(Locale.current),
-            style = MaterialTheme.typography.h4,
-            color = Blue.v500,
-            modifier = Modifier.clickable { onClickClear() }
-        )
-    }
+) = Row(modifier = modifier.padding(all = 16.dp)) {
+    Text(
+        text = stringResource(R.string.search_top_recent_searches),
+        style = MaterialTheme.typography.h4,
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier.weight(1F)
+    )
+    Text(
+        text = stringResource(R.string.common_clear).toUpperCase(Locale.current),
+        style = MaterialTheme.typography.h4,
+        color = Blue.v500,
+        modifier = Modifier.clickable { onClickClear() }
+    )
 }
 
 @Preview

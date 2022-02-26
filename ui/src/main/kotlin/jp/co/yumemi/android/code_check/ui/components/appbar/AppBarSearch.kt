@@ -17,22 +17,20 @@ fun AppBarSearch(
     onClickImeSearch: () -> Unit,
     onClickClear: () -> Unit,
     onSearchTextChanged: (String) -> Unit,
+) = CommonAppBar(
+    modifier = modifier,
+    navigationIcon = {
+        BackIcon(onClickBack = onClickBack)
+    },
 ) {
-    CommonAppBar(
-        modifier = modifier,
-        navigationIcon = {
-            BackIcon(onClickBack = onClickBack)
-        },
-    ) {
-        SearchTextField(
-            searchText = searchText,
-            placeholder = placeholder,
-            onSearchTextChanged = onSearchTextChanged,
-            onClickClear = onClickClear,
-            onClickImeSearch = onClickImeSearch,
-            modifier = Modifier.weight(1F)
-        )
-    }
+    SearchTextField(
+        searchText = searchText,
+        placeholder = placeholder,
+        onSearchTextChanged = onSearchTextChanged,
+        onClickClear = onClickClear,
+        onClickImeSearch = onClickImeSearch,
+        modifier = Modifier.weight(1F)
+    )
 }
 
 @Preview

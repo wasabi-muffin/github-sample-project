@@ -40,83 +40,81 @@ fun SearchRepoResultItem(
     stargazersCount: Int,
     language: String?,
     modifier: Modifier = Modifier
+) = Column(
+    modifier = modifier
+        .fillMaxWidth()
+        .padding(16.dp)
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp)
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            if (ownerIconUrl != null) {
-                Image(
-                    painter = rememberImagePainter(
-                        data = ownerIconUrl,
-                        builder = {
-                            transformations(CircleCropTransformation())
-                        }
-                    ),
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp)
-                )
-            }
-            if (ownerName != null) {
-                Text(
-                    text = ownerName,
-                    style = MaterialTheme.typography.h5,
-                    fontWeight = FontWeight.Normal,
-                    color = Gray.v500,
-                )
-            }
+        if (ownerIconUrl != null) {
+            Image(
+                painter = rememberImagePainter(
+                    data = ownerIconUrl,
+                    builder = {
+                        transformations(CircleCropTransformation())
+                    }
+                ),
+                contentDescription = null,
+                modifier = Modifier.size(16.dp)
+            )
         }
+        if (ownerName != null) {
+            Text(
+                text = ownerName,
+                style = MaterialTheme.typography.h5,
+                fontWeight = FontWeight.Normal,
+                color = Gray.v500,
+            )
+        }
+    }
+    Text(
+        text = repoName,
+        style = MaterialTheme.typography.h4,
+        fontWeight = FontWeight.Bold,
+        color = Github.Black,
+        modifier = Modifier.fillMaxWidth(),
+    )
+    if (repoDescription != null) {
         Text(
-            text = repoName,
+            text = repoDescription,
             style = MaterialTheme.typography.h4,
-            fontWeight = FontWeight.Bold,
-            color = Github.Black,
-            modifier = Modifier.fillMaxWidth(),
+            fontWeight = FontWeight.Normal,
+            color = Gray.v700,
         )
-        if (repoDescription != null) {
-            Text(
-                text = repoDescription,
-                style = MaterialTheme.typography.h4,
-                fontWeight = FontWeight.Normal,
-                color = Gray.v700,
-            )
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth(),
-        ) {
+    }
+    Spacer(modifier = Modifier.height(16.dp))
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.star_fill),
+            contentDescription = "star",
+            tint = Yellow.v500
+        )
+        Text(
+            text = stargazersCount.toString(),
+            style = MaterialTheme.typography.h4,
+            fontWeight = FontWeight.Normal,
+            color = Gray.v700,
+        )
+        if (language != null) {
             Icon(
-                painter = painterResource(id = R.drawable.star_fill),
-                contentDescription = "star",
-                tint = Yellow.v500
+                painter = painterResource(id = R.drawable.dot_fill),
+                contentDescription = "language",
+                tint = getLanguageColor(language)
             )
             Text(
-                text = stargazersCount.toString(),
+                text = language,
                 style = MaterialTheme.typography.h4,
                 fontWeight = FontWeight.Normal,
                 color = Gray.v700,
             )
-            if (language != null) {
-                Icon(
-                    painter = painterResource(id = R.drawable.dot_fill),
-                    contentDescription = "language",
-                    tint = getLanguageColor(language)
-                )
-                Text(
-                    text = language,
-                    style = MaterialTheme.typography.h4,
-                    fontWeight = FontWeight.Normal,
-                    color = Gray.v700,
-                )
-            }
         }
     }
 }

@@ -29,46 +29,44 @@ fun SearchTextField(
     onClickClear: () -> Unit,
     onClickImeSearch: () -> Unit,
     modifier: Modifier = Modifier,
-) {
-    TextField(
-        value = searchText,
-        placeholder = {
-            Text(
-                text = placeholder,
-                color = Gray.v300
+) = TextField(
+    value = searchText,
+    placeholder = {
+        Text(
+            text = placeholder,
+            color = Gray.v300
+        )
+    },
+    onValueChange = onSearchTextChanged,
+    singleLine = true,
+    trailingIcon = {
+        if (searchText.isNotEmpty()) {
+            Icon(
+                painter = painterResource(id = R.drawable.x),
+                contentDescription = "clear text",
+                tint = Gray.v700,
+                modifier = Modifier
+                    .size(24.dp)
+                    .offset(x = 10.dp)
+                    .clickable(onClick = onClickClear)
             )
-        },
-        onValueChange = onSearchTextChanged,
-        singleLine = true,
-        trailingIcon = {
-            if (searchText.isNotEmpty()) {
-                Icon(
-                    painter = painterResource(id = R.drawable.x),
-                    contentDescription = "clear text",
-                    tint = Gray.v700,
-                    modifier = Modifier
-                        .size(24.dp)
-                        .offset(x = 10.dp)
-                        .clickable(onClick = onClickClear)
-                )
-            }
-        },
-        keyboardOptions = KeyboardOptions(
-            imeAction = ImeAction.Search
-        ),
-        keyboardActions = KeyboardActions(
-            onSearch = { onClickImeSearch() }
-        ),
-        colors = TextFieldDefaults.textFieldColors(
-            textColor = Github.Black,
-            backgroundColor = Color.Transparent,
-            focusedIndicatorColor = Gray.v300,
-            disabledIndicatorColor = Gray.v300,
-            unfocusedIndicatorColor = Gray.v300
-        ),
-        modifier = modifier
-    )
-}
+        }
+    },
+    keyboardOptions = KeyboardOptions(
+        imeAction = ImeAction.Search
+    ),
+    keyboardActions = KeyboardActions(
+        onSearch = { onClickImeSearch() }
+    ),
+    colors = TextFieldDefaults.textFieldColors(
+        textColor = Github.Black,
+        backgroundColor = Color.Transparent,
+        focusedIndicatorColor = Gray.v300,
+        disabledIndicatorColor = Gray.v300,
+        unfocusedIndicatorColor = Gray.v300
+    ),
+    modifier = modifier
+)
 
 @Preview
 @Composable

@@ -22,17 +22,15 @@ fun CommonAppBar(
     elevation: Dp = 4.dp,
     navigationIcon: (@Composable () -> Unit)? = null,
     content: @Composable RowScope.() -> Unit
+) = TopAppBar(
+    modifier = modifier.fillMaxWidth(),
+    backgroundColor = Github.White,
+    elevation = elevation,
+    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
 ) {
-    TopAppBar(
-        modifier = modifier.fillMaxWidth(),
-        backgroundColor = Github.White,
-        elevation = elevation,
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-    ) {
-        navigationIcon?.invoke()
-        Spacer(modifier = Modifier.width(16.dp))
-        content()
-    }
+    navigationIcon?.invoke()
+    Spacer(modifier = Modifier.width(16.dp))
+    content()
 }
 
 @Preview

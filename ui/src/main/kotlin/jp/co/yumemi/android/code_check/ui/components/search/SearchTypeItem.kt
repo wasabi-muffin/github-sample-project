@@ -28,31 +28,29 @@ fun SearchTypeItem(
     searchText: String,
     searchType: SearchType,
     modifier: Modifier = Modifier
+) = Row(
+    modifier = modifier.padding(24.dp),
+    verticalAlignment = Alignment.CenterVertically
 ) {
-    Row(
-        modifier = modifier.padding(24.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        val searchTypeIconId = when (searchType) {
-            SearchType.Repo -> R.drawable.repo
-        }
-        val searchTypeLabelId = when (searchType) {
-            SearchType.Repo -> R.string.common_repositories
-        }
-        Icon(
-            painter = painterResource(id = searchTypeIconId),
-            contentDescription = "",
-            tint = Github.Black,
-            modifier = Modifier.size(24.dp)
-        )
-        Spacer(modifier = Modifier.width(16.dp))
-        Text(
-            text = stringResource(id = R.string.search_top_search_with, stringResource(id = searchTypeLabelId), "\"$searchText\""),
-            style = MaterialTheme.typography.h4,
-            fontWeight = FontWeight.Normal,
-            modifier = Modifier.weight(1F)
-        )
+    val searchTypeIconId = when (searchType) {
+        SearchType.Repo -> R.drawable.repo
     }
+    val searchTypeLabelId = when (searchType) {
+        SearchType.Repo -> R.string.common_repositories
+    }
+    Icon(
+        painter = painterResource(id = searchTypeIconId),
+        contentDescription = "",
+        tint = Github.Black,
+        modifier = Modifier.size(24.dp)
+    )
+    Spacer(modifier = Modifier.width(16.dp))
+    Text(
+        text = stringResource(id = R.string.search_top_search_with, stringResource(id = searchTypeLabelId), "\"$searchText\""),
+        style = MaterialTheme.typography.h4,
+        fontWeight = FontWeight.Normal,
+        modifier = Modifier.weight(1F)
+    )
 }
 
 @Preview

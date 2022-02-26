@@ -15,18 +15,16 @@ fun TitleAppBar(
     modifier: Modifier = Modifier,
     elevation: Dp = 0.dp,
     navigationIcon: (@Composable () -> Unit)? = null,
+) = CommonAppBar(
+    navigationIcon = navigationIcon,
+    elevation = elevation,
+    modifier = modifier
 ) {
-    CommonAppBar(
-        navigationIcon = navigationIcon,
-        elevation = elevation,
-        modifier = modifier
-    ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.h2,
-            fontWeight = FontWeight.Bold,
-            color = Github.Black,
-            modifier = Modifier.weight(1f)
-        )
-    }
+    Text(
+        text = title,
+        style = MaterialTheme.typography.h2,
+        fontWeight = FontWeight.Bold,
+        color = Github.Black,
+        modifier = Modifier.weight(1f)
+    )
 }

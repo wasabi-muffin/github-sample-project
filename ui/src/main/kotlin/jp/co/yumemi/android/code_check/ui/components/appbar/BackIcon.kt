@@ -13,13 +13,11 @@ import jp.co.yumemi.android.code_check.ui.primitives.Github
 @Composable
 fun BackIcon(
     onClickBack: () -> Unit
-) {
-    Icon(
-        painter = painterResource(id = R.drawable.arrow_left),
-        contentDescription = "back",
-        tint = Github.Black,
-        modifier = Modifier
-            .clickable { onClickBack() }
-            .size(24.dp)
-    )
-}
+) = Icon(
+    painter = painterResource(id = R.drawable.arrow_left),
+    contentDescription = "back",
+    tint = Github.Black,
+    modifier = Modifier
+        .clickable { onClickBack() }
+        .size(24.dp)
+)

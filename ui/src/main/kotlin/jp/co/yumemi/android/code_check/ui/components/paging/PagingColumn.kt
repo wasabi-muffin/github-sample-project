@@ -1,5 +1,6 @@
 package jp.co.yumemi.android.code_check.ui.components.paging
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
@@ -22,6 +23,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import jp.co.yumemi.android.code_check.presentation.core.contract.ViewState
@@ -35,6 +37,7 @@ inline fun <T, reified Loading : ViewState, reified Error : ViewState> PagingCol
     viewState: ViewState,
     noinline onClickRetry: () -> Unit,
     modifier: Modifier = Modifier,
+    footerBackground: Color = Github.White,
     state: LazyListState = rememberLazyListState(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     reverseLayout: Boolean = false,
@@ -43,60 +46,60 @@ inline fun <T, reified Loading : ViewState, reified Error : ViewState> PagingCol
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
     userScrollEnabled: Boolean = true,
     crossinline content: @Composable LazyItemScope.(Int, T) -> Unit
+) = LazyColumn(
+    modifier = modifier, state = state,
+    contentPadding = contentPadding,
+    reverseLayout = reverseLayout,
+    verticalArrangement = verticalArrangement,
+    horizontalAlignment = horizontalAlignment,
+    flingBehavior = flingBehavior,
+    userScrollEnabled = userScrollEnabled,
 ) {
-    LazyColumn(
-        modifier = modifier, state = state, contentPadding = contentPadding,
-        reverseLayout = reverseLayout,
-        verticalArrangement = verticalArrangement,
-        horizontalAlignment = horizontalAlignment,
-        flingBehavior = flingBehavior,
-        userScrollEnabled = userScrollEnabled,
-    ) {
-        itemsIndexed(items) { index, item ->
-            content(index, item)
-            if (index == items.lastIndex) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(64.dp)
-                ) {
-                    viewState.render<Loading> {
-                        Divider(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .align(Alignment.TopCenter)
+    itemsIndexed(items) { index, item ->
+        content(index, item)
+        if (index == items.lastIndex) {
+            Box(
+                modifier = Modifier
+                    .background(footerBackground)
+                    .fillMaxWidth()
+                    .height(64.dp)
+            ) {
+                viewState.render<Loading> {
+                    Divider(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.TopCenter)
+                    )
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                    )
+                }
+                viewState.render<Error> {
+                    Divider(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.TopCenter)
+                    )
+                    Row(
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp)
+                            .align(Alignment.Center)
+                            .fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "An error has occurred",
+                            style = MaterialTheme.typography.h4,
+                            color = Github.Black,
+                            modifier = Modifier.weight(1f)
                         )
-                        CircularProgressIndicator(
-                            modifier = Modifier
-                                .align(Alignment.Center)
+                        Text(
+                            text = "Retry",
+                            style = MaterialTheme.typography.h4,
+                            fontWeight = FontWeight.Bold,
+                            color = Blue.v500,
+                            modifier = Modifier.clickable { onClickRetry() }
                         )
-                    }
-                    viewState.render<Error> {
-                        Divider(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .align(Alignment.TopCenter)
-                        )
-                        Row(
-                            modifier = Modifier
-                                .padding(horizontal = 16.dp)
-                                .align(Alignment.Center)
-                                .fillMaxWidth()
-                        ) {
-                            Text(
-                                text = "An error has occurred",
-                                style = MaterialTheme.typography.h4,
-                                color = Github.Black,
-                                modifier = Modifier.weight(1f)
-                            )
-                            Text(
-                                text = "Retry",
-                                style = MaterialTheme.typography.h4,
-                                fontWeight = FontWeight.Bold,
-                                color = Blue.v500,
-                                modifier = Modifier.clickable { onClickRetry() }
-                            )
-                        }
                     }
                 }
             }
