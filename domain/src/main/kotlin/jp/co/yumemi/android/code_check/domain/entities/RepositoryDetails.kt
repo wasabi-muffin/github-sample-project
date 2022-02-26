@@ -8,5 +8,4 @@ data class RepositoryDetails(
     val repository: Repository,
     val releases: List<Release>,
     val contributors: List<User>,
-    val watchers: List<User>,
 ) : Parcelable
