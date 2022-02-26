@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.ui.components
+package jp.co.yumemi.android.code_check.ui.components.search
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -61,16 +60,17 @@ fun SearchRepoResultItem(
                         }
                     ),
                     contentDescription = null,
-                    modifier = Modifier.size(12.dp)
+                    modifier = Modifier.size(16.dp)
                 )
             }
-            if (ownerName != null)
+            if (ownerName != null) {
                 Text(
                     text = ownerName,
                     style = MaterialTheme.typography.h5,
                     fontWeight = FontWeight.Normal,
                     color = Gray.v500,
                 )
+            }
         }
         Text(
             text = repoName,

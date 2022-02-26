@@ -1,15 +1,17 @@
-package jp.co.yumemi.android.code_check.ui.components
+package jp.co.yumemi.android.code_check.ui.components.appbar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import jp.co.yumemi.android.code_check.ui.primitives.Github
 import jp.co.yumemi.android.code_check.ui.primitives.GithubTheme
@@ -17,12 +19,14 @@ import jp.co.yumemi.android.code_check.ui.primitives.GithubTheme
 @Composable
 fun CommonAppBar(
     modifier: Modifier = Modifier,
+    elevation: Dp = 4.dp,
     navigationIcon: (@Composable () -> Unit)? = null,
     content: @Composable RowScope.() -> Unit
 ) {
     TopAppBar(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         backgroundColor = Github.White,
+        elevation = elevation,
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
     ) {
         navigationIcon?.invoke()

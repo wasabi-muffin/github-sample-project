@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.ui.components
+package jp.co.yumemi.android.code_check.ui.components.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row

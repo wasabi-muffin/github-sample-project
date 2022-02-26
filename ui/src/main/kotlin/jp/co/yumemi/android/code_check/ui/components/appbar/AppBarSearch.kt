@@ -1,17 +1,11 @@
-package jp.co.yumemi.android.code_check.ui.components
+package jp.co.yumemi.android.code_check.ui.components.appbar
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import jp.co.yumemi.android.code_check.ui.R
-import jp.co.yumemi.android.code_check.ui.primitives.Github
+import jp.co.yumemi.android.code_check.ui.components.search.SearchTextField
 import jp.co.yumemi.android.code_check.ui.primitives.GithubTheme
 
 @Composable
@@ -27,14 +21,7 @@ fun AppBarSearch(
     CommonAppBar(
         modifier = modifier,
         navigationIcon = {
-            Icon(
-                painter = painterResource(id = R.drawable.arrow_left),
-                contentDescription = "back",
-                tint = Github.Black,
-                modifier = Modifier
-                    .clickable { onClickBack() }
-                    .size(24.dp)
-            )
+            BackIcon(onClickBack = onClickBack)
         },
     ) {
         SearchTextField(
