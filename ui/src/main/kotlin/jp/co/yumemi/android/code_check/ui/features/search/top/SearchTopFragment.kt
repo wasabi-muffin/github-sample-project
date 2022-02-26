@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import jp.co.yumemi.android.code_check.ui.core.compose
+import jp.co.yumemi.android.code_check.ui.utils.compose
 import jp.co.yumemi.android.code_check.ui.core.contract
 
 @AndroidEntryPoint

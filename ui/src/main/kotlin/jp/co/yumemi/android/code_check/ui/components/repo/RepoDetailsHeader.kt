@@ -38,6 +38,7 @@ fun RepoDetailsHeader(
     ownerName: String?,
     repoName: String,
     repoDescription: String?,
+    homepage: String?,
     stargazersCount: Int,
     forksCount: Int,
     modifier: Modifier = Modifier
@@ -48,7 +49,7 @@ fun RepoDetailsHeader(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
         if (ownerIconUrl != null) {
@@ -88,6 +89,25 @@ fun RepoDetailsHeader(
         )
     }
     Spacer(modifier = Modifier.height(16.dp))
+    if (homepage != null) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.link),
+                contentDescription = "star",
+                tint = Gray.v600
+            )
+            Text(
+                text = homepage,
+                style = MaterialTheme.typography.h3,
+                fontWeight = FontWeight.Bold,
+                color = Github.Black,
+            )
+        }
+    }
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -96,36 +116,36 @@ fun RepoDetailsHeader(
         Icon(
             painter = painterResource(id = R.drawable.star),
             contentDescription = "star",
-            tint = Gray.v700
+            tint = Gray.v600
         )
         Text(
             text = stargazersCount.toShortedString(),
             style = MaterialTheme.typography.h3,
             fontWeight = FontWeight.Bold,
-            color = Gray.v700,
+            color = Github.Black,
         )
         Text(
             text = stringResource(R.string.common_stars),
             style = MaterialTheme.typography.h3,
             fontWeight = FontWeight.Normal,
-            color = Gray.v700,
+            color = Gray.v600,
         )
         Icon(
             painter = painterResource(id = R.drawable.repo_forked),
             contentDescription = "forked",
-            tint = Gray.v700
+            tint = Gray.v600,
+        )
+        Text(
+            text = forksCount.toShortedString(),
+            style = MaterialTheme.typography.h3,
+            fontWeight = FontWeight.SemiBold,
+            color = Github.Black,
         )
         Text(
             text = stringResource(R.string.common_forks),
             style = MaterialTheme.typography.h3,
             fontWeight = FontWeight.Normal,
-            color = Gray.v700,
-        )
-        Text(
-            text = forksCount.toShortedString(),
-            style = MaterialTheme.typography.h3,
-            fontWeight = FontWeight.Bold,
-            color = Gray.v700,
+            color = Gray.v600,
         )
     }
 }
@@ -138,6 +158,7 @@ fun RepoDetailsHeader(
     ownerIconUrl = repository.owner?.iconUrl,
     ownerName = repository.owner?.name,
     repoName = repository.name,
+    homepage = repository.homepage,
     repoDescription = repository.description,
     stargazersCount = repository.stargazersCount,
     forksCount = repository.forksCount,
@@ -154,7 +175,7 @@ fun Preview_RepoDetailsHeader() {
                 name = "name",
                 description = "description",
                 owner = User(id = 0, name = "name", username = "", iconUrl = null, description = null),
-                homepage = null,
+                homepage = "url",
                 language = "Kotlin",
                 stargazersCount = 1,
                 watchersCount = 1,

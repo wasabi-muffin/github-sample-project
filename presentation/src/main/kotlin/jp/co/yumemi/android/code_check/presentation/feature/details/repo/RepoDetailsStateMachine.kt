@@ -65,7 +65,7 @@ class RepoDetailsStateMachine : StateMachine<RepoDetailsIntent,
         }
 
         state<RepoDetailsViewState.Stable.RefreshError> {
-            interpret<RepoDetailsIntent.ClickErrorOK> { RepoDetailsAction.ResolveError }
+            interpret<RepoDetailsIntent.ClickErrorOk> { RepoDetailsAction.ResolveError }
             process<RepoDetailsAction.ResolveError> {
                 result { RepoDetailsResult.ResolveError }
             }
