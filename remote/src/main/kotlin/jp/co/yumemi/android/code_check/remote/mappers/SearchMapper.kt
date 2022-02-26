@@ -7,7 +7,7 @@ object SearchMapper {
     fun apiToData(apiModel: RepoMinusSearchMinusResultMinusItemApiModel) = RepoSearchModel(
         name = apiModel.fullName,
         description = apiModel.description,
-        ownerName = apiModel.owner?.name,
+        ownerName = apiModel.owner?.login,
         ownerIconUrl = apiModel.owner?.avatarUrl,
         language = apiModel.language,
         stargazersCount = apiModel.stargazersCount,

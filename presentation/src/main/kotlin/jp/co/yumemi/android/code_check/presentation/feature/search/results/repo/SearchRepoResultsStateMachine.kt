@@ -30,20 +30,20 @@ class SearchRepoResultsStateMachine : StateMachine<SearchRepoResultsIntent,
             interpret<SearchRepoResultsIntent.OnStart> { SearchRepoResultsAction.LoadSearch }
             process<SearchRepoResultsAction.LoadSearch> {
                 result { SearchRepoResultsResult.Loading }
-                sideEffect { SearchRepoResultsSideEffect.Search(searchText = searchText, pageNumber = 0) }
+                sideEffect { SearchRepoResultsSideEffect.Search(searchText = searchText, pageNumber = 1) }
             }
             reduce<SearchRepoResultsResult.Loading> { SearchRepoResultsViewState.Loading(searchText = searchText) }
         }
 
         state<SearchRepoResultsViewState.Loading> {
             reduce<SearchRepoResultsResult.SearchSuccess> {
-                if (it.data.totalCount == 0) {
+                if (it.data.totalCount == 1) {
                     SearchRepoResultsViewState.Empty(searchText = searchText)
                 } else {
                     SearchRepoResultsViewState.Stable.Initial(
                         searchText = searchText,
                         results = it.data.items,
-                        pageNumber = 0,
+                        pageNumber = 1,
                         totalCount = it.data.totalCount
                     )
                 }
@@ -69,7 +69,7 @@ class SearchRepoResultsStateMachine : StateMachine<SearchRepoResultsIntent,
             }
             process<SearchRepoResultsAction.RefreshSearch> {
                 result { SearchRepoResultsResult.RefreshLoading }
-                sideEffect { SearchRepoResultsSideEffect.Search(searchText = searchText, pageNumber = 0) }
+                sideEffect { SearchRepoResultsSideEffect.Search(searchText = searchText, pageNumber = 1) }
             }
             process<SearchRepoResultsAction.PageSearch> {
                 result { SearchRepoResultsResult.PageLoading }
@@ -98,7 +98,7 @@ class SearchRepoResultsStateMachine : StateMachine<SearchRepoResultsIntent,
                 SearchRepoResultsViewState.Stable.Initial(
                     searchText = searchText,
                     results = it.data.items,
-                    pageNumber = 0,
+                    pageNumber = 1,
                     totalCount = it.data.totalCount
                 )
             }
@@ -118,7 +118,7 @@ class SearchRepoResultsStateMachine : StateMachine<SearchRepoResultsIntent,
                 SearchRepoResultsViewState.Stable.Initial(
                     searchText = searchText,
                     results = results + it.data.items,
-                    pageNumber = 0,
+                    pageNumber = pageNumber + 1,
                     totalCount = it.data.totalCount
                 )
             }
@@ -157,7 +157,7 @@ class SearchRepoResultsStateMachine : StateMachine<SearchRepoResultsIntent,
             }
             process<SearchRepoResultsAction.RefreshSearch> {
                 result { SearchRepoResultsResult.RefreshLoading }
-                sideEffect { SearchRepoResultsSideEffect.Search(searchText = searchText, pageNumber = 0) }
+                sideEffect { SearchRepoResultsSideEffect.Search(searchText = searchText, pageNumber = 1) }
             }
             reduce<SearchRepoResultsResult.PageLoading> {
                 SearchRepoResultsViewState.Stable.PageLoading(
@@ -181,7 +181,7 @@ class SearchRepoResultsStateMachine : StateMachine<SearchRepoResultsIntent,
             interpret<SearchRepoResultsIntent.ClickTryAgain> { SearchRepoResultsAction.LoadSearch }
             process<SearchRepoResultsAction.LoadSearch> {
                 result { SearchRepoResultsResult.Loading }
-                sideEffect { SearchRepoResultsSideEffect.Search(searchText = searchText, pageNumber = 0) }
+                sideEffect { SearchRepoResultsSideEffect.Search(searchText = searchText, pageNumber = 1) }
             }
             reduce<SearchRepoResultsResult.Loading> { SearchRepoResultsViewState.Loading(searchText = searchText) }
         }

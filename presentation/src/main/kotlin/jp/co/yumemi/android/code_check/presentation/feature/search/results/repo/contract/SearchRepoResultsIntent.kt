@@ -5,8 +5,8 @@ import jp.co.yumemi.android.code_check.presentation.core.contract.Intent
 import jp.co.yumemi.android.code_check.presentation.core.contract.ProcessEventIntent
 
 sealed class SearchRepoResultsIntent : Intent {
+    object OnStart: SearchRepoResultsIntent()
     object ClickBack : SearchRepoResultsIntent()
-    data class OnStart(val searchText: String) : SearchRepoResultsIntent()
     object ClickTryAgain : SearchRepoResultsIntent()
     data class ClickItem(val item: SimpleGithubRepo) : SearchRepoResultsIntent()
     object PullToRefresh : SearchRepoResultsIntent()
