@@ -8,6 +8,7 @@ data class RepositoryDetails(
     val repository: Repository,
     val releases: List<Release>,
     val contributors: List<User>,
+    val pullRequests: List<PullRequest>
 ) : Parcelable {
 
     enum class Element {

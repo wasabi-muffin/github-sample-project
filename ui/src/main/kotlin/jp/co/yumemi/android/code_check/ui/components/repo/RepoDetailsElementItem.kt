@@ -50,7 +50,8 @@ fun Preview_RepoDetailsElementItem() {
                     license = null
                 ),
                 releases = emptyList(),
-                contributors = emptyList()
+                contributors = emptyList(),
+                pullRequests = emptyList()
             ),
             element = RepositoryDetails.Element.Issues,
             modifier = Modifier.background(Color.White)
