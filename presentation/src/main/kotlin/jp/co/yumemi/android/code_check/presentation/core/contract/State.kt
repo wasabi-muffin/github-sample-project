@@ -1,6 +1,6 @@
 package jp.co.yumemi.android.code_check.presentation.core.contract
 
-data class State<VS: ViewState, E: Event>(
+data class State<VS : ViewState, E : Event>(
     val viewState: VS,
     val event: E? = null,
     val events: List<E> = emptyList()

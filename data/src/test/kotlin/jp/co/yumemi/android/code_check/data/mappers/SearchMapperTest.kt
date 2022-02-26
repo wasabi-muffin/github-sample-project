@@ -10,6 +10,8 @@ class SearchMapperTest {
         val entity = SearchMapper.modelToEntity(
             RepoSearchModel(
                 name = "",
+                description = "",
+                ownerName = "",
                 ownerIconUrl = null,
                 language = null,
                 stargazersCount = 0,
@@ -19,11 +21,10 @@ class SearchMapperTest {
             )
         )
         entity.name shouldBe ""
+        entity.description shouldBe ""
+        entity.ownerName shouldBe ""
         entity.ownerIconUrl shouldBe null
         entity.language shouldBe null
         entity.stargazersCount shouldBe 0
-        entity.watchersCount shouldBe 0
-        entity.forksCount shouldBe 0
-        entity.openIssuesCount shouldBe 0
     }
 }

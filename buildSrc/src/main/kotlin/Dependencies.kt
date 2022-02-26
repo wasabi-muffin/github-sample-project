@@ -2,12 +2,10 @@ object Versions {
     object Config {
         const val androidVersionCode = 1
         const val androidVersionName = "1.0"
-
         const val androidMinSdk = 23
         const val androidCompileSdk = 31
         const val androidTargetSdk = 31
         const val buildToolsVersion = "31.0.0"
-
         const val jvmTarget = "11"
     }
 
@@ -53,7 +51,7 @@ object Versions {
     const val room = "2.4.1"
 
     // Coil
-    const val coil = "1.3.2"
+    const val coil = "1.4.0"
 
     // Lint
     const val ktLint = "10.2.1"
@@ -125,7 +123,10 @@ object Dependencies {
         const val foundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
         const val material = "androidx.compose.material:material:${Versions.compose}"
         const val materialIcons = "androidx.compose.material:material-icons-extended:${Versions.compose}"
-        const val accompanistCoil = "com.google.accompanist:accompanist-coil:${Versions.accompanist}"
+    }
+
+    object Accompanist {
+        const val swipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanist}"
     }
 
     object Hilt {
@@ -162,6 +163,7 @@ object Dependencies {
 
     object Coil {
         const val core = "io.coil-kt:coil:${Versions.coil}"
+        const val compose = "io.coil-kt:coil-compose:${Versions.coil}"
     }
 
     object Leak {

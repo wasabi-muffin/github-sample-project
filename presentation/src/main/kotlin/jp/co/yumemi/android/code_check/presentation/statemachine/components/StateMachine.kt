@@ -29,7 +29,7 @@ open class StateMachine<I : Intent, A : Action, R : Result, VS : ViewState, E : 
 
     class StateNode<I : Intent, A : Action, R : Result, VS : ViewState> {
         val actions = mutableMapOf<Matcher<A, A>, List<ActionNode<A, VS>>>()
-        val intents = mutableMapOf<Matcher<I, I>, (VS, I) -> A>()
+        val intents = mutableMapOf<Matcher<I, I>, (VS, I) -> A?>()
         val transitions = mutableMapOf<Matcher<R, R>, (VS, R) -> VS>()
     }
 
@@ -53,11 +53,11 @@ open class StateMachine<I : Intent, A : Action, R : Result, VS : ViewState, E : 
         inner class StateNodeBuilder<VIEWSTATE : VS> {
             private val stateNode = StateNode<I, A, R, VS>()
 
-            fun <INTENT : I> interpret(intentMatcher: Matcher<I, INTENT>, interpret: VIEWSTATE.(INTENT) -> A) {
+            fun <INTENT : I> interpret(intentMatcher: Matcher<I, INTENT>, interpret: VIEWSTATE.(INTENT) -> A?) {
                 stateNode.intents[intentMatcher] = { state, intent -> interpret(state as VIEWSTATE, intent as INTENT) }
             }
 
-            inline fun <reified INTENT : I> interpret(noinline interpret: VIEWSTATE.(INTENT) -> A) = interpret(Matcher.any(), interpret)
+            inline fun <reified INTENT : I> interpret(noinline interpret: VIEWSTATE.(INTENT) -> A?) = interpret(Matcher.any(), interpret)
 
             fun <ACTION : A> process(actionMatcher: Matcher<A, ACTION>, builder: ActionNodeBuilder<ACTION, VIEWSTATE>.() -> Unit) {
                 stateNode.actions[actionMatcher] = ActionNodeBuilder<ACTION, VIEWSTATE>().apply(builder).build() as List<ActionNode<A, VS>>

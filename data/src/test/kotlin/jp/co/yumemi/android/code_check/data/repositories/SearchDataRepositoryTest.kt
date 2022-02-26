@@ -7,6 +7,7 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import jp.co.yumemi.android.code_check.data.models.RecentSearchModel
 import jp.co.yumemi.android.code_check.data.models.RepoSearchModel
+import jp.co.yumemi.android.code_check.data.models.RepoSearchResultModel
 import jp.co.yumemi.android.code_check.data.sources.SearchLocalDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
@@ -40,29 +41,34 @@ class SearchDataRepositoryTest {
     fun `test when search is successful`() {
         coEvery {
             searchRemoteDataSource.searchRepos(any(), any())
-        } returns List(5) { index ->
-            RepoSearchModel(
-                name = "name$index",
-                ownerIconUrl = "ownerIconUrl$index",
-                language = "language$index",
-                stargazersCount = index,
-                watchersCount = index,
-                forksCount = index,
-                openIssuesCount = index,
-            )
-        }
+        } returns RepoSearchResultModel(
+            repos = List(5) { index ->
+                RepoSearchModel(
+                    name = "name$index",
+                    description = "description$index",
+                    ownerName = "ownerName$index",
+                    ownerIconUrl = "ownerIconUrl$index",
+                    language = "language$index",
+                    stargazersCount = index,
+                    watchersCount = index,
+                    forksCount = index,
+                    openIssuesCount = index,
+                )
+            },
+            totalCount = 5
+        )
 
         coroutineTestRule.runBlockingTest {
             val result = searchRepository.searchRepos("")
-            result.size shouldBe 5
-            result.forEachIndexed { index, repo ->
+            result.totalCount shouldBe 5
+            result.items.size shouldBe 5
+            result.items.forEachIndexed { index, repo ->
                 repo.name shouldBe "name$index"
+                repo.description shouldBe "description$index"
+                repo.ownerName shouldBe "ownerName$index"
                 repo.ownerIconUrl shouldBe "ownerIconUrl$index"
                 repo.language shouldBe "language$index"
                 repo.stargazersCount shouldBe index
-                repo.watchersCount shouldBe index
-                repo.forksCount shouldBe index
-                repo.openIssuesCount shouldBe index
             }
             coVerify { searchRemoteDataSource.searchRepos(any(), "") }
             coVerify { searchLocalDataSource.saveRecentSearch("") }
