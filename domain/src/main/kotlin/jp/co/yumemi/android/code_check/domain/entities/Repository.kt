@@ -4,17 +4,17 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class GithubRepo(
+data class Repository(
+    val id: Int,
     val name: String,
+    val description: String?,
     val ownerName: String?,
     val ownerIconUrl: String?,
-    val description: String?,
-    val url: String?,
+    val homepage: String?,
+    val language: String?,
     val stargazersCount: Int,
-    val openIssuesCount: Int,
-    val releasesCount: Int,
-    val contributorsCount: Int,
     val watchersCount: Int,
     val forksCount: Int,
+    val openIssuesCount: Int,
     val license: String?,
 ) : Parcelable

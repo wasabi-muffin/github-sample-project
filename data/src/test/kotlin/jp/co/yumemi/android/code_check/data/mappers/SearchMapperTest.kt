@@ -15,10 +15,12 @@ class SearchMapperTest {
                 ownerName = "",
                 ownerIconUrl = null,
                 language = null,
+                homepage = "",
                 stargazersCount = 0,
                 watchersCount = 0,
                 forksCount = 0,
-                openIssuesCount = 0
+                openIssuesCount = 0,
+                license = null,
             )
         )
         entity.id shouldBe 1
@@ -26,7 +28,12 @@ class SearchMapperTest {
         entity.description shouldBe ""
         entity.ownerName shouldBe ""
         entity.ownerIconUrl shouldBe null
+        entity.homepage shouldBe ""
         entity.language shouldBe null
         entity.stargazersCount shouldBe 0
+        entity.watchersCount shouldBe 0
+        entity.forksCount shouldBe 0
+        entity.openIssuesCount shouldBe 0
+        entity.license shouldBe null
     }
 }

@@ -10,10 +10,12 @@ object SearchMapper {
         description = apiModel.description,
         ownerName = apiModel.owner?.login,
         ownerIconUrl = apiModel.owner?.avatarUrl,
+        homepage = apiModel.homepage,
         language = apiModel.language,
         stargazersCount = apiModel.stargazersCount,
         watchersCount = apiModel.watchersCount,
         forksCount = apiModel.forksCount,
-        openIssuesCount = apiModel.openIssuesCount
+        openIssuesCount = apiModel.openIssuesCount,
+        license = apiModel.license?.name,
     )
 }

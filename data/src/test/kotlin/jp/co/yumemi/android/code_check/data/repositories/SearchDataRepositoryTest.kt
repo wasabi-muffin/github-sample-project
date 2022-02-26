@@ -49,11 +49,13 @@ class SearchDataRepositoryTest {
                     description = "description$index",
                     ownerName = "ownerName$index",
                     ownerIconUrl = "ownerIconUrl$index",
+                    homepage = "homepage$index",
                     language = "language$index",
                     stargazersCount = index,
                     watchersCount = index,
                     forksCount = index,
                     openIssuesCount = index,
+                    license = "license$index",
                 )
             },
             totalCount = 5
@@ -69,8 +71,13 @@ class SearchDataRepositoryTest {
                 repo.description shouldBe "description$index"
                 repo.ownerName shouldBe "ownerName$index"
                 repo.ownerIconUrl shouldBe "ownerIconUrl$index"
+                repo.homepage shouldBe "homepage$index"
                 repo.language shouldBe "language$index"
                 repo.stargazersCount shouldBe index
+                repo.watchersCount shouldBe index
+                repo.forksCount shouldBe index
+                repo.openIssuesCount shouldBe index
+                repo.license shouldBe "license$index"
             }
             coVerify { searchRemoteDataSource.searchRepos(any(), "") }
             coVerify { searchLocalDataSource.saveRecentSearch("") }
