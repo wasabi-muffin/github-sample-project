@@ -3,7 +3,6 @@ package jp.co.yumemi.android.code_check.ui.features.search.top
 import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import jp.co.yumemi.android.code_check.domain.entities.RecentSearch
 import jp.co.yumemi.android.code_check.presentation.core.components.Store
 import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
@@ -23,16 +22,7 @@ class SearchViewModel @Inject constructor(
     stateHandle: SavedStateHandle,
 ) : StoreViewModel<SearchTopIntent, SearchTopAction, SearchTopResult, SearchTopViewState, SearchTopEvent>(storeFactory) {
     override val store: Store<SearchTopIntent, SearchTopViewState, SearchTopEvent> = storeFactory.create(
-        stateHandle.getState() ?: State(
-            SearchTopViewState.Stable.EmptySearch(
-                recentSearches = listOf(
-                    RecentSearch("1", 0L),
-                    RecentSearch("abcdefghijklmnopqrstuvwxyzabcdefghijklmnoprstuvwxyzabcdefghjijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz", 5L),
-                    RecentSearch("asdf", 2L),
-                    RecentSearch("asdfff", 4L),
-                )
-            )
-        ),
+        stateHandle.getState() ?: State(SearchTopViewState.Initial),
         middlewares = listOf(
             StateSaverMiddleware<SearchTopViewState, SearchTopEvent> { stateHandle.saveState(it) }
         )

@@ -4,6 +4,7 @@ plugins {
     id(Dependencies.Plugin.kotlinKapt)
     id(Dependencies.Plugin.parcelize)
     id(Dependencies.Plugin.hilt)
+    id(Dependencies.Plugin.safeArgs)
 }
 
 setupAndroid()

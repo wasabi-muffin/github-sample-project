@@ -49,8 +49,8 @@ fun SearchRepoResultsScreen(
         process = { dispatch(SearchRepoResultsIntent.ProcessEvent(it)) }
     ) { event ->
         when (event) {
-            is SearchRepoResultsEvent.NavigateBack -> Log.d("SearchRepoResults", "NavigateBack") // TODO: Add Navigation
-            is SearchRepoResultsEvent.NavigateDetails -> Log.d("SearchRepoResults", "NavigateDetails") // TODO: Add Navigation
+            is SearchRepoResultsEvent.NavigateBack -> navigator.back()
+            is SearchRepoResultsEvent.NavigateDetails -> navigator.details(event.item)
         }
     }
 

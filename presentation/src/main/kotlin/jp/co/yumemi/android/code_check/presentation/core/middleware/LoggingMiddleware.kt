@@ -12,13 +12,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onEach
 
 class LoggingMiddleware<I : Intent, A : Action, R : Result, VS : ViewState, E : Event>(
-    private val log: (message: String) -> Unit,
     private val verbose: Boolean = true,
     private val intentPrefix: String = "Intent:",
     private val actionPrefix: String = "Action:",
     private val resultPrefix: String = "Result:",
     private val statePrefix: String = "State:",
-) : IntentMiddleware<I, VS, E>, ActionMiddleware<A, VS, E>, ResultMiddleware<R, VS, E>, StateMiddleware<VS, E> {
+    private val log: (message: String) -> Unit,
+    ) : IntentMiddleware<I, VS, E>, ActionMiddleware<A, VS, E>, ResultMiddleware<R, VS, E>, StateMiddleware<VS, E> {
     override fun modifyIntents(input: Flow<I>, state: StateFlow<State<VS, E>>): Flow<I> = input.onEach { intent ->
         log("$intentPrefix ${intent.message()}")
     }

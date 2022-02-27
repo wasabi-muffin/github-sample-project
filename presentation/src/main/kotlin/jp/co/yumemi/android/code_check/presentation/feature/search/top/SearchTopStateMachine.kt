@@ -50,7 +50,7 @@ class SearchTopStateMachine : StateMachine<SearchTopIntent, SearchTopAction, Sea
             interpret<SearchTopIntent.ClickItem> { SearchTopAction.NavigateSearch(it.type) }
             interpret<SearchTopIntent.ClickClearSearchText> { SearchTopAction.UpdateSearchText("") }
             process<SearchTopAction.NavigateSearch> {
-                result { SearchTopResult.SendEvent(SearchTopEvent.NavigateSearch(it.type)) }
+                result { SearchTopResult.SendEvent(SearchTopEvent.NavigateSearch(it.type, searchText)) }
             }
             reduce<SearchTopResult.UpdateSearchText> {
                 if (it.text.isEmpty()) {
