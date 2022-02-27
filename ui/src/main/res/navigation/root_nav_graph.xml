@@ -14,6 +14,9 @@
         <action
                 android:id="@+id/action_searchTop_to_searchIssueResults"
                 app:destination="@id/searchIssueResults" />
+        <action
+                android:id="@+id/action_searchTop_to_searchPullRequestResults"
+                app:destination="@id/searchPullRequestResults" />
     </fragment>
 
     <fragment
@@ -36,6 +39,16 @@
                 android:name="searchText"
                 app:argType="string" />
     </fragment>
+
+    <fragment
+            android:id="@+id/searchPullRequestResults"
+            android:name="jp.co.yumemi.android.code_check.ui.features.search.results.pullrequest.SearchPullRequestResultsFragment"
+            android:label="SearchPullRequestResults">
+        <argument
+                android:name="searchText"
+                app:argType="string" />
+    </fragment>
+
 
     <fragment
             android:id="@+id/repoDetails"

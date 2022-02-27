@@ -6,4 +6,5 @@ class SearchTopNavigator(private val navController: NavController) {
     fun back() = navController.popBackStack()
     fun repositoryResults(searchText: String) = navController.navigate(SearchTopFragmentDirections.actionSearchTopToSearchRepositoryResults(searchText))
     fun issueResults(searchText: String) = navController.navigate(SearchTopFragmentDirections.actionSearchTopToSearchIssueResults(searchText))
+    fun pullRequestResults(searchText: String) = navController.navigate(SearchTopFragmentDirections.actionSearchTopToSearchPullRequestResults(searchText))
 }
