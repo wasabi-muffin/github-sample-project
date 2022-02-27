@@ -128,7 +128,7 @@ class SearchRemoteDataProviderTest {
             result.repos.forEachIndexed { index, repo ->
                 repo.name shouldBe "name$index"
             }
-            coVerify { searchApi.searchRepositories(accessToken = "", q = "", page = 0) }
+            coVerify { searchApi.searchRepositories(accessToken = "", q = "", page = 0, perPage = any()) }
         }
     }
 
@@ -144,7 +144,7 @@ class SearchRemoteDataProviderTest {
             }.exceptionOrNull()
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
-            coVerify { searchApi.searchRepositories(accessToken = "", q = "", page = 0) }
+            coVerify { searchApi.searchRepositories(accessToken = "", q = "", page = 0, perPage = any()) }
         }
     }
 }
