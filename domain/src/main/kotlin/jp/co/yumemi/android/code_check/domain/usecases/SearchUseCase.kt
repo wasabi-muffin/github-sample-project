@@ -61,7 +61,7 @@ class SearchUsersExecutor(
     }.toDomainResult(errorHandler)
 }
 
-class SearchOrganizationExecutor(
+class SearchOrganizationsExecutor(
     private val searchRepository: SearchRepository,
     private val errorHandler: ErrorHandler
 ) : SearchUseCase<Organization> {

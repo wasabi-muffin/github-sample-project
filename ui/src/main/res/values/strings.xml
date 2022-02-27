@@ -13,13 +13,12 @@
     <string name="common_issues">Issues</string>
     <string name="common_pull_requests">Pull Requests</string>
     <string name="common_people">People</string>
-    <string name="common_organizations">Pull Requests</string>
+    <string name="common_organizations">Organizations</string>
     <string name="common_releases">Releases</string>
     <string name="common_contributors">Contributors</string>
     <string name="common_watchers">Watchers</string>
     <string name="common_license">License</string>
 
-    
     // Search Top
     <string name="search_top_recent_searches">Recent searches</string>
     <string name="search_top_search_with">%s with %s</string>
