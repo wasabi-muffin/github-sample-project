@@ -8,7 +8,7 @@ import jp.co.yumemi.android.code_check.data.models.SearchResultModel
 import jp.co.yumemi.android.code_check.data.models.UserModel
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
 import jp.co.yumemi.android.code_check.remote.apis.SearchApi
-import jp.co.yumemi.android.code_check.remote.mappers.SearchRemoteMapper
+import jp.co.yumemi.android.code_check.remote.mappers.RepositoryRemoteMapper
 
 class SearchRemoteDataProvider(
     private val searchApi: SearchApi
@@ -17,7 +17,7 @@ class SearchRemoteDataProvider(
         .searchRepos(accessToken = token, q = searchText, page = pageNumber)
         .let { response ->
             SearchResultModel(
-                response.items.map(SearchRemoteMapper::toModel),
+                response.items.map(RepositoryRemoteMapper::toModel),
                 response.totalCount
             )
         }

@@ -7,6 +7,6 @@ data class IssueModel(
     val number: Int,
     val title: String,
     val createdAt: String,
-    val repository: Repository?,
+    val repository: RepositoryModel?,
     val state: String,
 )
