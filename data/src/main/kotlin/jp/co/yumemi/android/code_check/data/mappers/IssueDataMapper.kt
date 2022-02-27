@@ -10,6 +10,6 @@ object IssueDataMapper {
         title = model.title,
         createdAt = model.createdAt,
         repository = model.repository?.let(RepositoryDataMapper::toEntity),
-        state = model.state
+        status = model.state
     )
 }

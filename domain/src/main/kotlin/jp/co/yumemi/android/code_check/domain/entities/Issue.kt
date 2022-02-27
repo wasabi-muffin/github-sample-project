@@ -10,5 +10,5 @@ data class Issue(
     val title: String,
     val createdAt: String,
     val repository: Repository?,
-    val state: String,
+    val status: String,
 ): Parcelable

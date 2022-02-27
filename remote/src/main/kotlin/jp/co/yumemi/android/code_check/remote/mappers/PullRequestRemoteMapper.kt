@@ -10,18 +10,20 @@ object PullRequestRemoteMapper {
             id = apiModel.id,
             title = apiModel.title,
             user = apiModel.user?.let(UserRemoteMapper::toModel),
+            number = apiModel.number,
             repository = null,
             date = apiModel.createdAt,
-            isDraft = apiModel.draft ?: false
+            status = apiModel.state
         )
 
     fun toModel(apiModel: IssueMinusSearchMinusResultMinusItemApiModel) =
         PullRequestModel(
             id = apiModel.id,
             title = apiModel.title,
+            number = apiModel.number,
             user = apiModel.user?.let(UserRemoteMapper::toModel),
             repository = apiModel.repository?.let(RepositoryRemoteMapper::toModel),
             date = apiModel.createdAt,
-            isDraft = apiModel.draft ?: false
+            status = apiModel.state
         )
 }

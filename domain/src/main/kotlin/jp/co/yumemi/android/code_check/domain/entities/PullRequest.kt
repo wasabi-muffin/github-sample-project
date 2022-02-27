@@ -7,8 +7,9 @@ import kotlinx.parcelize.Parcelize
 data class PullRequest(
     val id: Int,
     val title: String,
+    val number: Int,
     val user: User?,
     val repository: Repository?,
     val createdAt: String,
-    val isDraft: Boolean,
+    val status: String
 ) : Parcelable
