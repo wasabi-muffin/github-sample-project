@@ -5,4 +5,5 @@ import jp.co.yumemi.android.code_check.presentation.statemachine.contract.SideEf
 sealed class SearchTopSideEffect : SideEffect {
     object LoadRecentSearches : SearchTopSideEffect()
     object ClearRecentSearches : SearchTopSideEffect()
+    data class SearchAll(val searchText: String) : SearchTopSideEffect()
 }

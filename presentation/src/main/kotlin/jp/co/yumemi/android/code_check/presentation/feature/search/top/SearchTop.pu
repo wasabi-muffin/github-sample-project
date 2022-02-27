@@ -41,7 +41,8 @@ state Search {
             }
 
             state Stable.Search.Success {
-                Stable.Search.Success : I.ClickSearchResultItem(type) > A.NavigateDetails(type) > E.NavigateDetails(type)
+                Stable.Search.Success : I.Click{Type}Result > A.Navigate{Type}Details > E.Navigate{Type}Details
+                Stable.Search.Success : I.ClickSeeAll(type) > A.NavigateSearch(type) > E.NavigateSearch(type)
             }
 
             state Stable.Search.Error {

@@ -18,6 +18,8 @@ import jp.co.yumemi.android.code_check.domain.usecases.GetRecentSearchesExecutor
 import jp.co.yumemi.android.code_check.domain.usecases.GetRecentSearchesUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.GetRepositoryDetailsExecutor
 import jp.co.yumemi.android.code_check.domain.usecases.GetRepositoryDetailsUseCase
+import jp.co.yumemi.android.code_check.domain.usecases.SearchAllExecutor
+import jp.co.yumemi.android.code_check.domain.usecases.SearchAllUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.SearchIssuesExecutor
 import jp.co.yumemi.android.code_check.domain.usecases.SearchOrganizationsExecutor
 import jp.co.yumemi.android.code_check.domain.usecases.SearchPullRequestsExecutor
@@ -57,6 +59,12 @@ class DomainModule {
         searchRepository: SearchRepository,
         errorHandler: ErrorHandler
     ): SearchUseCase<Organization> = SearchOrganizationsExecutor(searchRepository, errorHandler)
+
+    @Provides
+    fun provideSearchAllUseCase(
+        searchRepository: SearchRepository,
+        errorHandler: ErrorHandler,
+    ): SearchAllUseCase = SearchAllExecutor(searchRepository, errorHandler)
 
     @Provides
     fun provideClearRecentSearchesUseCase(
