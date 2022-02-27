@@ -32,11 +32,12 @@ class SearchTopProcessor(
             SearchTopSideEffect.LoadRecentSearches -> {
                 flowOf(SearchTopResult.RecentSearches(getRecentSearchesUseCase.execute(Unit)))
             }
-            is SearchTopSideEffect.SearchAll -> searchAllUseCase
-                .execute(SearchAllUseCase.Args(sideEffect.searchText))
-                .process(
-                    onSuccess = { SearchTopResult.LoadSearchSuccess(it) },
-                    onError = { SearchTopResult.LoadSearchError(it) },
-                )
+            is SearchTopSideEffect.SearchAll ->
+                searchAllUseCase
+                    .execute(SearchAllUseCase.Args(sideEffect.searchText))
+                    .process(
+                        onSuccess = { SearchTopResult.LoadSearchSuccess(it) },
+                        onError = { SearchTopResult.LoadSearchError(it) },
+                    )
         }
 }
