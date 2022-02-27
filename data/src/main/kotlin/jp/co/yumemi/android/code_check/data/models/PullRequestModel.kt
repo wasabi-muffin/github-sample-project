@@ -4,6 +4,7 @@ data class PullRequestModel(
     val id: Int,
     val title: String,
     val user: UserModel?,
+    val repository: RepositoryModel?,
     val date: String,
     val isDraft: Boolean,
 )
