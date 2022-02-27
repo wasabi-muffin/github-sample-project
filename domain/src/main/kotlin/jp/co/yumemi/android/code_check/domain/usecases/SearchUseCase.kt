@@ -13,16 +13,16 @@ import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.entities.User
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 
-interface SearchRepoUseCase<T : Parcelable> : UseCase<SearchRepoUseCase.Args, DomainResult<Pageable<T>>> {
+interface SearchUseCase<T : Parcelable> : UseCase<SearchUseCase.Args, DomainResult<Pageable<T>>> {
     data class Args(val searchText: String, val pageNumber: Int)
 }
 
-class SearchRepositoryExecutor(
+class SearchRepositoriesExecutor(
     private val searchRepository: SearchRepository,
     private val errorHandler: ErrorHandler
-) : SearchRepoUseCase<Repository> {
+) : SearchUseCase<Repository> {
     override suspend fun execute(
-        arguments: SearchRepoUseCase.Args
+        arguments: SearchUseCase.Args
     ): DomainResult<Pageable<Repository>> = runCatching {
         searchRepository.searchRepositories(arguments.searchText, arguments.pageNumber)
     }.toDomainResult(errorHandler)
@@ -31,9 +31,9 @@ class SearchRepositoryExecutor(
 class SearchIssuesExecutor(
     private val searchRepository: SearchRepository,
     private val errorHandler: ErrorHandler
-) : SearchRepoUseCase<Issue> {
+) : SearchUseCase<Issue> {
     override suspend fun execute(
-        arguments: SearchRepoUseCase.Args
+        arguments: SearchUseCase.Args
     ): DomainResult<Pageable<Issue>> = runCatching {
         searchRepository.searchIssues(arguments.searchText, arguments.pageNumber)
     }.toDomainResult(errorHandler)
@@ -42,9 +42,9 @@ class SearchIssuesExecutor(
 class SearchPullRequestsExecutor(
     private val searchRepository: SearchRepository,
     private val errorHandler: ErrorHandler
-) : SearchRepoUseCase<PullRequest> {
+) : SearchUseCase<PullRequest> {
     override suspend fun execute(
-        arguments: SearchRepoUseCase.Args
+        arguments: SearchUseCase.Args
     ): DomainResult<Pageable<PullRequest>> = runCatching {
         searchRepository.searchPullRequests(arguments.searchText, arguments.pageNumber)
     }.toDomainResult(errorHandler)
@@ -53,9 +53,9 @@ class SearchPullRequestsExecutor(
 class SearchUsersExecutor(
     private val searchRepository: SearchRepository,
     private val errorHandler: ErrorHandler
-) : SearchRepoUseCase<User> {
+) : SearchUseCase<User> {
     override suspend fun execute(
-        arguments: SearchRepoUseCase.Args
+        arguments: SearchUseCase.Args
     ): DomainResult<Pageable<User>> = runCatching {
         searchRepository.searchUsers(arguments.searchText, arguments.pageNumber)
     }.toDomainResult(errorHandler)
@@ -64,9 +64,9 @@ class SearchUsersExecutor(
 class SearchOrganizationExecutor(
     private val searchRepository: SearchRepository,
     private val errorHandler: ErrorHandler
-) : SearchRepoUseCase<Organization> {
+) : SearchUseCase<Organization> {
     override suspend fun execute(
-        arguments: SearchRepoUseCase.Args
+        arguments: SearchUseCase.Args
     ): DomainResult<Pageable<Organization>> = runCatching {
         searchRepository.searchOrganizations(arguments.searchText, arguments.pageNumber)
     }.toDomainResult(errorHandler)

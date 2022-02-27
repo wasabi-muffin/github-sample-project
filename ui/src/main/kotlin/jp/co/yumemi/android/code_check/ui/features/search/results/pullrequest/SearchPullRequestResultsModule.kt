@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import jp.co.yumemi.android.code_check.domain.entities.PullRequest
-import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
+import jp.co.yumemi.android.code_check.domain.usecases.SearchUseCase
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.SearchResultsProcessor
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.SearchResultsStateMachine
@@ -39,6 +39,6 @@ class SearchPullRequestResultsModule {
     @Provides
     fun provideSearchPullRequestResultsProcessor(
         stateMachine: SearchResultsStateMachine<PullRequest>,
-        searchRepoUseCase: SearchRepoUseCase<PullRequest>
-    ): SearchResultsProcessor<PullRequest> = SearchResultsProcessor(stateMachine, searchRepoUseCase)
+        searchUseCase: SearchUseCase<PullRequest>
+    ): SearchResultsProcessor<PullRequest> = SearchResultsProcessor(stateMachine, searchUseCase)
 }
