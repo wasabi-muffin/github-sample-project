@@ -33,6 +33,7 @@ class SearchTopStateMachine : StateMachine<SearchTopIntent, SearchTopAction, Sea
             interpret<SearchTopIntent.InputSearchText> { SearchTopAction.UpdateSearchText(it.text) }
             process<SearchTopAction.UpdateSearchText> {
                 result { SearchTopResult.UpdateSearchText(it.text) }
+                sideEffect { if (it.text.isEmpty()) SearchTopSideEffect.LoadRecentSearches else null }
             }
         }
 
@@ -42,6 +43,7 @@ class SearchTopStateMachine : StateMachine<SearchTopIntent, SearchTopAction, Sea
             process<SearchTopAction.ClearRecentSearches> {
                 sideEffect { SearchTopSideEffect.ClearRecentSearches }
             }
+            reduce<SearchTopResult.RecentSearches> { copy(recentSearches = it.data) }
             reduce<SearchTopResult.ClearRecentSearches> { SearchTopViewState.Stable.EmptySearch(recentSearches = emptyList()) }
             reduce<SearchTopResult.UpdateSearchText> { SearchTopViewState.Stable.NonEmptySearch(searchText = it.text, recentSearches = recentSearches) }
         }
@@ -52,6 +54,7 @@ class SearchTopStateMachine : StateMachine<SearchTopIntent, SearchTopAction, Sea
             process<SearchTopAction.NavigateSearch> {
                 result { SearchTopResult.SendEvent(SearchTopEvent.NavigateSearch(it.type, searchText)) }
             }
+            reduce<SearchTopResult.RecentSearches> { copy(recentSearches = it.data) }
             reduce<SearchTopResult.UpdateSearchText> {
                 if (it.text.isEmpty()) {
                     SearchTopViewState.Stable.EmptySearch(recentSearches = recentSearches)
