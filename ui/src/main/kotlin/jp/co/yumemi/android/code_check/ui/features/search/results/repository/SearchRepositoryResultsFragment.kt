@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.ui.features.search.results
+package jp.co.yumemi.android.code_check.ui.features.search.results.repository
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,14 +12,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import jp.co.yumemi.android.code_check.ui.components.search.SearchRepoResultItem
+import jp.co.yumemi.android.code_check.ui.components.search.SearchRepositoryResultItem
 import jp.co.yumemi.android.code_check.ui.core.contract
+import jp.co.yumemi.android.code_check.ui.features.search.results.SearchResultsScreen
 import jp.co.yumemi.android.code_check.ui.utils.compose
 
 @AndroidEntryPoint
-class SearchRepoResultsFragment : Fragment() {
+class SearchRepositoryResultsFragment : Fragment() {
     @Inject lateinit var assistedFactory: SearchRepositoryResultsViewModel.Factory
-    private val navArgs: SearchRepoResultsFragmentArgs by navArgs()
+    private val navArgs: SearchRepositoryResultsFragmentArgs by navArgs()
     private val viewModel: SearchRepositoryResultsViewModel by viewModels {
         SearchRepositoryResultsViewModel.provideFactory(
             assistedFactory = assistedFactory,
@@ -35,7 +36,7 @@ class SearchRepoResultsFragment : Fragment() {
                 contract = contract(viewModel.store),
                 navigator = SearchRepositoryResultsNavigator(findNavController())
             ) { item, onClick ->
-                SearchRepoResultItem(repository = item, modifier = Modifier.clickable { onClick(item) })
+                SearchRepositoryResultItem(repository = item, modifier = Modifier.clickable { onClick(item) })
             }
         }
     }

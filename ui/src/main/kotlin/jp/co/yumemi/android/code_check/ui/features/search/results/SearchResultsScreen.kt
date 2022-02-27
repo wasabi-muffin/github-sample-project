@@ -2,7 +2,6 @@ package jp.co.yumemi.android.code_check.ui.features.search.results
 
 import android.os.Parcelable
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,10 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import jp.co.yumemi.android.code_check.domain.entities.Repository
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsEvent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsIntent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsViewState
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsEvent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsIntent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsViewState
 import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.components.appbar.BackIcon
 import jp.co.yumemi.android.code_check.ui.components.appbar.TitleAppBar
@@ -28,13 +26,12 @@ import jp.co.yumemi.android.code_check.ui.components.error.ErrorOkDialog
 import jp.co.yumemi.android.code_check.ui.components.error.description
 import jp.co.yumemi.android.code_check.ui.components.error.title
 import jp.co.yumemi.android.code_check.ui.components.paging.PagingColumn
-import jp.co.yumemi.android.code_check.ui.components.search.SearchRepoResultItem
 import jp.co.yumemi.android.code_check.ui.core.Contract
-import jp.co.yumemi.android.code_check.ui.utils.elevation
 import jp.co.yumemi.android.code_check.ui.core.handle
-import jp.co.yumemi.android.code_check.ui.utils.onScrolledToBottom
 import jp.co.yumemi.android.code_check.ui.core.render
 import jp.co.yumemi.android.code_check.ui.primitives.Gray
+import jp.co.yumemi.android.code_check.ui.utils.elevation
+import jp.co.yumemi.android.code_check.ui.utils.onScrolledToBottom
 
 @Composable
 fun <T : Parcelable> SearchResultsScreen(

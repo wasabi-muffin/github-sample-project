@@ -1,15 +1,16 @@
-package jp.co.yumemi.android.code_check.presentation.feature.search.results.repo
+package jp.co.yumemi.android.code_check.presentation.feature.search.results
 
 import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
 import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.utils.process
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsAction
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsEvent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsIntent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsResult
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsSideEffect
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsViewState
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.SearchResultsProcessor
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsAction
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsEvent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsIntent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsResult
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsSideEffect
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.components.StateMachine
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow

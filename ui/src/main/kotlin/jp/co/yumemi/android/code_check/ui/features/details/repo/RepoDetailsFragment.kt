@@ -10,10 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import jp.co.yumemi.android.code_check.domain.entities.Repository
-import jp.co.yumemi.android.code_check.ui.utils.compose
 import jp.co.yumemi.android.code_check.ui.core.contract
-import jp.co.yumemi.android.code_check.ui.features.search.results.SearchRepoResultsFragmentArgs
+import jp.co.yumemi.android.code_check.ui.utils.compose
 
 @AndroidEntryPoint
 class RepoDetailsFragment : Fragment() {

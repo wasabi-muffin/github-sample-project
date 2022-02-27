@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.ui.features.search.results
+package jp.co.yumemi.android.code_check.ui.features.search.results.repository
 
 import android.os.Bundle
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
@@ -13,11 +13,11 @@ import jp.co.yumemi.android.code_check.presentation.core.components.Store
 import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
 import jp.co.yumemi.android.code_check.presentation.core.middleware.StateSaverMiddleware
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsAction
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsEvent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsIntent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsResult
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsViewState
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsAction
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsEvent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsIntent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsResult
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsViewState
 import jp.co.yumemi.android.code_check.ui.core.StoreViewModel
 import jp.co.yumemi.android.code_check.ui.core.getState
 import jp.co.yumemi.android.code_check.ui.core.onInit

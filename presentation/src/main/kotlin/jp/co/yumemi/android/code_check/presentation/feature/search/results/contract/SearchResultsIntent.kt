@@ -1,7 +1,6 @@
-package jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract
+package jp.co.yumemi.android.code_check.presentation.feature.search.results.contract
 
 import android.os.Parcelable
-import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.presentation.core.contract.Intent
 import jp.co.yumemi.android.code_check.presentation.core.contract.ProcessEventIntent
 

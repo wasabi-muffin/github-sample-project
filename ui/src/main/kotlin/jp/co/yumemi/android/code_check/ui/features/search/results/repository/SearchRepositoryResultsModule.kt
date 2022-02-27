@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.ui.features.search.results
+package jp.co.yumemi.android.code_check.ui.features.search.results.repository
 
 import dagger.Module
 import dagger.Provides
@@ -7,14 +7,14 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.SearchRepositoryResultsProcessor
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.SearchResultsProcessor
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.SearchResultsStateMachine
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsAction
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsEvent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsIntent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsResult
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsViewState
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.SearchRepositoryResultsProcessor
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.SearchResultsProcessor
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.SearchResultsStateMachine
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsAction
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsEvent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsIntent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsResult
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.factory.StateMachineStoreFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

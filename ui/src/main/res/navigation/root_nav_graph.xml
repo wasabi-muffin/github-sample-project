@@ -15,7 +15,7 @@
 
     <fragment
             android:id="@+id/searchRepoResults"
-            android:name="jp.co.yumemi.android.code_check.ui.features.search.results.SearchRepoResultsFragment"
+            android:name="jp.co.yumemi.android.code_check.ui.features.search.results.repository.SearchRepositoryResultsFragment"
             android:label="SearchRepoResults">
         <action
                 android:id="@+id/action_searchRepoResults_to_repoDetails"
