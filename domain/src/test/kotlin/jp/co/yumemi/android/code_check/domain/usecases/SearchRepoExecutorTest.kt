@@ -20,13 +20,13 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class SearchRepoExecutorTest {
+class SearchRepositoryExecutorTest {
     @get:Rule
     val coroutineTestRule = CoroutineTestRule()
     private val searchRepository = mockk<SearchRepository>()
     private val errorHandler = mockk<ErrorHandler>()
     private val testException = Exception("test")
-    private val searchRepoUseCase = SearchRepoExecutor(searchRepository, errorHandler)
+    private val searchRepoUseCase = SearchRepositoryExecutor(searchRepository, errorHandler)
 
     @Test
     fun `test when execute is successful`() {

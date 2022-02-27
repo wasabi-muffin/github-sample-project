@@ -23,7 +23,7 @@ import kotlinx.coroutines.FlowPreview
 @ExperimentalCoroutinesApi
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-class SearchResultsModule {
+class SearchRepositoryResultsModule {
     @Provides
     fun provideSearchRepositoryResultsStateMachine(): SearchResultsStateMachine<Repository> = SearchResultsStateMachine()
 
@@ -40,6 +40,6 @@ class SearchResultsModule {
     @Provides
     fun provideSearchRepositoryResultsProcessor(
         stateMachine: SearchResultsStateMachine<Repository>,
-        searchRepoUseCase: SearchRepoUseCase
+        searchRepoUseCase: SearchRepoUseCase<Repository>
     ): SearchResultsProcessor<Repository> = SearchRepositoryResultsProcessor(stateMachine, searchRepoUseCase)
 }
