@@ -9,6 +9,7 @@ object PullRequestRemoteMapper {
             id = apiModel.id,
             title = apiModel.title,
             user = apiModel.user?.let(UserRemoteMapper::toModel),
+            repository = null,
             date = apiModel.createdAt,
             isDraft = apiModel.draft ?: false
         )

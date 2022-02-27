@@ -122,7 +122,7 @@ class SearchRemoteDataProviderTest {
         )
 
         coroutineTestRule.runBlockingTest {
-            val result = searchRemoteDataSource.searchRepos("", "", 0)
+            val result = searchRemoteDataSource.searchRepositories("", "", 0)
             result.totalCount shouldBe 5
             result.repos.size shouldBe 5
             result.repos.forEachIndexed { index, repo ->
@@ -140,7 +140,7 @@ class SearchRemoteDataProviderTest {
 
         coroutineTestRule.runBlockingTest {
             val result = runCatching {
-                searchRemoteDataSource.searchRepos("", "", 0)
+                searchRemoteDataSource.searchRepositories("", "", 0)
             }.exceptionOrNull()
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
