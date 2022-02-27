@@ -9,7 +9,7 @@ data class PullRequest(
     val title: String,
     val number: Int,
     val user: User?,
-    val repository: Repository?,
+    val repoName: String,
     val createdAt: String,
     val status: String
 ) : Parcelable
