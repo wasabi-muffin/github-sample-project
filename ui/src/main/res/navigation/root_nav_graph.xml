@@ -9,6 +9,9 @@
             android:name="jp.co.yumemi.android.code_check.ui.features.search.top.SearchTopFragment"
             android:label="SearchTop">
         <action
+                android:id="@+id/action_searchTop_to_repoDetails"
+                app:destination="@id/repoDetails" />
+        <action
                 android:id="@+id/action_searchTop_to_searchRepositoryResults"
                 app:destination="@id/searchRepositoryResults" />
         <action

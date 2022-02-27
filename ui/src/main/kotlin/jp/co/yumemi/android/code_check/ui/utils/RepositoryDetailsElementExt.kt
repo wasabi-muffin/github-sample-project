@@ -2,6 +2,7 @@ package jp.co.yumemi.android.code_check.ui.utils
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.runtime.Composable
 import jp.co.yumemi.android.code_check.domain.entities.RepositoryDetails
 import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.primitives.Blue
@@ -41,6 +42,7 @@ val RepositoryDetails.Element.iconBackground
         RepositoryDetails.Element.License -> Red.v500
     }
 
+@Composable
 fun RepositoryDetails.Element.note(details: RepositoryDetails) = when (this) {
     RepositoryDetails.Element.Issues -> details.repository.openIssuesCount.toShortedString()
     RepositoryDetails.Element.PullRequests -> details.pullRequests.size.toShortedString()
