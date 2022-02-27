@@ -103,7 +103,7 @@ fun RepoDetailsHeader(
             Text(
                 text = homepage,
                 style = MaterialTheme.typography.h3,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.SemiBold,
                 color = Github.Black,
             )
         }
@@ -121,7 +121,7 @@ fun RepoDetailsHeader(
         Text(
             text = stargazersCount.toShortedString(),
             style = MaterialTheme.typography.h3,
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.SemiBold,
             color = Github.Black,
         )
         Text(
