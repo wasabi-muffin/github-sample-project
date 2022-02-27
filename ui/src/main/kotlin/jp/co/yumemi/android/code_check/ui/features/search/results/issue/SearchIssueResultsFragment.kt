@@ -16,7 +16,6 @@ import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.components.search.SearchIssueResultItem
 import jp.co.yumemi.android.code_check.ui.core.contract
 import jp.co.yumemi.android.code_check.ui.features.search.results.SearchResultsScreen
-import jp.co.yumemi.android.code_check.ui.features.search.results.issue.SearchIssueResultsViewModel
 import jp.co.yumemi.android.code_check.ui.utils.compose
 
 @AndroidEntryPoint

@@ -2,8 +2,6 @@ package jp.co.yumemi.android.code_check.presentation.feature.details.repo.contra
 
 import jp.co.yumemi.android.code_check.presentation.core.contract.Intent
 import jp.co.yumemi.android.code_check.presentation.core.contract.ProcessEventIntent
-import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopEvent
-import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopIntent
 
 sealed class RepoDetailsIntent : Intent {
     object OnStart : RepoDetailsIntent()

@@ -35,11 +35,12 @@ class RepoDetailsProcessor(
         sideEffect: RepoDetailsSideEffect,
         state: State<RepoDetailsViewState, RepoDetailsEvent>
     ): Flow<RepoDetailsResult?> = when (sideEffect) {
-        is RepoDetailsSideEffect.LoadDetails -> getRepositoryDetailsUseCase
-            .execute(GetRepositoryDetailsUseCase.Args(sideEffect.repo))
-            .process(
-                onSuccess = { RepoDetailsResult.LoadDetailsSuccess(details = it) },
-                onError = { RepoDetailsResult.LoadDetailsError(error = it) }
-            )
+        is RepoDetailsSideEffect.LoadDetails ->
+            getRepositoryDetailsUseCase
+                .execute(GetRepositoryDetailsUseCase.Args(sideEffect.repo))
+                .process(
+                    onSuccess = { RepoDetailsResult.LoadDetailsSuccess(details = it) },
+                    onError = { RepoDetailsResult.LoadDetailsError(error = it) }
+                )
     }
 }
