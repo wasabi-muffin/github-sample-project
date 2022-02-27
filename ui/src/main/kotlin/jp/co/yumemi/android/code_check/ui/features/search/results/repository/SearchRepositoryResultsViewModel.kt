@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.ui.features.search.results
+package jp.co.yumemi.android.code_check.ui.features.search.results.repository
 
 import android.os.Bundle
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
@@ -8,39 +8,44 @@ import androidx.savedstate.SavedStateRegistryOwner
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.presentation.core.components.Store
 import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
 import jp.co.yumemi.android.code_check.presentation.core.middleware.StateSaverMiddleware
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsAction
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsEvent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsIntent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsResult
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsViewState
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsAction
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsEvent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsIntent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsResult
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsViewState
 import jp.co.yumemi.android.code_check.ui.core.StoreViewModel
 import jp.co.yumemi.android.code_check.ui.core.getState
 import jp.co.yumemi.android.code_check.ui.core.onInit
 import jp.co.yumemi.android.code_check.ui.core.saveState
 
-class SearchRepoResultsViewModel @AssistedInject constructor(
-    storeFactory: StoreFactory<SearchRepoResultsIntent, SearchRepoResultsAction, SearchRepoResultsResult, SearchRepoResultsViewState, SearchRepoResultsEvent>,
+class SearchRepositoryResultsViewModel @AssistedInject constructor(
+    storeFactory: StoreFactory<SearchResultsIntent<Repository>,
+        SearchResultsAction<Repository>,
+        SearchResultsResult<Repository>,
+        SearchResultsViewState<Repository>,
+        SearchResultsEvent<Repository>>,
     @Assisted stateHandle: SavedStateHandle,
     @Assisted val searchText: String,
-) : StoreViewModel<SearchRepoResultsIntent,
-    SearchRepoResultsAction,
-    SearchRepoResultsResult,
-    SearchRepoResultsViewState,
-    SearchRepoResultsEvent>(storeFactory) {
-    override val store: Store<SearchRepoResultsIntent, SearchRepoResultsViewState, SearchRepoResultsEvent> = storeFactory.create(
-        stateHandle.getState() ?: State(SearchRepoResultsViewState.Initial(searchText)),
+) : StoreViewModel<SearchResultsIntent<Repository>,
+    SearchResultsAction<Repository>,
+    SearchResultsResult<Repository>,
+    SearchResultsViewState<Repository>,
+    SearchResultsEvent<Repository>>(storeFactory) {
+    override val store: Store<SearchResultsIntent<Repository>, SearchResultsViewState<Repository>, SearchResultsEvent<Repository>> = storeFactory.create(
+        stateHandle.getState() ?: State(SearchResultsViewState.Initial(searchText)),
         middlewares = listOf(
-            StateSaverMiddleware<SearchRepoResultsViewState, SearchRepoResultsEvent> { stateHandle.saveState(it) }
+            StateSaverMiddleware<SearchResultsViewState<Repository>, SearchResultsEvent<Repository>> { stateHandle.saveState(it) }
         )
     )
 
     init {
         stateHandle.onInit {
-            dispatch(SearchRepoResultsIntent.OnStart)
+            dispatch(SearchResultsIntent.OnStart())
         }
     }
 
@@ -49,7 +54,7 @@ class SearchRepoResultsViewModel @AssistedInject constructor(
         fun create(
             savedStateHandle: SavedStateHandle,
             searchText: String,
-        ): SearchRepoResultsViewModel
+        ): SearchRepositoryResultsViewModel
     }
 
     companion object {

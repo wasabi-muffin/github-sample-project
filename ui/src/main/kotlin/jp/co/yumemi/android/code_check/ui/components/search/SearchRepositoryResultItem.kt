@@ -33,7 +33,7 @@ import jp.co.yumemi.android.code_check.ui.primitives.Yellow
 import jp.co.yumemi.android.code_check.ui.utils.getLanguageColor
 
 @Composable
-fun SearchRepoResultItem(
+fun SearchRepositoryResultItem(
     ownerIconUrl: String?,
     ownerName: String?,
     repoName: String,
@@ -121,10 +121,10 @@ fun SearchRepoResultItem(
 }
 
 @Composable
-fun SearchRepoResultItem(
+fun SearchRepositoryResultItem(
     repository: Repository,
     modifier: Modifier = Modifier
-) = SearchRepoResultItem(
+) = SearchRepositoryResultItem(
     ownerIconUrl = repository.owner?.iconUrl,
     ownerName = repository.owner?.name,
     repoName = repository.name,
@@ -138,7 +138,7 @@ fun SearchRepoResultItem(
 @Composable
 fun Preview_SearchRepoResultItem() {
     GithubTheme {
-        SearchRepoResultItem(
+        SearchRepositoryResultItem(
             repository = Repository(
                 id = 1,
                 name = "name",
