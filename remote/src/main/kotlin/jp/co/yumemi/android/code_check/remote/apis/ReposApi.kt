@@ -1352,7 +1352,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
         }
     }
 
@@ -1784,7 +1784,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
         }
     }
 
@@ -1840,7 +1840,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1852,7 +1852,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
         }
     }
 
@@ -2128,8 +2128,8 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("isProtected", isProtected)
-            parameter("perPage", perPage)
+            parameter("is_protected", isProtected)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2150,7 +2150,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("affiliation", affiliation)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2161,7 +2161,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2172,7 +2172,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2183,7 +2183,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2199,7 +2199,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
             parameter("author", author)
             parameter("since", since)
             parameter("until", until)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2211,7 +2211,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("anon", anon)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2222,7 +2222,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2233,7 +2233,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2248,7 +2248,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
             parameter("ref", ref)
             parameter("task", task)
             parameter("environment", environment)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2264,7 +2264,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
             parameter("type", type)
             parameter("sort", sort)
             parameter("direction", direction)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
             parameter("since", since)
             parameter("before", before)
@@ -2280,7 +2280,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
             parameter("type", type)
             parameter("sort", sort)
             parameter("direction", direction)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2294,7 +2294,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
             parameter("type", type)
             parameter("sort", sort)
             parameter("direction", direction)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2306,7 +2306,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("sort", sort)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2317,7 +2317,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2328,7 +2328,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2348,7 +2348,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2369,7 +2369,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2380,7 +2380,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2391,7 +2391,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2402,7 +2402,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2413,7 +2413,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -2424,7 +2424,7 @@ class HttpClientReposApi(private val httpClientProvider: HttpClientProvider) : R
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }

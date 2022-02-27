@@ -140,7 +140,7 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -151,12 +151,12 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("checkName", checkName)
+            parameter("check_name", checkName)
             parameter("status", status)
             parameter("filter", filter)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
-            parameter("appId", appId)
+            parameter("app_id", appId)
         }
     }
 
@@ -166,10 +166,10 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("checkName", checkName)
+            parameter("check_name", checkName)
             parameter("status", status)
             parameter("filter", filter)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -180,9 +180,9 @@ class HttpClientChecksApi(private val httpClientProvider: HttpClientProvider) : 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("appId", appId)
-            parameter("checkName", checkName)
-            parameter("perPage", perPage)
+            parameter("app_id", appId)
+            parameter("check_name", checkName)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }

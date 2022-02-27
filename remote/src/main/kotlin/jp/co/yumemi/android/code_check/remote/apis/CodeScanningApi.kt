@@ -130,7 +130,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Delete
-            parameter("confirmDelete", confirmDelete)
+            parameter("confirm_delete", confirmDelete)
         }
     }
 
@@ -168,7 +168,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("ref", ref)
         }
     }
@@ -182,7 +182,7 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
             parameter("before", before)
             parameter("after", after)
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("direction", direction)
             parameter("state", state)
             parameter("sort", sort)
@@ -195,10 +195,10 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("toolName", toolName)
-            parameter("toolGuid", toolGuid)
+            parameter("tool_name", toolName)
+            parameter("tool_guid", toolGuid)
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("ref", ref)
             parameter("direction", direction)
             parameter("sort", sort)
@@ -212,12 +212,12 @@ class HttpClientCodeScanningApi(private val httpClientProvider: HttpClientProvid
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("toolName", toolName)
-            parameter("toolGuid", toolGuid)
+            parameter("tool_name", toolName)
+            parameter("tool_guid", toolGuid)
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("ref", ref)
-            parameter("sarifId", sarifId)
+            parameter("sarif_id", sarifId)
         }
     }
 

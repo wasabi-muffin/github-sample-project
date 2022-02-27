@@ -113,7 +113,7 @@ class HttpClientScimApi(private val httpClientProvider: HttpClientProvider) : Sc
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("startIndex", startIndex)
+            parameter("start_index", startIndex)
             parameter("count", count)
             parameter("filter", filter)
         }

@@ -524,7 +524,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("since", since)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
         }
     }
 
@@ -534,7 +534,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -563,7 +563,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -574,7 +574,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -585,7 +585,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -596,7 +596,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -609,7 +609,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
             method = HttpMethod.Get
             parameter("filter", filter)
             parameter("role", role)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -621,7 +621,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("state", state)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -633,7 +633,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("filter", filter)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -644,7 +644,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -655,7 +655,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -666,7 +666,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
             parameter("login", login)
         }
@@ -678,7 +678,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("cursor", cursor)
         }
     }
@@ -689,7 +689,7 @@ class HttpClientOrgsApi(private val httpClientProvider: HttpClientProvider) : Or
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }

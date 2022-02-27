@@ -309,7 +309,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("state", state)
         }
     }
@@ -321,7 +321,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("state", state)
         }
     }
@@ -395,7 +395,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("packageType", packageType)
+            parameter("package_type", packageType)
             parameter("visibility", visibility)
         }
     }
@@ -406,7 +406,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("packageType", packageType)
+            parameter("package_type", packageType)
             parameter("visibility", visibility)
         }
     }
@@ -417,7 +417,7 @@ class HttpClientPackagesApi(private val httpClientProvider: HttpClientProvider) 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("packageType", packageType)
+            parameter("package_type", packageType)
             parameter("visibility", visibility)
         }
     }

@@ -1017,7 +1017,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1028,7 +1028,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1039,7 +1039,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1051,7 +1051,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("direction", direction)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1063,7 +1063,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("direction", direction)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1075,7 +1075,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("direction", direction)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
             parameter("pinned", pinned)
         }
@@ -1088,7 +1088,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("direction", direction)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1099,9 +1099,9 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
-            parameter("displayName", displayName)
+            parameter("display_name", displayName)
         }
     }
 
@@ -1111,7 +1111,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1131,7 +1131,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1161,7 +1161,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("role", role)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1173,7 +1173,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("role", role)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1184,7 +1184,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1195,7 +1195,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1206,7 +1206,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1217,7 +1217,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1228,7 +1228,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -1239,7 +1239,7 @@ class HttpClientTeamsApi(private val httpClientProvider: HttpClientProvider) : T
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
