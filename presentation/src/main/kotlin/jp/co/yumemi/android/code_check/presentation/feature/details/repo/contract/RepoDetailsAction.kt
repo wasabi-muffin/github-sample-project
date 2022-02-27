@@ -2,7 +2,6 @@ package jp.co.yumemi.android.code_check.presentation.feature.details.repo.contra
 
 import jp.co.yumemi.android.code_check.presentation.core.contract.Action
 import jp.co.yumemi.android.code_check.presentation.core.contract.ProcessEventAction
-import jp.co.yumemi.android.code_check.presentation.core.contract.ProcessEventIntent
 
 sealed class RepoDetailsAction : Action {
     object LoadDetails : RepoDetailsAction()

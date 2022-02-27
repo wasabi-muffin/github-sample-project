@@ -9,7 +9,7 @@ import jp.co.yumemi.android.code_check.presentation.feature.search.results.contr
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.components.StateMachine
 
-class SearchResultsStateMachine<T: Parcelable> : StateMachine<SearchResultsIntent<T>,
+class SearchResultsStateMachine<T : Parcelable> : StateMachine<SearchResultsIntent<T>,
     SearchResultsAction<T>,
     SearchResultsResult<T>,
     SearchResultsViewState<T>,

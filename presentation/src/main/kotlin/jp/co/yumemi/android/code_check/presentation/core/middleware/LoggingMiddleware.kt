@@ -18,7 +18,7 @@ class LoggingMiddleware<I : Intent, A : Action, R : Result, VS : ViewState, E : 
     private val resultPrefix: String = "Result:",
     private val statePrefix: String = "State:",
     private val log: (message: String) -> Unit,
-    ) : IntentMiddleware<I, VS, E>, ActionMiddleware<A, VS, E>, ResultMiddleware<R, VS, E>, StateMiddleware<VS, E> {
+) : IntentMiddleware<I, VS, E>, ActionMiddleware<A, VS, E>, ResultMiddleware<R, VS, E>, StateMiddleware<VS, E> {
     override fun modifyIntents(input: Flow<I>, state: StateFlow<State<VS, E>>): Flow<I> = input.onEach { intent ->
         log("$intentPrefix ${intent.message()}")
     }

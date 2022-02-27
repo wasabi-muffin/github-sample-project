@@ -4,7 +4,6 @@ import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.entities.RepositoryDetails
 import jp.co.yumemi.android.code_check.presentation.core.contract.ViewState
-import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 sealed class RepoDetailsViewState : ViewState {

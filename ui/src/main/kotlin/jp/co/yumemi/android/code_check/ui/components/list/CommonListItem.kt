@@ -1,6 +1,5 @@
 package jp.co.yumemi.android.code_check.ui.components.list
 
-import android.widget.Space
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

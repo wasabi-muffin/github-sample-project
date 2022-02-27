@@ -4,7 +4,6 @@ import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
 import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.utils.process
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.SearchResultsProcessor
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsAction
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsEvent
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsIntent
