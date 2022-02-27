@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.ui.features.search.results.repository
+package jp.co.yumemi.android.code_check.ui.features.search.results.issue
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,17 +13,17 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import jp.co.yumemi.android.code_check.ui.R
-import jp.co.yumemi.android.code_check.ui.components.search.SearchRepositoryResultItem
+import jp.co.yumemi.android.code_check.ui.components.search.SearchIssueResultItem
 import jp.co.yumemi.android.code_check.ui.core.contract
 import jp.co.yumemi.android.code_check.ui.features.search.results.SearchResultsScreen
 import jp.co.yumemi.android.code_check.ui.utils.compose
 
 @AndroidEntryPoint
-class SearchRepositoryResultsFragment : Fragment() {
-    @Inject lateinit var assistedFactory: SearchRepositoryResultsViewModel.Factory
-    private val navArgs: SearchRepositoryResultsFragmentArgs by navArgs()
-    private val viewModel: SearchRepositoryResultsViewModel by viewModels {
-        SearchRepositoryResultsViewModel.provideFactory(
+class SearchIssueResultsFragment : Fragment() {
+    @Inject lateinit var assistedFactory: SearchIssueResultsViewModel.Factory
+    private val navArgs: SearchIssueResultsFragmentArgs by navArgs()
+    private val viewModel: SearchIssueResultsViewModel by viewModels {
+        SearchIssueResultsViewModel.provideFactory(
             assistedFactory = assistedFactory,
             owner = this,
             arguments = arguments,
@@ -35,10 +35,10 @@ class SearchRepositoryResultsFragment : Fragment() {
         return requireContext().compose {
             SearchResultsScreen(
                 contract = contract(viewModel.store),
-                navigator = SearchRepositoryResultsNavigator(findNavController()),
-                title = R.string.common_repositories,
+                navigator = SearchIssueResultsNavigator(findNavController()),
+                title = R.string.common_issues,
             ) { item, onClick ->
-                SearchRepositoryResultItem(repository = item, modifier = Modifier.clickable { onClick(item) })
+                SearchIssueResultItem(issue = item, modifier = Modifier.clickable { onClick(item) })
             }
         }
     }

@@ -9,17 +9,29 @@
             android:name="jp.co.yumemi.android.code_check.ui.features.search.top.SearchTopFragment"
             android:label="SearchTop">
         <action
-                android:id="@+id/action_searchTop_to_searchRepoResults"
-                app:destination="@id/searchRepoResults" />
+                android:id="@+id/action_searchTop_to_searchRepositoryResults"
+                app:destination="@id/searchRepositoryResults" />
+        <action
+                android:id="@+id/action_searchTop_to_searchIssueResults"
+                app:destination="@id/searchIssueResults" />
     </fragment>
 
     <fragment
-            android:id="@+id/searchRepoResults"
+            android:id="@+id/searchRepositoryResults"
             android:name="jp.co.yumemi.android.code_check.ui.features.search.results.repository.SearchRepositoryResultsFragment"
-            android:label="SearchRepoResults">
+            android:label="SearchRepositoryResults">
         <action
-                android:id="@+id/action_searchRepoResults_to_repoDetails"
+                android:id="@+id/action_searchRepositoryResults_to_repoDetails"
                 app:destination="@id/repoDetails" />
+        <argument
+                android:name="searchText"
+                app:argType="string" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/searchIssueResults"
+            android:name="jp.co.yumemi.android.code_check.ui.features.search.results.issue.SearchIssueResultsFragment"
+            android:label="SearchIssueResults">
         <argument
                 android:name="searchText"
                 app:argType="string" />

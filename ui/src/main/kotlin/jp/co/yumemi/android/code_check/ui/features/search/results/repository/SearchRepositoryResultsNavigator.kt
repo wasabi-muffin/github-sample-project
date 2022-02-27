@@ -9,5 +9,5 @@ class SearchRepositoryResultsNavigator(private val navController: NavController)
         navController.popBackStack()
     }
 
-    override fun details(item: Repository) = navController.navigate(SearchRepositoryResultsFragmentDirections.actionSearchRepoResultsToRepoDetails(item))
+    override fun details(item: Repository) = navController.navigate(SearchRepositoryResultsFragmentDirections.actionSearchRepositoryResultsToRepoDetails(item))
 }
