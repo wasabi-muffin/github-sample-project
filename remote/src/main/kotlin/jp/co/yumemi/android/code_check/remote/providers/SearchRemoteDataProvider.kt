@@ -27,7 +27,7 @@ class SearchRemoteDataProvider(
         }
 
     override suspend fun searchIssues(token: String?, searchText: String, pageNumber: Int): SearchResultModel<IssueModel> = searchApi
-        .searchIssuesAndPullRequests(accessToken = token, q = "$searchText type:issue}", page = pageNumber)
+        .searchIssuesAndPullRequests(accessToken = token, q = "$searchText type:issue", page = pageNumber)
         .let { response ->
             SearchResultModel(
                 response.items.map(IssueRemoteMapper::toModel),
@@ -36,7 +36,7 @@ class SearchRemoteDataProvider(
         }
 
     override suspend fun searchPullRequests(token: String?, searchText: String, pageNumber: Int): SearchResultModel<PullRequestModel> = searchApi
-        .searchIssuesAndPullRequests(accessToken = token, q = "$searchText type:pr}", page = pageNumber)
+        .searchIssuesAndPullRequests(accessToken = token, q = "$searchText type:pr", page = pageNumber)
         .let { response ->
             SearchResultModel(
                 response.items.map(PullRequestRemoteMapper::toModel),
@@ -45,7 +45,7 @@ class SearchRemoteDataProvider(
         }
 
     override suspend fun searchUsers(token: String?, searchText: String, pageNumber: Int): SearchResultModel<UserModel> = searchApi
-        .searchUsers(accessToken = token, q = "$searchText type:user}", page = pageNumber)
+        .searchUsers(accessToken = token, q = "$searchText type:user", page = pageNumber)
         .let { response ->
             SearchResultModel(
                 response.items.map(UserRemoteMapper::toModel),
@@ -54,7 +54,7 @@ class SearchRemoteDataProvider(
         }
 
     override suspend fun searchOrganizations(token: String?, searchText: String, pageNumber: Int): SearchResultModel<OrganizationModel> = searchApi
-        .searchUsers(accessToken = token, q = "$searchText type:organization}", page = pageNumber)
+        .searchUsers(accessToken = token, q = "$searchText type:organization", page = pageNumber)
         .let { response ->
             SearchResultModel(
                 response.items.map(OrganizationRemoteMapper::toModel),
