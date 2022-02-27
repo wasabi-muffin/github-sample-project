@@ -17,7 +17,9 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toLowerCase
@@ -46,9 +48,11 @@ import jp.co.yumemi.android.code_check.ui.primitives.Github
 import jp.co.yumemi.android.code_check.ui.primitives.Gray
 import jp.co.yumemi.android.code_check.ui.utils.toShortedString
 
+@ExperimentalComposeUiApi
 @Composable
 fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, SearchTopEvent>, navigator: SearchTopNavigator) {
     val (state, events, dispatch) = contract
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     events?.handle(
         process = { dispatch(SearchTopIntent.ProcessEvent(it)) }
@@ -79,7 +83,10 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
                 onClickBack = { navigator.back() },
                 onClickClear = { dispatch(SearchTopIntent.ClickClearSearchText) },
                 onSearchTextChanged = { dispatch(SearchTopIntent.InputSearchText(it)) },
-                onClickImeSearch = { dispatch(SearchTopIntent.ClickSearch) }
+                onClickImeSearch = {
+                    dispatch(SearchTopIntent.ClickSearch)
+                    keyboardController?.hide()
+                },
             )
         }
         when (state) {
@@ -96,7 +103,10 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
                         }
                         RecentSearchItem(
                             searchText = item.searchText,
-                            modifier = Modifier.clickable { dispatch(SearchTopIntent.ClickRecentSearchItem(item)) }
+                            modifier = Modifier.clickable {
+                                dispatch(SearchTopIntent.ClickRecentSearchItem(item))
+                                keyboardController?.show()
+                            }
                         )
                     }
                 }
