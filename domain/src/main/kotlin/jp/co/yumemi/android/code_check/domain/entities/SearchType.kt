@@ -5,5 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 enum class SearchType : Parcelable {
-    Repo
+    Repo,
+    Issues,
+    PullRequests,
+    People,
+    Organization,
+    JumpTo
 }

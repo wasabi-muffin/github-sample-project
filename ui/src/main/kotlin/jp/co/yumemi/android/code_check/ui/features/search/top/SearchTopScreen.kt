@@ -33,6 +33,11 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
             is SearchTopEvent.NavigateBack -> navigator.back()
             is SearchTopEvent.NavigateSearch -> when (event.type) {
                 SearchType.Repo -> navigator.repoResults(event.searchText)
+                SearchType.Issues -> Log.d("NavigateSearch", "Issues ${event.searchText}") // TODO: Add Screen
+                SearchType.PullRequests -> Log.d("NavigateSearch", "PullRequests ${event.searchText}") // TODO: Add Screen
+                SearchType.People -> Log.d("NavigateSearch", "People ${event.searchText}") // TODO: Add Screen
+                SearchType.Organization -> Log.d("NavigateSearch", "Organization ${event.searchText}") // TODO: Add Screen
+                SearchType.JumpTo -> Log.d("NavigateSearch", "JumpTo ${event.searchText}") // TODO: Add Screen
             }
         }
     }
@@ -74,12 +79,13 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
                 Column(
                     modifier = Modifier.background(Github.White),
                 ) {
-                    SearchTypeItem(
-                        searchText = state.searchText,
-                        searchType = SearchType.Repo,
-                        modifier = Modifier
-                            .clickable { dispatch(SearchTopIntent.ClickItem(SearchType.Repo)) }
-                    )
+                    SearchType.values().forEach { searchType ->
+                        SearchTypeItem(
+                            searchText = state.searchText,
+                            searchType = searchType,
+                            modifier = Modifier.clickable { dispatch(SearchTopIntent.ClickItem(searchType)) }
+                        )
+                    }
                 }
             }
             else -> Unit

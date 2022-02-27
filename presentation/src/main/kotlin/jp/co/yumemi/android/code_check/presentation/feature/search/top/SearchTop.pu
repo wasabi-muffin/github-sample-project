@@ -3,8 +3,8 @@ state Search {
     Search : I.ClickBack > A.NavigateBack > E.NavigateBack
 
     state Initial {
-        Initial : I.OnStart > A.LoadRecentSearches > R.RecentSearches
-        
+        Initial : I.OnStart > A.LoadRecentSearches > SE.RecentSearches[R.RecentSearches]
+
         Initial -right-> Stable.EmptySearch : R.RecentSearches
     }
 
@@ -13,7 +13,7 @@ state Search {
 
         state Stable.EmptySearch {
             Stable.EmptySearch : I.ClickClearRecentSearches > A.ClearRecentSearches > R.ClearRecentSearches
-            Stable.EmptySearch : I.ClickRecentSearchItem > A.UpdateSearchText > R.UpdateSearchText
+            Stable.EmptySearch : I.ClickRecentSearchItem > A.UpdateSearchText > R.UpdateSearchText, SE.RecentSearches[R.RecentSearches]
 
             Stable.EmptySearch --> Stable.NonEmptySearch : R.UpdateSearchText
             Stable.EmptySearch --> Stable.EmptySearch : R.ClearRecentSearches
@@ -21,7 +21,7 @@ state Search {
 
         state Stable.NonEmptySearch {
             Stable.NonEmptySearch : I.ClickItem(type) > A.NavigateSearch(type) > E.NavigateSearch(type)
-            Stable.NonEmptySearch : I.ClickClearSearchText > A.UpdateSearchText > R.UpdateSearchText
+            Stable.NonEmptySearch : I.ClickClearSearchText > A.UpdateSearchText > R.UpdateSearchText, SE.RecentSearches[R.RecentSearches]
 
             Stable.NonEmptySearch --> Stable.EmptySearch : R.UpdateSearchText
         }
