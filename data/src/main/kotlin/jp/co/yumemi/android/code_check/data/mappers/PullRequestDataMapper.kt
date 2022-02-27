@@ -10,7 +10,7 @@ object PullRequestDataMapper {
             title = model.title,
             user = model.user?.let(UserDataMapper::toEntity),
             number = model.number,
-            repository = model.repository?.let(RepositoryDataMapper::toEntity),
+            repoName = model.repoName,
             createdAt = model.date,
             status = model.status
         )

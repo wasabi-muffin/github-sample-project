@@ -80,13 +80,12 @@ fun SearchIssueResultItem(
 fun SearchIssueResultItem(
     issue: Issue,
     modifier: Modifier = Modifier,
-    repoName: String = issue.repository?.name ?: "",
 ) {
     val status = IssueStatus(issue.status)
     SearchIssueResultItem(
         icon = status.icon,
         iconTint = status.iconTint,
-        repoName = repoName,
+        repoName = issue.repoName,
         number = issue.number.toString(),
         title = issue.title,
         daysAgo = issue.createdAt,
@@ -98,13 +97,12 @@ fun SearchIssueResultItem(
 fun SearchPullRequestResultItem(
     pullRequest: PullRequest,
     modifier: Modifier = Modifier,
-    repoName: String = pullRequest.repository?.name ?: "",
 ) {
     val status = PullRequestStatus(pullRequest.status)
     SearchIssueResultItem(
         icon = status.icon,
         iconTint = status.iconTint,
-        repoName = repoName,
+        repoName = pullRequest.repoName,
         number = pullRequest.number.toString(),
         title = pullRequest.title,
         daysAgo = pullRequest.createdAt,
