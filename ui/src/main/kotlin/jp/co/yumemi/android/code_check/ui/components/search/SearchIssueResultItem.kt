@@ -26,6 +26,7 @@ import jp.co.yumemi.android.code_check.ui.primitives.Github
 import jp.co.yumemi.android.code_check.ui.primitives.GithubTheme
 import jp.co.yumemi.android.code_check.ui.primitives.Gray
 import jp.co.yumemi.android.code_check.ui.utils.IssueStatus
+import jp.co.yumemi.android.code_check.ui.utils.PullRequestStatus
 
 @Composable
 fun SearchIssueResultItem(
@@ -99,7 +100,7 @@ fun SearchPullRequestResultItem(
     modifier: Modifier = Modifier,
     repoName: String = pullRequest.repository?.name ?: "",
 ) {
-    val status = IssueStatus(pullRequest.status)
+    val status = PullRequestStatus(pullRequest.status)
     SearchIssueResultItem(
         icon = status.icon,
         iconTint = status.iconTint,
