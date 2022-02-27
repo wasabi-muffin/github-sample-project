@@ -38,7 +38,7 @@ class SearchResultsStateMachine<T : Parcelable> : StateMachine<SearchResultsInte
 
         state<SearchResultsViewState.Loading<T>> {
             reduce<SearchResultsResult.SearchSuccess<T>> {
-                if (it.data.totalCount == 1) {
+                if (it.data.totalCount == 0) {
                     SearchResultsViewState.Empty(searchText = searchText)
                 } else {
                     SearchResultsViewState.Stable.Initial(

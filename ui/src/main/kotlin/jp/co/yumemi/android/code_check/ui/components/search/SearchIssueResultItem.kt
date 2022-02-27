@@ -25,6 +25,7 @@ import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.primitives.Github
 import jp.co.yumemi.android.code_check.ui.primitives.GithubTheme
 import jp.co.yumemi.android.code_check.ui.primitives.Gray
+import jp.co.yumemi.android.code_check.ui.utils.DateString
 import jp.co.yumemi.android.code_check.ui.utils.IssueStatus
 import jp.co.yumemi.android.code_check.ui.utils.PullRequestStatus
 
@@ -35,7 +36,7 @@ fun SearchIssueResultItem(
     repoName: String,
     number: String,
     title: String,
-    daysAgo: String,
+    durationBeforeNow: String,
     modifier: Modifier = Modifier
 ) = Row(
     horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -69,7 +70,7 @@ fun SearchIssueResultItem(
         )
     }
     Text(
-        text = daysAgo,
+        text = durationBeforeNow,
         style = MaterialTheme.typography.h4,
         fontWeight = FontWeight.Normal,
         color = Gray.v700,
@@ -88,7 +89,7 @@ fun SearchIssueResultItem(
         repoName = issue.repoName,
         number = issue.number.toString(),
         title = issue.title,
-        daysAgo = issue.createdAt,
+        durationBeforeNow = DateString(issue.createdAt).toDurationUntilToday(),
         modifier = modifier,
     )
 }
@@ -105,7 +106,7 @@ fun SearchPullRequestResultItem(
         repoName = pullRequest.repoName,
         number = pullRequest.number.toString(),
         title = pullRequest.title,
-        daysAgo = pullRequest.createdAt,
+        durationBeforeNow = DateString(pullRequest.createdAt).toDurationUntilToday(),
         modifier = modifier,
     )
 }
@@ -120,7 +121,7 @@ fun Preview_SearchIssueResultItem() {
             repoName = "repo/name",
             number = "1",
             title = "title",
-            daysAgo = "1d",
+            durationBeforeNow = "1d",
             modifier = Modifier.background(Color.White)
         )
     }

@@ -88,12 +88,14 @@ fun <T : Parcelable> SearchResultsScreen(
                     SwipeRefresh(
                         state = rememberSwipeRefreshState(isRefreshing = state is SearchResultsViewState.Stable.RefreshLoading),
                         onRefresh = { dispatch(SearchResultsIntent.PullToRefresh()) },
+                        modifier = Modifier.fillMaxSize()
                     ) {
                         PagingColumn<T, SearchResultsViewState.Stable.PageLoading<T>, SearchResultsViewState.Stable.PageError<T>>(
                             items = state.results,
                             viewState = state,
                             state = scrollState,
                             onClickRetry = { dispatch(SearchResultsIntent.ClickErrorRetry()) },
+                            modifier = Modifier.fillMaxSize()
                         ) { index, item ->
                             resultItem(item) {
                                 dispatch(SearchResultsIntent.ClickItem(item = item))

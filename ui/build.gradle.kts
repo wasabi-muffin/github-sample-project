@@ -17,6 +17,7 @@ dependencies {
 
     implementation(Dependencies.Kotlinx.coroutinesCore)
     implementation(Dependencies.Kotlinx.coroutinesAndroid)
+    implementation(Dependencies.Kotlinx.datetime)
     implementation(Dependencies.AndroidX.core)
     implementation(Dependencies.AndroidX.appCompat)
     implementation(Dependencies.AndroidX.lifecycleViewModel)
