@@ -9,7 +9,8 @@ object PullRequestDataMapper {
             id = model.id,
             title = model.title,
             user = model.user?.let(UserDataMapper::toEntity),
-            date = model.date,
+            repository = null, // TODO: Add Model
+            createdAt = model.date,
             isDraft = model.isDraft
         )
 }

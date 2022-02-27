@@ -62,7 +62,7 @@ class SearchDataRepositoryTest {
         )
 
         coroutineTestRule.runBlockingTest {
-            val result = searchRepository.searchRepos("")
+            val result = searchRepository.searchRepositories("")
             result.totalCount shouldBe 5
             result.items.size shouldBe 5
             result.items.forEachIndexed { index, repo ->
@@ -90,7 +90,7 @@ class SearchDataRepositoryTest {
 
         coroutineTestRule.runBlockingTest {
             val result = runCatching {
-                searchRepository.searchRepos("")
+                searchRepository.searchRepositories("")
             }.exceptionOrNull()
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
