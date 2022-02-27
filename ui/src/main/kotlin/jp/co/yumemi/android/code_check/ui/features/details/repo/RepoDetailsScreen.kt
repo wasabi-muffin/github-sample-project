@@ -1,6 +1,5 @@
 package jp.co.yumemi.android.code_check.ui.features.details.repo
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -47,7 +46,7 @@ fun RepoDetailsScreen(
         process = { dispatch(RepoDetailsIntent.ProcessEvent(it)) }
     ) { event ->
         when (event) {
-            is RepoDetailsEvent.NavigateBack -> Log.d("RepoDetails", "NavigateBack") // TODO: Add Navigation
+            is RepoDetailsEvent.NavigateBack -> navigator.back()
         }
     }
 
@@ -91,7 +90,7 @@ fun RepoDetailsScreen(
                             RepoDetailsHeader(repository = state.details.repository)
                             Divider()
                             RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Issues)
-                            // RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.PullRequests) // TODO: Add pull requests
+                            RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.PullRequests)
                             RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Releases)
                             RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Contributors)
                             RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Watchers)

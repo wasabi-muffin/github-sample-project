@@ -1,5 +1,6 @@
 package jp.co.yumemi.android.code_check.data.repositories
 
+import jp.co.yumemi.android.code_check.data.mappers.PullRequestDataMapper
 import jp.co.yumemi.android.code_check.data.mappers.ReleaseDataMapper
 import jp.co.yumemi.android.code_check.data.mappers.UserDataMapper
 import jp.co.yumemi.android.code_check.data.sources.RepositoriesRemoteDataSource
@@ -19,7 +20,7 @@ class RepositoriesDataRepository(
         .getReleases(name)
         .map(ReleaseDataMapper::toEntity)
 
-    override suspend fun getPulls(name: String): List<PullRequest> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getPulls(name: String): List<PullRequest> = repositoriesRemoteDataSource
+        .getPulls(name)
+        .map(PullRequestDataMapper::toEntity)
 }

@@ -30,8 +30,10 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
         process = { dispatch(SearchTopIntent.ProcessEvent(it)) }
     ) { event ->
         when (event) {
-            is SearchTopEvent.NavigateBack -> Log.d("SearchTopEvent", "Navigate Back") // TODO: Add Navigation
-            is SearchTopEvent.NavigateSearch -> Log.d("SearchTopEvent", "Navigate Search") // TODO: Add Navigation
+            is SearchTopEvent.NavigateBack -> navigator.back()
+            is SearchTopEvent.NavigateSearch -> when (event.type) {
+                SearchType.Repo -> navigator.repoResults(event.searchText)
+            }
         }
     }
 

@@ -8,9 +8,4 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class TopActivity : AppCompatActivity(R.layout.activity_top) {
-
-    companion object {
-        lateinit var lastSearchDate: Date
-    }
-}
+class MainActivity : AppCompatActivity(R.layout.activity_main)

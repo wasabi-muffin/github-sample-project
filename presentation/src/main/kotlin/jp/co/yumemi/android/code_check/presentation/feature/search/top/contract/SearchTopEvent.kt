@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 
 sealed class SearchTopEvent : Event() {
     @Parcelize object NavigateBack : SearchTopEvent()
-    @Parcelize data class NavigateSearch(val type: SearchType) : SearchTopEvent()
+    @Parcelize data class NavigateSearch(val type: SearchType, val searchText: String) : SearchTopEvent()
 }

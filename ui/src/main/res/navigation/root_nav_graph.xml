@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/root_nav_graph"
+        app:startDestination="@id/searchTop">
+
+    <fragment
+            android:id="@+id/searchTop"
+            android:name="jp.co.yumemi.android.code_check.ui.features.search.top.SearchTopFragment"
+            android:label="SearchTop">
+        <action
+                android:id="@+id/action_searchTop_to_searchRepoResults"
+                app:destination="@id/searchRepoResults" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/searchRepoResults"
+            android:name="jp.co.yumemi.android.code_check.ui.features.search.results.SearchRepoResultsFragment"
+            android:label="SearchRepoResults">
+        <action
+                android:id="@+id/action_searchRepoResults_to_repoDetails"
+                app:destination="@id/repoDetails" />
+        <argument
+                android:name="searchText"
+                app:argType="string" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/repoDetails"
+            android:name="jp.co.yumemi.android.code_check.ui.features.details.repo.RepoDetailsFragment"
+            android:label="RepoDetails">
+        <argument
+                android:name="repository"
+                app:argType="jp.co.yumemi.android.code_check.domain.entities.Repository" />
+    </fragment>
+</navigation>
