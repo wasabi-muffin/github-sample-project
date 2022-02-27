@@ -13,6 +13,5 @@ sealed class SearchTopAction : Action {
     object NavigateBack : SearchTopAction()
     data class NavigateSearch(val type: SearchType) : SearchTopAction()
     data class NavigateRepositoryDetails(val repository: Repository) : SearchTopAction()
-    data class NavigateSearchResults(val type: SearchType) : SearchTopAction()
     data class ProcessEvent(override val event: SearchTopEvent) : SearchTopAction(), ProcessEventAction<SearchTopEvent>
 }

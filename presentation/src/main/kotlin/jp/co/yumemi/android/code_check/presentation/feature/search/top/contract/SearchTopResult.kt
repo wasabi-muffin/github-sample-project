@@ -11,6 +11,7 @@ sealed class SearchTopResult : Result {
     data class RecentSearches(val data: List<RecentSearch>) : SearchTopResult()
     data class UpdateSearchText(val text: String) : SearchTopResult()
     object ClearRecentSearches : SearchTopResult()
+    object Loading : SearchTopResult()
     data class LoadSearchSuccess(val results: SearchAll): SearchTopResult()
     data class LoadSearchError(val error: DomainError): SearchTopResult()
     data class SendEvent(override val event: SearchTopEvent) : SearchTopResult(), SendEventResult<SearchTopEvent>

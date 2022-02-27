@@ -15,6 +15,7 @@ sealed class SearchTopIntent : Intent {
     data class ClickItem(val type: SearchType) : SearchTopIntent()
     object ClickClearSearchText : SearchTopIntent()
     object ClickSearch : SearchTopIntent()
+    object ClickTryAgain : SearchTopIntent()
     data class ClickRepositoryResult(val repository: Repository) : SearchTopIntent()
     data class ClickSeeAll(val searchType: SearchType) : SearchTopIntent()
     data class ProcessEvent(override val event: SearchTopEvent) : SearchTopIntent(), ProcessEventIntent<SearchTopEvent>
