@@ -11,7 +11,6 @@ import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsSideEffect
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.components.StateMachine
-import jp.co.yumemi.android.code_check.presentation.statemachine.components.StateMachineProcessor
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 
@@ -24,14 +23,7 @@ class SearchRepositoryResultsProcessor(
         SearchResultsEvent<Repository>,
         SearchResultsSideEffect<Repository>>,
     private val searchRepoUseCase: SearchRepoUseCase
-) : StateMachineProcessor<SearchResultsIntent<Repository>,
-    SearchResultsAction<Repository>,
-    SearchResultsResult<Repository>,
-    SearchResultsViewState<Repository>,
-    SearchResultsEvent<Repository>,
-    SearchResultsSideEffect<Repository>>(
-    stateMachine
-) {
+) : SearchResultsProcessor<Repository>(stateMachine) {
     override suspend fun process(
         sideEffect: SearchResultsSideEffect<Repository>,
         state: State<SearchResultsViewState<Repository>, SearchResultsEvent<Repository>>

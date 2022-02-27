@@ -8,6 +8,7 @@ import androidx.savedstate.SavedStateRegistryOwner
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.presentation.core.components.Store
 import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
@@ -22,25 +23,29 @@ import jp.co.yumemi.android.code_check.ui.core.getState
 import jp.co.yumemi.android.code_check.ui.core.onInit
 import jp.co.yumemi.android.code_check.ui.core.saveState
 
-class SearchRepoResultsViewModel @AssistedInject constructor(
-    storeFactory: StoreFactory<SearchResultsIntent, SearchResultsAction, SearchResultsResult, SearchResultsViewState, SearchResultsEvent>,
+class SearchRepositoryResultsViewModel @AssistedInject constructor(
+    storeFactory: StoreFactory<SearchResultsIntent<Repository>,
+        SearchResultsAction<Repository>,
+        SearchResultsResult<Repository>,
+        SearchResultsViewState<Repository>,
+        SearchResultsEvent<Repository>>,
     @Assisted stateHandle: SavedStateHandle,
     @Assisted val searchText: String,
-) : StoreViewModel<SearchResultsIntent,
-    SearchResultsAction,
-    SearchResultsResult,
-    SearchResultsViewState,
-    SearchResultsEvent>(storeFactory) {
-    override val store: Store<SearchResultsIntent, SearchResultsViewState, SearchResultsEvent> = storeFactory.create(
+) : StoreViewModel<SearchResultsIntent<Repository>,
+    SearchResultsAction<Repository>,
+    SearchResultsResult<Repository>,
+    SearchResultsViewState<Repository>,
+    SearchResultsEvent<Repository>>(storeFactory) {
+    override val store: Store<SearchResultsIntent<Repository>, SearchResultsViewState<Repository>, SearchResultsEvent<Repository>> = storeFactory.create(
         stateHandle.getState() ?: State(SearchResultsViewState.Initial(searchText)),
         middlewares = listOf(
-            StateSaverMiddleware<SearchResultsViewState, SearchResultsEvent> { stateHandle.saveState(it) }
+            StateSaverMiddleware<SearchResultsViewState<Repository>, SearchResultsEvent<Repository>> { stateHandle.saveState(it) }
         )
     )
 
     init {
         stateHandle.onInit {
-            dispatch(SearchResultsIntent.OnStart)
+            dispatch(SearchResultsIntent.OnStart())
         }
     }
 
@@ -49,7 +54,7 @@ class SearchRepoResultsViewModel @AssistedInject constructor(
         fun create(
             savedStateHandle: SavedStateHandle,
             searchText: String,
-        ): SearchRepoResultsViewModel
+        ): SearchRepositoryResultsViewModel
     }
 
     companion object {

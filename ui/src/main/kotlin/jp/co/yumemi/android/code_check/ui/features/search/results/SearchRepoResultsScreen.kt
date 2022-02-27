@@ -1,5 +1,6 @@
 package jp.co.yumemi.android.code_check.ui.features.search.results
 
+import android.os.Parcelable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -36,13 +37,14 @@ import jp.co.yumemi.android.code_check.ui.core.render
 import jp.co.yumemi.android.code_check.ui.primitives.Gray
 
 @Composable
-fun SearchRepoResultsScreen(
-    contract: Contract<SearchResultsIntent, SearchResultsViewState, SearchResultsEvent>,
-    navigator: SearchRepoResultsNavigator
+fun <T : Parcelable> SearchResultsScreen(
+    contract: Contract<SearchResultsIntent<T>, SearchResultsViewState<T>, SearchResultsEvent<T>>,
+    navigator: SearchResultsNavigator<T>,
+    resultItem: @Composable (item: T, onClick: (T) -> Unit) -> Unit
 ) {
     val (state, events, dispatch) = contract
     val scrollState = rememberLazyListState()
-    scrollState.onScrolledToBottom(buffer = 3) { dispatch(SearchResultsIntent.ScrollToBottom) }
+    scrollState.onScrolledToBottom(buffer = 3) { dispatch(SearchResultsIntent.ScrollToBottom()) }
 
     events?.handle(
         process = { dispatch(SearchResultsIntent.ProcessEvent(it)) }
@@ -58,7 +60,7 @@ fun SearchRepoResultsScreen(
             title = stringResource(id = R.string.common_repositories),
             elevation = scrollState.elevation,
             navigationIcon = {
-                BackIcon { dispatch(SearchResultsIntent.ClickBack) }
+                BackIcon { dispatch(SearchResultsIntent.ClickBack()) }
             }
         )
         Box(
@@ -81,31 +83,30 @@ fun SearchRepoResultsScreen(
                     }
                 }
                 is SearchResultsViewState.Error -> {
-                    ErrorFullscreen(title = stringResource(id = state.error.title())) { dispatch(SearchResultsIntent.ClickTryAgain) }
+                    ErrorFullscreen(title = stringResource(id = state.error.title())) { dispatch(SearchResultsIntent.ClickTryAgain()) }
                 }
                 is SearchResultsViewState.Stable -> {
                     SwipeRefresh(
                         state = rememberSwipeRefreshState(isRefreshing = state is SearchResultsViewState.Stable.RefreshLoading),
-                        onRefresh = { dispatch(SearchResultsIntent.PullToRefresh) },
+                        onRefresh = { dispatch(SearchResultsIntent.PullToRefresh()) },
                     ) {
-                        PagingColumn<Repository, SearchResultsViewState.Stable.PageLoading, SearchResultsViewState.Stable.PageError>(
+                        PagingColumn<T, SearchResultsViewState.Stable.PageLoading<T>, SearchResultsViewState.Stable.PageError<T>>(
                             items = state.results,
                             viewState = state,
                             state = scrollState,
-                            onClickRetry = { dispatch(SearchResultsIntent.ClickErrorRetry) },
+                            onClickRetry = { dispatch(SearchResultsIntent.ClickErrorRetry()) },
                         ) { index, item ->
-                            SearchRepoResultItem(
-                                repository = item,
-                                modifier = Modifier.clickable { dispatch(SearchResultsIntent.ClickItem(item = item)) }
-                            )
+                            resultItem(item) {
+                                dispatch(SearchResultsIntent.ClickItem(item = item))
+                            }
                             if (index != state.results.lastIndex) {
                                 Divider()
                             }
                         }
                     }
-                    state.render<SearchResultsViewState.Stable.RefreshError> {
+                    state.render<SearchResultsViewState.Stable.RefreshError<T>> {
                         ErrorOkDialog(title = stringResource(id = it.error.title()), description = stringResource(id = it.error.description())) {
-                            dispatch(SearchResultsIntent.ClickErrorOk)
+                            dispatch(SearchResultsIntent.ClickErrorOk())
                         }
                     }
                 }
