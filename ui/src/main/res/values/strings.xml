@@ -25,11 +25,16 @@
     <string name="common_time_weeks">w</string>
     <string name="common_time_months">mo</string>
     <string name="common_time_years">y</string>
+    <string name="common_single_decimal_format">%.1f</string>
+    <string name="common_over_99">99+</string>
+    <string name="common_unit_thousands">k</string>
+    <string name="common_unit_millions">m</string>
 
     // Search Top
     <string name="search_top_recent_searches">Recent searches</string>
     <string name="search_top_search_with">%s with %s</string>
     <string name="seach_top_jump_to">Jump to %s</string>
+    <string name="search_top_see_more">See %s more %s</string>
 
     // TODO: Replace placeholders
     <string name="placeholder_error_title_unknown">Error Title</string>

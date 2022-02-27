@@ -6,9 +6,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class SearchAll(
-    val repositories: Pageable<Repository>?,
-    val issues: Pageable<Issue>?,
-    val pullRequests: Pageable<PullRequest>?,
-    val people: Pageable<User>?,
-    val organizations: Pageable<Organization>?,
+    val repositories: Pageable<Repository>,
+    val issues: Pageable<Issue>,
+    val pullRequests: Pageable<PullRequest>,
+    val people: Pageable<User>,
+    val organizations: Pageable<Organization>,
 ) : Parcelable
