@@ -17,3 +17,13 @@ fun <T> Result<T>.toDomainResult(errorHandler: ErrorHandler) = this.fold(
     onSuccess = { DomainResult.Success(it) },
     onFailure = { DomainResult.Failure(errorHandler.handleError(it)) }
 )
+
+fun <T> DomainResult<T>.successOrNull() = when (this) {
+    is DomainResult.Success<T> -> data
+    is DomainResult.Failure -> null
+}
+
+fun <T> DomainResult<T>.errorOrNull() = when (this) {
+    is DomainResult.Success<T> -> null
+    is DomainResult.Failure -> error
+}
