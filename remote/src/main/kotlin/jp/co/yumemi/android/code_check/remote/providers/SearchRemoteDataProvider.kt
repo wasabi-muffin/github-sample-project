@@ -17,8 +17,13 @@ import jp.co.yumemi.android.code_check.remote.mappers.UserRemoteMapper
 class SearchRemoteDataProvider(
     private val searchApi: SearchApi
 ) : SearchRemoteDataSource {
-    override suspend fun searchRepositories(token: String?, searchText: String, pageNumber: Int): SearchResultModel<RepositoryModel> = searchApi
-        .searchRepositories(accessToken = token, q = searchText, page = pageNumber)
+    override suspend fun searchRepositories(
+        token: String?,
+        searchText: String,
+        pageNumber: Int,
+        count: Int
+    ): SearchResultModel<RepositoryModel> = searchApi
+        .searchRepositories(accessToken = token, q = searchText, page = pageNumber, perPage = count)
         .let { response ->
             SearchResultModel(
                 response.items.map(RepositoryRemoteMapper::toModel),
@@ -26,8 +31,13 @@ class SearchRemoteDataProvider(
             )
         }
 
-    override suspend fun searchIssues(token: String?, searchText: String, pageNumber: Int): SearchResultModel<IssueModel> = searchApi
-        .searchIssuesAndPullRequests(accessToken = token, q = "$searchText type:issue", page = pageNumber)
+    override suspend fun searchIssues(
+        token: String?,
+        searchText: String,
+        pageNumber: Int,
+        count: Int
+    ): SearchResultModel<IssueModel> = searchApi
+        .searchIssuesAndPullRequests(accessToken = token, q = "$searchText type:issue", page = pageNumber, perPage = count)
         .let { response ->
             SearchResultModel(
                 response.items.map(IssueRemoteMapper::toModel),
@@ -35,8 +45,13 @@ class SearchRemoteDataProvider(
             )
         }
 
-    override suspend fun searchPullRequests(token: String?, searchText: String, pageNumber: Int): SearchResultModel<PullRequestModel> = searchApi
-        .searchIssuesAndPullRequests(accessToken = token, q = "$searchText type:pr", page = pageNumber)
+    override suspend fun searchPullRequests(
+        token: String?,
+        searchText: String,
+        pageNumber: Int,
+        count: Int
+    ): SearchResultModel<PullRequestModel> = searchApi
+        .searchIssuesAndPullRequests(accessToken = token, q = "$searchText type:pr", page = pageNumber, perPage = count)
         .let { response ->
             SearchResultModel(
                 response.items.map(PullRequestRemoteMapper::toModel),
@@ -44,8 +59,13 @@ class SearchRemoteDataProvider(
             )
         }
 
-    override suspend fun searchUsers(token: String?, searchText: String, pageNumber: Int): SearchResultModel<UserModel> = searchApi
-        .searchUsers(accessToken = token, q = "$searchText type:user", page = pageNumber)
+    override suspend fun searchUsers(
+        token: String?,
+        searchText: String,
+        pageNumber: Int,
+        count: Int
+    ): SearchResultModel<UserModel> = searchApi
+        .searchUsers(accessToken = token, q = "$searchText type:user", page = pageNumber, perPage = count)
         .let { response ->
             SearchResultModel(
                 response.items.map(UserRemoteMapper::toModel),
@@ -53,8 +73,13 @@ class SearchRemoteDataProvider(
             )
         }
 
-    override suspend fun searchOrganizations(token: String?, searchText: String, pageNumber: Int): SearchResultModel<OrganizationModel> = searchApi
-        .searchUsers(accessToken = token, q = "$searchText type:organization", page = pageNumber)
+    override suspend fun searchOrganizations(
+        token: String?,
+        searchText: String,
+        pageNumber: Int,
+        count: Int
+    ): SearchResultModel<OrganizationModel> = searchApi
+        .searchUsers(accessToken = token, q = "$searchText type:organization", page = pageNumber, perPage = count)
         .let { response ->
             SearchResultModel(
                 response.items.map(OrganizationRemoteMapper::toModel),

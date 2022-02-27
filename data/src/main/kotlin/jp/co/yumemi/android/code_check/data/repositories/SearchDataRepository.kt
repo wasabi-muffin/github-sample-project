@@ -21,46 +21,46 @@ class SearchDataRepository(
     private val searchRemoteDataSource: SearchRemoteDataSource,
     private val searchLocalDataSource: SearchLocalDataSource
 ) : SearchRepository {
-    override suspend fun searchRepositories(searchText: String, pageNumber: Int): Pageable<Repository> {
+    override suspend fun searchRepositories(searchText: String, pageNumber: Int, count: Int): Pageable<Repository> {
         searchLocalDataSource.saveRecentSearch(searchText)
         return searchRemoteDataSource
-            .searchRepositories(searchText = searchText, pageNumber = pageNumber)
+            .searchRepositories(searchText = searchText, pageNumber = pageNumber, count = count)
             .let { results ->
                 Pageable(results.repos.map(RepositoryDataMapper::toEntity), results.totalCount)
             }
     }
 
-    override suspend fun searchIssues(searchText: String, pageNumber: Int): Pageable<Issue> {
+    override suspend fun searchIssues(searchText: String, pageNumber: Int, count: Int): Pageable<Issue> {
         searchLocalDataSource.saveRecentSearch(searchText)
         return searchRemoteDataSource
-            .searchIssues(searchText = searchText, pageNumber = pageNumber)
+            .searchIssues(searchText = searchText, pageNumber = pageNumber, count = count)
             .let { results ->
                 Pageable(results.repos.map(IssueDataMapper::toEntity), results.totalCount)
             }
     }
 
-    override suspend fun searchPullRequests(searchText: String, pageNumber: Int): Pageable<PullRequest> {
+    override suspend fun searchPullRequests(searchText: String, pageNumber: Int, count: Int): Pageable<PullRequest> {
         searchLocalDataSource.saveRecentSearch(searchText)
         return searchRemoteDataSource
-            .searchPullRequests(searchText = searchText, pageNumber = pageNumber)
+            .searchPullRequests(searchText = searchText, pageNumber = pageNumber, count = count)
             .let { results ->
                 Pageable(results.repos.map(PullRequestDataMapper::toEntity), results.totalCount)
             }
     }
 
-    override suspend fun searchUsers(searchText: String, pageNumber: Int): Pageable<User> {
+    override suspend fun searchUsers(searchText: String, pageNumber: Int, count: Int): Pageable<User> {
         searchLocalDataSource.saveRecentSearch(searchText)
         return searchRemoteDataSource
-            .searchUsers(searchText = searchText, pageNumber = pageNumber)
+            .searchUsers(searchText = searchText, pageNumber = pageNumber, count = count)
             .let { results ->
                 Pageable(results.repos.map(UserDataMapper::toEntity), results.totalCount)
             }
     }
 
-    override suspend fun searchOrganizations(searchText: String, pageNumber: Int): Pageable<Organization> {
+    override suspend fun searchOrganizations(searchText: String, pageNumber: Int, count: Int): Pageable<Organization> {
         searchLocalDataSource.saveRecentSearch(searchText)
         return searchRemoteDataSource
-            .searchOrganizations(searchText = searchText, pageNumber = pageNumber)
+            .searchOrganizations(searchText = searchText, pageNumber = pageNumber, count = count)
             .let { results ->
                 Pageable(results.repos.map(OrganizationDataMapper::toEntity), results.totalCount)
             }
