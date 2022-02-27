@@ -70,7 +70,7 @@ interface SearchApi {
     *
     * @return InlineResponse20028ApiModel
     */
-    suspend fun searchRepos(accessToken: String? = null, q: kotlin.String? = null, sort: kotlin.String? = null, order: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20028ApiModel
+    suspend fun searchRepositories(accessToken: String? = null, q: kotlin.String? = null, sort: kotlin.String? = null, order: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20028ApiModel
 
     /**
     * Search topics
@@ -152,7 +152,7 @@ class HttpClientSearchApi(private val httpClientProvider: HttpClientProvider) : 
         }
     }
 
-    override suspend fun searchRepos(accessToken: String?, q: kotlin.String?, sort: kotlin.String?, order: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20028ApiModel {
+    override suspend fun searchRepositories(accessToken: String?, q: kotlin.String?, sort: kotlin.String?, order: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20028ApiModel {
         val path = "/search/repositories"
 
         return httpClient.request {

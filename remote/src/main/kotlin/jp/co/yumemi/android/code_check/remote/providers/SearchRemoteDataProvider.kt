@@ -8,13 +8,17 @@ import jp.co.yumemi.android.code_check.data.models.SearchResultModel
 import jp.co.yumemi.android.code_check.data.models.UserModel
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
 import jp.co.yumemi.android.code_check.remote.apis.SearchApi
+import jp.co.yumemi.android.code_check.remote.mappers.IssueRemoteMapper
+import jp.co.yumemi.android.code_check.remote.mappers.OrganizationRemoteMapper
+import jp.co.yumemi.android.code_check.remote.mappers.PullRequestRemoteMapper
 import jp.co.yumemi.android.code_check.remote.mappers.RepositoryRemoteMapper
+import jp.co.yumemi.android.code_check.remote.mappers.UserRemoteMapper
 
 class SearchRemoteDataProvider(
     private val searchApi: SearchApi
 ) : SearchRemoteDataSource {
     override suspend fun searchRepositories(token: String?, searchText: String, pageNumber: Int): SearchResultModel<RepositoryModel> = searchApi
-        .searchRepos(accessToken = token, q = searchText, page = pageNumber)
+        .searchRepositories(accessToken = token, q = searchText, page = pageNumber)
         .let { response ->
             SearchResultModel(
                 response.items.map(RepositoryRemoteMapper::toModel),
@@ -22,19 +26,39 @@ class SearchRemoteDataProvider(
             )
         }
 
-    override suspend fun searchIssues(token: String?, searchText: String, pageNumber: Int): SearchResultModel<IssueModel> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun searchIssues(token: String?, searchText: String, pageNumber: Int): SearchResultModel<IssueModel> = searchApi
+        .searchIssuesAndPullRequests(accessToken = token, q = "$searchText type:issue}", page = pageNumber)
+        .let { response ->
+            SearchResultModel(
+                response.items.map(IssueRemoteMapper::toModel),
+                response.totalCount
+            )
+        }
 
-    override suspend fun searchPullRequests(token: String?, searchText: String, pageNumber: Int): SearchResultModel<PullRequestModel> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun searchPullRequests(token: String?, searchText: String, pageNumber: Int): SearchResultModel<PullRequestModel> = searchApi
+        .searchIssuesAndPullRequests(accessToken = token, q = "$searchText type:pr}", page = pageNumber)
+        .let { response ->
+            SearchResultModel(
+                response.items.map(PullRequestRemoteMapper::toModel),
+                response.totalCount
+            )
+        }
 
-    override suspend fun searchUsers(token: String?, searchText: String, pageNumber: Int): SearchResultModel<UserModel> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun searchUsers(token: String?, searchText: String, pageNumber: Int): SearchResultModel<UserModel> = searchApi
+        .searchUsers(accessToken = token, q = "$searchText type:user}", page = pageNumber)
+        .let { response ->
+            SearchResultModel(
+                response.items.map(UserRemoteMapper::toModel),
+                response.totalCount
+            )
+        }
 
-    override suspend fun searchOrganizations(token: String?, searchText: String, pageNumber: Int): SearchResultModel<OrganizationModel> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun searchOrganizations(token: String?, searchText: String, pageNumber: Int): SearchResultModel<OrganizationModel> = searchApi
+        .searchUsers(accessToken = token, q = "$searchText type:organization}", page = pageNumber)
+        .let { response ->
+            SearchResultModel(
+                response.items.map(OrganizationRemoteMapper::toModel),
+                response.totalCount
+            )
+        }
 }
