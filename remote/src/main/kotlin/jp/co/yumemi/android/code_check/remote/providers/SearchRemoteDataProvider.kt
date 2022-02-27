@@ -23,7 +23,7 @@ class SearchRemoteDataProvider(
         pageNumber: Int,
         count: Int
     ): SearchResultModel<RepositoryModel> = searchApi
-        .searchRepositories(accessToken = token, q = searchText, page = pageNumber, perPage = count)
+        .searchRepos(accessToken = token, q = searchText, page = pageNumber, perPage = count)
         .let { response ->
             SearchResultModel(
                 response.items.map(RepositoryRemoteMapper::toModel),

@@ -19,11 +19,12 @@ class SearchAllExecutor(
 ) : SearchAllUseCase {
     override suspend fun execute(arguments: SearchAllUseCase.Args): DomainResult<SearchAll> = runCatching {
         coroutineScope {
-            val repositories = async { searchRepository.searchRepositories(searchText = arguments.searchText, count = 3) }
-            val issues = async { searchRepository.searchIssues(searchText = arguments.searchText, count = 3) }
-            val pullRequests = async { searchRepository.searchPullRequests(searchText = arguments.searchText, count = 3) }
-            val users = async { searchRepository.searchUsers(searchText = arguments.searchText, count = 3) }
-            val organizations = async { searchRepository.searchOrganizations(searchText = arguments.searchText, count = 3) }
+            val itemCount = 3
+            val repositories = async { searchRepository.searchRepositories(searchText = arguments.searchText, count = itemCount) }
+            val issues = async { searchRepository.searchIssues(searchText = arguments.searchText, count = itemCount) }
+            val pullRequests = async { searchRepository.searchPullRequests(searchText = arguments.searchText, count = itemCount) }
+            val users = async { searchRepository.searchUsers(searchText = arguments.searchText, count = itemCount) }
+            val organizations = async { searchRepository.searchOrganizations(searchText = arguments.searchText, count = itemCount) }
             SearchAll(
                 repositories = repositories.await(),
                 issues = issues.await(),
