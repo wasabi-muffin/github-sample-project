@@ -496,7 +496,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
             parameter("orgs", orgs)
             parameter("owned", owned)
             parameter("pulls", pulls)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -507,7 +507,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -519,7 +519,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("since", since)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -533,7 +533,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
             parameter("sort", sort)
             parameter("direction", direction)
             parameter("since", since)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -544,7 +544,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -555,7 +555,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -572,7 +572,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
             parameter("sort", sort)
             parameter("direction", direction)
             parameter("since", since)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -589,7 +589,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
             parameter("sort", sort)
             parameter("direction", direction)
             parameter("since", since)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -609,7 +609,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
             parameter("sort", sort)
             parameter("direction", direction)
             parameter("since", since)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -620,7 +620,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -631,7 +631,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -645,7 +645,7 @@ class HttpClientIssuesApi(private val httpClientProvider: HttpClientProvider) : 
             parameter("state", state)
             parameter("sort", sort)
             parameter("direction", direction)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }

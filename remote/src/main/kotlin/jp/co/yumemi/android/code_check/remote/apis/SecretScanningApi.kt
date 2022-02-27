@@ -85,10 +85,10 @@ class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProv
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("state", state)
-            parameter("secretType", secretType)
+            parameter("secret_type", secretType)
             parameter("resolution", resolution)
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
         }
     }
 
@@ -99,10 +99,10 @@ class HttpClientSecretScanningApi(private val httpClientProvider: HttpClientProv
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("state", state)
-            parameter("secretType", secretType)
+            parameter("secret_type", secretType)
             parameter("resolution", resolution)
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
         }
     }
 

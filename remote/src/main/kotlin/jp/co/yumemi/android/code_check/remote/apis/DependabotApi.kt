@@ -250,7 +250,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -261,7 +261,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -273,7 +273,7 @@ class HttpClientDependabotApi(private val httpClientProvider: HttpClientProvider
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("page", page)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
         }
     }
 

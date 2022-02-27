@@ -202,8 +202,7 @@ private fun <T : Parcelable> SearchResultGroup(
 ) {
     if (result.items.isNotEmpty()) {
         CommonListSectionHeader(title = stringResource(id = title))
-        // TODO: Fix API query param name
-        result.items.take(3).forEach { item ->
+        result.items.forEach { item ->
             content(item)
             if (hasDividers) Divider()
         }
