@@ -4,12 +4,11 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class PullRequest(
+data class Issue(
     val id: Int,
-    val title: String,
     val number: Int,
-    val user: User?,
-    val repository: Repository?,
+    val title: String,
     val createdAt: String,
-    val status: String
-) : Parcelable
+    val repository: Repository?,
+    val status: String,
+): Parcelable

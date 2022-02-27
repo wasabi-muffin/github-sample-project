@@ -41,7 +41,7 @@ class SearchDataRepositoryTest {
     @Test
     fun `test when search is successful`() {
         coEvery {
-            searchRemoteDataSource.searchRepos(any(), any())
+            searchRemoteDataSource.searchRepositories(any(), any())
         } returns SearchResultModel(
             repos = List(5) { index ->
                 RepositoryModel(
@@ -62,7 +62,7 @@ class SearchDataRepositoryTest {
         )
 
         coroutineTestRule.runBlockingTest {
-            val result = searchRepository.searchRepos("")
+            val result = searchRepository.searchRepositories("")
             result.totalCount shouldBe 5
             result.items.size shouldBe 5
             result.items.forEachIndexed { index, repo ->
@@ -77,7 +77,7 @@ class SearchDataRepositoryTest {
                 repo.openIssuesCount shouldBe index
                 repo.license shouldBe "license$index"
             }
-            coVerify { searchRemoteDataSource.searchRepos(any(), "") }
+            coVerify { searchRemoteDataSource.searchRepositories(any(), "") }
             coVerify { searchLocalDataSource.saveRecentSearch("") }
         }
     }
@@ -85,16 +85,16 @@ class SearchDataRepositoryTest {
     @Test
     fun `test when remote data provider throws an error`() {
         coEvery {
-            searchRemoteDataSource.searchRepos(any(), any())
+            searchRemoteDataSource.searchRepositories(any(), any())
         } throws testException
 
         coroutineTestRule.runBlockingTest {
             val result = runCatching {
-                searchRepository.searchRepos("")
+                searchRepository.searchRepositories("")
             }.exceptionOrNull()
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
-            coVerify { searchRemoteDataSource.searchRepos(any(), any()) }
+            coVerify { searchRemoteDataSource.searchRepositories(any(), any()) }
         }
     }
 }

@@ -31,7 +31,7 @@ class SearchRepositoryExecutorTest {
     @Test
     fun `test when execute is successful`() {
         coEvery {
-            searchRepository.searchRepos(any())
+            searchRepository.searchRepositories(any())
         } returns Pageable(
             items = List(5) { index ->
                 Repository(
@@ -68,7 +68,7 @@ class SearchRepositoryExecutorTest {
                 repo.openIssuesCount shouldBe index
                 repo.license shouldBe "license$index"
             }
-            coVerify { searchRepository.searchRepos("") }
+            coVerify { searchRepository.searchRepositories("") }
             coVerify(inverse = true) { errorHandler.handleError(any()) }
         }
     }
@@ -76,7 +76,7 @@ class SearchRepositoryExecutorTest {
     @Test
     fun `test when repository throws an error and execute fails`() {
         coEvery {
-            searchRepository.searchRepos(any())
+            searchRepository.searchRepositories(any())
         } throws testException
 
         every { errorHandler.handleError(any()) } returns DomainError.Unknown(testException)
@@ -87,7 +87,7 @@ class SearchRepositoryExecutorTest {
             result.error.shouldBeTypeOf<DomainError.Unknown>()
             result.error.throwable shouldBe testException
             result.error.throwable.message shouldBe "test"
-            coVerify { searchRepository.searchRepos("") }
+            coVerify { searchRepository.searchRepositories("") }
             coVerify { errorHandler.handleError(testException) }
         }
     }
