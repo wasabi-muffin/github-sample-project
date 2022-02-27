@@ -22,7 +22,7 @@ class SearchRepositoryResultsProcessor(
         SearchResultsViewState<Repository>,
         SearchResultsEvent<Repository>,
         SearchResultsSideEffect<Repository>>,
-    private val searchRepoUseCase: SearchRepoUseCase
+    private val searchRepoUseCase: SearchRepoUseCase<Repository>
 ) : SearchResultsProcessor<Repository>(stateMachine) {
     override suspend fun process(
         sideEffect: SearchResultsSideEffect<Repository>,
