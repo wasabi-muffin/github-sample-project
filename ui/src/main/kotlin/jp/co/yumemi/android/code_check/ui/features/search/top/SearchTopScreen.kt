@@ -32,8 +32,8 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
         when (event) {
             is SearchTopEvent.NavigateBack -> navigator.back()
             is SearchTopEvent.NavigateSearch -> when (event.type) {
-                SearchType.Repo -> navigator.repoResults(event.searchText)
-                SearchType.Issues -> Log.d("NavigateSearch", "Issues ${event.searchText}") // TODO: Add Screen
+                SearchType.Repo -> navigator.repositoryResults(event.searchText)
+                SearchType.Issues -> navigator.issueResults(event.searchText)
                 SearchType.PullRequests -> Log.d("NavigateSearch", "PullRequests ${event.searchText}") // TODO: Add Screen
                 SearchType.People -> Log.d("NavigateSearch", "People ${event.searchText}") // TODO: Add Screen
                 SearchType.Organization -> Log.d("NavigateSearch", "Organization ${event.searchText}") // TODO: Add Screen

@@ -1,6 +1,7 @@
 package jp.co.yumemi.android.code_check.ui.features.search.results
 
 import android.os.Parcelable
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,6 +38,7 @@ import jp.co.yumemi.android.code_check.ui.utils.onScrolledToBottom
 fun <T : Parcelable> SearchResultsScreen(
     contract: Contract<SearchResultsIntent<T>, SearchResultsViewState<T>, SearchResultsEvent<T>>,
     navigator: SearchResultsNavigator<T>,
+    @StringRes title: Int,
     resultItem: @Composable (item: T, onClick: (T) -> Unit) -> Unit
 ) {
     val (state, events, dispatch) = contract
@@ -54,7 +56,7 @@ fun <T : Parcelable> SearchResultsScreen(
 
     Column(modifier = Modifier.fillMaxSize()) {
         TitleAppBar(
-            title = stringResource(id = R.string.common_repositories),
+            title = stringResource(id = title),
             elevation = scrollState.elevation,
             navigationIcon = {
                 BackIcon { dispatch(SearchResultsIntent.ClickBack()) }

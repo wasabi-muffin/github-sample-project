@@ -4,5 +4,6 @@ import androidx.navigation.NavController
 
 class SearchTopNavigator(private val navController: NavController) {
     fun back() = navController.popBackStack()
-    fun repoResults(searchText: String) = navController.navigate(SearchTopFragmentDirections.actionSearchTopToSearchRepoResults(searchText))
+    fun repositoryResults(searchText: String) = navController.navigate(SearchTopFragmentDirections.actionSearchTopToSearchRepositoryResults(searchText))
+    fun issueResults(searchText: String) = navController.navigate(SearchTopFragmentDirections.actionSearchTopToSearchIssueResults(searchText))
 }
