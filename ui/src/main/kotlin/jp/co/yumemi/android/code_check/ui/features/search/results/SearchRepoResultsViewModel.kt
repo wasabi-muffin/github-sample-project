@@ -12,35 +12,35 @@ import jp.co.yumemi.android.code_check.presentation.core.components.Store
 import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
 import jp.co.yumemi.android.code_check.presentation.core.middleware.StateSaverMiddleware
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsAction
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsEvent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsIntent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsResult
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsViewState
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsAction
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsEvent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsIntent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsResult
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsViewState
 import jp.co.yumemi.android.code_check.ui.core.StoreViewModel
 import jp.co.yumemi.android.code_check.ui.core.getState
 import jp.co.yumemi.android.code_check.ui.core.onInit
 import jp.co.yumemi.android.code_check.ui.core.saveState
 
 class SearchRepoResultsViewModel @AssistedInject constructor(
-    storeFactory: StoreFactory<SearchRepoResultsIntent, SearchRepoResultsAction, SearchRepoResultsResult, SearchRepoResultsViewState, SearchRepoResultsEvent>,
+    storeFactory: StoreFactory<SearchResultsIntent, SearchResultsAction, SearchResultsResult, SearchResultsViewState, SearchResultsEvent>,
     @Assisted stateHandle: SavedStateHandle,
     @Assisted val searchText: String,
-) : StoreViewModel<SearchRepoResultsIntent,
-    SearchRepoResultsAction,
-    SearchRepoResultsResult,
-    SearchRepoResultsViewState,
-    SearchRepoResultsEvent>(storeFactory) {
-    override val store: Store<SearchRepoResultsIntent, SearchRepoResultsViewState, SearchRepoResultsEvent> = storeFactory.create(
-        stateHandle.getState() ?: State(SearchRepoResultsViewState.Initial(searchText)),
+) : StoreViewModel<SearchResultsIntent,
+    SearchResultsAction,
+    SearchResultsResult,
+    SearchResultsViewState,
+    SearchResultsEvent>(storeFactory) {
+    override val store: Store<SearchResultsIntent, SearchResultsViewState, SearchResultsEvent> = storeFactory.create(
+        stateHandle.getState() ?: State(SearchResultsViewState.Initial(searchText)),
         middlewares = listOf(
-            StateSaverMiddleware<SearchRepoResultsViewState, SearchRepoResultsEvent> { stateHandle.saveState(it) }
+            StateSaverMiddleware<SearchResultsViewState, SearchResultsEvent> { stateHandle.saveState(it) }
         )
     )
 
     init {
         stateHandle.onInit {
-            dispatch(SearchRepoResultsIntent.OnStart)
+            dispatch(SearchResultsIntent.OnStart)
         }
     }
 

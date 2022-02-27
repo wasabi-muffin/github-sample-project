@@ -6,13 +6,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.SearchRepoResultsProcessor
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.SearchRepoResultsStateMachine
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsAction
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsEvent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsIntent
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsResult
-import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchRepoResultsViewState
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.SearchRepositoryResultsProcessor
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.SearchResultsStateMachine
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsAction
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsEvent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsIntent
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsResult
+import jp.co.yumemi.android.code_check.presentation.feature.search.results.repo.contract.SearchResultsViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.factory.StateMachineStoreFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -23,18 +23,18 @@ import kotlinx.coroutines.FlowPreview
 @InstallIn(ActivityRetainedComponent::class)
 class SearchRepoResultsModule {
     @Provides
-    fun provideSearchRepoResultsStateMachine(): SearchRepoResultsStateMachine = SearchRepoResultsStateMachine()
+    fun provideSearchRepoResultsStateMachine(): SearchResultsStateMachine = SearchResultsStateMachine()
 
     @Provides
     fun provideSearchRepoResultsStoreStateMachineFactory(
-        stateMachine: SearchRepoResultsStateMachine,
-        processor: SearchRepoResultsProcessor
-    ): StoreFactory<SearchRepoResultsIntent, SearchRepoResultsAction, SearchRepoResultsResult, SearchRepoResultsViewState, SearchRepoResultsEvent> =
+        stateMachine: SearchResultsStateMachine,
+        processor: SearchRepositoryResultsProcessor
+    ): StoreFactory<SearchResultsIntent, SearchResultsAction, SearchResultsResult, SearchResultsViewState, SearchResultsEvent> =
         StateMachineStoreFactory(stateMachine, processor)
 
     @Provides
     fun provideSearchRepoResultsProcessor(
-        stateMachine: SearchRepoResultsStateMachine,
+        stateMachine: SearchResultsStateMachine,
         searchRepoUseCase: SearchRepoUseCase,
-    ): SearchRepoResultsProcessor = SearchRepoResultsProcessor(stateMachine, searchRepoUseCase)
+    ): SearchRepositoryResultsProcessor = SearchRepositoryResultsProcessor(stateMachine, searchRepoUseCase)
 }
