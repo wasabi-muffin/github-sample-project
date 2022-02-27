@@ -1,10 +1,10 @@
-package jp.co.yumemi.android.code_check.ui.features.search.results.issue
+package jp.co.yumemi.android.code_check.ui.features.search.results.user
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
-import jp.co.yumemi.android.code_check.domain.entities.Issue
+import jp.co.yumemi.android.code_check.domain.entities.User
 import jp.co.yumemi.android.code_check.domain.usecases.SearchUseCase
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.SearchResultsProcessor
@@ -22,23 +22,23 @@ import kotlinx.coroutines.FlowPreview
 @ExperimentalCoroutinesApi
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-class SearchIssueResultsModule {
+class SearchUserResultsModule {
     @Provides
-    fun provideSearchIssueResultsStateMachine(): SearchResultsStateMachine<Issue> = SearchResultsStateMachine()
+    fun provideSearchUserResultsStateMachine(): SearchResultsStateMachine<User> = SearchResultsStateMachine()
 
     @Provides
-    fun provideSearchIssueResultsStoreStateMachineFactory(
-        stateMachine: SearchResultsStateMachine<Issue>,
-        processor: SearchResultsProcessor<Issue>
-    ): StoreFactory<SearchResultsIntent<Issue>,
-        SearchResultsAction<Issue>,
-        SearchResultsResult<Issue>,
-        SearchResultsViewState<Issue>,
-        SearchResultsEvent<Issue>> = StateMachineStoreFactory(stateMachine, processor)
+    fun provideSearchUserResultsStoreStateMachineFactory(
+        stateMachine: SearchResultsStateMachine<User>,
+        processor: SearchResultsProcessor<User>
+    ): StoreFactory<SearchResultsIntent<User>,
+        SearchResultsAction<User>,
+        SearchResultsResult<User>,
+        SearchResultsViewState<User>,
+        SearchResultsEvent<User>> = StateMachineStoreFactory(stateMachine, processor)
 
     @Provides
-    fun provideSearchIssueResultsProcessor(
-        stateMachine: SearchResultsStateMachine<Issue>,
-        searchUseCase: SearchUseCase<Issue>
-    ): SearchResultsProcessor<Issue> = SearchResultsProcessor(stateMachine, searchUseCase)
+    fun provideSearchUserResultsProcessor(
+        stateMachine: SearchResultsStateMachine<User>,
+        searchUseCase: SearchUseCase<User>
+    ): SearchResultsProcessor<User> = SearchResultsProcessor(stateMachine, searchUseCase)
 }

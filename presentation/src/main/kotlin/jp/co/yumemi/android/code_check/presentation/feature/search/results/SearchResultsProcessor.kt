@@ -1,7 +1,7 @@
 package jp.co.yumemi.android.code_check.presentation.feature.search.results
 
 import android.os.Parcelable
-import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
+import jp.co.yumemi.android.code_check.domain.usecases.SearchUseCase
 import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.utils.process
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.contract.SearchResultsAction
@@ -23,7 +23,7 @@ class SearchResultsProcessor<T : Parcelable>(
         SearchResultsViewState<T>,
         SearchResultsEvent<T>,
         SearchResultsSideEffect<T>>,
-    private val searchRepoUseCase: SearchRepoUseCase<T>
+    private val searchUseCase: SearchUseCase<T>
 ) : StateMachineProcessor<SearchResultsIntent<T>,
     SearchResultsAction<T>,
     SearchResultsResult<T>,
@@ -34,7 +34,7 @@ class SearchResultsProcessor<T : Parcelable>(
         sideEffect: SearchResultsSideEffect<T>,
         state: State<SearchResultsViewState<T>, SearchResultsEvent<T>>
     ): Flow<SearchResultsResult<T>?> = when (sideEffect) {
-        is SearchResultsSideEffect.Search -> searchRepoUseCase.execute(SearchRepoUseCase.Args(sideEffect.searchText, sideEffect.pageNumber)).process(
+        is SearchResultsSideEffect.Search -> searchUseCase.execute(SearchUseCase.Args(sideEffect.searchText, sideEffect.pageNumber)).process(
             onSuccess = { SearchResultsResult.SearchSuccess(it) },
             onError = { SearchResultsResult.SearchError(it) }
         )

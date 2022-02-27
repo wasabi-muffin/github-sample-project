@@ -26,7 +26,7 @@ class SearchRepositoryExecutorTest {
     private val searchRepository = mockk<SearchRepository>()
     private val errorHandler = mockk<ErrorHandler>()
     private val testException = Exception("test")
-    private val searchRepoUseCase = SearchRepositoryExecutor(searchRepository, errorHandler)
+    private val searchRepoUseCase = SearchRepositoriesExecutor(searchRepository, errorHandler)
 
     @Test
     fun `test when execute is successful`() {
@@ -52,7 +52,7 @@ class SearchRepositoryExecutorTest {
         )
 
         coroutineTestRule.runBlockingTest {
-            val result = searchRepoUseCase.execute(SearchRepoUseCase.Args("", 0))
+            val result = searchRepoUseCase.execute(SearchUseCase.Args("", 0))
             result.shouldBeTypeOf<DomainResult.Success<Pageable<Repository>>>()
             result.data.totalCount shouldBe 5
             result.data.items.size shouldBe 5
@@ -82,7 +82,7 @@ class SearchRepositoryExecutorTest {
         every { errorHandler.handleError(any()) } returns DomainError.Unknown(testException)
 
         coroutineTestRule.runBlockingTest {
-            val result = searchRepoUseCase.execute(SearchRepoUseCase.Args("", 0))
+            val result = searchRepoUseCase.execute(SearchUseCase.Args("", 0))
             result.shouldBeTypeOf<DomainResult.Failure>()
             result.error.shouldBeTypeOf<DomainError.Unknown>()
             result.error.throwable shouldBe testException

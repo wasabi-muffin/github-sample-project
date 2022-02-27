@@ -8,6 +8,7 @@ import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.entities.Issue
 import jp.co.yumemi.android.code_check.domain.entities.PullRequest
 import jp.co.yumemi.android.code_check.domain.entities.Repository
+import jp.co.yumemi.android.code_check.domain.entities.User
 import jp.co.yumemi.android.code_check.domain.repositories.RepositoriesRepository
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 import jp.co.yumemi.android.code_check.domain.usecases.ClearRecentSearchesExecutor
@@ -18,8 +19,9 @@ import jp.co.yumemi.android.code_check.domain.usecases.GetRepositoryDetailsExecu
 import jp.co.yumemi.android.code_check.domain.usecases.GetRepositoryDetailsUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.SearchIssuesExecutor
 import jp.co.yumemi.android.code_check.domain.usecases.SearchPullRequestsExecutor
-import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
-import jp.co.yumemi.android.code_check.domain.usecases.SearchRepositoryExecutor
+import jp.co.yumemi.android.code_check.domain.usecases.SearchUseCase
+import jp.co.yumemi.android.code_check.domain.usecases.SearchRepositoriesExecutor
+import jp.co.yumemi.android.code_check.domain.usecases.SearchUsersExecutor
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
@@ -28,19 +30,25 @@ class DomainModule {
     fun provideSearchRepositoryUseCase(
         searchRepository: SearchRepository,
         errorHandler: ErrorHandler
-    ): SearchRepoUseCase<Repository> = SearchRepositoryExecutor(searchRepository, errorHandler)
+    ): SearchUseCase<Repository> = SearchRepositoriesExecutor(searchRepository, errorHandler)
 
     @Provides
     fun provideSearchIssueUseCase(
         searchRepository: SearchRepository,
         errorHandler: ErrorHandler
-    ): SearchRepoUseCase<Issue> = SearchIssuesExecutor(searchRepository, errorHandler)
+    ): SearchUseCase<Issue> = SearchIssuesExecutor(searchRepository, errorHandler)
 
     @Provides
     fun provideSearchPullRequestUseCase(
         searchRepository: SearchRepository,
         errorHandler: ErrorHandler
-    ): SearchRepoUseCase<PullRequest> = SearchPullRequestsExecutor(searchRepository, errorHandler)
+    ): SearchUseCase<PullRequest> = SearchPullRequestsExecutor(searchRepository, errorHandler)
+
+    @Provides
+    fun provideSearchUserUseCase(
+        searchRepository: SearchRepository,
+        errorHandler: ErrorHandler
+    ): SearchUseCase<User> = SearchUsersExecutor(searchRepository, errorHandler)
 
     @Provides
     fun provideClearRecentSearchesUseCase(

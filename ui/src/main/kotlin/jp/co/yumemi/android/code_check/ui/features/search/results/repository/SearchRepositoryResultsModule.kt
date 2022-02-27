@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import jp.co.yumemi.android.code_check.domain.entities.Repository
-import jp.co.yumemi.android.code_check.domain.usecases.SearchRepoUseCase
+import jp.co.yumemi.android.code_check.domain.usecases.SearchUseCase
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.SearchResultsProcessor
 import jp.co.yumemi.android.code_check.presentation.feature.search.results.SearchResultsStateMachine
@@ -39,6 +39,6 @@ class SearchRepositoryResultsModule {
     @Provides
     fun provideSearchRepositoryResultsProcessor(
         stateMachine: SearchResultsStateMachine<Repository>,
-        searchRepoUseCase: SearchRepoUseCase<Repository>
-    ): SearchResultsProcessor<Repository> = SearchResultsProcessor(stateMachine, searchRepoUseCase)
+        searchUseCase: SearchUseCase<Repository>
+    ): SearchResultsProcessor<Repository> = SearchResultsProcessor(stateMachine, searchUseCase)
 }
