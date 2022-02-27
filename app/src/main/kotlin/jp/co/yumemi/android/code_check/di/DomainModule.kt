@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.entities.Issue
+import jp.co.yumemi.android.code_check.domain.entities.Organization
 import jp.co.yumemi.android.code_check.domain.entities.PullRequest
 import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.entities.User
@@ -18,9 +19,10 @@ import jp.co.yumemi.android.code_check.domain.usecases.GetRecentSearchesUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.GetRepositoryDetailsExecutor
 import jp.co.yumemi.android.code_check.domain.usecases.GetRepositoryDetailsUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.SearchIssuesExecutor
+import jp.co.yumemi.android.code_check.domain.usecases.SearchOrganizationsExecutor
 import jp.co.yumemi.android.code_check.domain.usecases.SearchPullRequestsExecutor
-import jp.co.yumemi.android.code_check.domain.usecases.SearchUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.SearchRepositoriesExecutor
+import jp.co.yumemi.android.code_check.domain.usecases.SearchUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.SearchUsersExecutor
 
 @Module
@@ -49,6 +51,12 @@ class DomainModule {
         searchRepository: SearchRepository,
         errorHandler: ErrorHandler
     ): SearchUseCase<User> = SearchUsersExecutor(searchRepository, errorHandler)
+
+    @Provides
+    fun provideSearchOrganizationUseCase(
+        searchRepository: SearchRepository,
+        errorHandler: ErrorHandler
+    ): SearchUseCase<Organization> = SearchOrganizationsExecutor(searchRepository, errorHandler)
 
     @Provides
     fun provideClearRecentSearchesUseCase(

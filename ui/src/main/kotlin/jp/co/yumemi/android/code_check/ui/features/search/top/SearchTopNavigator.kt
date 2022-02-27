@@ -8,4 +8,5 @@ class SearchTopNavigator(private val navController: NavController) {
     fun issueResults(searchText: String) = navController.navigate(SearchTopFragmentDirections.actionSearchTopToSearchIssueResults(searchText))
     fun pullRequestResults(searchText: String) = navController.navigate(SearchTopFragmentDirections.actionSearchTopToSearchPullRequestResults(searchText))
     fun userResults(searchText: String) = navController.navigate(SearchTopFragmentDirections.actionSearchTopToSearchUserResults(searchText))
+    fun organizationResults(searchText: String) = navController.navigate(SearchTopFragmentDirections.actionSearchTopToSearchOrganizationResults(searchText))
 }
