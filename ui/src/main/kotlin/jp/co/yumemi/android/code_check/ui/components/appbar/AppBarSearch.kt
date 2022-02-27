@@ -19,9 +19,7 @@ fun AppBarSearch(
     onSearchTextChanged: (String) -> Unit,
 ) = CommonAppBar(
     modifier = modifier,
-    navigationIcon = {
-        BackIcon(onClickBack = onClickBack)
-    },
+    navigationIcon = null,
 ) {
     SearchTextField(
         searchText = searchText,

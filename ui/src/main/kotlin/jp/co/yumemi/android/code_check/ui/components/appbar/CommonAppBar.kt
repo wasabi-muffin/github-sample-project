@@ -28,8 +28,10 @@ fun CommonAppBar(
     elevation = elevation,
     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
 ) {
-    navigationIcon?.invoke()
-    Spacer(modifier = Modifier.width(16.dp))
+    if (navigationIcon != null) {
+        navigationIcon()
+        Spacer(modifier = Modifier.width(16.dp))
+    }
     content()
 }
 

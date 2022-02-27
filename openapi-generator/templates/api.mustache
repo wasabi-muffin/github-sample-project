@@ -34,7 +34,7 @@ class HttpClient{{classname}}(private val httpClientProvider: HttpClientProvider
             url { encodedPath = path }
             method = HttpMethod.{{#lambda.titlecase}}{{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}{{/lambda.titlecase}}{{#bodyParams}}
             body = request{{/bodyParams}}{{#queryParams}}
-            parameter("{{paramName}}", {{paramName}}){{/queryParams}}
+            parameter("{{#lambda.snakecase}}{{paramName}}{{/lambda.snakecase}}", {{paramName}}){{/queryParams}}
         }
     }
 

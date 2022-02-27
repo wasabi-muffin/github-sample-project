@@ -198,9 +198,9 @@ class HttpClientOauthAuthorizationsApi(private val httpClientProvider: HttpClien
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
-            parameter("clientId", clientId)
+            parameter("client_id", clientId)
         }
     }
 
@@ -210,9 +210,9 @@ class HttpClientOauthAuthorizationsApi(private val httpClientProvider: HttpClien
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
-            parameter("clientId", clientId)
+            parameter("client_id", clientId)
         }
     }
 

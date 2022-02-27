@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import jp.co.yumemi.android.code_check.domain.usecases.ClearRecentSearchesUseCase
 import jp.co.yumemi.android.code_check.domain.usecases.GetRecentSearchesUseCase
+import jp.co.yumemi.android.code_check.domain.usecases.SearchAllUseCase
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
 import jp.co.yumemi.android.code_check.presentation.feature.search.top.SearchTopProcessor
 import jp.co.yumemi.android.code_check.presentation.feature.search.top.SearchTopStateMachine
@@ -39,5 +40,6 @@ class SearchTopModule {
         stateMachine: SearchTopStateMachine,
         clearRecentSearchesUseCase: ClearRecentSearchesUseCase,
         getRecentSearchesUseCase: GetRecentSearchesUseCase,
-    ): SearchTopProcessor = SearchTopProcessor(stateMachine, clearRecentSearchesUseCase, getRecentSearchesUseCase)
+        searchAllUseCase: SearchAllUseCase,
+    ): SearchTopProcessor = SearchTopProcessor(stateMachine, clearRecentSearchesUseCase, getRecentSearchesUseCase, searchAllUseCase)
 }

@@ -399,7 +399,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("content", content)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -411,7 +411,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("content", content)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -423,7 +423,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("content", content)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -435,7 +435,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("content", content)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -447,7 +447,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("content", content)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -459,7 +459,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("content", content)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -471,7 +471,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("content", content)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -483,7 +483,7 @@ class HttpClientReactionsApi(private val httpClientProvider: HttpClientProvider)
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("content", content)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }

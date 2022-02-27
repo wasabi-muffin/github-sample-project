@@ -70,7 +70,7 @@ interface SearchApi {
     *
     * @return InlineResponse20028ApiModel
     */
-    suspend fun searchRepositories(accessToken: String? = null, q: kotlin.String? = null, sort: kotlin.String? = null, order: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20028ApiModel
+    suspend fun searchRepos(accessToken: String? = null, q: kotlin.String? = null, sort: kotlin.String? = null, order: kotlin.String? = null, perPage: kotlin.Int? = null, page: kotlin.Int? = null): InlineResponse20028ApiModel
 
     /**
     * Search topics
@@ -104,7 +104,7 @@ class HttpClientSearchApi(private val httpClientProvider: HttpClientProvider) : 
             parameter("q", q)
             parameter("sort", sort)
             parameter("order", order)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -118,7 +118,7 @@ class HttpClientSearchApi(private val httpClientProvider: HttpClientProvider) : 
             parameter("q", q)
             parameter("sort", sort)
             parameter("order", order)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -132,7 +132,7 @@ class HttpClientSearchApi(private val httpClientProvider: HttpClientProvider) : 
             parameter("q", q)
             parameter("sort", sort)
             parameter("order", order)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -143,16 +143,16 @@ class HttpClientSearchApi(private val httpClientProvider: HttpClientProvider) : 
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("repositoryId", repositoryId)
+            parameter("repository_id", repositoryId)
             parameter("q", q)
             parameter("sort", sort)
             parameter("order", order)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
 
-    override suspend fun searchRepositories(accessToken: String?, q: kotlin.String?, sort: kotlin.String?, order: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20028ApiModel {
+    override suspend fun searchRepos(accessToken: String?, q: kotlin.String?, sort: kotlin.String?, order: kotlin.String?, perPage: kotlin.Int?, page: kotlin.Int?): InlineResponse20028ApiModel {
         val path = "/search/repositories"
 
         return httpClient.request {
@@ -161,7 +161,7 @@ class HttpClientSearchApi(private val httpClientProvider: HttpClientProvider) : 
             parameter("q", q)
             parameter("sort", sort)
             parameter("order", order)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -173,7 +173,7 @@ class HttpClientSearchApi(private val httpClientProvider: HttpClientProvider) : 
             url { encodedPath = path }
             method = HttpMethod.Get
             parameter("q", q)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -187,7 +187,7 @@ class HttpClientSearchApi(private val httpClientProvider: HttpClientProvider) : 
             parameter("q", q)
             parameter("sort", sort)
             parameter("order", order)
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }

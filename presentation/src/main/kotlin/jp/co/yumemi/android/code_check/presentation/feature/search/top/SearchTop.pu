@@ -10,6 +10,7 @@ state Search {
 
     state Stable {
         Stable : I.InputSearchText > A.UpdateSearchText > R.UpdateSearchText
+        Stable --> Stable : R.RecentSearches
 
         state Stable.EmptySearch {
             Stable.EmptySearch : I.ClickClearRecentSearches > A.ClearRecentSearches > R.ClearRecentSearches
@@ -22,8 +23,33 @@ state Search {
         state Stable.NonEmptySearch {
             Stable.NonEmptySearch : I.ClickItem(type) > A.NavigateSearch(type) > E.NavigateSearch(type)
             Stable.NonEmptySearch : I.ClickClearSearchText > A.UpdateSearchText > R.UpdateSearchText, SE.RecentSearches[R.RecentSearches]
+            Stable.NonEmptySearch : I.ClickSearch > A.LoadSearch > R.Loading, SE.LoadSearch[R.LoadSearchSuccess, R.LoadSearchError]
 
             Stable.NonEmptySearch --> Stable.EmptySearch : R.UpdateSearchText
+            Stable.NonEmptySearch --> Stable.Search.Loading : R.Loading
+        }
+
+        state Stable.Search {
+            Stable.Search : I.ClickClearSearchText > A.UpdateSearchText > R.UpdateSearchText, SE.RecentSearches[R.RecentSearches]
+
+            Stable.Search --> Stable.NonEmptySearch : R.UpdateSearchText
+            Stable.Search --> Stable.EmptySearch : R.UpdateSearchText{empty}
+
+            state Stable.Search.Loading {
+                Stable.Search.Loading --> Stable.Search.Success : R.LoadSearchSuccess
+                Stable.Search.Loading --> Stable.Search.Error : R.SearchError
+            }
+
+            state Stable.Search.Success {
+                Stable.Search.Success : I.Click{Type}Result > A.Navigate{Type}Details > E.Navigate{Type}Details
+                Stable.Search.Success : I.ClickSeeAll(type) > A.NavigateSearch(type) > E.NavigateSearch(type)
+            }
+
+            state Stable.Search.Error {
+                Stable.Search.Error : I.ClickTryAgain : A.LoadSearch > R.Loading, SE.LoadSearch[R.LoadSearchSuccess, R.LoadSearchError]
+
+                Stable.Search.Error --> Stable.Search.Loading : R.Loading
+            }
         }
     }
 }

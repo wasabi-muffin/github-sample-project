@@ -25,7 +25,7 @@ class SearchRemoteDataProviderTest {
     @Test
     fun `test when search is successful`() {
         coEvery {
-            searchApi.searchRepositories(any(), any(), any(), any(), any(), any())
+            searchApi.searchRepos(any(), any(), any(), any(), any(), any())
         } returns InlineResponse20028ApiModel(
             totalCount = 5,
             incompleteResults = false,
@@ -128,14 +128,14 @@ class SearchRemoteDataProviderTest {
             result.repos.forEachIndexed { index, repo ->
                 repo.name shouldBe "name$index"
             }
-            coVerify { searchApi.searchRepositories(accessToken = "", q = "", page = 0) }
+            coVerify { searchApi.searchRepos(accessToken = "", q = "", page = 0, perPage = any()) }
         }
     }
 
     @Test
     fun `test when api throws an error`() {
         coEvery {
-            searchApi.searchRepositories(any(), any(), any(), any(), any(), any())
+            searchApi.searchRepos(any(), any(), any(), any(), any(), any())
         } throws testException
 
         coroutineTestRule.runBlockingTest {
@@ -144,7 +144,7 @@ class SearchRemoteDataProviderTest {
             }.exceptionOrNull()
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
-            coVerify { searchApi.searchRepositories(accessToken = "", q = "", page = 0) }
+            coVerify { searchApi.searchRepos(accessToken = "", q = "", page = 0, perPage = any()) }
         }
     }
 }

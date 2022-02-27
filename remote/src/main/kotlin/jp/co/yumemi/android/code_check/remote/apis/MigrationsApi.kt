@@ -335,7 +335,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -346,7 +346,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
             parameter("exclude", exclude)
         }
@@ -358,7 +358,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }
@@ -369,7 +369,7 @@ class HttpClientMigrationsApi(private val httpClientProvider: HttpClientProvider
         return httpClient.request {
             url { encodedPath = path }
             method = HttpMethod.Get
-            parameter("perPage", perPage)
+            parameter("per_page", perPage)
             parameter("page", page)
         }
     }

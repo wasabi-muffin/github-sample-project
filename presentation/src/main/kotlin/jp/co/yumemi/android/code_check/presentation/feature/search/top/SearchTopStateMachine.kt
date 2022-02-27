@@ -45,22 +45,97 @@ class SearchTopStateMachine : StateMachine<SearchTopIntent, SearchTopAction, Sea
             }
             reduce<SearchTopResult.RecentSearches> { copy(recentSearches = it.data) }
             reduce<SearchTopResult.ClearRecentSearches> { SearchTopViewState.Stable.EmptySearch(recentSearches = emptyList()) }
-            reduce<SearchTopResult.UpdateSearchText> { SearchTopViewState.Stable.NonEmptySearch(searchText = it.text, recentSearches = recentSearches) }
+            reduce<SearchTopResult.UpdateSearchText> {
+                SearchTopViewState.Stable.NonEmptySearch(
+                    searchText = it.text,
+                    recentSearches = recentSearches
+                )
+            }
         }
 
         state<SearchTopViewState.Stable.NonEmptySearch> {
             interpret<SearchTopIntent.ClickItem> { SearchTopAction.NavigateSearch(it.type) }
             interpret<SearchTopIntent.ClickClearSearchText> { SearchTopAction.UpdateSearchText("") }
+            interpret<SearchTopIntent.ClickSearch> { SearchTopAction.LoadSearch }
             process<SearchTopAction.NavigateSearch> {
                 result { SearchTopResult.SendEvent(SearchTopEvent.NavigateSearch(it.type, searchText)) }
+            }
+            process<SearchTopAction.LoadSearch> {
+                result { SearchTopResult.Loading }
+                sideEffect { SearchTopSideEffect.SearchAll(searchText) }
+            }
+            reduce<SearchTopResult.Loading> {
+                SearchTopViewState.Stable.Search.Loading(
+                    recentSearches = recentSearches,
+                    searchText = searchText
+                )
             }
             reduce<SearchTopResult.RecentSearches> { copy(recentSearches = it.data) }
             reduce<SearchTopResult.UpdateSearchText> {
                 if (it.text.isEmpty()) {
                     SearchTopViewState.Stable.EmptySearch(recentSearches = recentSearches)
                 } else {
-                    SearchTopViewState.Stable.NonEmptySearch(searchText = it.text, recentSearches = recentSearches)
+                    SearchTopViewState.Stable.NonEmptySearch(
+                        searchText = it.text,
+                        recentSearches = recentSearches
+                    )
                 }
+            }
+        }
+
+        state<SearchTopViewState.Stable.Search> {
+            interpret<SearchTopIntent.ClickClearSearchText> { SearchTopAction.UpdateSearchText("") }
+            reduce<SearchTopResult.UpdateSearchText> {
+                if (it.text.isEmpty()) {
+                    SearchTopViewState.Stable.EmptySearch(recentSearches = recentSearches)
+                } else {
+                    SearchTopViewState.Stable.NonEmptySearch(
+                        searchText = it.text,
+                        recentSearches = recentSearches
+                    )
+                }
+            }
+        }
+
+        state<SearchTopViewState.Stable.Search.Loading> {
+            reduce<SearchTopResult.LoadSearchSuccess> {
+                SearchTopViewState.Stable.Search.Success(
+                    recentSearches = recentSearches,
+                    searchText = searchText,
+                    searchResults = it.results
+                )
+            }
+            reduce<SearchTopResult.LoadSearchError> {
+                SearchTopViewState.Stable.Search.Error(
+                    recentSearches = recentSearches,
+                    searchText = searchText,
+                    error = it.error
+                )
+            }
+        }
+
+        state<SearchTopViewState.Stable.Search.Success> {
+            interpret<SearchTopIntent.ClickRepositoryResult> { SearchTopAction.NavigateRepositoryDetails(it.repository) }
+            interpret<SearchTopIntent.ClickSeeAll> { SearchTopAction.NavigateSearch(it.searchType) }
+            process<SearchTopAction.NavigateRepositoryDetails> {
+                result { SearchTopResult.SendEvent(SearchTopEvent.NavigateRepositoryDetails(it.repository)) }
+            }
+            process<SearchTopAction.NavigateSearch> {
+                result { SearchTopResult.SendEvent(SearchTopEvent.NavigateSearch(it.type, searchText)) }
+            }
+        }
+
+        state<SearchTopViewState.Stable.Search.Error> {
+            interpret<SearchTopIntent.ClickTryAgain> { SearchTopAction.LoadSearch }
+            process<SearchTopAction.LoadSearch> {
+                result { SearchTopResult.Loading }
+                sideEffect { SearchTopSideEffect.SearchAll(searchText) }
+            }
+            reduce<SearchTopResult.Loading> {
+                SearchTopViewState.Stable.Search.Loading(
+                    recentSearches = recentSearches,
+                    searchText = searchText
+                )
             }
         }
     }
