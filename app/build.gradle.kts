@@ -42,6 +42,7 @@ dependencies {
 
     // KotlinX
     implementation(Dependencies.Kotlinx.coroutinesAndroid)
+    implementation(Dependencies.Kotlinx.datetime)
 
     // Ktor
     implementation(Dependencies.Ktor.clientAndroid)
