@@ -51,6 +51,8 @@ fun Project.setupAndroid() {
 
     setupAndroidApp()
     setupAndroidLibrary()
+    setupLinter()
+    setupTestCoverage()
 }
 
 private fun Project.setupAndroidApp() {
