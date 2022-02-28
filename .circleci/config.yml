@@ -103,7 +103,7 @@ jobs:
       - danger:
           path: ./Dangerfile-Test
       - store_test_results:
-          path: build/reports/kover/
+          path: ~/test-results
 
   deploy:
     executor:
