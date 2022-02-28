@@ -10,8 +10,8 @@ import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.core.Pageable
-import jp.co.yumemi.android.code_check.domain.entities.Issue
 import jp.co.yumemi.android.code_check.domain.entities.DefaultEntity
+import jp.co.yumemi.android.code_check.domain.entities.Issue
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
 import jp.co.yumemi.android.code_check.test.runBlockingTest
