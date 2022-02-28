@@ -30,6 +30,7 @@ commands:
       path:
         type: string
         description: Dangerfile
+        default: ./Dangerfile
     steps:
       - restore_cache:
           <<: *gem_cache_key
@@ -43,6 +44,17 @@ commands:
       - restore_cache:
           <<: *ssh_cache_key
       - run: bundle exec danger --dangerfile=<< parameters.path >> --danger_id=<< parameters.path >>
+  save_test_results:
+    description: Save test results
+    steps:
+      - run:
+          name: Merge test result
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/test-results
 
 jobs:
   build_workspace:
@@ -85,8 +97,7 @@ jobs:
       - gradle:
           title: ktLint
           task: ktlintCheck
-      - danger:
-          path: ./Dangerfile-Lint
+      - danger
 
   unit_test:
     executor:
@@ -103,9 +114,7 @@ jobs:
           task: koverMergedXmlReport
       - codecov/upload:
           file: ./build/reports/kover/report.xml
-#      - danger:
-#          path: ./Dangerfile-Test
-      - store_test_results:
+      - save_test_results:
           path: ~/test-results
 
   deploy:
