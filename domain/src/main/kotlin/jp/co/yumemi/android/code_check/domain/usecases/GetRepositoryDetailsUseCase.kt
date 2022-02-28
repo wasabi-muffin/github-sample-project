@@ -21,9 +21,21 @@ class GetRepositoryDetailsExecutor(
 ) : GetRepositoryDetailsUseCase {
     override suspend fun execute(arguments: GetRepositoryDetailsUseCase.Args): DomainResult<RepositoryDetails> = runHandling(errorHandler) {
         val (contributors, releases, pullRequests) = coroutineScope {
-            val contributors = async { repositoriesRepository.getContributors(name = arguments.repo.name) }
-            val releases = async { repositoriesRepository.getReleases(name = arguments.repo.name) }
-            val pullRequests = async { repositoriesRepository.getPulls(name = arguments.repo.name) }
+            val contributors = async {
+                runCatching {
+                    repositoriesRepository.getContributors(name = arguments.repo.name)
+                }.getOrNull()
+            }
+            val releases = async {
+                runCatching {
+                    repositoriesRepository.getReleases(name = arguments.repo.name)
+                }.getOrNull()
+            }
+            val pullRequests = async {
+                runCatching {
+                    repositoriesRepository.getPulls(name = arguments.repo.name)
+                }.getOrNull()
+            }
             Triple(contributors.await(), releases.await(), pullRequests.await())
         }
         RepositoryDetails(repository = arguments.repo, releases = releases, contributors = contributors, pullRequests = pullRequests)
