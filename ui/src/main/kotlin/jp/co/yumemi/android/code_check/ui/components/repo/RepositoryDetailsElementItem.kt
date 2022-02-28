@@ -17,7 +17,7 @@ import jp.co.yumemi.android.code_check.ui.utils.label
 import jp.co.yumemi.android.code_check.ui.utils.note
 
 @Composable
-fun RepoDetailsElementItem(
+fun RepositoryDetailsElementItem(
     repoDetails: RepositoryDetails,
     element: RepositoryDetails.Element,
     modifier: Modifier = Modifier
@@ -32,9 +32,9 @@ fun RepoDetailsElementItem(
 
 @Preview
 @Composable
-fun Preview_RepoDetailsElementItem() {
+fun Preview_RepositoryDetailsElementItem() {
     GithubTheme {
-        RepoDetailsElementItem(
+        RepositoryDetailsElementItem(
             repoDetails = RepositoryDetails(
                 repository = Repository(
                     id = 0,

@@ -33,10 +33,11 @@
     // Search Top
     <string name="search_top_recent_searches">Recent searches</string>
     <string name="search_top_search_with">%s with %s</string>
-    <string name="seach_top_jump_to">Jump to %s</string>
+    <string name="search_top_jump_to">Jump to %s</string>
     <string name="search_top_see_more">See %s more %s</string>
 
     // TODO: Replace placeholders
     <string name="placeholder_error_title_unknown">Error Title</string>
     <string name="placeholder_error_description_unknown">Error Description</string>
+    <string name="error_not_implemented">Not yet implemented</string>
 </resources>

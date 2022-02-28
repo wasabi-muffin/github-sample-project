@@ -26,8 +26,8 @@ import jp.co.yumemi.android.code_check.ui.components.error.ErrorFullscreen
 import jp.co.yumemi.android.code_check.ui.components.error.ErrorOkDialog
 import jp.co.yumemi.android.code_check.ui.components.error.description
 import jp.co.yumemi.android.code_check.ui.components.error.title
-import jp.co.yumemi.android.code_check.ui.components.repo.RepoDetailsElementItem
-import jp.co.yumemi.android.code_check.ui.components.repo.RepoDetailsHeader
+import jp.co.yumemi.android.code_check.ui.components.repo.RepositoryDetailsElementItem
+import jp.co.yumemi.android.code_check.ui.components.repo.RepositoryDetailsHeader
 import jp.co.yumemi.android.code_check.ui.core.Contract
 import jp.co.yumemi.android.code_check.ui.core.handle
 import jp.co.yumemi.android.code_check.ui.core.render
@@ -87,14 +87,14 @@ fun RepoDetailsScreen(
                                 .verticalScroll(scrollState)
                                 .fillMaxSize()
                         ) {
-                            RepoDetailsHeader(repository = state.details.repository)
+                            RepositoryDetailsHeader(repository = state.details.repository)
                             Divider()
-                            RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Issues)
-                            RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.PullRequests)
-                            RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Releases)
-                            RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Contributors)
-                            RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Watchers)
-                            RepoDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.License)
+                            RepositoryDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Issues)
+                            RepositoryDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.PullRequests)
+                            RepositoryDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Releases)
+                            RepositoryDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Contributors)
+                            RepositoryDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.Watchers)
+                            RepositoryDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.License)
                         }
                     }
                     state.render<RepoDetailsViewState.Stable.RefreshError> {

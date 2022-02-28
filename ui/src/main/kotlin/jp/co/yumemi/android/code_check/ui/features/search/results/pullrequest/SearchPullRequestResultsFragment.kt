@@ -17,6 +17,7 @@ import jp.co.yumemi.android.code_check.ui.components.search.SearchPullRequestRes
 import jp.co.yumemi.android.code_check.ui.core.contract
 import jp.co.yumemi.android.code_check.ui.features.search.results.SearchResultsScreen
 import jp.co.yumemi.android.code_check.ui.utils.compose
+import jp.co.yumemi.android.code_check.ui.utils.notImplemented
 
 @AndroidEntryPoint
 class SearchPullRequestResultsFragment : Fragment() {
@@ -37,8 +38,8 @@ class SearchPullRequestResultsFragment : Fragment() {
                 contract = contract(viewModel.store),
                 navigator = SearchPullRequestResultsNavigator(findNavController()),
                 title = R.string.common_pull_requests,
-            ) { item, onClick ->
-                SearchPullRequestResultItem(pullRequest = item, modifier = Modifier.clickable { onClick(item) })
+            ) { item, _ ->
+                SearchPullRequestResultItem(pullRequest = item, modifier = Modifier.clickable { notImplemented(requireContext()) })
             }
         }
     }

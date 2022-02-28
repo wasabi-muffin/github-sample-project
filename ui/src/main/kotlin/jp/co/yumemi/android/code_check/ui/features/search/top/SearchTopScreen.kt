@@ -1,7 +1,7 @@
 package jp.co.yumemi.android.code_check.ui.features.search.top
 
 import android.os.Parcelable
-import android.util.Log
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,11 +17,10 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toLowerCase
@@ -48,12 +47,14 @@ import jp.co.yumemi.android.code_check.ui.core.Contract
 import jp.co.yumemi.android.code_check.ui.core.handle
 import jp.co.yumemi.android.code_check.ui.primitives.Github
 import jp.co.yumemi.android.code_check.ui.primitives.Gray
+import jp.co.yumemi.android.code_check.ui.utils.notImplemented
 import jp.co.yumemi.android.code_check.ui.utils.toShortedString
 
 @Composable
 fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, SearchTopEvent>, navigator: SearchTopNavigator) {
     val (state, events, dispatch) = contract
     val focusManager = LocalFocusManager.current
+    val context = LocalContext.current
 
     events?.handle(
         process = { dispatch(SearchTopIntent.ProcessEvent(it)) }
@@ -67,7 +68,7 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
                 SearchType.PullRequests -> navigator.pullRequestResults(event.searchText)
                 SearchType.People -> navigator.userResults(event.searchText)
                 SearchType.Organization -> navigator.organizationResults(event.searchText)
-                SearchType.JumpTo -> Log.d("NavigateSearch", "JumpTo ${event.searchText}") // TODO: Add Screen
+                SearchType.JumpTo -> notImplemented(context)
             }
         }
     }
