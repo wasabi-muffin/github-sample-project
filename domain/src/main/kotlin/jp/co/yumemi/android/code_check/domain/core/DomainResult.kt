@@ -15,7 +15,7 @@ sealed class DomainResult<out R> {
  */
 fun <T> Result<T>.toDomainResult(errorHandler: ErrorHandler) = this.fold(
     onSuccess = { DomainResult.Success(it) },
-    onFailure = { DomainResult.Failure(errorHandler.handleError(it)) }
+    onFailure = { DomainResult.Failure(errorHandler.handle(it)) }
 )
 
 fun <T> DomainResult<T>.successOrNull() = when (this) {

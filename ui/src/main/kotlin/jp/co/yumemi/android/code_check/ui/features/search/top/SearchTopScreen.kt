@@ -1,7 +1,6 @@
 package jp.co.yumemi.android.code_check.ui.features.search.top
 
 import android.os.Parcelable
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,6 +32,8 @@ import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.
 import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.components.appbar.AppBarSearch
 import jp.co.yumemi.android.code_check.ui.components.error.ErrorFullscreen
+import jp.co.yumemi.android.code_check.ui.components.error.description
+import jp.co.yumemi.android.code_check.ui.components.error.title
 import jp.co.yumemi.android.code_check.ui.components.list.CommonListSectionHeader
 import jp.co.yumemi.android.code_check.ui.components.search.RecentSearchHeader
 import jp.co.yumemi.android.code_check.ui.components.search.RecentSearchItem
@@ -189,7 +190,7 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
                 }
             }
             is SearchTopViewState.Stable.Search.Error -> {
-                ErrorFullscreen(title = stringResource(R.string.common_empty_content))
+                ErrorFullscreen(state.error)
             }
         }
     }

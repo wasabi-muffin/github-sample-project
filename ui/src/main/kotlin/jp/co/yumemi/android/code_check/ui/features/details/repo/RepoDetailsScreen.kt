@@ -24,8 +24,6 @@ import jp.co.yumemi.android.code_check.ui.components.appbar.BackIcon
 import jp.co.yumemi.android.code_check.ui.components.appbar.TitleAppBar
 import jp.co.yumemi.android.code_check.ui.components.error.ErrorFullscreen
 import jp.co.yumemi.android.code_check.ui.components.error.ErrorOkDialog
-import jp.co.yumemi.android.code_check.ui.components.error.description
-import jp.co.yumemi.android.code_check.ui.components.error.title
 import jp.co.yumemi.android.code_check.ui.components.repo.RepositoryDetailsElementItem
 import jp.co.yumemi.android.code_check.ui.components.repo.RepositoryDetailsHeader
 import jp.co.yumemi.android.code_check.ui.core.Contract
@@ -75,7 +73,7 @@ fun RepoDetailsScreen(
                     }
                 }
                 is RepoDetailsViewState.Error -> {
-                    ErrorFullscreen(title = stringResource(id = state.error.title())) { dispatch(RepoDetailsIntent.ClickTryAgain) }
+                    ErrorFullscreen(error = state.error) { dispatch(RepoDetailsIntent.ClickTryAgain) }
                 }
                 is RepoDetailsViewState.Stable -> {
                     SwipeRefresh(
@@ -98,7 +96,7 @@ fun RepoDetailsScreen(
                         }
                     }
                     state.render<RepoDetailsViewState.Stable.RefreshError> {
-                        ErrorOkDialog(title = stringResource(id = it.error.title()), description = stringResource(id = it.error.description())) {
+                        ErrorOkDialog(error = it.error) {
                             dispatch(RepoDetailsIntent.ClickErrorOk)
                         }
                     }

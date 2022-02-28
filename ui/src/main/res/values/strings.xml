@@ -36,8 +36,11 @@
     <string name="search_top_jump_to">Jump to %s</string>
     <string name="search_top_see_more">See %s more %s</string>
 
-    // TODO: Replace placeholders
-    <string name="placeholder_error_title_unknown">Error Title</string>
-    <string name="placeholder_error_description_unknown">Error Description</string>
+    // Errors
+    <string name="error_network_title">No network connection</string>
+    <string name="error_maintenance_title">Under maintenance</string>
+    <string name="error_server_title">A server error has occurred</string>
+    <string name="error_unknown_title">An unknown error has occurred</string>
+    <string name="error_try_again_later">Please try again later</string>
     <string name="error_not_implemented">Not yet implemented</string>
 </resources>

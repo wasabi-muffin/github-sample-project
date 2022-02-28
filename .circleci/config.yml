@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   android: circleci/android@1.0.3
+  codecov: codecov/codecov@3.2.2
   
 references:
   home: &home
@@ -100,10 +101,12 @@ jobs:
       - gradle:
           title: code coverage
           task: koverMergedXmlReport
-      - danger:
-          path: ./Dangerfile-Test
+      - codecov/upload:
+          file: ./build/reports/kover/report.xml
+#      - danger:
+#          path: ./Dangerfile-Test
       - store_test_results:
-          path: build/reports/kover/
+          path: ~/test-results
 
   deploy:
     executor:

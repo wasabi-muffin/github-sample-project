@@ -3,6 +3,7 @@ package jp.co.yumemi.android.code_check.domain.usecases
 import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.core.UseCase
+import jp.co.yumemi.android.code_check.domain.core.runHandling
 import jp.co.yumemi.android.code_check.domain.core.toDomainResult
 import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.entities.RepositoryDetails
@@ -18,7 +19,7 @@ class GetRepositoryDetailsExecutor(
     private val repositoriesRepository: RepositoriesRepository,
     private val errorHandler: ErrorHandler,
 ) : GetRepositoryDetailsUseCase {
-    override suspend fun execute(arguments: GetRepositoryDetailsUseCase.Args): DomainResult<RepositoryDetails> = runCatching {
+    override suspend fun execute(arguments: GetRepositoryDetailsUseCase.Args): DomainResult<RepositoryDetails> = runHandling(errorHandler) {
         val (contributors, releases, pullRequests) = coroutineScope {
             val contributors = async { repositoriesRepository.getContributors(name = arguments.repo.name) }
             val releases = async { repositoriesRepository.getReleases(name = arguments.repo.name) }
@@ -26,5 +27,5 @@ class GetRepositoryDetailsExecutor(
             Triple(contributors.await(), releases.await(), pullRequests.await())
         }
         RepositoryDetails(repository = arguments.repo, releases = releases, contributors = contributors, pullRequests = pullRequests)
-    }.toDomainResult(errorHandler)
+    }
 }

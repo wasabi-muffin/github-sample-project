@@ -24,8 +24,6 @@ import jp.co.yumemi.android.code_check.ui.components.appbar.BackIcon
 import jp.co.yumemi.android.code_check.ui.components.appbar.TitleAppBar
 import jp.co.yumemi.android.code_check.ui.components.error.ErrorFullscreen
 import jp.co.yumemi.android.code_check.ui.components.error.ErrorOkDialog
-import jp.co.yumemi.android.code_check.ui.components.error.description
-import jp.co.yumemi.android.code_check.ui.components.error.title
 import jp.co.yumemi.android.code_check.ui.components.paging.PagingColumn
 import jp.co.yumemi.android.code_check.ui.core.Contract
 import jp.co.yumemi.android.code_check.ui.core.handle
@@ -82,7 +80,7 @@ fun <T : Parcelable> SearchResultsScreen(
                     }
                 }
                 is SearchResultsViewState.Error -> {
-                    ErrorFullscreen(title = stringResource(id = state.error.title())) { dispatch(SearchResultsIntent.ClickTryAgain()) }
+                    ErrorFullscreen(error = state.error) { dispatch(SearchResultsIntent.ClickTryAgain()) }
                 }
                 is SearchResultsViewState.Stable -> {
                     SwipeRefresh(
@@ -106,7 +104,7 @@ fun <T : Parcelable> SearchResultsScreen(
                         }
                     }
                     state.render<SearchResultsViewState.Stable.RefreshError<T>> {
-                        ErrorOkDialog(title = stringResource(id = it.error.title()), description = stringResource(id = it.error.description())) {
+                        ErrorOkDialog(error = it.error) {
                             dispatch(SearchResultsIntent.ClickErrorOk())
                         }
                     }

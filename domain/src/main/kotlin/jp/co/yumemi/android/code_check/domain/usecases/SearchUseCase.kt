@@ -5,6 +5,7 @@ import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.core.Pageable
 import jp.co.yumemi.android.code_check.domain.core.UseCase
+import jp.co.yumemi.android.code_check.domain.core.runHandling
 import jp.co.yumemi.android.code_check.domain.core.toDomainResult
 import jp.co.yumemi.android.code_check.domain.entities.Issue
 import jp.co.yumemi.android.code_check.domain.entities.Organization
@@ -23,9 +24,9 @@ class SearchRepositoriesExecutor(
 ) : SearchUseCase<Repository> {
     override suspend fun execute(
         arguments: SearchUseCase.Args
-    ): DomainResult<Pageable<Repository>> = runCatching {
+    ): DomainResult<Pageable<Repository>> = runHandling(errorHandler) {
         searchRepository.searchRepositories(arguments.searchText, arguments.pageNumber)
-    }.toDomainResult(errorHandler)
+    }
 }
 
 class SearchIssuesExecutor(
@@ -34,9 +35,9 @@ class SearchIssuesExecutor(
 ) : SearchUseCase<Issue> {
     override suspend fun execute(
         arguments: SearchUseCase.Args
-    ): DomainResult<Pageable<Issue>> = runCatching {
+    ): DomainResult<Pageable<Issue>> = runHandling(errorHandler) {
         searchRepository.searchIssues(arguments.searchText, arguments.pageNumber)
-    }.toDomainResult(errorHandler)
+    }
 }
 
 class SearchPullRequestsExecutor(
@@ -45,9 +46,9 @@ class SearchPullRequestsExecutor(
 ) : SearchUseCase<PullRequest> {
     override suspend fun execute(
         arguments: SearchUseCase.Args
-    ): DomainResult<Pageable<PullRequest>> = runCatching {
+    ): DomainResult<Pageable<PullRequest>> = runHandling(errorHandler) {
         searchRepository.searchPullRequests(arguments.searchText, arguments.pageNumber)
-    }.toDomainResult(errorHandler)
+    }
 }
 
 class SearchUsersExecutor(
@@ -56,9 +57,9 @@ class SearchUsersExecutor(
 ) : SearchUseCase<User> {
     override suspend fun execute(
         arguments: SearchUseCase.Args
-    ): DomainResult<Pageable<User>> = runCatching {
+    ): DomainResult<Pageable<User>> = runHandling(errorHandler) {
         searchRepository.searchUsers(arguments.searchText, arguments.pageNumber)
-    }.toDomainResult(errorHandler)
+    }
 }
 
 class SearchOrganizationsExecutor(
@@ -67,7 +68,7 @@ class SearchOrganizationsExecutor(
 ) : SearchUseCase<Organization> {
     override suspend fun execute(
         arguments: SearchUseCase.Args
-    ): DomainResult<Pageable<Organization>> = runCatching {
+    ): DomainResult<Pageable<Organization>> = runHandling(errorHandler) {
         searchRepository.searchOrganizations(arguments.searchText, arguments.pageNumber)
-    }.toDomainResult(errorHandler)
+    }
 }

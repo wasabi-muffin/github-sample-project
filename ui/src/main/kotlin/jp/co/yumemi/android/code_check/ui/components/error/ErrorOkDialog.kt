@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.primitives.Blue
 import jp.co.yumemi.android.code_check.ui.primitives.GithubTheme
@@ -46,6 +47,19 @@ fun ErrorOkDialog(
             )
         }
     }
+)
+
+@Composable
+fun ErrorOkDialog(
+    error: DomainError,
+    description: String? = null,
+    canDismiss: Boolean = false,
+    onClickOk: () -> Unit,
+) = ErrorOkDialog(
+    title = stringResource(id = error.title()),
+    description = error.description()?.let { stringResource(id = it) },
+    canDismiss = canDismiss,
+    onClickOk = onClickOk
 )
 
 @Preview

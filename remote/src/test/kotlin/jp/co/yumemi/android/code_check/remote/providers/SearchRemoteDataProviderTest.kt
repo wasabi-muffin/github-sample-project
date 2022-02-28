@@ -4,7 +4,10 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeTypeOf
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.mockk
+import jp.co.yumemi.android.code_check.data.error.DataException
+import jp.co.yumemi.android.code_check.data.error.ExceptionHandler
 import jp.co.yumemi.android.code_check.remote.apis.SearchApi
 import jp.co.yumemi.android.code_check.remote.models.InlineResponse20028ApiModel
 import jp.co.yumemi.android.code_check.remote.models.RepoMinusSearchMinusResultMinusItemApiModel
@@ -19,7 +22,8 @@ class SearchRemoteDataProviderTest {
     @get:Rule
     val coroutineTestRule = CoroutineTestRule()
     private val searchApi = mockk<SearchApi>()
-    private val searchRemoteDataSource = SearchRemoteDataProvider(searchApi)
+    private val exceptionHandler = mockk<ExceptionHandler>()
+    private val searchRemoteDataSource = SearchRemoteDataProvider(searchApi, exceptionHandler)
     private val testException = Exception("test")
 
     @Test
@@ -137,14 +141,15 @@ class SearchRemoteDataProviderTest {
         coEvery {
             searchApi.searchRepos(any(), any(), any(), any(), any(), any())
         } throws testException
+        every { exceptionHandler.handle(any()) } returns DataException.Unknown()
 
         coroutineTestRule.runBlockingTest {
             val result = runCatching {
                 searchRemoteDataSource.searchRepositories("", "", 0)
             }.exceptionOrNull()
-            result.shouldBeTypeOf<Exception>()
-            result shouldBe testException
+            result.shouldBeTypeOf<DataException.Unknown>()
             coVerify { searchApi.searchRepos(accessToken = "", q = "", page = 0, perPage = any()) }
+            coVerify { exceptionHandler.handle(testException) }
         }
     }
 }
