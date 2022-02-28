@@ -21,7 +21,7 @@ fun SearchTypeItem(
 ) = CommonListItem(
     icon = searchType.icon(),
     title = if (searchType == SearchType.JumpTo) {
-        stringResource(id = R.string.seach_top_jump_to, "\"$searchText\"")
+        stringResource(id = R.string.search_top_jump_to, "\"$searchText\"")
     } else {
         searchType.label()?.let {
             stringResource(id = R.string.search_top_search_with, stringResource(id = it), "\"$searchText\"")

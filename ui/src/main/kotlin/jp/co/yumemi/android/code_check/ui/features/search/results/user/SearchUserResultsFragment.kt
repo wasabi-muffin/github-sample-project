@@ -17,6 +17,7 @@ import jp.co.yumemi.android.code_check.ui.components.search.SearchUserResultItem
 import jp.co.yumemi.android.code_check.ui.core.contract
 import jp.co.yumemi.android.code_check.ui.features.search.results.SearchResultsScreen
 import jp.co.yumemi.android.code_check.ui.utils.compose
+import jp.co.yumemi.android.code_check.ui.utils.notImplemented
 
 @AndroidEntryPoint
 class SearchUserResultsFragment : Fragment() {
@@ -37,8 +38,8 @@ class SearchUserResultsFragment : Fragment() {
                 contract = contract(viewModel.store),
                 navigator = SearchUserResultsNavigator(findNavController()),
                 title = R.string.common_people,
-            ) { item, onClick ->
-                SearchUserResultItem(user = item, modifier = Modifier.clickable { onClick(item) })
+            ) { item, _ ->
+                SearchUserResultItem(user = item, modifier = Modifier.clickable { notImplemented(requireContext()) })
             }
         }
     }

@@ -33,7 +33,7 @@ import jp.co.yumemi.android.code_check.ui.primitives.Gray
 import jp.co.yumemi.android.code_check.ui.utils.toShortedString
 
 @Composable
-fun RepoDetailsHeader(
+fun RepositoryDetailsHeader(
     ownerIconUrl: String?,
     ownerName: String?,
     repoName: String,
@@ -43,6 +43,7 @@ fun RepoDetailsHeader(
     forksCount: Int,
     modifier: Modifier = Modifier
 ) = Column(
+    verticalArrangement = Arrangement.spacedBy(8.dp),
     modifier = modifier
         .fillMaxWidth()
         .padding(16.dp)
@@ -151,12 +152,12 @@ fun RepoDetailsHeader(
 }
 
 @Composable
-fun RepoDetailsHeader(
+fun RepositoryDetailsHeader(
     repository: Repository,
     modifier: Modifier = Modifier
-) = RepoDetailsHeader(
+) = RepositoryDetailsHeader(
     ownerIconUrl = repository.owner?.iconUrl,
-    ownerName = repository.owner?.name,
+    ownerName = repository.owner?.username,
     repoName = repository.name,
     homepage = repository.homepage,
     repoDescription = repository.description,
@@ -167,9 +168,9 @@ fun RepoDetailsHeader(
 
 @Preview
 @Composable
-fun Preview_RepoDetailsHeader() {
+fun Preview_RepositoryDetailsHeader() {
     GithubTheme {
-        RepoDetailsHeader(
+        RepositoryDetailsHeader(
             repository = Repository(
                 id = 1,
                 name = "name",

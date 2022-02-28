@@ -5,9 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
@@ -42,13 +40,14 @@ fun SearchRepositoryResultItem(
     language: String?,
     modifier: Modifier = Modifier
 ) = Column(
+    verticalArrangement = Arrangement.spacedBy(4.dp),
     modifier = modifier
         .fillMaxWidth()
         .padding(16.dp)
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
         if (ownerIconUrl != null) {
@@ -87,11 +86,12 @@ fun SearchRepositoryResultItem(
             color = Gray.v700,
         )
     }
-    Spacer(modifier = Modifier.height(16.dp))
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
     ) {
         Icon(
             painter = painterResource(id = R.drawable.star_fill),
@@ -126,7 +126,7 @@ fun SearchRepositoryResultItem(
     modifier: Modifier = Modifier
 ) = SearchRepositoryResultItem(
     ownerIconUrl = repository.owner?.iconUrl,
-    ownerName = repository.owner?.name,
+    ownerName = repository.owner?.username,
     repoName = repository.name,
     repoDescription = repository.description,
     stargazersCount = repository.stargazersCount,

@@ -17,6 +17,7 @@ import jp.co.yumemi.android.code_check.ui.components.search.SearchOrganizationRe
 import jp.co.yumemi.android.code_check.ui.core.contract
 import jp.co.yumemi.android.code_check.ui.features.search.results.SearchResultsScreen
 import jp.co.yumemi.android.code_check.ui.utils.compose
+import jp.co.yumemi.android.code_check.ui.utils.notImplemented
 
 @AndroidEntryPoint
 class SearchOrganizationResultsFragment : Fragment() {
@@ -37,8 +38,8 @@ class SearchOrganizationResultsFragment : Fragment() {
                 contract = contract(viewModel.store),
                 navigator = SearchOrganizationResultsNavigator(findNavController()),
                 title = R.string.common_organizations,
-            ) { item, onClick ->
-                SearchOrganizationResultItem(organization = item, modifier = Modifier.clickable { onClick(item) })
+            ) { item, _ ->
+                SearchOrganizationResultItem(organization = item, modifier = Modifier.clickable { notImplemented(requireContext()) })
             }
         }
     }
