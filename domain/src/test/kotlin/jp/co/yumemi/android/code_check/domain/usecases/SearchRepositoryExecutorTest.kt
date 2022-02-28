@@ -69,7 +69,7 @@ class SearchRepositoryExecutorTest {
                 repo.license shouldBe "license$index"
             }
             coVerify { searchRepository.searchRepositories("") }
-            coVerify(inverse = true) { errorHandler.handleError(any()) }
+            coVerify(inverse = true) { errorHandler.handle(any()) }
         }
     }
 
@@ -79,7 +79,7 @@ class SearchRepositoryExecutorTest {
             searchRepository.searchRepositories(any())
         } throws testException
 
-        every { errorHandler.handleError(any()) } returns DomainError.Unknown(testException)
+        every { errorHandler.handle(any()) } returns DomainError.Unknown(testException)
 
         coroutineTestRule.runBlockingTest {
             val result = searchRepoUseCase.execute(SearchUseCase.Args("", 0))
@@ -88,7 +88,7 @@ class SearchRepositoryExecutorTest {
             result.error.throwable shouldBe testException
             result.error.throwable.message shouldBe "test"
             coVerify { searchRepository.searchRepositories("") }
-            coVerify { errorHandler.handleError(testException) }
+            coVerify { errorHandler.handle(testException) }
         }
     }
 }

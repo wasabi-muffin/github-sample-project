@@ -8,7 +8,7 @@ import java.net.UnknownHostException
 import jp.co.yumemi.android.code_check.data.error.DataException
 import jp.co.yumemi.android.code_check.data.error.ExceptionHandler
 
-object RemoteExceptionHandler : ExceptionHandler {
+class RemoteExceptionHandler : ExceptionHandler {
     override fun handle(throwable: Throwable): DataException {
         Log.d("ExceptionHandler", "Throwable: $throwable")
         val exception = when (throwable) {
@@ -31,13 +31,5 @@ object RemoteExceptionHandler : ExceptionHandler {
         }
         Log.d("ExceptionHandler", "Exception $exception")
         return exception
-    }
-}
-
-internal inline fun <T, R> T.runHandling(block: T.() -> R): R {
-    return try {
-        block()
-    } catch (e: Throwable) {
-        throw RemoteExceptionHandler.handle(e)
     }
 }

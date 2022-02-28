@@ -13,3 +13,11 @@ sealed class DomainError(
     data class Maintenance(override val throwable: Throwable) : DomainError(throwable)
     data class Unknown(override val throwable: Throwable) : DomainError(throwable)
 }
+
+inline fun <T, R> T.runHandling(handler: ErrorHandler, block: T.() -> R): DomainResult<R> {
+    return try {
+        DomainResult.Success(block())
+    } catch (e: Throwable) {
+        DomainResult.Failure(handler.handle(e))
+    }
+}

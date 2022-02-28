@@ -3,6 +3,7 @@ package jp.co.yumemi.android.code_check.domain.usecases
 import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.core.UseCase
+import jp.co.yumemi.android.code_check.domain.core.runHandling
 import jp.co.yumemi.android.code_check.domain.core.toDomainResult
 import jp.co.yumemi.android.code_check.domain.entities.SearchAll
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
@@ -17,7 +18,7 @@ class SearchAllExecutor(
     private val searchRepository: SearchRepository,
     private val errorHandler: ErrorHandler,
 ) : SearchAllUseCase {
-    override suspend fun execute(arguments: SearchAllUseCase.Args): DomainResult<SearchAll> = runCatching {
+    override suspend fun execute(arguments: SearchAllUseCase.Args): DomainResult<SearchAll> = runHandling(errorHandler) {
         coroutineScope {
             val itemCount = 3
             val repositories = async { searchRepository.searchRepositories(searchText = arguments.searchText, count = itemCount) }
@@ -33,5 +34,5 @@ class SearchAllExecutor(
                 organizations = organizations.await()
             )
         }
-    }.toDomainResult(errorHandler)
+    }
 }

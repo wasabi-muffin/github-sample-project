@@ -4,7 +4,7 @@ import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 
 class DefaultErrorHandler : ErrorHandler {
-    override fun handleError(throwable: Throwable): DomainError = when (throwable) {
+    override fun handle(throwable: Throwable): DomainError = when (throwable) {
         is DataException -> when (throwable) {
             is DataException.LocalException.DatabaseException -> DomainError.Maintenance(throwable)
             is DataException.RemoteException.ForbiddenException -> DomainError.Server(throwable)
