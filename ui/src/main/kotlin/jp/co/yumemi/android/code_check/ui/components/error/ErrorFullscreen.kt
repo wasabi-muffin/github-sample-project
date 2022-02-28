@@ -19,6 +19,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.primitives.Blue
 import jp.co.yumemi.android.code_check.ui.primitives.Github
@@ -48,7 +49,7 @@ fun ErrorFullscreen(
                 text = description,
                 style = MaterialTheme.typography.h3,
                 fontWeight = FontWeight.Bold,
-                color = Blue.v500
+                color = Gray.v700
             )
         }
         if (onClickRetry != null) {
@@ -68,6 +69,18 @@ fun ErrorFullscreen(
         }
     }
 }
+
+@Composable
+fun ErrorFullscreen(
+    error: DomainError,
+    modifier: Modifier = Modifier.background(Gray.v200),
+    onClickRetry: (() -> Unit)? = null
+) = ErrorFullscreen(
+    title = stringResource(id = error.title()),
+    description = error.description()?.let { stringResource(id = it) },
+    modifier = modifier,
+    onClickRetry = onClickRetry
+)
 
 @Preview
 @Composable

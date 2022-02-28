@@ -7,7 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import jp.co.yumemi.android.code_check.domain.core.DomainError
+import jp.co.yumemi.android.code_check.data.error.DefaultErrorHandler
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.local.core.AppDatabase
 import jp.co.yumemi.android.code_check.remote.core.DefaultHttpClientProvider
@@ -17,7 +17,7 @@ import jp.co.yumemi.android.code_check.remote.core.HttpClientProvider
 @InstallIn(SingletonComponent::class)
 class AppModule {
     @Provides
-    fun provideErrorHandler() = ErrorHandler { throwable -> DomainError.Unknown(throwable) }
+    fun provideErrorHandler(): ErrorHandler = DefaultErrorHandler()
 
     @Provides
     fun provideAppDatabase(
