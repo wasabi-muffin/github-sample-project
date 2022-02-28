@@ -13,16 +13,6 @@ fun Project.setupTestCoverage() {
             }
         }
     }
-
-//    extensions.findByType(LibraryExtension::class.java)?.apply {
-//        testOptions {
-//            unitTests.all {
-//                it.extensions.configure(kotlinx.kover.api.KoverTaskExtension::class) {
-//                    isDisabled = it.name != "testDevDebugUnitTest"
-//                }
-//            }
-//        }
-//    }
 }
 
 fun Project.setupTestCoverageTask() {
