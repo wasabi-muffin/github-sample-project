@@ -32,8 +32,6 @@ import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.
 import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.components.appbar.AppBarSearch
 import jp.co.yumemi.android.code_check.ui.components.error.ErrorFullscreen
-import jp.co.yumemi.android.code_check.ui.components.error.description
-import jp.co.yumemi.android.code_check.ui.components.error.title
 import jp.co.yumemi.android.code_check.ui.components.list.CommonListSectionHeader
 import jp.co.yumemi.android.code_check.ui.components.search.RecentSearchHeader
 import jp.co.yumemi.android.code_check.ui.components.search.RecentSearchItem

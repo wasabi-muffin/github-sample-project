@@ -4,7 +4,6 @@ import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.core.UseCase
 import jp.co.yumemi.android.code_check.domain.core.runHandling
-import jp.co.yumemi.android.code_check.domain.core.toDomainResult
 import jp.co.yumemi.android.code_check.domain.entities.SearchAll
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 import kotlinx.coroutines.async

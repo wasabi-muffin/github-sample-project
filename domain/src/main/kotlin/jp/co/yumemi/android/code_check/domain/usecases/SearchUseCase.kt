@@ -6,7 +6,6 @@ import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.domain.core.Pageable
 import jp.co.yumemi.android.code_check.domain.core.UseCase
 import jp.co.yumemi.android.code_check.domain.core.runHandling
-import jp.co.yumemi.android.code_check.domain.core.toDomainResult
 import jp.co.yumemi.android.code_check.domain.entities.Issue
 import jp.co.yumemi.android.code_check.domain.entities.Organization
 import jp.co.yumemi.android.code_check.domain.entities.PullRequest
