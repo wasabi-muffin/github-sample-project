@@ -13,19 +13,39 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 // ref: https://manavtamboli.medium.com/infinite-list-paged-list-in-jetpack-compose-b10fc7e74768
-val LazyListState.firstVisibleItem get() = layoutInfo.visibleItemsInfo.firstOrNull()
-val LazyListState.lastVisibleItem get() = layoutInfo.visibleItemsInfo.lastOrNull()
-val LazyListState.isAtTop: Boolean
-    get() {
-        val firstVisibleItem = firstVisibleItem ?: return true
-        return firstVisibleItem.index == 0 && firstVisibleItem.offset == 0
+@Composable
+fun LazyListState.isAtTop(): Boolean {
+    val isAtTop = remember {
+        derivedStateOf {
+            val firstVisibleItem = firstVisibleItem ?: return@derivedStateOf true
+            firstVisibleItem.index == 0 && firstVisibleItem.offset == 0
+        }
     }
-val LazyListState.isAtBottom: Boolean
-    get() {
-        val lastVisibleItem = lastVisibleItem ?: return true
-        return lastVisibleItem.index == layoutInfo.totalItemsCount - 1 && lastVisibleItem.offset == layoutInfo.viewportSize.height - lastVisibleItem.size
+    return isAtTop.value
+}
+
+@Composable
+fun LazyListState.isAtBottom(): Boolean {
+    val isAtBottom = remember {
+        derivedStateOf {
+            val lastVisibleItem = lastVisibleItem ?: return@derivedStateOf true
+            lastVisibleItem.index == layoutInfo.totalItemsCount - 1 && lastVisibleItem.offset == layoutInfo.viewportSize.height - lastVisibleItem.size
+        }
     }
-val LazyListState.elevation: Dp get() = if (isAtTop) 0.dp else 4.dp // TODO: Issues when setting background colors
+    return isAtBottom.value
+}
+
+@Composable
+fun LazyListState.elevation(): Dp {
+    val elevation = remember {
+        derivedStateOf {
+            val firstVisibleItem = firstVisibleItem ?: return@derivedStateOf 0.dp
+            val isAtTop = firstVisibleItem.index == 0 && firstVisibleItem.offset == 0
+            if (isAtTop) 0.dp else 4.dp
+        }
+    }
+    return elevation.value
+}
 
 @SuppressLint("ComposableNaming")
 @Composable
@@ -68,3 +88,6 @@ fun LazyListState.onScrolledToBottom(
             .collect { if (it) onNotify() }
     }
 }
+
+private val LazyListState.firstVisibleItem get() = layoutInfo.visibleItemsInfo.firstOrNull()
+private val LazyListState.lastVisibleItem get() = layoutInfo.visibleItemsInfo.lastOrNull()

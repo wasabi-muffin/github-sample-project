@@ -57,7 +57,7 @@ fun <T : Parcelable> SearchResultsScreen(
     Column(modifier = Modifier.fillMaxSize()) {
         TitleAppBar(
             title = stringResource(id = title),
-            elevation = scrollState.elevation,
+            elevation = scrollState.elevation(),
             navigationIcon = {
                 BackIcon { dispatch(SearchResultsIntent.ClickBack()) }
             }
