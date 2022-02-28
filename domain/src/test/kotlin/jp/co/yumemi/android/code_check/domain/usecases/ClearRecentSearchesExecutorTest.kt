@@ -1,15 +1,8 @@
 package jp.co.yumemi.android.code_check.domain.usecases
 
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldBeTypeOf
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import jp.co.yumemi.android.code_check.domain.core.DomainResult
-import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
-import jp.co.yumemi.android.code_check.domain.core.Pageable
-import jp.co.yumemi.android.code_check.domain.entities.Issue
-import jp.co.yumemi.android.code_check.domain.entities.RecentSearch
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
 import jp.co.yumemi.android.code_check.test.runBlockingTest
