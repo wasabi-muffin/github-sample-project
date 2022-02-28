@@ -53,7 +53,7 @@ fun RepoDetailsScreen(
     Column(modifier = Modifier.fillMaxSize()) {
         TitleAppBar(
             title = stringResource(id = R.string.common_repositories),
-            elevation = scrollState.elevation,
+            elevation = scrollState.elevation(),
             navigationIcon = {
                 BackIcon { dispatch(RepoDetailsIntent.ClickBack) }
             }
