@@ -32,14 +32,14 @@ class SearchOrganizationResultsFragment : Fragment() {
         )
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return requireContext().compose {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return context?.compose {
             SearchResultsScreen(
                 contract = contract(viewModel.store),
                 navigator = SearchOrganizationResultsNavigator(findNavController()),
                 title = R.string.common_organizations,
             ) { item, _ ->
-                SearchOrganizationResultItem(organization = item, modifier = Modifier.clickable { notImplemented(requireContext()) })
+                SearchOrganizationResultItem(organization = item, modifier = Modifier.clickable { notImplemented(this) })
             }
         }
     }

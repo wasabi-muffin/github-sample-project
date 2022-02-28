@@ -32,8 +32,8 @@ class SearchIssueResultsFragment : Fragment() {
         )
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return requireContext().compose {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return context?.compose {
             SearchResultsScreen(
                 contract = contract(viewModel.store),
                 navigator = SearchIssueResultsNavigator(findNavController()),

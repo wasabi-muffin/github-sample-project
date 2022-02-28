@@ -32,14 +32,14 @@ class SearchPullRequestResultsFragment : Fragment() {
         )
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return requireContext().compose {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return context?.compose {
             SearchResultsScreen(
                 contract = contract(viewModel.store),
                 navigator = SearchPullRequestResultsNavigator(findNavController()),
                 title = R.string.common_pull_requests,
             ) { item, _ ->
-                SearchPullRequestResultItem(pullRequest = item, modifier = Modifier.clickable { notImplemented(requireContext()) })
+                SearchPullRequestResultItem(pullRequest = item, modifier = Modifier.clickable { notImplemented(this) })
             }
         }
     }
