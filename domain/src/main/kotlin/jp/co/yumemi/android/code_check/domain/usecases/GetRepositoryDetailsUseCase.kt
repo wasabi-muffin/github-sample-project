@@ -11,7 +11,7 @@ import jp.co.yumemi.android.code_check.domain.utils.asyncGetOrNull
 import kotlinx.coroutines.coroutineScope
 
 interface GetRepositoryDetailsUseCase : UseCase<GetRepositoryDetailsUseCase.Args, DomainResult<RepositoryDetails>> {
-    data class Args(val repo: Repository)
+    data class Args(val repository: Repository)
 }
 
 class GetRepositoryDetailsExecutor(
@@ -20,11 +20,11 @@ class GetRepositoryDetailsExecutor(
 ) : GetRepositoryDetailsUseCase {
     override suspend fun execute(arguments: GetRepositoryDetailsUseCase.Args): DomainResult<RepositoryDetails> = runHandling(errorHandler) {
         val (contributors, releases, pullRequests) = coroutineScope {
-            val contributors = asyncGetOrNull { repositoriesRepository.getContributors(name = arguments.repo.name) }
-            val releases = asyncGetOrNull { repositoriesRepository.getReleases(name = arguments.repo.name) }
-            val pullRequests = asyncGetOrNull { repositoriesRepository.getPulls(name = arguments.repo.name) }
+            val contributors = asyncGetOrNull { repositoriesRepository.getContributors(name = arguments.repository.name) }
+            val releases = asyncGetOrNull { repositoriesRepository.getReleases(name = arguments.repository.name) }
+            val pullRequests = asyncGetOrNull { repositoriesRepository.getPulls(name = arguments.repository.name) }
             Triple(contributors.await(), releases.await(), pullRequests.await())
         }
-        RepositoryDetails(repository = arguments.repo, releases = releases, contributors = contributors, pullRequests = pullRequests)
+        RepositoryDetails(repository = arguments.repository, releases = releases, contributors = contributors, pullRequests = pullRequests)
     }
 }
