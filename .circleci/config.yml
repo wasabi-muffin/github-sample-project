@@ -114,8 +114,7 @@ jobs:
           task: koverMergedXmlReport
       - codecov/upload:
           file: ./build/reports/kover/report.xml
-      - save_test_results:
-          path: ~/test-results
+      - save_test_results
 
   deploy:
     executor:
