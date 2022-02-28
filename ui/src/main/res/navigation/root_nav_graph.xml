@@ -10,34 +10,62 @@
             android:label="SearchTop">
         <action
                 android:id="@+id/action_searchTop_to_repoDetails"
-                app:destination="@id/repoDetails" />
+                app:destination="@id/repoDetails"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_searchTop_to_searchRepositoryResults"
-                app:destination="@id/searchRepositoryResults" />
+                app:destination="@id/searchRepositoryResults"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
         <action
                 android:id="@+id/action_searchTop_to_searchIssueResults"
-                app:destination="@id/searchIssueResults" />
+                app:destination="@id/searchIssueResults"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
         <action
                 android:id="@+id/action_searchTop_to_searchPullRequestResults"
-                app:destination="@id/searchPullRequestResults" />
+                app:destination="@id/searchPullRequestResults"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
         <action
                 android:id="@+id/action_searchTop_to_searchUserResults"
-                app:destination="@id/searchUserResults" />
+                app:destination="@id/searchUserResults"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
         <action
                 android:id="@+id/action_searchTop_to_searchOrganizationResults"
-                app:destination="@id/searchOrganizationResults" />
+                app:destination="@id/searchOrganizationResults"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
             android:id="@+id/searchRepositoryResults"
             android:name="jp.co.yumemi.android.code_check.ui.features.search.results.repository.SearchRepositoryResultsFragment"
             android:label="SearchRepositoryResults">
-        <action
-                android:id="@+id/action_searchRepositoryResults_to_repoDetails"
-                app:destination="@id/repoDetails" />
         <argument
                 android:name="searchText"
                 app:argType="string" />
+        <action
+                android:id="@+id/action_searchRepositoryResults_to_repoDetails"
+                app:destination="@id/repoDetails"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
