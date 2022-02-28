@@ -21,14 +21,19 @@ fun RepositoryDetailsElementItem(
     repoDetails: RepositoryDetails,
     element: RepositoryDetails.Element,
     modifier: Modifier = Modifier
-) = CommonListItem(
-    icon = element.icon(),
-    title = stringResource(id = element.label()),
-    iconColor = Github.White,
-    iconBackground = element.iconBackground,
-    note = element.note(repoDetails),
-    modifier = modifier
-)
+) {
+    val note = element.note(repoDetails)
+    if (note != null) {
+        CommonListItem(
+            icon = element.icon(),
+            title = stringResource(id = element.label()),
+            iconColor = Github.White,
+            iconBackground = element.iconBackground,
+            note = note,
+            modifier = modifier
+        )
+    }
+}
 
 @Preview
 @Composable

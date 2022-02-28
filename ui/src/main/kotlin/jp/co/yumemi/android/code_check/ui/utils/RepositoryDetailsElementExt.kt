@@ -45,9 +45,9 @@ val RepositoryDetails.Element.iconBackground
 @Composable
 fun RepositoryDetails.Element.note(details: RepositoryDetails) = when (this) {
     RepositoryDetails.Element.Issues -> details.repository.openIssuesCount.toShortedString()
-    RepositoryDetails.Element.PullRequests -> details.pullRequests.size.toShortedString()
-    RepositoryDetails.Element.Releases -> details.releases.size.toDoubleDigitString()
-    RepositoryDetails.Element.Contributors -> details.contributors.size.toDoubleDigitString()
+    RepositoryDetails.Element.PullRequests -> details.pullRequests?.size?.toShortedString()
+    RepositoryDetails.Element.Releases -> details.releases?.size?.toDoubleDigitString()
+    RepositoryDetails.Element.Contributors -> details.contributors?.size?.toDoubleDigitString()
     RepositoryDetails.Element.Watchers -> details.repository.watchersCount.toShortedString()
     RepositoryDetails.Element.License -> details.repository.license
 }
