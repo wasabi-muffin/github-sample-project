@@ -1,7 +1,5 @@
 package jp.co.yumemi.android.code_check.data.core
 
-import jp.co.yumemi.android.code_check.domain.core.DomainError
-
 /**
  * Data exception
  *
