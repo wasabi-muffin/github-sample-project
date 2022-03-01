@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check
+package jp.co.yumemi.android.code_check.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

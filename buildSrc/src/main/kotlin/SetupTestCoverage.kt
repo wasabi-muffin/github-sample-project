@@ -32,9 +32,11 @@ fun Project.setupTestCoverageTask() {
             "*.databinding.*",
             // Modules
             "*.di.*",
+            "*.app.*",
             "*.domain.core.*",
             "*.domain.entities.*",
             "*.domain.repositories.*",
+            "*.data.core.*",
             "*.data.models.*",
             "*.data.sources.*",
             "*.remote.core.*",

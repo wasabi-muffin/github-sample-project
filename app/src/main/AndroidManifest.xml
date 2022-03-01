@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-            android:name=".GithubSampleApplication"
+            android:name=".app.GithubSampleApplication"
             android:allowBackup="true"
             android:fullBackupContent="@xml/backup_descriptor"
             android:icon="@mipmap/ic_launcher"
@@ -14,7 +14,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AndroidEngineerCodeCheck">
         <activity
-                android:name="jp.co.yumemi.android.code_check.MainActivity"
+                android:name="jp.co.yumemi.android.code_check.app.MainActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
