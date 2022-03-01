@@ -7,6 +7,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import javax.inject.Qualifier
 import jp.co.yumemi.android.code_check.data.error.ExceptionHandler
 import jp.co.yumemi.android.code_check.data.sources.SearchLocalDataSource
+import jp.co.yumemi.android.code_check.data.utils.InstantProvider
 import jp.co.yumemi.android.code_check.local.core.AppDatabase
 import jp.co.yumemi.android.code_check.local.providers.SearchLocalDataProvider
 import jp.co.yumemi.android.code_check.remote.error.RemoteExceptionHandler
@@ -21,8 +22,9 @@ class LocalModule {
     @Provides
     fun provideLocalDataSource(
         database: AppDatabase,
+        instantProvider: InstantProvider,
         @Local exceptionHandler: ExceptionHandler,
-    ): SearchLocalDataSource = SearchLocalDataProvider(database.searchDao(), exceptionHandler)
+    ): SearchLocalDataSource = SearchLocalDataProvider(database.searchDao(), instantProvider, exceptionHandler)
 }
 
 @Qualifier

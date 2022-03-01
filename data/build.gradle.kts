@@ -12,4 +12,5 @@ dependencies {
     projectTest(Modules.Test)
 
     implementation(Dependencies.Kotlinx.serializationJson)
+    implementation(Dependencies.Kotlinx.datetime)
 }
