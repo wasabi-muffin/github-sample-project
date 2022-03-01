@@ -5,7 +5,46 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-fun Project.setupAndroid() {
+fun Project.setupAndroidApp(
+    additionalConfig: BaseAppModuleExtension.() -> Unit = {}
+) {
+    setupAndroidCore()
+    extensions.findByType(BaseAppModuleExtension::class.java)?.apply {
+        defaultConfig {
+            applicationId = "jp.co.yumemi.android.codecheck"
+        }
+
+        buildTypes {
+            getByName("release") {
+                isMinifyEnabled = true
+                proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            }
+        }
+
+        buildFeatures {
+            viewBinding = true
+        }
+
+        additionalConfig()
+    }
+}
+
+fun Project.setupAndroidLibrary(
+    additionalConfig: LibraryExtension.() -> Unit = {}
+) {
+    setupAndroidCore()
+    extensions.findByType(LibraryExtension::class.java)?.apply {
+        buildTypes {
+            getByName("release") {
+                isMinifyEnabled = false
+            }
+        }
+
+        additionalConfig()
+    }
+}
+
+private fun Project.setupAndroidCore() {
     extensions.findByType(BaseExtension::class.java)?.apply {
         compileSdkVersion(Versions.Config.androidCompileSdk)
         buildToolsVersion(Versions.Config.buildToolsVersion)
@@ -53,40 +92,9 @@ fun Project.setupAndroid() {
             }
         }
 
-        setupFlavorDimensions()
     }
 
-    setupAndroidApp()
-    setupAndroidLibrary()
     setupLinter()
     setupTestCoverage()
-}
-
-private fun Project.setupAndroidApp() {
-    extensions.findByType(BaseAppModuleExtension::class.java)?.apply {
-        defaultConfig {
-            applicationId = "jp.co.yumemi.android.codecheck"
-        }
-
-        buildTypes {
-            getByName("release") {
-                isMinifyEnabled = true
-                proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            }
-        }
-
-        buildFeatures {
-            viewBinding = true
-        }
-    }
-}
-
-private fun Project.setupAndroidLibrary() {
-    extensions.findByType(LibraryExtension::class.java)?.apply {
-        buildTypes {
-            getByName("release") {
-                isMinifyEnabled = false
-            }
-        }
-    }
+    setupFlavorDimensions()
 }

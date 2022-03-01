@@ -7,7 +7,7 @@ plugins {
     id(Dependencies.Plugin.safeArgs)
 }
 
-setupAndroid()
+setupAndroidLibrary()
 setupJetpackCompose()
 
 dependencies {

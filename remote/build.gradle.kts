@@ -4,7 +4,7 @@ plugins {
     id(Dependencies.Plugin.serialization)
 }
 
-setupAndroid()
+setupAndroidLibrary()
 
 dependencies {
     project(Modules.Data)

@@ -3,7 +3,7 @@ plugins {
     id(Dependencies.Plugin.kotlinAndroid)
 }
 
-setupAndroid()
+setupAndroidLibrary()
 
 dependencies {
     api(Dependencies.Test.core)

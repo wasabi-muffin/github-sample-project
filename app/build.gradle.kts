@@ -7,7 +7,11 @@ plugins {
     id(Dependencies.Plugin.hilt)
 }
 
-setupAndroid()
+setupAndroidApp {
+    defaultConfig {
+        signingConfig = signingConfigs.getByName("debug")
+    }
+}
 
 dependencies {
     project(Modules.Ui)
