@@ -10,6 +10,11 @@ import jp.co.yumemi.android.code_check.domain.repositories.RepositoriesRepositor
 import jp.co.yumemi.android.code_check.domain.utils.asyncGetOrNull
 import kotlinx.coroutines.coroutineScope
 
+/**
+ * Get repository details use case
+ *
+ * Get details for a repository
+ */
 interface GetRepositoryDetailsUseCase : UseCase<GetRepositoryDetailsUseCase.Args, DomainResult<RepositoryDetails>> {
     data class Args(val repository: Repository)
 }

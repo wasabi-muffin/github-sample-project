@@ -1,8 +1,8 @@
 package jp.co.yumemi.android.code_check.data.repositories
 
-import jp.co.yumemi.android.code_check.domain.core.Pageable
 import jp.co.yumemi.android.code_check.domain.entities.Issue
 import jp.co.yumemi.android.code_check.domain.entities.Organization
+import jp.co.yumemi.android.code_check.domain.entities.Pageable
 import jp.co.yumemi.android.code_check.domain.entities.PullRequest
 import jp.co.yumemi.android.code_check.domain.entities.RecentSearch
 import jp.co.yumemi.android.code_check.domain.entities.Repository

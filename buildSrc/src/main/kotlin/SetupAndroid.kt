@@ -45,6 +45,8 @@ fun Project.setupAndroidLibrary(
 }
 
 private fun Project.setupAndroidCore() {
+    plugins.apply(Dependencies.Plugin.dokka)
+
     extensions.findByType(BaseExtension::class.java)?.apply {
         compileSdkVersion(Versions.Config.androidCompileSdk)
         buildToolsVersion(Versions.Config.buildToolsVersion)

@@ -8,7 +8,7 @@ import jp.co.yumemi.android.code_check.data.mappers.RepositoryDataMapper
 import jp.co.yumemi.android.code_check.data.mappers.UserDataMapper
 import jp.co.yumemi.android.code_check.data.sources.SearchLocalDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
-import jp.co.yumemi.android.code_check.domain.core.Pageable
+import jp.co.yumemi.android.code_check.domain.entities.Pageable
 import jp.co.yumemi.android.code_check.domain.entities.Issue
 import jp.co.yumemi.android.code_check.domain.entities.Organization
 import jp.co.yumemi.android.code_check.domain.entities.PullRequest

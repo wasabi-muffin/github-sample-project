@@ -1,9 +1,19 @@
 package jp.co.yumemi.android.code_check.domain.entities
 
 import android.os.Parcelable
-import jp.co.yumemi.android.code_check.domain.core.Pageable
 import kotlinx.parcelize.Parcelize
 
+/**
+ * Search All Entity
+ *
+ * Holds information for searching for multiple types
+ *
+ * @property repositories search repository results
+ * @property issues search issue results
+ * @property pullRequests search pull request results
+ * @property people search people results
+ * @property organizations search organization results
+ */
 @Parcelize
 data class SearchAll(
     val repositories: Pageable<Repository>,

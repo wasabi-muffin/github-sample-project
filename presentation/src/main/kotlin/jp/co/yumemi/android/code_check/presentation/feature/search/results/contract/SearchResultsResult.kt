@@ -2,7 +2,7 @@ package jp.co.yumemi.android.code_check.presentation.feature.search.results.cont
 
 import android.os.Parcelable
 import jp.co.yumemi.android.code_check.domain.core.DomainError
-import jp.co.yumemi.android.code_check.domain.core.Pageable
+import jp.co.yumemi.android.code_check.domain.entities.Pageable
 import jp.co.yumemi.android.code_check.presentation.core.contract.ProcessEventResult
 import jp.co.yumemi.android.code_check.presentation.core.contract.Result
 import jp.co.yumemi.android.code_check.presentation.core.contract.SendEventResult

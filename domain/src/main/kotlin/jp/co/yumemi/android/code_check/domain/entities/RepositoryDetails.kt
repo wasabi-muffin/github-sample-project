@@ -3,6 +3,16 @@ package jp.co.yumemi.android.code_check.domain.entities
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
+/**
+ * Repository Details Entity
+ *
+ * Holds information related to a single repository
+ *
+ * @property repository repository that is accessed
+ * @property releases releases for this repository
+ * @property contributors contributors for this repository
+ * @property pullRequests pull requests for this repository
+ */
 @Parcelize
 data class RepositoryDetails(
     val repository: Repository,
