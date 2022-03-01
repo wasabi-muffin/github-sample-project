@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
  * @property name name for this release
  * @property tag tag used for this release
  * @property description description for this release
- * @property authorUsername username of the author who published this release
+ * @property authorUsername username of the author who created this release
  * @property authorIconUrl url for the avatar of the author who published this release
  * @property date date this release was published
  */

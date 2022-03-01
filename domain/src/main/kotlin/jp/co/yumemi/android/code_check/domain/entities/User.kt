@@ -9,8 +9,8 @@ import kotlinx.parcelize.Parcelize
  * @property id unique id for this user
  * @property name name of this user
  * @property username login username associated with this user
- * @property iconUrl url for the avatar of this organization
- * @property description bio for this organization
+ * @property iconUrl url for the avatar of this user
+ * @property description bio for this user
  */
 @Parcelize
 data class User(

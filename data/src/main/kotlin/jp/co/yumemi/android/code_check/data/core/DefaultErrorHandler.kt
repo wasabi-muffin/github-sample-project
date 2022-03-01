@@ -3,6 +3,11 @@ package jp.co.yumemi.android.code_check.data.core
 import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 
+/**
+ * Default error handler
+ *
+ * Default implementation of [ErrorHandler]
+ */
 class DefaultErrorHandler : ErrorHandler {
     override fun handle(throwable: Throwable): DomainError = when (throwable) {
         is DataException -> when (throwable) {

@@ -3,7 +3,12 @@ package jp.co.yumemi.android.code_check.data.mappers
 import jp.co.yumemi.android.code_check.data.models.PullRequestModel
 import jp.co.yumemi.android.code_check.domain.entities.PullRequest
 
-object PullRequestDataMapper {
+/**
+ * Pull request data mapper
+ *
+ * Maps pull request data models to domain entities
+ */
+internal object PullRequestDataMapper {
     fun toEntity(model: PullRequestModel) =
         PullRequest(
             id = model.id,
