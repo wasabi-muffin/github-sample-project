@@ -29,8 +29,6 @@ object Versions {
     const val material = "1.4.0"
     const val coreKtx = "1.6.0"
     const val appCompat = "1.3.1"
-    const val constraintLayout = "2.1.1"
-    const val recyclerView = "1.2.1"
     const val lifecycle = "2.4.1"
     const val navigation = "2.3.5"
 
@@ -55,9 +53,6 @@ object Versions {
 
     // Lint
     const val ktLint = "10.2.1"
-
-    // Test Coverage
-    const val kover = "0.5.0"
 
     // Leaks
     const val leakCanary = "2.8.1"
@@ -104,9 +99,6 @@ object Dependencies {
     object AndroidX {
         const val core = "androidx.core:core-ktx:${Versions.coreKtx}"
         const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-        const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
-        const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
         const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
         const val lifecycleSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle}"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
@@ -122,7 +114,6 @@ object Dependencies {
         const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
         const val foundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
         const val material = "androidx.compose.material:material:${Versions.compose}"
-        const val materialIcons = "androidx.compose.material:material-icons-extended:${Versions.compose}"
     }
 
     object Accompanist {

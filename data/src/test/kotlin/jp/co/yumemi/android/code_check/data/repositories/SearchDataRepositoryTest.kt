@@ -23,7 +23,7 @@ class SearchDataRepositoryTest {
     val coroutineTestRule = CoroutineTestRule()
     private val searchRemoteDataSource = mockk<SearchRemoteDataSource>()
     private val searchLocalDataSource = mockk<SearchLocalDataSource>()
-    private val searchRepository = SearchDataRepository(searchRemoteDataSource, searchLocalDataSource)
+    private val searchRepository = SearchMockRepository(searchRemoteDataSource, searchLocalDataSource)
     private val testException = Exception("test")
     private val listSize = 5
 
