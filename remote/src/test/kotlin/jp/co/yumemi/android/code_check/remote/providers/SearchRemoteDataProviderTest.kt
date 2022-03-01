@@ -7,8 +7,8 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
-import jp.co.yumemi.android.code_check.data.error.DataException
-import jp.co.yumemi.android.code_check.data.error.ExceptionHandler
+import jp.co.yumemi.android.code_check.data.core.DataException
+import jp.co.yumemi.android.code_check.data.core.ExceptionHandler
 import jp.co.yumemi.android.code_check.remote.apis.SearchApi
 import jp.co.yumemi.android.code_check.remote.models.DefaultModel
 import jp.co.yumemi.android.code_check.remote.models.InlineResponse20026ApiModel

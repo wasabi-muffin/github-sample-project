@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.data.error
+package jp.co.yumemi.android.code_check.data.core
 
 sealed class DataException : Throwable() {
     abstract override val message: String?

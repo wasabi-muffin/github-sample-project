@@ -1,7 +1,7 @@
 package jp.co.yumemi.android.code_check.local.error
 
 import io.kotest.matchers.shouldBe
-import jp.co.yumemi.android.code_check.data.error.DataException
+import jp.co.yumemi.android.code_check.data.core.DataException
 import org.junit.Test
 
 class LocalExceptionHandlerTest {
