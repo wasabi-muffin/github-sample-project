@@ -1,5 +1,14 @@
 package jp.co.yumemi.android.code_check.data.models
 
+/**
+ * Organization Data Model
+ *
+ * @property id unique id for this organization
+ * @property name name of this organization
+ * @property username login username associated with this organization
+ * @property iconUrl url for the avatar of this organization
+ * @property description bio for this organization
+ */
 data class OrganizationModel(
     val id: Int,
     val name: String?,
