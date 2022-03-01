@@ -8,6 +8,11 @@ import java.net.UnknownHostException
 import jp.co.yumemi.android.code_check.data.core.DataException
 import jp.co.yumemi.android.code_check.data.core.ExceptionHandler
 
+/**
+ * Remote exception handler
+ *
+ * Default implementation for the remote layer of [ExceptionHandler]
+ */
 class RemoteExceptionHandler : ExceptionHandler {
     override fun handle(throwable: Throwable): DataException {
         Log.d("ExceptionHandler", "Throwable: $throwable")

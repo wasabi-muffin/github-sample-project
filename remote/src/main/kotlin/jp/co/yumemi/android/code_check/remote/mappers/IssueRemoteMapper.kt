@@ -4,6 +4,11 @@ import jp.co.yumemi.android.code_check.data.models.IssueModel
 import jp.co.yumemi.android.code_check.remote.models.IssueMinusSearchMinusResultMinusItemApiModel
 import jp.co.yumemi.android.code_check.remote.utils.filterRepoName
 
+/**
+ * Issue remote mapper
+ *
+ * Maps issue api models to data models
+ */
 object IssueRemoteMapper {
     fun toModel(apiModel: IssueMinusSearchMinusResultMinusItemApiModel) = IssueModel(
         id = apiModel.id,

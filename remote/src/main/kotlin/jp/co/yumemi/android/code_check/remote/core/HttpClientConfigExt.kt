@@ -22,17 +22,32 @@ import jp.co.yumemi.android.code_check.remote.models.BasicMinusErrorApiModel
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 
+/**
+ * Install json serializer
+ *
+ * Serializer config for [HttpClient]
+ */
 fun HttpClientConfig<*>.installJsonSerializer() = install(JsonFeature) {
     serializer = KotlinxSerializer(json)
     accept(ContentType.Application.Json)
 }
 
+/**
+ * Install time out config
+ *
+ * Timeout config for [HttpClient]
+ */
 fun HttpClientConfig<*>.installTimeOutConfig() = install(HttpTimeout) {
     requestTimeoutMillis = 50000
     connectTimeoutMillis = 50000
     socketTimeoutMillis = 50000
 }
 
+/**
+ * Install default request
+ *
+ * Default request config for [HttpClient]
+ */
 fun HttpClientConfig<*>.installDefaultRequest() = defaultRequest {
     header(HttpHeaders.ContentType, ContentType.Application.Json.toString())
     header(HttpHeaders.Connection, "close") // to avoid java.io.IOException
@@ -40,6 +55,11 @@ fun HttpClientConfig<*>.installDefaultRequest() = defaultRequest {
     url { protocol = URLProtocol.HTTPS }
 }
 
+/**
+ * Install logging
+ *
+ * Logging config for [HttpClient]
+ */
 fun HttpClientConfig<*>.installLogging() {
     install(Logging) {
         level = LogLevel.ALL
@@ -51,6 +71,11 @@ fun HttpClientConfig<*>.installLogging() {
     }
 }
 
+/**
+ * Error validation
+ *
+ * Error validation config for [HttpCallValidator]
+ */
 fun HttpCallValidator.Config.errorValidation() {
     handleResponseException { e ->
         if (e is ResponseException) {
@@ -65,9 +90,19 @@ fun HttpCallValidator.Config.errorValidation() {
     }
 }
 
+/**
+ * Parse
+ *
+ * Extension to decode responses
+ */
 private suspend inline fun <reified R> HttpResponse.parse(): R =
     json.decodeFromString(serializer(), this.readText())
 
+/**
+ * Json
+ *
+ * Default Json serialization config
+ */
 private val json = Json {
     isLenient = true
     ignoreUnknownKeys = true

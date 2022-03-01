@@ -16,6 +16,11 @@ import jp.co.yumemi.android.code_check.remote.mappers.PullRequestRemoteMapper
 import jp.co.yumemi.android.code_check.remote.mappers.RepositoryRemoteMapper
 import jp.co.yumemi.android.code_check.remote.mappers.UserRemoteMapper
 
+/**
+ * Search remote data provider
+ *
+ * Default implementation of [SearchRemoteDataSource]
+ */
 class SearchRemoteDataProvider(
     private val searchApi: SearchApi,
     private val exceptionHandler: ExceptionHandler,
