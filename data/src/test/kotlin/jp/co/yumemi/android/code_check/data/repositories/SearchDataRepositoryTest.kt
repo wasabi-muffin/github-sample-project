@@ -34,6 +34,10 @@ class SearchDataRepositoryTest {
         } returns Unit
 
         coEvery {
+            searchLocalDataSource.deleteAllRecentSearches()
+        } returns Unit
+
+        coEvery {
             searchLocalDataSource.getRecentSearches()
         } returns List(listSize) { index ->
             DefaultModel.recentSearch.copy(timestamp = index.toLong())
@@ -74,7 +78,7 @@ class SearchDataRepositoryTest {
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
             coVerify { searchRemoteDataSource.searchRepositories(token = any(), searchText = "", pageNumber = any(), count = any()) }
-            coVerify { searchRemoteDataSource.searchRepositories(token = any(), any()) }
+            coVerify { searchLocalDataSource.saveRecentSearch(searchText = "") }
         }
     }
 
@@ -112,7 +116,7 @@ class SearchDataRepositoryTest {
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
             coVerify { searchRemoteDataSource.searchIssues(token = any(), searchText = "", pageNumber = any(), count = any()) }
-            coVerify { searchRemoteDataSource.searchIssues(token = any(), any()) }
+            coVerify { searchLocalDataSource.saveRecentSearch(searchText = "") }
         }
     }
 
@@ -150,7 +154,7 @@ class SearchDataRepositoryTest {
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
             coVerify { searchRemoteDataSource.searchPullRequests(token = any(), searchText = "", pageNumber = any(), count = any()) }
-            coVerify { searchRemoteDataSource.searchPullRequests(token = any(), any()) }
+            coVerify { searchLocalDataSource.saveRecentSearch(searchText = "") }
         }
     }
 
@@ -188,7 +192,7 @@ class SearchDataRepositoryTest {
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
             coVerify { searchRemoteDataSource.searchUsers(token = any(), searchText = "", pageNumber = any(), count = any()) }
-            coVerify { searchRemoteDataSource.searchUsers(token = any(), any()) }
+            coVerify { searchLocalDataSource.saveRecentSearch(searchText = "") }
         }
     }
 
@@ -226,7 +230,51 @@ class SearchDataRepositoryTest {
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
             coVerify { searchRemoteDataSource.searchOrganizations(token = any(), searchText = "", pageNumber = any(), count = any()) }
-            coVerify { searchRemoteDataSource.searchOrganizations(token = any(), any()) }
+            coVerify { searchLocalDataSource.saveRecentSearch(searchText = "") }
+        }
+    }
+
+    @Test
+    fun `test when get recent searches is successful`() {
+        coroutineTestRule.runBlockingTest {
+            searchRepository.getRecentSearches()
+            coVerify { searchLocalDataSource.getRecentSearches() }
+        }
+    }
+
+    @Test
+    fun `test when  get recent searches throws an error`() {
+        coEvery {
+            searchLocalDataSource.getRecentSearches()
+        } throws testException
+
+        coroutineTestRule.runBlockingTest {
+            val result = shouldThrowAny { searchRepository.getRecentSearches() }
+            result.shouldBeTypeOf<Exception>()
+            result shouldBe testException
+            coVerify { searchLocalDataSource.getRecentSearches() }
+        }
+    }
+
+    @Test
+    fun `test when delete all recent searches is successful`() {
+        coroutineTestRule.runBlockingTest {
+            searchRepository.clearRecentSearches()
+            coVerify { searchLocalDataSource.deleteAllRecentSearches() }
+        }
+    }
+
+    @Test
+    fun `test when delete all recent searches throws an error`() {
+        coEvery {
+            searchLocalDataSource.deleteAllRecentSearches()
+        } throws testException
+
+        coroutineTestRule.runBlockingTest {
+            val result = shouldThrowAny { searchRepository.clearRecentSearches() }
+            result.shouldBeTypeOf<Exception>()
+            result shouldBe testException
+            coVerify { searchLocalDataSource.deleteAllRecentSearches() }
         }
     }
 }
