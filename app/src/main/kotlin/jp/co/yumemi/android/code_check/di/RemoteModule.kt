@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import javax.inject.Qualifier
-import jp.co.yumemi.android.code_check.data.error.ExceptionHandler
+import jp.co.yumemi.android.code_check.data.core.ExceptionHandler
 import jp.co.yumemi.android.code_check.data.sources.RepositoriesRemoteDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
 import jp.co.yumemi.android.code_check.remote.apis.PullsApi

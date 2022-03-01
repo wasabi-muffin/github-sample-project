@@ -5,8 +5,8 @@ import io.ktor.client.features.HttpRequestTimeoutException
 import io.ktor.network.sockets.ConnectTimeoutException
 import io.ktor.network.sockets.SocketTimeoutException
 import java.net.UnknownHostException
-import jp.co.yumemi.android.code_check.data.error.DataException
-import jp.co.yumemi.android.code_check.data.error.ExceptionHandler
+import jp.co.yumemi.android.code_check.data.core.DataException
+import jp.co.yumemi.android.code_check.data.core.ExceptionHandler
 
 class RemoteExceptionHandler : ExceptionHandler {
     override fun handle(throwable: Throwable): DataException {

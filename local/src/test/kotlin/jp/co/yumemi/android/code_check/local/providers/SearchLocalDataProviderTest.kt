@@ -6,8 +6,8 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
-import jp.co.yumemi.android.code_check.data.error.DataException
-import jp.co.yumemi.android.code_check.data.error.ExceptionHandler
+import jp.co.yumemi.android.code_check.data.core.DataException
+import jp.co.yumemi.android.code_check.data.core.ExceptionHandler
 import jp.co.yumemi.android.code_check.data.utils.InstantProvider
 import jp.co.yumemi.android.code_check.local.dao.SearchDao
 import jp.co.yumemi.android.code_check.local.models.RecentSearchDbModel

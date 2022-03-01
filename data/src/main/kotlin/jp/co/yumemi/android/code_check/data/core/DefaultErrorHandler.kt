@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.data.error
+package jp.co.yumemi.android.code_check.data.core
 
 import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler

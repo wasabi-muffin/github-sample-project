@@ -1,7 +1,7 @@
 package jp.co.yumemi.android.code_check.remote.providers
 
-import jp.co.yumemi.android.code_check.data.error.ExceptionHandler
-import jp.co.yumemi.android.code_check.data.error.runHandling
+import jp.co.yumemi.android.code_check.data.core.ExceptionHandler
+import jp.co.yumemi.android.code_check.data.core.runHandling
 import jp.co.yumemi.android.code_check.data.models.IssueModel
 import jp.co.yumemi.android.code_check.data.models.OrganizationModel
 import jp.co.yumemi.android.code_check.data.models.PullRequestModel

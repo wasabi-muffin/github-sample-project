@@ -1,14 +1,13 @@
 package jp.co.yumemi.android.code_check.data.repositories
 
+import io.kotest.assertions.throwables.shouldThrowAny
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeTypeOf
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import jp.co.yumemi.android.code_check.data.models.RecentSearchModel
-import jp.co.yumemi.android.code_check.data.models.RepositoryModel
+import jp.co.yumemi.android.code_check.data.models.DefaultModel
 import jp.co.yumemi.android.code_check.data.models.SearchResultModel
-import jp.co.yumemi.android.code_check.data.models.UserModel
 import jp.co.yumemi.android.code_check.data.sources.SearchLocalDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
@@ -26,75 +25,208 @@ class SearchDataRepositoryTest {
     private val searchLocalDataSource = mockk<SearchLocalDataSource>()
     private val searchRepository = SearchDataRepository(searchRemoteDataSource, searchLocalDataSource)
     private val testException = Exception("test")
+    private val listSize = 5
 
     @Before
     fun setup() {
         coEvery {
-            searchLocalDataSource.saveRecentSearch(any())
+            searchLocalDataSource.saveRecentSearch(searchText = any())
         } returns Unit
 
         coEvery {
             searchLocalDataSource.getRecentSearches()
-        } returns listOf(RecentSearchModel("", 1L))
-    }
-
-    @Test
-    fun `test when search is successful`() {
-        coEvery {
-            searchRemoteDataSource.searchRepositories(any(), any())
-        } returns SearchResultModel(
-            items = List(5) { index ->
-                RepositoryModel(
-                    id = index,
-                    name = "name$index",
-                    description = "description$index",
-                    owner = UserModel(id = 0, name = null, username = "", iconUrl = null, blog = null, location = null, email = null, bio = null),
-                    homepage = "homepage$index",
-                    language = "language$index",
-                    stargazersCount = index,
-                    watchersCount = index,
-                    forksCount = index,
-                    openIssuesCount = index,
-                    license = "license$index",
-                )
-            },
-            totalCount = 5
-        )
-
-        coroutineTestRule.runBlockingTest {
-            val result = searchRepository.searchRepositories("")
-            result.totalCount shouldBe 5
-            result.items.size shouldBe 5
-            result.items.forEachIndexed { index, repo ->
-                repo.id shouldBe index
-                repo.name shouldBe "name$index"
-                repo.description shouldBe "description$index"
-                repo.homepage shouldBe "homepage$index"
-                repo.language shouldBe "language$index"
-                repo.stargazersCount shouldBe index
-                repo.watchersCount shouldBe index
-                repo.forksCount shouldBe index
-                repo.openIssuesCount shouldBe index
-                repo.license shouldBe "license$index"
-            }
-            coVerify { searchRemoteDataSource.searchRepositories(any(), "") }
-            coVerify { searchLocalDataSource.saveRecentSearch("") }
+        } returns List(listSize) { index ->
+            DefaultModel.recentSearch.copy(timestamp = index.toLong())
         }
     }
 
     @Test
-    fun `test when remote data provider throws an error`() {
+    fun `test when search repositories is successful`() {
         coEvery {
-            searchRemoteDataSource.searchRepositories(any(), any())
+            searchRemoteDataSource.searchRepositories(token = any(), searchText = any(), pageNumber = any(), count = any())
+        } returns SearchResultModel(
+            items = List(listSize) { index ->
+                DefaultModel.repository.copy(id = index)
+            },
+            totalCount = listSize
+        )
+
+        coroutineTestRule.runBlockingTest {
+            val result = searchRepository.searchRepositories(searchText = "")
+            result.totalCount shouldBe listSize
+            result.items.size shouldBe listSize
+            result.items.forEachIndexed { index, item ->
+                item.id shouldBe index
+            }
+            coVerify { searchRemoteDataSource.searchRepositories(token = any(), searchText = "", pageNumber = any(), count = any()) }
+            coVerify { searchLocalDataSource.saveRecentSearch(searchText = "") }
+        }
+    }
+
+    @Test
+    fun `test when search repositories throws an error`() {
+        coEvery {
+            searchRemoteDataSource.searchRepositories(token = any(), searchText = any(), pageNumber = any(), count = any())
         } throws testException
 
         coroutineTestRule.runBlockingTest {
-            val result = runCatching {
-                searchRepository.searchRepositories("")
-            }.exceptionOrNull()
+            val result = shouldThrowAny { searchRepository.searchRepositories("") }
             result.shouldBeTypeOf<Exception>()
             result shouldBe testException
-            coVerify { searchRemoteDataSource.searchRepositories(any(), any()) }
+            coVerify { searchRemoteDataSource.searchRepositories(token = any(), searchText = "", pageNumber = any(), count = any()) }
+            coVerify { searchRemoteDataSource.searchRepositories(token = any(), any()) }
+        }
+    }
+
+    @Test
+    fun `test when search issues is successful`() {
+        coEvery {
+            searchRemoteDataSource.searchIssues(token = any(), searchText = any(), pageNumber = any(), count = any())
+        } returns SearchResultModel(
+            items = List(listSize) { index ->
+                DefaultModel.issue.copy(id = index)
+            },
+            totalCount = listSize
+        )
+
+        coroutineTestRule.runBlockingTest {
+            val result = searchRepository.searchIssues(searchText = "")
+            result.totalCount shouldBe listSize
+            result.items.size shouldBe listSize
+            result.items.forEachIndexed { index, item ->
+                item.id shouldBe index
+            }
+            coVerify { searchRemoteDataSource.searchIssues(token = any(), searchText = "", pageNumber = any(), count = any()) }
+            coVerify { searchLocalDataSource.saveRecentSearch(searchText = "") }
+        }
+    }
+
+    @Test
+    fun `test when search issues throws an error`() {
+        coEvery {
+            searchRemoteDataSource.searchIssues(token = any(), searchText = any(), pageNumber = any(), count = any())
+        } throws testException
+
+        coroutineTestRule.runBlockingTest {
+            val result = shouldThrowAny { searchRepository.searchIssues("") }
+            result.shouldBeTypeOf<Exception>()
+            result shouldBe testException
+            coVerify { searchRemoteDataSource.searchIssues(token = any(), searchText = "", pageNumber = any(), count = any()) }
+            coVerify { searchRemoteDataSource.searchIssues(token = any(), any()) }
+        }
+    }
+
+    @Test
+    fun `test when search pull requests is successful`() {
+        coEvery {
+            searchRemoteDataSource.searchPullRequests(token = any(), searchText = any(), pageNumber = any(), count = any())
+        } returns SearchResultModel(
+            items = List(listSize) { index ->
+                DefaultModel.pullRequest.copy(id = index)
+            },
+            totalCount = listSize
+        )
+
+        coroutineTestRule.runBlockingTest {
+            val result = searchRepository.searchPullRequests(searchText = "")
+            result.totalCount shouldBe listSize
+            result.items.size shouldBe listSize
+            result.items.forEachIndexed { index, item ->
+                item.id shouldBe index
+            }
+            coVerify { searchRemoteDataSource.searchPullRequests(token = any(), searchText = "", pageNumber = any(), count = any()) }
+            coVerify { searchLocalDataSource.saveRecentSearch(searchText = "") }
+        }
+    }
+
+    @Test
+    fun `test when search pull requests throws an error`() {
+        coEvery {
+            searchRemoteDataSource.searchPullRequests(token = any(), searchText = any(), pageNumber = any(), count = any())
+        } throws testException
+
+        coroutineTestRule.runBlockingTest {
+            val result = shouldThrowAny { searchRepository.searchPullRequests("") }
+            result.shouldBeTypeOf<Exception>()
+            result shouldBe testException
+            coVerify { searchRemoteDataSource.searchPullRequests(token = any(), searchText = "", pageNumber = any(), count = any()) }
+            coVerify { searchRemoteDataSource.searchPullRequests(token = any(), any()) }
+        }
+    }
+
+    @Test
+    fun `test when search users is successful`() {
+        coEvery {
+            searchRemoteDataSource.searchUsers(token = any(), searchText = any(), pageNumber = any(), count = any())
+        } returns SearchResultModel(
+            items = List(listSize) { index ->
+                DefaultModel.user.copy(id = index)
+            },
+            totalCount = listSize
+        )
+
+        coroutineTestRule.runBlockingTest {
+            val result = searchRepository.searchUsers(searchText = "")
+            result.totalCount shouldBe listSize
+            result.items.size shouldBe listSize
+            result.items.forEachIndexed { index, item ->
+                item.id shouldBe index
+            }
+            coVerify { searchRemoteDataSource.searchUsers(token = any(), searchText = "", pageNumber = any(), count = any()) }
+            coVerify { searchLocalDataSource.saveRecentSearch(searchText = "") }
+        }
+    }
+
+    @Test
+    fun `test when search users throws an error`() {
+        coEvery {
+            searchRemoteDataSource.searchUsers(token = any(), searchText = any(), pageNumber = any(), count = any())
+        } throws testException
+
+        coroutineTestRule.runBlockingTest {
+            val result = shouldThrowAny { searchRepository.searchUsers("") }
+            result.shouldBeTypeOf<Exception>()
+            result shouldBe testException
+            coVerify { searchRemoteDataSource.searchUsers(token = any(), searchText = "", pageNumber = any(), count = any()) }
+            coVerify { searchRemoteDataSource.searchUsers(token = any(), any()) }
+        }
+    }
+
+    @Test
+    fun `test when search organizations is successful`() {
+        coEvery {
+            searchRemoteDataSource.searchOrganizations(token = any(), searchText = any(), pageNumber = any(), count = any())
+        } returns SearchResultModel(
+            items = List(listSize) { index ->
+                DefaultModel.organization.copy(id = index)
+            },
+            totalCount = listSize
+        )
+
+        coroutineTestRule.runBlockingTest {
+            val result = searchRepository.searchOrganizations(searchText = "")
+            result.totalCount shouldBe listSize
+            result.items.size shouldBe listSize
+            result.items.forEachIndexed { index, item ->
+                item.id shouldBe index
+            }
+            coVerify { searchRemoteDataSource.searchOrganizations(token = any(), searchText = "", pageNumber = any(), count = any()) }
+            coVerify { searchLocalDataSource.saveRecentSearch(searchText = "") }
+        }
+    }
+
+    @Test
+    fun `test when search organizations throws an error`() {
+        coEvery {
+            searchRemoteDataSource.searchOrganizations(token = any(), searchText = any(), pageNumber = any(), count = any())
+        } throws testException
+
+        coroutineTestRule.runBlockingTest {
+            val result = shouldThrowAny { searchRepository.searchOrganizations("") }
+            result.shouldBeTypeOf<Exception>()
+            result shouldBe testException
+            coVerify { searchRemoteDataSource.searchOrganizations(token = any(), searchText = "", pageNumber = any(), count = any()) }
+            coVerify { searchRemoteDataSource.searchOrganizations(token = any(), any()) }
         }
     }
 }

@@ -7,7 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import jp.co.yumemi.android.code_check.data.error.DefaultErrorHandler
+import jp.co.yumemi.android.code_check.data.core.DefaultErrorHandler
 import jp.co.yumemi.android.code_check.data.utils.InstantProvider
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
 import jp.co.yumemi.android.code_check.local.core.AppDatabase
