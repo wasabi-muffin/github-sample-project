@@ -62,7 +62,7 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
             is SearchTopEvent.NavigateBack -> navigator.back()
             is SearchTopEvent.NavigateRepositoryDetails -> navigator.repositoryDetails(event.repository)
             is SearchTopEvent.NavigateSearch -> when (event.type) {
-                SearchType.Repo -> navigator.repositoryResults(event.searchText)
+                SearchType.Repository -> navigator.repositoryResults(event.searchText)
                 SearchType.Issues -> navigator.issueResults(event.searchText)
                 SearchType.PullRequests -> navigator.pullRequestResults(event.searchText)
                 SearchType.People -> navigator.userResults(event.searchText)
@@ -144,7 +144,7 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
                     SearchResultGroup(
                         result = state.searchResults.repositories,
                         title = R.string.common_repositories,
-                        onClickSeeAll = { dispatch(SearchTopIntent.ClickSeeAll(SearchType.Repo)) }
+                        onClickSeeAll = { dispatch(SearchTopIntent.ClickSeeAll(SearchType.Repository)) }
                     ) {
                         SearchRepositoryResultItem(
                             repository = it,

@@ -34,6 +34,6 @@ fun SearchTypeItem(
 @Composable
 fun Preview_SearchTypeItem() {
     GithubTheme {
-        SearchTypeItem(searchText = "Test", searchType = SearchType.Repo, modifier = Modifier.background(Color.White))
+        SearchTypeItem(searchText = "Test", searchType = SearchType.Repository, modifier = Modifier.background(Color.White))
     }
 }

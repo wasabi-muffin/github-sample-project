@@ -15,30 +15,30 @@ import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.factory.StoreFactory
 import jp.co.yumemi.android.code_check.presentation.core.middleware.LoggingMiddleware
 import jp.co.yumemi.android.code_check.presentation.core.middleware.StateSaverMiddleware
-import jp.co.yumemi.android.code_check.presentation.feature.details.repo.contract.RepoDetailsAction
-import jp.co.yumemi.android.code_check.presentation.feature.details.repo.contract.RepoDetailsEvent
-import jp.co.yumemi.android.code_check.presentation.feature.details.repo.contract.RepoDetailsIntent
-import jp.co.yumemi.android.code_check.presentation.feature.details.repo.contract.RepoDetailsResult
-import jp.co.yumemi.android.code_check.presentation.feature.details.repo.contract.RepoDetailsViewState
+import jp.co.yumemi.android.code_check.presentation.feature.details.repository.contract.RepositoryDetailsAction
+import jp.co.yumemi.android.code_check.presentation.feature.details.repository.contract.RepositoryDetailsEvent
+import jp.co.yumemi.android.code_check.presentation.feature.details.repository.contract.RepositoryDetailsIntent
+import jp.co.yumemi.android.code_check.presentation.feature.details.repository.contract.RepositoryDetailsResult
+import jp.co.yumemi.android.code_check.presentation.feature.details.repository.contract.RepositoryDetailsViewState
 import jp.co.yumemi.android.code_check.ui.core.StoreViewModel
 import jp.co.yumemi.android.code_check.ui.core.getState
 import jp.co.yumemi.android.code_check.ui.core.onInit
 import jp.co.yumemi.android.code_check.ui.core.saveState
 
 class RepoDetailsViewModel @AssistedInject constructor(
-    storeFactory: StoreFactory<RepoDetailsIntent, RepoDetailsAction, RepoDetailsResult, RepoDetailsViewState, RepoDetailsEvent>,
+    storeFactory: StoreFactory<RepositoryDetailsIntent, RepositoryDetailsAction, RepositoryDetailsResult, RepositoryDetailsViewState, RepositoryDetailsEvent>,
     @Assisted stateHandle: SavedStateHandle,
     @Assisted val repository: Repository
-) : StoreViewModel<RepoDetailsIntent,
-    RepoDetailsAction,
-    RepoDetailsResult,
-    RepoDetailsViewState,
-    RepoDetailsEvent>(storeFactory) {
-    override val store: Store<RepoDetailsIntent, RepoDetailsViewState, RepoDetailsEvent> = storeFactory.create(
-        stateHandle.getState() ?: State(RepoDetailsViewState.Initial(repository)),
+) : StoreViewModel<RepositoryDetailsIntent,
+    RepositoryDetailsAction,
+    RepositoryDetailsResult,
+    RepositoryDetailsViewState,
+    RepositoryDetailsEvent>(storeFactory) {
+    override val store: Store<RepositoryDetailsIntent, RepositoryDetailsViewState, RepositoryDetailsEvent> = storeFactory.create(
+        stateHandle.getState() ?: State(RepositoryDetailsViewState.Initial(repository)),
         middlewares = listOf(
-            StateSaverMiddleware<RepoDetailsViewState, RepoDetailsEvent> { stateHandle.saveState(it) },
-            LoggingMiddleware<RepoDetailsIntent, RepoDetailsAction, RepoDetailsResult, RepoDetailsViewState, RepoDetailsEvent> {
+            StateSaverMiddleware<RepositoryDetailsViewState, RepositoryDetailsEvent> { stateHandle.saveState(it) },
+            LoggingMiddleware<RepositoryDetailsIntent, RepositoryDetailsAction, RepositoryDetailsResult, RepositoryDetailsViewState, RepositoryDetailsEvent> {
                 Log.d("RepoDetails", it)
             },
         )
@@ -46,7 +46,7 @@ class RepoDetailsViewModel @AssistedInject constructor(
 
     init {
         stateHandle.onInit {
-            dispatch(RepoDetailsIntent.OnStart)
+            dispatch(RepositoryDetailsIntent.OnStart)
         }
     }
 

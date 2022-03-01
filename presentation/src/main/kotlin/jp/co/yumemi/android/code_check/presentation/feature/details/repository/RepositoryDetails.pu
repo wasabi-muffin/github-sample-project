@@ -1,6 +1,6 @@
-@startuml RepoDetails
-state RepoDetails {
-    RepoDetails: I.ClickBack > A.NavigateBack > E.NavigateBack
+@startuml RepositoryDetails
+state RepositoryDetails {
+    RepositoryDetails: I.ClickBack > A.NavigateBack > E.NavigateBack
 
     state Initial {
         Initial : I.OnStart > A.LoadDetails > R.Loading, SE.LoadDetails[R.LoadDetailsSuccess, R.LoadDetailsError]

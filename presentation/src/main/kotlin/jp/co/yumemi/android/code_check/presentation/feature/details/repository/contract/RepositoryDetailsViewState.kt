@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.presentation.feature.details.repo.contract
+package jp.co.yumemi.android.code_check.presentation.feature.details.repository.contract
 
 import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.entities.Repository
@@ -6,37 +6,37 @@ import jp.co.yumemi.android.code_check.domain.entities.RepositoryDetails
 import jp.co.yumemi.android.code_check.presentation.core.contract.ViewState
 import kotlinx.parcelize.Parcelize
 
-sealed class RepoDetailsViewState : ViewState {
-    internal abstract val repo: Repository
+sealed class RepositoryDetailsViewState : ViewState {
+    internal abstract val repository: Repository
 
     @Parcelize data class Initial(
-        override val repo: Repository
-    ) : RepoDetailsViewState()
+        override val repository: Repository
+    ) : RepositoryDetailsViewState()
 
     @Parcelize data class Loading(
-        override val repo: Repository
-    ) : RepoDetailsViewState()
+        override val repository: Repository
+    ) : RepositoryDetailsViewState()
 
     @Parcelize data class Error(
-        override val repo: Repository,
+        override val repository: Repository,
         val error: DomainError
-    ) : RepoDetailsViewState()
+    ) : RepositoryDetailsViewState()
 
-    sealed class Stable : RepoDetailsViewState() {
+    sealed class Stable : RepositoryDetailsViewState() {
         abstract val details: RepositoryDetails
 
         @Parcelize data class Initial(
-            override val repo: Repository,
+            override val repository: Repository,
             override val details: RepositoryDetails
         ) : Stable()
 
         @Parcelize data class RefreshLoading(
-            override val repo: Repository,
+            override val repository: Repository,
             override val details: RepositoryDetails
         ) : Stable()
 
         @Parcelize data class RefreshError(
-            override val repo: Repository,
+            override val repository: Repository,
             override val details: RepositoryDetails,
             val error: DomainError
         ) : Stable()
