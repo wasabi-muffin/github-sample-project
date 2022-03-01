@@ -1,7 +1,6 @@
 package jp.co.yumemi.android.code_check.local.error
 
 import io.kotest.matchers.shouldBe
-import io.mockk.coVerify
 import jp.co.yumemi.android.code_check.data.error.DataException
 import org.junit.Test
 
