@@ -26,7 +26,7 @@ class SearchDataRepository(
         return searchRemoteDataSource
             .searchRepositories(searchText = searchText, pageNumber = pageNumber, count = count)
             .let { results ->
-                Pageable(results.repos.map(RepositoryDataMapper::toEntity), results.totalCount)
+                Pageable(results.items.map(RepositoryDataMapper::toEntity), results.totalCount)
             }
     }
 
@@ -35,7 +35,7 @@ class SearchDataRepository(
         return searchRemoteDataSource
             .searchIssues(searchText = searchText, pageNumber = pageNumber, count = count)
             .let { results ->
-                Pageable(results.repos.map(IssueDataMapper::toEntity), results.totalCount)
+                Pageable(results.items.map(IssueDataMapper::toEntity), results.totalCount)
             }
     }
 
@@ -44,7 +44,7 @@ class SearchDataRepository(
         return searchRemoteDataSource
             .searchPullRequests(searchText = searchText, pageNumber = pageNumber, count = count)
             .let { results ->
-                Pageable(results.repos.map(PullRequestDataMapper::toEntity), results.totalCount)
+                Pageable(results.items.map(PullRequestDataMapper::toEntity), results.totalCount)
             }
     }
 
@@ -53,7 +53,7 @@ class SearchDataRepository(
         return searchRemoteDataSource
             .searchUsers(searchText = searchText, pageNumber = pageNumber, count = count)
             .let { results ->
-                Pageable(results.repos.map(UserDataMapper::toEntity), results.totalCount)
+                Pageable(results.items.map(UserDataMapper::toEntity), results.totalCount)
             }
     }
 
@@ -62,7 +62,7 @@ class SearchDataRepository(
         return searchRemoteDataSource
             .searchOrganizations(searchText = searchText, pageNumber = pageNumber, count = count)
             .let { results ->
-                Pageable(results.repos.map(OrganizationDataMapper::toEntity), results.totalCount)
+                Pageable(results.items.map(OrganizationDataMapper::toEntity), results.totalCount)
             }
     }
 
