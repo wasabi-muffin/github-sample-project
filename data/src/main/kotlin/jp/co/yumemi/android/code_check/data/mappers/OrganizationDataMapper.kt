@@ -3,7 +3,12 @@ package jp.co.yumemi.android.code_check.data.mappers
 import jp.co.yumemi.android.code_check.data.models.OrganizationModel
 import jp.co.yumemi.android.code_check.domain.entities.Organization
 
-object OrganizationDataMapper {
+/**
+ * Organization data mapper
+ *
+ * Maps organization data models to domain entities
+ */
+internal object OrganizationDataMapper {
     fun toEntity(model: OrganizationModel) = Organization(
         id = model.id,
         name = model.name,

@@ -9,6 +9,11 @@ import jp.co.yumemi.android.code_check.domain.entities.Release
 import jp.co.yumemi.android.code_check.domain.entities.User
 import jp.co.yumemi.android.code_check.domain.repositories.RepositoriesRepository
 
+/**
+ * Repositories data repository
+ *
+ * Default implementation of [RepositoriesRepository]
+ */
 class RepositoriesDataRepository(
     private val repositoriesRemoteDataSource: RepositoriesRemoteDataSource
 ) : RepositoriesRepository {

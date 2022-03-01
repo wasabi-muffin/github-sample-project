@@ -3,7 +3,12 @@ package jp.co.yumemi.android.code_check.data.mappers
 import jp.co.yumemi.android.code_check.data.models.UserModel
 import jp.co.yumemi.android.code_check.domain.entities.User
 
-object UserDataMapper {
+/**
+ * User data mapper
+ *
+ * Maps data models to domain entities
+ */
+internal object UserDataMapper {
     fun toEntity(model: UserModel) = User(
         id = model.id,
         name = model.name,

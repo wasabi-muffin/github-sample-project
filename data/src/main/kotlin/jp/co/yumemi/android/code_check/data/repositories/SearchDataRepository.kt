@@ -17,6 +17,11 @@ import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.entities.User
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 
+/**
+ * Search data repository
+ *
+ * Default implementation of [SearchRepository]
+ */
 class SearchDataRepository(
     private val searchRemoteDataSource: SearchRemoteDataSource,
     private val searchLocalDataSource: SearchLocalDataSource
