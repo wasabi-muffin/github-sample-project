@@ -43,7 +43,7 @@ class SearchDataRepositoryTest {
         coEvery {
             searchRemoteDataSource.searchRepositories(any(), any())
         } returns SearchResultModel(
-            repos = List(5) { index ->
+            items = List(5) { index ->
                 RepositoryModel(
                     id = index,
                     name = "name$index",

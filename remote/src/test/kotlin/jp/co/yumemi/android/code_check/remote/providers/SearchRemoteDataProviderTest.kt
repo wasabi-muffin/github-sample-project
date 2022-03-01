@@ -1,5 +1,6 @@
 package jp.co.yumemi.android.code_check.remote.providers
 
+import io.kotest.assertions.throwables.shouldThrowAny
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeTypeOf
 import io.mockk.coEvery
@@ -9,11 +10,17 @@ import io.mockk.mockk
 import jp.co.yumemi.android.code_check.data.error.DataException
 import jp.co.yumemi.android.code_check.data.error.ExceptionHandler
 import jp.co.yumemi.android.code_check.remote.apis.SearchApi
+import jp.co.yumemi.android.code_check.remote.models.DefaultModel
+import jp.co.yumemi.android.code_check.remote.models.InlineResponse20026ApiModel
 import jp.co.yumemi.android.code_check.remote.models.InlineResponse20028ApiModel
-import jp.co.yumemi.android.code_check.remote.models.RepoMinusSearchMinusResultMinusItemApiModel
+import jp.co.yumemi.android.code_check.remote.models.InlineResponse20030ApiModel
+import jp.co.yumemi.android.code_check.remote.models.issueSearchResultItem
+import jp.co.yumemi.android.code_check.remote.models.repoSearchResultItem
+import jp.co.yumemi.android.code_check.remote.models.userSearchResultItem
 import jp.co.yumemi.android.code_check.test.CoroutineTestRule
 import jp.co.yumemi.android.code_check.test.runBlockingTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -23,133 +30,146 @@ class SearchRemoteDataProviderTest {
     val coroutineTestRule = CoroutineTestRule()
     private val searchApi = mockk<SearchApi>()
     private val exceptionHandler = mockk<ExceptionHandler>()
-    private val searchRemoteDataSource = SearchRemoteDataProvider(searchApi, exceptionHandler)
+    private val searchRemoteDataSource = SearchRemoteDataProvider(searchApi = searchApi, exceptionHandler = exceptionHandler)
     private val testException = Exception("test")
+    private val listSize = 5
+
+    @Before
+    fun setup() {
+        every { exceptionHandler.handle(throwable = any()) } returns DataException.Unknown()
+    }
 
     @Test
-    fun `test when search is successful`() {
+    fun `test when search repos is successful`() {
         coEvery {
-            searchApi.searchRepos(any(), any(), any(), any(), any(), any())
+            searchApi.searchRepos(accessToken = any(), q = any(), sort = any(), order = any(), perPage = any(), page = any())
         } returns InlineResponse20028ApiModel(
-            totalCount = 5,
+            totalCount = listSize,
             incompleteResults = false,
-            items = List(5) { index ->
-                RepoMinusSearchMinusResultMinusItemApiModel(
-                    id = index,
-                    nodeId = "",
-                    name = "",
-                    fullName = "name$index",
-                    owner = null,
-                    private = false,
-                    htmlUrl = "",
-                    description = null,
-                    fork = false,
-                    url = "",
-                    createdAt = "",
-                    updatedAt = "",
-                    pushedAt = "",
-                    homepage = null,
-                    propertySize = 0,
-                    stargazersCount = 0,
-                    watchersCount = 0,
-                    language = null,
-                    forksCount = 0,
-                    openIssuesCount = 0,
-                    defaultBranch = "",
-                    score = 0.0,
-                    forksUrl = "",
-                    keysUrl = "",
-                    collaboratorsUrl = "",
-                    teamsUrl = "",
-                    hooksUrl = "",
-                    issueEventsUrl = "",
-                    eventsUrl = "",
-                    assigneesUrl = "",
-                    branchesUrl = "",
-                    tagsUrl = "",
-                    blobsUrl = "",
-                    gitTagsUrl = "",
-                    gitRefsUrl = "",
-                    treesUrl = "",
-                    statusesUrl = "",
-                    languagesUrl = "",
-                    stargazersUrl = "",
-                    contributorsUrl = "",
-                    subscribersUrl = "",
-                    subscriptionUrl = "",
-                    commitsUrl = "",
-                    gitCommitsUrl = "",
-                    commentsUrl = "",
-                    issueCommentUrl = "",
-                    contentsUrl = "",
-                    compareUrl = "",
-                    mergesUrl = "",
-                    archiveUrl = "",
-                    downloadsUrl = "",
-                    issuesUrl = "",
-                    pullsUrl = "",
-                    milestonesUrl = "",
-                    notificationsUrl = "",
-                    labelsUrl = "",
-                    releasesUrl = "",
-                    deploymentsUrl = "",
-                    gitUrl = "",
-                    sshUrl = "",
-                    cloneUrl = "",
-                    svnUrl = "",
-                    forks = 0,
-                    openIssues = 0,
-                    watchers = 0,
-                    mirrorUrl = null,
-                    hasIssues = false,
-                    hasProjects = false,
-                    hasPages = false,
-                    hasWiki = false,
-                    hasDownloads = false,
-                    archived = false,
-                    disabled = false,
-                    license = null,
-                    masterBranch = null,
-                    topics = listOf(),
-                    visibility = null,
-                    permissions = null,
-                    tempCloneToken = null,
-                    allowMergeCommit = null,
-                    allowSquashMerge = null,
-                    allowRebaseMerge = null,
-                    allowAutoMerge = null,
-                    deleteBranchOnMerge = null,
-                    allowForking = null,
-                    isTemplate = null
-                )
+            items = List(listSize) { index ->
+                DefaultModel.repoSearchResultItem.copy(id = index)
             }
         )
 
         coroutineTestRule.runBlockingTest {
-            val result = searchRemoteDataSource.searchRepositories("", "", 0)
-            result.totalCount shouldBe 5
-            result.repos.size shouldBe 5
-            result.repos.forEachIndexed { index, repo ->
-                repo.name shouldBe "name$index"
+            val result = searchRemoteDataSource.searchRepositories(token = "", searchText = "", pageNumber = 0, count = 0)
+            result.totalCount shouldBe listSize
+            result.items.size shouldBe listSize
+            result.items.forEachIndexed { index, item ->
+                item.id shouldBe index
             }
-            coVerify { searchApi.searchRepos(accessToken = "", q = "", page = 0, perPage = any()) }
+            coVerify { searchApi.searchRepos(accessToken = "", q = "", page = 0, perPage = 0, sort = any(), order = any()) }
+            coVerify(inverse = true) { exceptionHandler.handle(throwable = any()) }
         }
     }
 
     @Test
-    fun `test when api throws an error`() {
+    fun `test when search repos throws an error`() {
         coEvery {
-            searchApi.searchRepos(any(), any(), any(), any(), any(), any())
+            searchApi.searchRepos(accessToken = any(), q = any(), sort = any(), order = any(), perPage = any(), page = any())
         } throws testException
-        every { exceptionHandler.handle(any()) } returns DataException.Unknown()
 
         coroutineTestRule.runBlockingTest {
             val result = runCatching {
-                searchRemoteDataSource.searchRepositories("", "", 0)
+                searchRemoteDataSource.searchRepositories(token = "", searchText = "", pageNumber = 0, count = 0)
             }.exceptionOrNull()
             result.shouldBeTypeOf<DataException.Unknown>()
-            coVerify { searchApi.searchRepos(accessToken = "", q = "", page = 0, perPage = any()) }
-            coVerify { exceptionHandler.handle(testException) }
+            coVerify { searchApi.searchRepos(accessToken = "", q = "", page = 0, perPage = 0) }
+            coVerify { exceptionHandler.handle(throwable = testException) }
+        }
+    }
+
+    @Test
+    fun `test when search issues and pull requests is successful`() {
+        coEvery {
+            searchApi.searchIssuesAndPullRequests(accessToken = any(), q = any(), sort = any(), order = any(), perPage = any(), page = any())
+        } returns InlineResponse20026ApiModel(
+            totalCount = listSize,
+            incompleteResults = false,
+            items = List(listSize) { index ->
+                DefaultModel.issueSearchResultItem.copy(id = index)
+            }
+        )
+
+        coroutineTestRule.runBlockingTest {
+            val issuesResult = searchRemoteDataSource.searchIssues(token = "", searchText = "", pageNumber = 0, count = 0)
+            val pullRequestsResult = searchRemoteDataSource.searchPullRequests(token = "", searchText = "", pageNumber = 0, count = 0)
+            issuesResult.totalCount shouldBe listSize
+            issuesResult.items.size shouldBe listSize
+            issuesResult.items.forEachIndexed { index, item ->
+                item.id shouldBe index
+            }
+            pullRequestsResult.totalCount shouldBe listSize
+            pullRequestsResult.items.size shouldBe listSize
+            pullRequestsResult.items.forEachIndexed { index, item ->
+                item.id shouldBe index
+            }
+
+            coVerify(exactly = 2) { searchApi.searchIssuesAndPullRequests(accessToken = "", q = any(), page = 0, perPage = 0, sort = any(), order = any()) }
+            coVerify(inverse = true) { exceptionHandler.handle(throwable = any()) }
+        }
+    }
+
+    @Test
+    fun `test when search issues and pull requests throws an error`() {
+        coEvery {
+            searchApi.searchIssuesAndPullRequests(accessToken = any(), q = any(), sort = any(), order = any(), perPage = any(), page = any())
+        } throws testException
+
+        coroutineTestRule.runBlockingTest {
+            val issuesResult = shouldThrowAny { searchRemoteDataSource.searchIssues(token = "", searchText = "", pageNumber = 0, count = 0) }
+            val pullRequestsResult = shouldThrowAny { searchRemoteDataSource.searchPullRequests(token = "", searchText = "", pageNumber = 0, count = 0) }
+            issuesResult.shouldBeTypeOf<DataException.Unknown>()
+            pullRequestsResult.shouldBeTypeOf<DataException.Unknown>()
+            coVerify(exactly = 2) { searchApi.searchIssuesAndPullRequests(accessToken = "", q = any(), page = 0, perPage = 0, sort = any(), order = any()) }
+            coVerify(exactly = 2) { exceptionHandler.handle(throwable = testException) }
+        }
+    }
+
+    @Test
+    fun `test when search users is successful`() {
+        coEvery {
+            searchApi.searchUsers(accessToken = any(), q = any(), sort = any(), order = any(), perPage = any(), page = any())
+        } returns InlineResponse20030ApiModel(
+            totalCount = listSize,
+            incompleteResults = false,
+            items = List(listSize) { index ->
+                DefaultModel.userSearchResultItem.copy(id = index)
+            }
+        )
+
+        coroutineTestRule.runBlockingTest {
+            val usersResult = searchRemoteDataSource.searchUsers(token = "", searchText = "", pageNumber = 0, count = 0)
+            val organizationsResult = searchRemoteDataSource.searchOrganizations(token = "", searchText = "", pageNumber = 0, count = 0)
+            usersResult.totalCount shouldBe listSize
+            usersResult.items.size shouldBe listSize
+            usersResult.items.forEachIndexed { index, item ->
+                item.id shouldBe index
+            }
+            organizationsResult.totalCount shouldBe listSize
+            organizationsResult.items.size shouldBe listSize
+            organizationsResult.items.forEachIndexed { index, item ->
+                item.id shouldBe index
+            }
+
+            coVerify(exactly = 2) { searchApi.searchUsers(accessToken = "", q = any(), page = 0, perPage = 0, sort = any(), order = any()) }
+            coVerify(inverse = true) { exceptionHandler.handle(throwable = any()) }
+        }
+    }
+
+    @Test
+    fun `test when search users throws an error`() {
+        coEvery {
+            searchApi.searchUsers(accessToken = any(), q = any(), sort = any(), order = any(), perPage = any(), page = any())
+        } throws testException
+
+        coroutineTestRule.runBlockingTest {
+            val usersResult = shouldThrowAny { searchRemoteDataSource.searchUsers(token = "", searchText = "", pageNumber = 0, count = 0) }
+            val organizationsResult = shouldThrowAny { searchRemoteDataSource.searchOrganizations(token = "", searchText = "", pageNumber = 0, count = 0) }
+            usersResult.shouldBeTypeOf<DataException.Unknown>()
+            organizationsResult.shouldBeTypeOf<DataException.Unknown>()
+            coVerify(exactly = 2) { searchApi.searchUsers(accessToken = "", q = any(), page = 0, perPage = 0, sort = any(), order = any()) }
+            coVerify(exactly = 2) { exceptionHandler.handle(throwable = testException) }
         }
     }
 }
