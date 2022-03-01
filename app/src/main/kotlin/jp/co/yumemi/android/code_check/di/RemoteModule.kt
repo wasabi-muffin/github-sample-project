@@ -11,7 +11,7 @@ import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource
 import jp.co.yumemi.android.code_check.remote.apis.PullsApi
 import jp.co.yumemi.android.code_check.remote.apis.ReposApi
 import jp.co.yumemi.android.code_check.remote.apis.SearchApi
-import jp.co.yumemi.android.code_check.remote.error.RemoteExceptionHandler
+import jp.co.yumemi.android.code_check.remote.core.RemoteExceptionHandler
 import jp.co.yumemi.android.code_check.remote.providers.RepositoriesRemoteDataProvider
 import jp.co.yumemi.android.code_check.remote.providers.SearchRemoteDataProvider
 
