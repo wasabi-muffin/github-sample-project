@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.local.error
+package jp.co.yumemi.android.code_check.local.core
 
 import jp.co.yumemi.android.code_check.data.core.DataException
 import jp.co.yumemi.android.code_check.data.core.ExceptionHandler
