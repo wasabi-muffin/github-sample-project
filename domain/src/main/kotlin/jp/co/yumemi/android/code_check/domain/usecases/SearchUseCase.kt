@@ -3,7 +3,7 @@ package jp.co.yumemi.android.code_check.domain.usecases
 import android.os.Parcelable
 import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
-import jp.co.yumemi.android.code_check.domain.core.Pageable
+import jp.co.yumemi.android.code_check.domain.entities.Pageable
 import jp.co.yumemi.android.code_check.domain.core.UseCase
 import jp.co.yumemi.android.code_check.domain.core.runHandling
 import jp.co.yumemi.android.code_check.domain.entities.Issue
@@ -13,6 +13,11 @@ import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.entities.User
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 
+/**
+ * Search use case
+ *
+ * @param T type of the class to search for
+ */
 interface SearchUseCase<T : Parcelable> : UseCase<SearchUseCase.Args, DomainResult<Pageable<T>>> {
     data class Args(val searchText: String, val pageNumber: Int)
 }

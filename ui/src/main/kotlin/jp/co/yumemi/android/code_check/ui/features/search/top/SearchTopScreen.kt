@@ -24,7 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.dp
-import jp.co.yumemi.android.code_check.domain.core.Pageable
+import jp.co.yumemi.android.code_check.domain.entities.Pageable
 import jp.co.yumemi.android.code_check.domain.entities.SearchType
 import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopEvent
 import jp.co.yumemi.android.code_check.presentation.feature.search.top.contract.SearchTopIntent

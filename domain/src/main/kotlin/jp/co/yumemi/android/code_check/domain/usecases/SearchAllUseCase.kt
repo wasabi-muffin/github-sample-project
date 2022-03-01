@@ -9,6 +9,11 @@ import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
+/**
+ * Search all use case
+ *
+ * Perform a search for each search option and return the aggregated results
+ */
 interface SearchAllUseCase : UseCase<SearchAllUseCase.Args, DomainResult<SearchAll>> {
     data class Args(val searchText: String)
 }

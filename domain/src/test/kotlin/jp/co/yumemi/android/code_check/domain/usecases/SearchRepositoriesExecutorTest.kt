@@ -9,7 +9,7 @@ import io.mockk.mockk
 import jp.co.yumemi.android.code_check.domain.core.DomainError
 import jp.co.yumemi.android.code_check.domain.core.DomainResult
 import jp.co.yumemi.android.code_check.domain.core.ErrorHandler
-import jp.co.yumemi.android.code_check.domain.core.Pageable
+import jp.co.yumemi.android.code_check.domain.entities.Pageable
 import jp.co.yumemi.android.code_check.domain.entities.DefaultEntity
 import jp.co.yumemi.android.code_check.domain.entities.Repository
 import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
