@@ -4,6 +4,11 @@ import jp.co.yumemi.android.code_check.data.models.RepositoryModel
 import jp.co.yumemi.android.code_check.remote.models.RepoMinusSearchMinusResultMinusItemApiModel
 import jp.co.yumemi.android.code_check.remote.models.RepositoryApiModel
 
+/**
+ * Issues repository mapper
+ *
+ * Maps repository api models to data models
+ */
 object RepositoryRemoteMapper {
     fun toModel(apiModel: RepoMinusSearchMinusResultMinusItemApiModel) = RepositoryModel(
         id = apiModel.id,

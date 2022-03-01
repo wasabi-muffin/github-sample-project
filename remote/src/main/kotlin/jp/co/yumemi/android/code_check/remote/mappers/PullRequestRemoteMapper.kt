@@ -5,6 +5,11 @@ import jp.co.yumemi.android.code_check.remote.models.IssueMinusSearchMinusResult
 import jp.co.yumemi.android.code_check.remote.models.PullMinusRequestMinusSimpleApiModel
 import jp.co.yumemi.android.code_check.remote.utils.filterRepoName
 
+/**
+ * Pull requests remote mapper
+ *
+ * Maps pull request api models to data models
+ */
 object PullRequestRemoteMapper {
     fun toModel(apiModel: PullMinusRequestMinusSimpleApiModel) =
         PullRequestModel(
