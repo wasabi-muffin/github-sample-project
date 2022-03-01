@@ -18,7 +18,6 @@ import io.ktor.client.statement.readText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.URLProtocol
-import jp.co.yumemi.android.code_check.remote.error.ApiException
 import jp.co.yumemi.android.code_check.remote.models.BasicMinusErrorApiModel
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer

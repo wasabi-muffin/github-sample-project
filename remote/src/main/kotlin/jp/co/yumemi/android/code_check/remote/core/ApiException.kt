@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.remote.error
+package jp.co.yumemi.android.code_check.remote.core
 
 sealed class ApiException: Throwable() {
     abstract val statusCode: Int

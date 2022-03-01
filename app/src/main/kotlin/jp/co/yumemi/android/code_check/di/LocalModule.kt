@@ -10,7 +10,7 @@ import jp.co.yumemi.android.code_check.data.sources.SearchLocalDataSource
 import jp.co.yumemi.android.code_check.data.utils.InstantProvider
 import jp.co.yumemi.android.code_check.local.core.AppDatabase
 import jp.co.yumemi.android.code_check.local.providers.SearchLocalDataProvider
-import jp.co.yumemi.android.code_check.remote.error.RemoteExceptionHandler
+import jp.co.yumemi.android.code_check.remote.core.RemoteExceptionHandler
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
