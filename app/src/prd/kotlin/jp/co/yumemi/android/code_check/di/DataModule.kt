@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import jp.co.yumemi.android.code_check.data.repositories.RepositoriesDataRepository
+import jp.co.yumemi.android.code_check.data.repositories.SearchDataRepository
 import jp.co.yumemi.android.code_check.data.sources.RepositoriesRemoteDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchLocalDataSource
 import jp.co.yumemi.android.code_check.data.sources.SearchRemoteDataSource

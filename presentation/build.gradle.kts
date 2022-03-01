@@ -5,7 +5,7 @@ plugins {
     id(Dependencies.Plugin.parcelize)
 }
 
-setupAndroid()
+setupAndroidLibrary()
 
 dependencies {
     project(Modules.Domain)

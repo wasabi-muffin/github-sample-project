@@ -10,4 +10,11 @@ enum class Flavor(
         override val suffix: String = ".$label"
     },
     Prd("prd", Dimension.BuildEnv),
+    ;
+
+    val index get() = Dimension.values().indexOf(dimension)
+
+    companion object {
+        fun fromLabel(label: String): Flavor? = values().find { it.label == label }
+    }
 }
