@@ -11,6 +11,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onEach
 
+/**
+ * Logging middleware
+ *
+ * Middleware to log state machine inputs/outputs
+ */
 class LoggingMiddleware<I : Intent, A : Action, R : Result, VS : ViewState, E : Event>(
     private val verbose: Boolean = true,
     private val intentPrefix: String = "Intent:",

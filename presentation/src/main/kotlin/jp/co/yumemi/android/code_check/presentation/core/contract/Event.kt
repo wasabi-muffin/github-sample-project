@@ -4,6 +4,8 @@ import android.os.Parcelable
 import java.util.UUID
 
 /**
+ * Event
+ *
  * One-time effects for the client (i.e. navigation, snackbars, animation)
  */
 abstract class Event : Parcelable {

@@ -14,8 +14,18 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 
+/**
+ * Message
+ *
+ * Message that can be sent/received by state machines
+ */
 interface Message
 
+/**
+ * Message sender middleware
+ *
+ * Middleware to send messages to other state machines
+ */
 abstract class MessageSenderMiddleware<A : Action, R : Result, M : Message>(
     private val messages: MutableSharedFlow<M>,
 ) : ActionMiddleware<A, ViewState, Event>, ResultMiddleware<R, ViewState, Event> {
@@ -32,6 +42,11 @@ abstract class MessageSenderMiddleware<A : Action, R : Result, M : Message>(
     open fun send(result: R): M? = null
 }
 
+/**
+ * Message receiver middleware
+ *
+ * Middleware to receive messages to other state machines
+ */
 abstract class MessageReceiverMiddleware<I : Intent, M : Message>(
     private val messages: Flow<M>,
 ) : IntentMiddleware<I, ViewState, Event> {
