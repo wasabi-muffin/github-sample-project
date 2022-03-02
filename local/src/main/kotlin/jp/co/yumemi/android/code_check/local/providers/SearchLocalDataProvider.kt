@@ -9,6 +9,11 @@ import jp.co.yumemi.android.code_check.local.dao.SearchDao
 import jp.co.yumemi.android.code_check.local.mappers.RecentSearchLocalMapper
 import jp.co.yumemi.android.code_check.local.models.RecentSearchDbModel
 
+/**
+ * Search local data provider
+ *
+ * Default implementation for [SearchLocalDataSource]
+ */
 class SearchLocalDataProvider(
     private val searchDao: SearchDao,
     private val instantProvider: InstantProvider,

@@ -3,6 +3,12 @@ package jp.co.yumemi.android.code_check.local.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Recent search db model
+ *
+ * @property searchText search text for the search that was executed
+ * @property timestamp time when the search was executed
+ */
 @Entity
 class RecentSearchDbModel(
     @PrimaryKey val searchText: String,
