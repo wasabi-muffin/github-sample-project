@@ -1,5 +1,10 @@
 package jp.co.yumemi.android.code_check.presentation.core.contract
 
+/**
+ * State
+ *
+ * Holder for view states and events
+ */
 data class State<VS : ViewState, E : Event>(
     val viewState: VS,
     val event: E? = null,

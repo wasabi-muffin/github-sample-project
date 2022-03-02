@@ -19,6 +19,11 @@ import jp.co.yumemi.android.code_check.presentation.statemachine.middleware.Stat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
+/**
+ * State machine store factory
+ *
+ * Creates a store with a [StateMachine] and applies [StateMachineMiddleware]
+ */
 @FlowPreview
 @ExperimentalCoroutinesApi
 class StateMachineStoreFactory<I : Intent, A : Action, R : Result, VS : ViewState, E : Event, SE : SideEffect>(

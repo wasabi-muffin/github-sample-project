@@ -13,6 +13,11 @@ import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.contract.ViewState
 import jp.co.yumemi.android.code_check.presentation.core.middleware.Middleware
 
+/**
+ * Default store factory
+ *
+ * Default implementation of a store factory
+ */
 class DefaultStoreFactory<I : Intent, A : Action, R : Result, VS : ViewState, E : Event>(
     private val interpreter: Interpreter<I, A, VS, E>,
     private val processor: Processor<A, R, VS, E>,

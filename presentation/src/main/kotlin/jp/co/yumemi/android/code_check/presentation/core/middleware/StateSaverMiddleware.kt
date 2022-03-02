@@ -6,6 +6,11 @@ import jp.co.yumemi.android.code_check.presentation.core.contract.ViewState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 
+/**
+ * State saver middleware
+ *
+ * Middleware to persist state upon process death
+ */
 class StateSaverMiddleware<VS : ViewState, E : Event>(
     private val save: (state: State<VS, E>) -> Unit,
 ) : StateMiddleware<VS, E> {

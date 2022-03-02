@@ -18,6 +18,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filter
 
+/**
+ * State machine middleware
+ *
+ * Middleware that uses a [StateMachine] to validate each step, then prevents and logs invalid transitions
+ */
 class StateMachineMiddleware<I : Intent, A : Action, R : Result, VS : ViewState, E : Event, SE : SideEffect>(
     private val stateMachine: StateMachine<I, A, R, VS, E, SE>,
     private val log: ((String) -> Unit)? = null

@@ -15,6 +15,11 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flowOf
 
+/**
+ * State machine processor
+ *
+ * Uses a state machine graph to create a [Processor]
+ */
 @FlowPreview
 abstract class StateMachineProcessor<I : Intent, A : Action, R : Result, VS : ViewState, E : Event, SE : SideEffect>(
     private val stateMachine: StateMachine<I, A, R, VS, E, SE>,

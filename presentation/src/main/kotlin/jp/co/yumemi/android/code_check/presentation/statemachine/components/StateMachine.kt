@@ -9,6 +9,11 @@ import jp.co.yumemi.android.code_check.presentation.core.contract.ViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.contract.SideEffect
 import kotlin.reflect.KClass
 
+/**
+ * State machine
+ *
+ * Builds a graph representation of a state machine to use on the core module
+ */
 open class StateMachine<I : Intent, A : Action, R : Result, VS : ViewState, E : Event, SE : SideEffect>(
     val graph: Map<Matcher<VS, VS>, StateNode<I, A, R, VS>>,
 ) {

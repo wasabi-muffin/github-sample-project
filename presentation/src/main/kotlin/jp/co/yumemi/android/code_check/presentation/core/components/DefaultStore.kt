@@ -28,6 +28,8 @@ import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 
 /**
+ * Default store
+ *
  * Default implementation of a [Store] that provides unidirectional dataflow logic
  */
 @FlowPreview
@@ -68,6 +70,8 @@ class DefaultStore<I : Intent, in A : Action, in R : Result, VS : ViewState, E :
     }
 
     /**
+     * Intent middlewares
+     *
      * Helper function to apply [IntentMiddleware]
      */
     private fun Flow<I>.intentMiddlewares(
@@ -77,6 +81,8 @@ class DefaultStore<I : Intent, in A : Action, in R : Result, VS : ViewState, E :
     }
 
     /**
+     * Action middlewares
+     *
      * Helper function to apply [ActionMiddleware]
      */
     private fun Flow<A>.actionMiddlewares(
@@ -86,6 +92,8 @@ class DefaultStore<I : Intent, in A : Action, in R : Result, VS : ViewState, E :
     }
 
     /**
+     * Result middlewares
+     *
      * Helper function to apply [ResultMiddleware]
      */
     private fun Flow<R>.resultMiddlewares(
@@ -95,6 +103,8 @@ class DefaultStore<I : Intent, in A : Action, in R : Result, VS : ViewState, E :
     }
 
     /**
+     * State middlewares
+     *
      * Helper function to apply [StateMiddleware]
      */
     private fun Flow<State<VS, E>>.stateMiddlewares(

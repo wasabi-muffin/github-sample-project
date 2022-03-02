@@ -11,6 +11,11 @@ import jp.co.yumemi.android.code_check.presentation.core.contract.State
 import jp.co.yumemi.android.code_check.presentation.core.contract.ViewState
 import jp.co.yumemi.android.code_check.presentation.statemachine.contract.SideEffect
 
+/**
+ * State machine reducer
+ *
+ * Uses a state machine graph to create a [Reducer]
+ */
 open class StateMachineReducer<I : Intent, A : Action, R : Result, VS : ViewState, E : Event, SE : SideEffect>(
     private val stateMachine: StateMachine<I, A, R, VS, E, SE>,
 ) : Reducer<R, VS, E> {
