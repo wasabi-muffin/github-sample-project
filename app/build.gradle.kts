@@ -30,6 +30,4 @@ dependencies {
     implementation(Dependencies.Kotlinx.datetime)
     implementation(Dependencies.Room.runtime)
     debugImplementation(Dependencies.Leak.leakCanary)
-    androidTestImplementation(Dependencies.Test.junitExt)
-    androidTestImplementation(Dependencies.Test.espresso)
 }

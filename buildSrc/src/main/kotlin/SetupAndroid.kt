@@ -87,6 +87,12 @@ private fun Project.setupAndroidCore() {
                 )
             )
         }
+
+        tasks.withType(KotlinCompile::class.java) {
+            kotlinOptions {
+                jvmTarget = Versions.Config.jvmTarget
+            }
+        }
     }
 
     setupLinter()

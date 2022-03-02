@@ -20,6 +20,12 @@ buildscript {
     }
 }
 
+allprojects {
+    configurations.all {
+        resolutionStrategy.force("org.objenesis:objenesis:2.6")
+    }
+}
+
 setupTestCoverageTask()
 
 tasks.register("clean", Delete::class) {
