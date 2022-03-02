@@ -19,7 +19,7 @@
 - minSdk：23
 - targetSdk：31
 
-### ライブラリ- 
+### ライブラリ
 - Kotlin Coroutines: 1.5.2 
 - Kotlinx Datetime: 0.3.2
 - Jetpack Compose: 1.2.0-alpha04
