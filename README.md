@@ -23,6 +23,7 @@
 - Kotlin Coroutines: 1.5.2 
 - Kotlinx Datetime: 0.3.2
 - Jetpack Compose: 1.2.0-alpha04
+- Acoompanist: 0.24.2-alpha
 - Hilt: 2.38.1
 - Kotlinx Serialization: 1.3.2
 - Ktor: 1.6.4
