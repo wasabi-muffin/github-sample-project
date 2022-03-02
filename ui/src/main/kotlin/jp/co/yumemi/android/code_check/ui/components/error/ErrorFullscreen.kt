@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,11 +37,13 @@ fun ErrorFullscreen(
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.align(Alignment.Center)
+        modifier = modifier
+            .align(Alignment.Center)
+            .padding(24.dp)
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.h2,
+            style = MaterialTheme.typography.h1,
             fontWeight = FontWeight.Bold,
             color = Github.Black
         )
@@ -48,7 +51,8 @@ fun ErrorFullscreen(
             Text(
                 text = description,
                 style = MaterialTheme.typography.h3,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Normal,
+                textAlign = TextAlign.Center,
                 color = Gray.v700
             )
         }

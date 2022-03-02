@@ -61,13 +61,16 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
         when (event) {
             is SearchTopEvent.NavigateBack -> navigator.back()
             is SearchTopEvent.NavigateRepositoryDetails -> navigator.repositoryDetails(event.repository)
-            is SearchTopEvent.NavigateSearch -> when (event.type) {
-                SearchType.Repository -> navigator.repositoryResults(event.searchText)
-                SearchType.Issues -> navigator.issueResults(event.searchText)
-                SearchType.PullRequests -> navigator.pullRequestResults(event.searchText)
-                SearchType.People -> navigator.userResults(event.searchText)
-                SearchType.Organization -> navigator.organizationResults(event.searchText)
-                SearchType.JumpTo -> notImplemented(context)
+            is SearchTopEvent.NavigateSearch -> {
+                focusManager.clearFocus(force = true)
+                when (event.type) {
+                    SearchType.Repository -> navigator.repositoryResults(event.searchText)
+                    SearchType.Issues -> navigator.issueResults(event.searchText)
+                    SearchType.PullRequests -> navigator.pullRequestResults(event.searchText)
+                    SearchType.People -> navigator.userResults(event.searchText)
+                    SearchType.Organization -> navigator.organizationResults(event.searchText)
+                    SearchType.JumpTo -> notImplemented(context)
+                }
             }
         }
     }
@@ -93,23 +96,30 @@ fun SearchTopScreen(contract: Contract<SearchTopIntent, SearchTopViewState, Sear
         when (state) {
             is SearchTopViewState.Initial -> Unit
             is SearchTopViewState.Stable.EmptySearch -> {
-                LazyColumn(
-                    modifier = Modifier.background(Github.White),
-                ) {
-                    itemsIndexed(state.recentSearches) { index, item ->
-                        if (index == 0) {
-                            RecentSearchHeader(
-                                onClickClear = { dispatch(SearchTopIntent.ClickClearRecentSearches) }
+                if (state.recentSearches.isNotEmpty()) {
+                    LazyColumn(
+                        modifier = Modifier.background(Github.White),
+                    ) {
+                        itemsIndexed(state.recentSearches) { index, item ->
+                            if (index == 0) {
+                                RecentSearchHeader(
+                                    onClickClear = { dispatch(SearchTopIntent.ClickClearRecentSearches) }
+                                )
+                            }
+                            RecentSearchItem(
+                                searchText = item.searchText,
+                                modifier = Modifier.clickable {
+                                    dispatch(SearchTopIntent.ClickRecentSearchItem(item))
+                                    focusManager.moveFocus(FocusDirection.Next)
+                                }
                             )
                         }
-                        RecentSearchItem(
-                            searchText = item.searchText,
-                            modifier = Modifier.clickable {
-                                dispatch(SearchTopIntent.ClickRecentSearchItem(item))
-                                focusManager.moveFocus(FocusDirection.Next)
-                            }
-                        )
                     }
+                } else {
+                    ErrorFullscreen(
+                        title = stringResource(R.string.search_top_empty_title),
+                        description = stringResource(R.string.search_top_empty_description)
+                    )
                 }
             }
             is SearchTopViewState.Stable.NonEmptySearch -> {
