@@ -33,6 +33,8 @@
 - Dokka: 1.6.10
 
 ### テストスイート
+提出時点のTest Coverage: 94.10%　*UI/Presentationのテストは入っていません
+
 - Androidx Test Core: 1.4.0
 - Junit: 4.13.2
 - Turbine: 0.7.0
