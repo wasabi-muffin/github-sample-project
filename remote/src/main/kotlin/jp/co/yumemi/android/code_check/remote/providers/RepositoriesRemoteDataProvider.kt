@@ -12,6 +12,11 @@ import jp.co.yumemi.android.code_check.remote.mappers.PullRequestRemoteMapper
 import jp.co.yumemi.android.code_check.remote.mappers.ReleaseRemoteMapper
 import jp.co.yumemi.android.code_check.remote.mappers.UserRemoteMapper
 
+/**
+ * Repositories remote data provider
+ *
+ * Default implementation of [RepositoriesRemoteDataSource]
+ */
 class RepositoriesRemoteDataProvider(
     private val reposApi: ReposApi,
     private val pullsApi: PullsApi,

@@ -6,6 +6,11 @@ import jp.co.yumemi.android.code_check.remote.models.NullableMinusSimpleMinusUse
 import jp.co.yumemi.android.code_check.remote.models.SimpleMinusUserApiModel
 import jp.co.yumemi.android.code_check.remote.models.UserMinusSearchMinusResultMinusItemApiModel
 
+/**
+ * User remote mapper
+ *
+ * Maps user api models to data models
+ */
 object UserRemoteMapper {
     fun toModel(apiModel: NullableMinusSimpleMinusUserApiModel) = UserModel(
         id = apiModel.id,

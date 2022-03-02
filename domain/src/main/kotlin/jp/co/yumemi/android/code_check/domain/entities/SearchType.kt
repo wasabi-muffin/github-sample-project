@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
  */
 @Parcelize
 enum class SearchType : Parcelable {
-    Repo,
+    Repository,
     Issues,
     PullRequests,
     People,

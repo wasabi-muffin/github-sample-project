@@ -16,9 +16,9 @@ import androidx.compose.ui.res.stringResource
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import jp.co.yumemi.android.code_check.domain.entities.RepositoryDetails
-import jp.co.yumemi.android.code_check.presentation.feature.details.repo.contract.RepoDetailsEvent
-import jp.co.yumemi.android.code_check.presentation.feature.details.repo.contract.RepoDetailsIntent
-import jp.co.yumemi.android.code_check.presentation.feature.details.repo.contract.RepoDetailsViewState
+import jp.co.yumemi.android.code_check.presentation.feature.details.repository.contract.RepositoryDetailsEvent
+import jp.co.yumemi.android.code_check.presentation.feature.details.repository.contract.RepositoryDetailsIntent
+import jp.co.yumemi.android.code_check.presentation.feature.details.repository.contract.RepositoryDetailsViewState
 import jp.co.yumemi.android.code_check.ui.R
 import jp.co.yumemi.android.code_check.ui.components.appbar.BackIcon
 import jp.co.yumemi.android.code_check.ui.components.appbar.TitleAppBar
@@ -34,17 +34,17 @@ import jp.co.yumemi.android.code_check.ui.utils.elevation
 
 @Composable
 fun RepoDetailsScreen(
-    contract: Contract<RepoDetailsIntent, RepoDetailsViewState, RepoDetailsEvent>,
+    contract: Contract<RepositoryDetailsIntent, RepositoryDetailsViewState, RepositoryDetailsEvent>,
     navigator: RepoDetailsNavigator
 ) {
     val (state, events, dispatch) = contract
     val scrollState = rememberScrollState()
 
     events?.handle(
-        process = { dispatch(RepoDetailsIntent.ProcessEvent(it)) }
+        process = { dispatch(RepositoryDetailsIntent.ProcessEvent(it)) }
     ) { event ->
         when (event) {
-            is RepoDetailsEvent.NavigateBack -> navigator.back()
+            is RepositoryDetailsEvent.NavigateBack -> navigator.back()
         }
     }
 
@@ -53,7 +53,7 @@ fun RepoDetailsScreen(
             title = stringResource(id = R.string.common_repositories),
             elevation = scrollState.elevation(),
             navigationIcon = {
-                BackIcon { dispatch(RepoDetailsIntent.ClickBack) }
+                BackIcon { dispatch(RepositoryDetailsIntent.ClickBack) }
             }
         )
         Box(
@@ -62,8 +62,8 @@ fun RepoDetailsScreen(
                 .fillMaxWidth()
         ) {
             when (state) {
-                is RepoDetailsViewState.Initial -> Unit
-                is RepoDetailsViewState.Loading -> {
+                is RepositoryDetailsViewState.Initial -> Unit
+                is RepositoryDetailsViewState.Loading -> {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
@@ -72,13 +72,13 @@ fun RepoDetailsScreen(
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                     }
                 }
-                is RepoDetailsViewState.Error -> {
-                    ErrorFullscreen(error = state.error) { dispatch(RepoDetailsIntent.ClickTryAgain) }
+                is RepositoryDetailsViewState.Error -> {
+                    ErrorFullscreen(error = state.error) { dispatch(RepositoryDetailsIntent.ClickTryAgain) }
                 }
-                is RepoDetailsViewState.Stable -> {
+                is RepositoryDetailsViewState.Stable -> {
                     SwipeRefresh(
-                        state = rememberSwipeRefreshState(isRefreshing = state is RepoDetailsViewState.Stable.RefreshLoading),
-                        onRefresh = { dispatch(RepoDetailsIntent.PullToRefresh) },
+                        state = rememberSwipeRefreshState(isRefreshing = state is RepositoryDetailsViewState.Stable.RefreshLoading),
+                        onRefresh = { dispatch(RepositoryDetailsIntent.PullToRefresh) },
                     ) {
                         Column(
                             modifier = Modifier
@@ -95,9 +95,9 @@ fun RepoDetailsScreen(
                             RepositoryDetailsElementItem(repoDetails = state.details, element = RepositoryDetails.Element.License)
                         }
                     }
-                    state.render<RepoDetailsViewState.Stable.RefreshError> {
+                    state.render<RepositoryDetailsViewState.Stable.RefreshError> {
                         ErrorOkDialog(error = it.error) {
-                            dispatch(RepoDetailsIntent.ClickErrorOk)
+                            dispatch(RepositoryDetailsIntent.ClickErrorOk)
                         }
                     }
                 }
