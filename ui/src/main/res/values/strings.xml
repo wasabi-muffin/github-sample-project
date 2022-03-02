@@ -35,6 +35,8 @@
     <string name="search_top_search_with">%s with %s</string>
     <string name="search_top_jump_to">Jump to %s</string>
     <string name="search_top_see_more">See %s more %s</string>
+    <string name="search_top_empty_title">Find your stuff.</string>
+    <string name="search_top_empty_description">Search all of Github for People, Repositories, Organizations, Issues, and Pull Requests</string>
 
     // Errors
     <string name="error_network_title">No network connection</string>
