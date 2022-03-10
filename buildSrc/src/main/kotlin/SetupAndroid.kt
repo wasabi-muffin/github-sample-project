@@ -11,7 +11,7 @@ fun Project.setupAndroidApp(
     setupAndroidCore()
     extensions.findByType(BaseAppModuleExtension::class.java)?.apply {
         defaultConfig {
-            applicationId = "jp.co.yumemi.android.codecheck"
+            applicationId = "io.github.gmvalentino8.github.sample"
         }
 
         buildTypes {

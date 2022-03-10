@@ -1,13 +1,13 @@
-package jp.co.yumemi.android.code_check.data.repositories
+package io.github.gmvalentino8.github.sample.data.repositories
 
-import jp.co.yumemi.android.code_check.domain.entities.Issue
-import jp.co.yumemi.android.code_check.domain.entities.Organization
-import jp.co.yumemi.android.code_check.domain.entities.Pageable
-import jp.co.yumemi.android.code_check.domain.entities.PullRequest
-import jp.co.yumemi.android.code_check.domain.entities.RecentSearch
-import jp.co.yumemi.android.code_check.domain.entities.Repository
-import jp.co.yumemi.android.code_check.domain.entities.User
-import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
+import io.github.gmvalentino8.github.sample.domain.entities.Issue
+import io.github.gmvalentino8.github.sample.domain.entities.Organization
+import io.github.gmvalentino8.github.sample.domain.entities.Pageable
+import io.github.gmvalentino8.github.sample.domain.entities.PullRequest
+import io.github.gmvalentino8.github.sample.domain.entities.RecentSearch
+import io.github.gmvalentino8.github.sample.domain.entities.Repository
+import io.github.gmvalentino8.github.sample.domain.entities.User
+import io.github.gmvalentino8.github.sample.domain.repositories.SearchRepository
 
 class SearchMockRepository : SearchRepository {
     override suspend fun searchRepositories(searchText: String, pageNumber: Int, count: Int): Pageable<Repository> = Pageable(

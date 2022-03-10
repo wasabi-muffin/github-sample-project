@@ -1,9 +1,9 @@
-package jp.co.yumemi.android.code_check.data.repositories
+package io.github.gmvalentino8.github.sample.data.repositories
 
-import jp.co.yumemi.android.code_check.domain.entities.PullRequest
-import jp.co.yumemi.android.code_check.domain.entities.Release
-import jp.co.yumemi.android.code_check.domain.entities.User
-import jp.co.yumemi.android.code_check.domain.repositories.RepositoriesRepository
+import io.github.gmvalentino8.github.sample.domain.entities.PullRequest
+import io.github.gmvalentino8.github.sample.domain.entities.Release
+import io.github.gmvalentino8.github.sample.domain.entities.User
+import io.github.gmvalentino8.github.sample.domain.repositories.RepositoriesRepository
 
 class RepositoriesMockRepository : RepositoriesRepository {
     override suspend fun getContributors(name: String): List<User> = listOf()

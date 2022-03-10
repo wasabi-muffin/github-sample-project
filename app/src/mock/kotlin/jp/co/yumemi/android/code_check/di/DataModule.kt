@@ -1,13 +1,13 @@
-package jp.co.yumemi.android.code_check.di
+package io.github.gmvalentino8.github.sample.di
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
-import jp.co.yumemi.android.code_check.data.repositories.RepositoriesMockRepository
-import jp.co.yumemi.android.code_check.data.repositories.SearchMockRepository
-import jp.co.yumemi.android.code_check.domain.repositories.RepositoriesRepository
-import jp.co.yumemi.android.code_check.domain.repositories.SearchRepository
+import io.github.gmvalentino8.github.sample.data.repositories.RepositoriesMockRepository
+import io.github.gmvalentino8.github.sample.data.repositories.SearchMockRepository
+import io.github.gmvalentino8.github.sample.domain.repositories.RepositoriesRepository
+import io.github.gmvalentino8.github.sample.domain.repositories.SearchRepository
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
